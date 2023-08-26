@@ -1,0 +1,47 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./*"],
+      "@app/*": ["./app/*"],
+      "@lib/*": ["./library/*"],
+      "@hooks/*": ["./hooks/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "**/**/*.ts",
+    "**/**/*.tsx",
+    ".next/types/**/*.ts",
+    "app/_day-schedule/hooks/test-day-schedule-reducer.jest",
+    "app/main/page.js"
+  ],
+  "exclude": ["node_modules", "node_modules/**/*"],
+  "typedocOptions": {
+    "entryPoints": ["app/**/*.tsx", "app/**/*.ts", "library/*"],
+    "exclude": ["app/**/stories/*", "app/**/**/*.test.*"],
+    "out": "docs",
+    "plugin": ["typedoc-plugin-merge-modules"],
+    "mergeModulesRenameDefaults": true,
+    "mergeModulesMergeMode": "module"
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "name": "global-time-schedule",
+  "dockerComposeFile": ["../../compose.yml"],
+  "service": "global-time-schedule",
+  "runServices": ["global-time-schedule"],
+  "workspaceFolder": "/global-time-schedule/front",
+  "forwardPorts": [5000],
+  "remoteUser": "node",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "Orta.vscode-jest",
+        "streetsidesoftware.code-spell-checker",
+        "zokugun.explicit-folding",
+        "ygkn.storybook-opener"
+      ],
+      "settings": {
+        "workbench.colorCustomizations": {
+          "tab.activeBackground": "#3363a3",
+          "titleBar.activeBackground": "#3363a3",
+          "titleBar.activeForeground": "#000"
+        },
+        "json.schemaDownload.enable": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+      }
+    }
+  }
+}

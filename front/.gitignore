@@ -1,28 +1,28 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-front/node_modules
-front/.pnp
+node_modules
+.pnp
 .pnp.js
 
 # testing
-front/coverage
+coverage
 
 # next.js
-front/.next/
-front/out/
+.next/
+out/
 
 # production
-front/build
+build
 
 # misc
 .DS_Store
 *.pem
 
 # debug
-front/npm-debug.log*
-front/yarn-debug.log*
-front/yarn-error.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # local env files
 .env*.local
@@ -33,7 +33,3 @@ front/yarn-error.log*
 # typescript
 front/*.tsbuildinfo
 front/next-env.d.ts
-
-front/storybook-static
-
-front/docs/*
