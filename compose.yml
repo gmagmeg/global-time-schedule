@@ -1,0 +1,15 @@
+# 主にdevコンテナの利用と、docker runコマンドの再現性を目的として、１コンテナのみですがcomposeを利用しています
+services:
+  global-time-schedule:
+    image: "global-time-schedule"
+    container_name: "global-time-schedule"
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./front:/front
+      - /front/node_modules
+    ports:
+      - "5000:3000"
+    environment:
+      - TZ=Asia/Tokyoz

@@ -1,8 +1,10 @@
 {
   "name": "global-time-schedule",
-  "image": "global-time-schedule",
+  "dockerComposeFile": ["../../compose.yml"],
+  "service": "global-time-schedule",
+  "runServices": ["global-time-schedule"],
   "workspaceFolder": "/front",
-  "forwardPorts": [3000],
+  "forwardPorts": [5000],
   "postCreateCommand": "npm install && npm run storybook",
   "customizations": {
     "vscode": {
