@@ -8,7 +8,7 @@ RUN if getent group $GID ; then echo "Group with GID $GID already exists." ; els
 
 WORKDIR /front
 
-COPY ./ ./
+COPY ./front ./
 
 RUN npm install
 

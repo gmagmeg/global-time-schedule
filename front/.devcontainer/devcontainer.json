@@ -1,0 +1,24 @@
+{
+  "name": "global-time-schedule",
+  "image": "global-time-schedule",
+  "workspaceFolder": "/front",
+  "forwardPorts": [3000],
+  "postCreateCommand": "npm install && npm run storybook",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "workbench.colorCustomizations": {
+          "tab.activeBackground": "#3363a3",
+          "titleBar.activeBackground": "#3363a3",
+          "titleBar.activeForeground": "#000"
+        },
+        "json.schemaDownload.enable": true
+      }
+    }
+  }
+}
