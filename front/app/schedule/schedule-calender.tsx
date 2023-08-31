@@ -1,13 +1,12 @@
 import { useState } from 'react';
 import 'react-calendar/dist/Calendar.css';
 import Calendar from 'react-calendar';
-import { Box, Input, Button, ChakraProvider } from '@chakra-ui/react';
+import { Input, ChakraProvider } from '@chakra-ui/react';
+import dayjs from 'dayjs';
 
 type CalenderDate = Date | null;
 type RangeCalenderDate = [CalenderDate, CalenderDate];
 type CalendarStatus = 'hidden' | 'display';
-
-// @todo Dayjsをインポートして、日付のフォーマットを変更する
 
 export const ScheduleCalender = () => {
   const [calenderDate, setCalenderDate] = useState<Date>(new Date());
@@ -52,14 +51,14 @@ export const ScheduleCalender = () => {
 
   return (
     <ChakraProvider>
-        <Box>
           <Input
             onClick={onChangeDate}
             variant='outline' placeholder='開始日を入力してください'
-            value={calenderDate.toDateString()}
+            value={
+              dayjs(calenderDate).format('YYYY年M月D日')
+            
+            }
           />
-          {calendar()}
-        </Box>
     </ChakraProvider>
   );
 }
