@@ -1,10 +1,7 @@
-'use client'
+"use client";
 
-import { FC } from 'react'
+import { FC } from "react";
 
 export const TimeInputBox = () => {
-
-  return (
-    <h1>クライアントコンポーネント</h1>
-  )
-}
+  return <h1>クライアントコンポーネント</h1>;
+};

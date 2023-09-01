@@ -1,11 +1,11 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { ScheduleCalender } from "@app/schedule/schedule-calender";
+import { Calendar } from "@/app/schedule/calendar";
 
 const meta = {
-  title: "Schedule/ScheduleCalender",
-  component: ScheduleCalender,
+  title: "Schedule/Calendar",
+  component: Calendar,
   tags: ["autodocs"],
-} satisfies Meta<typeof ScheduleCalender>;
+} satisfies Meta<typeof Calendar>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
