@@ -2,8 +2,8 @@ import { useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import { Input, ChakraProvider } from "@chakra-ui/react";
 import dayjs from "dayjs";
-import { Calendar } from "@app/schedule/calendar";
-import { CalendarDate } from "@app/schedule/types-schedule";
+import { Calendar } from "@/app/date-edit/calendar";
+import { CalendarDate } from "@/app/date-edit/types-date-edit";
 
 export const ScheduleCalendar = () => {
   const [calendarDate, setCalendarDate] = useState<CalendarDate>(new Date());
@@ -40,9 +40,7 @@ export const ScheduleCalendar = () => {
         value={formatCalendarDate()}
       />
       {calendarStatus === "display" && (
-        <Calendar
-         targetDate={calendarDate}
-         onChangeDate={handleSelectedDate} />
+        <Calendar targetDate={calendarDate} onChangeDate={handleSelectedDate} />
       )}
     </ChakraProvider>
   );

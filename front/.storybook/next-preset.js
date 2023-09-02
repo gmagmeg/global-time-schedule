@@ -1,4 +1,4 @@
-const path = require('path');
+const path = require("path");
 
 module.exports = {
   webpackFinal: async (config) => {
@@ -9,7 +9,7 @@ module.exports = {
         alias: {
           ...config.resolve.alias,
           // ここに Next.js の alias 設定を追加
-          '@app': path.resolve(__dirname, '../app'),
+          "@app": path.resolve(__dirname, "../app"),
         },
       },
     };
