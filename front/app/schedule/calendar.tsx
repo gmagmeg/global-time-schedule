@@ -1,17 +1,22 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import "react-calendar/dist/Calendar.css";
-import ReactCalendar from "react-calendar";
+import ReactCalendar, {CalendarProps} from "react-calendar";
 import {
   CalendarDate,
   NullableCalendarDate,
   NullableCalendarDateRange,
+  CalenderStyle
 } from "@app/schedule/types-schedule";
 
 export const Calendar: FC<{
+  targetDate: CalendarDate;
   onChangeDate: (date: CalendarDate) => void;
-}> = ({ onChangeDate }) => {
-  const [calendarDate, setCalendarDate] = useState<Date>(new Date());
-
+  calendarType?: CalenderStyle;
+}> = ({
+  targetDate, 
+  calendarType = "hebrew",
+  onChangeDate,
+}) => {
   // 日付を選択した時の処理
   const handleSelectedDate = (
     date: NullableCalendarDate | NullableCalendarDateRange
@@ -20,15 +25,15 @@ export const Calendar: FC<{
       date = date[0];
     }
     const selectDate = date ?? new Date();
-    setCalendarDate(selectDate);
+
     onChangeDate(selectDate);
   };
 
   return (
     <ReactCalendar
       onChange={handleSelectedDate}
-      value={calendarDate}
-      calendarType="hebrew"
+      value={targetDate}
+      calendarType={calendarType}
     />
   );
 };
