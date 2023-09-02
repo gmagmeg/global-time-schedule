@@ -29,6 +29,7 @@ const config: StorybookConfig = {
         alias: {
           ...baseConfig.resolve?.alias,
           "@app": path.resolve(__dirname, "../app/"),
+          "@": path.resolve(__dirname, "../"),
         },
       },
     };

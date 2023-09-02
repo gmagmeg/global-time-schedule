@@ -1,46 +1,43 @@
-import { useState } from 'react';
-import 'react-calendar/dist/Calendar.css';
-import { Input, ChakraProvider } from '@chakra-ui/react';
-import dayjs from 'dayjs';
-import { Calendar } from '@app/schedule/calendar';
-import { CalendarDate } from '@app/schedule/types-schedule'
+import { useState } from "react";
+import "react-calendar/dist/Calendar.css";
+import { Input, ChakraProvider } from "@chakra-ui/react";
+import dayjs from "dayjs";
+import { Calendar } from "@app/schedule/calendar";
+import { CalendarDate } from "@app/schedule/types-schedule";
 
 export const ScheduleCalendar = () => {
-  const [calendarDate, setcalendarDate] = useState<Date>(new Date());
-  const [calendarStatus, setcalendarStatus] = useState<"display" | "hidden">('hidden');
+  const [calendarDate, setCalendarDate] = useState<string>("");
+  const [calendarStatus, setCalendarStatus] = useState<"display" | "hidden">(
+    "hidden"
+  );
 
   // カレンダーの表示・非表示を切り替える
-  const onClickInput = () => {
-    if (calendarStatus === 'hidden') {
-      setcalendarStatus('display');
+  const handleClickInput = () => {
+    if (calendarStatus === "hidden") {
+      setCalendarStatus("display");
     } else {
-      setcalendarStatus('hidden');
+      setCalendarStatus("hidden");
     }
-  }
+  };
 
   // カレンダーで日付を選択した時の処理
   const handleSelectedDate = (date: CalendarDate): void => {
-    setcalendarStatus('hidden');
-    setcalendarDate(date);
-  }
-
-  // カレンダーコンポーネントの表示・非表示
-  const calendar = () => {
-    if (calendarStatus === 'display') {
-      return <Calendar
-        onChangeDate={handleSelectedDate}
-      />
-    }
+    setCalendarStatus("hidden");
+    setCalendarDate(dayjs(date).format("YYYY-MM-DD"));
   };
 
   return (
     <ChakraProvider>
       <Input
-        onClick={onClickInput}
-        variant='outline' placeholder='開始日を入力してください'
-        value={dayjs(calendarDate).format('YYYY年M月D日')}
+        onClick={handleClickInput}
+        variant="outline"
+        placeholder="開始日を入力してください"
+        onChange={(): void => {}}
+        value={calendarDate}
       />
-      {calendar()}
+      {calendarStatus === "display" && (
+        <Calendar onChangeDate={handleSelectedDate} />
+      )}
     </ChakraProvider>
   );
-}
+};

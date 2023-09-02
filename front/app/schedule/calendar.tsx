@@ -1,25 +1,27 @@
 import { FC, useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import ReactCalendar from "react-calendar";
-import { CalendarDate, NullableCalendarDate, NullableCalendarDateRange } from '@app/schedule/types-schedule';
+import {
+  CalendarDate,
+  NullableCalendarDate,
+  NullableCalendarDateRange,
+} from "@app/schedule/types-schedule";
 
 export const Calendar: FC<{
   onChangeDate: (date: CalendarDate) => void;
 }> = ({ onChangeDate }) => {
-  const [calendarDate, setCalenderDate] = useState<Date>(new Date());
+  const [calendarDate, setCalendarDate] = useState<Date>(new Date());
 
   // 日付を選択した時の処理
-  const handleSelectedDate = (date: NullableCalendarDate | NullableCalendarDateRange): void => {
-    if (!date) {
-      date = new Date();
-    }
-
+  const handleSelectedDate = (
+    date: NullableCalendarDate | NullableCalendarDateRange
+  ): void => {
     if (Array.isArray(date)) {
-      date = date[0] ?? new Date();
+      date = date[0];
     }
-
-    setCalenderDate(date);
-    onChangeDate(date);
+    const selectDate = date ?? new Date();
+    setCalendarDate(selectDate);
+    onChangeDate(selectDate);
   };
 
   return (
