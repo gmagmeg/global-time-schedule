@@ -6,9 +6,7 @@ const timeZoneInfoList = timezones.map(({ timezone, abbreviation }) => {
     return;
   }
 
-  return {
-    [timezone]: abbreviation,
-  };
+  return [timezone, abbreviation];
 });
 
 console.log(
