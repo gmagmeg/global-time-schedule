@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FC, useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import { Input, ChakraProvider } from "@chakra-ui/react";
 import dayjs from "dayjs";
@@ -6,9 +6,13 @@ import { Calendar } from "@/app/date-edit/calendar";
 import { CalendarDate } from "@/app/date-edit/types-date-edit";
 import { DisplayStatus } from "@/app/common-types";
 
-export const ScheduleCalendar = () => {
-  const [calendarDate, setCalendarDate] = useState<CalendarDate>(new Date());
-  const [calendarStatus, setCalendarStatus] = useState<DisplayStatus>("hidden");
+export const DateEdit :FC<{
+  displayStatus: DisplayStatus;
+  currentDate: CalendarDate
+}> = ({displayStatus, currentDate}) => {
+  
+  const [calendarDate, setCalendarDate] = useState<CalendarDate>(currentDate);
+  const [calendarStatus, setCalendarStatus] = useState<DisplayStatus>(displayStatus);
 
   // カレンダーの表示・非表示を切り替える
   const handleClickInput = () => {
@@ -30,6 +34,7 @@ export const ScheduleCalendar = () => {
     setCalendarDate(date);
   };
 
+  // 日付のフォーマットを整える
   const formatCalendarDate = (): string => {
     return dayjs(calendarDate).format("YYYY/MM/DD");
   };
