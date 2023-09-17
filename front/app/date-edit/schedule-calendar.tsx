@@ -4,19 +4,23 @@ import { Input, ChakraProvider } from "@chakra-ui/react";
 import dayjs from "dayjs";
 import { Calendar } from "@/app/date-edit/calendar";
 import { CalendarDate } from "@/app/date-edit/types-date-edit";
+import { DisplayStatus } from "@/app/common-types";
 
 export const ScheduleCalendar = () => {
   const [calendarDate, setCalendarDate] = useState<CalendarDate>(new Date());
-  const [calendarStatus, setCalendarStatus] = useState<"display" | "hidden">(
-    "hidden"
-  );
+  const [calendarStatus, setCalendarStatus] = useState<DisplayStatus>("hidden");
 
   // カレンダーの表示・非表示を切り替える
   const handleClickInput = () => {
-    if (calendarStatus === "hidden") {
-      setCalendarStatus("display");
-    } else {
-      setCalendarStatus("hidden");
+    switch (calendarStatus) {
+      case "hidden":
+        setCalendarStatus("display");
+        return;
+      case "display":
+        setCalendarStatus("hidden");
+        return;
+      default:
+        return;
     }
   };
 

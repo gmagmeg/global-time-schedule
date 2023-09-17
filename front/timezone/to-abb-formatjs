@@ -1,0 +1,18 @@
+const timezones = require("./timezone.json");
+let timeZoneInfoList = {};
+timezones.forEach(({ abbreviation, timezone, utc_offset }) => {
+  if (abbreviation.match(/^[\+|\-]/)) {
+    return;
+  }
+
+  if (!timeZoneInfoList[`${abbreviation}`]) {
+    timeZoneInfoList[`${abbreviation}`] = {
+      utc_offset: utc_offset,
+      timezone: [timezone],
+    };
+  } else {
+    timeZoneInfoList[abbreviation].timezone.push(timezone);
+  }
+});
+
+console.log(timeZoneInfoList);
