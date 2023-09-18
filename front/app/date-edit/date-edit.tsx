@@ -11,7 +11,7 @@ export const DateEdit :FC<{
   currentDate: CalendarDate
 }> = ({displayStatus, currentDate}) => {
   
-  const [calendarDate, setCalendarDate] = useState<CalendarDate>(currentDate);
+  const [calendarDate, setCalendarDate] = useState<CalendarDate>(new Date("2021/01/01"));
   const [calendarStatus, setCalendarStatus] = useState<DisplayStatus>(displayStatus);
 
   // カレンダーの表示・非表示を切り替える
@@ -47,6 +47,7 @@ export const DateEdit :FC<{
         placeholder="開始日を入力してください"
         readOnly
         value={formatCalendarDate()}
+        defaultValue="2021/01/01"
       />
       {calendarStatus === "display" && (
         <Calendar targetDate={calendarDate} onChangeDate={handleSelectedDate} />
