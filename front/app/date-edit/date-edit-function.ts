@@ -1,7 +1,5 @@
 import dayjs from "dayjs";
-
-type WeekStartDay = "Sun" | "Mon";
-type BaseWeekDays = 1 | 7 | 8;
+import { BaseWeekDays, WeekStartDay } from "@app/date-edit/types-date-edit";
 
 // 受け取った日付をベースに、指定された次の週の開始日に補正して返す
 export const adjustNextStartDay = (
