@@ -10,10 +10,12 @@
     "vscode": {
       "extensions": [
         "GitHub.copilot",
+        "GitHub.copilot-chat",
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "Orta.vscode-jest",
-        "streetsidesoftware.code-spell-checker"
+        "streetsidesoftware.code-spell-checker",
+        "zokugun.explicit-folding"
       ],
       "settings": {
         "workbench.colorCustomizations": {

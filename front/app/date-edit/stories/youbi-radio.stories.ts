@@ -23,6 +23,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    youbi: "Sun",
+    weekStartDay: "Sun",
+    onChangeRadio: (nextString: string): void => {},
   },
 };
