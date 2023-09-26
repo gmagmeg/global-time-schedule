@@ -28,12 +28,15 @@ export const Calendar: FC<{
 
   const minDate = validMinDate(new Date()).toDate();
 
+  const tileDisabled = ({ date }: { date: Date }) => date.getDay() > 1;
+
   return (
     <ReactCalendar
       onChange={handleSelectedDate}
       value={targetDate}
       calendarType={calendarType}
       minDate={minDate}
+      tileDisabled={tileDisabled}
     />
   );
 };

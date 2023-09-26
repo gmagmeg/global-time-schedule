@@ -3,7 +3,6 @@ import {
   State,
   DateEditAction,
 } from "@app/date-edit/date-edit-reducer";
-import { CalendarDate, WEEK_START_DAY } from "@app/date-edit/types-date-edit";
 
 describe("dateEditReducer", () => {
   const initialState: State = {

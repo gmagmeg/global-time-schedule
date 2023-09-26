@@ -2,7 +2,10 @@ import { FC, useReducer } from "react";
 import "react-calendar/dist/Calendar.css";
 import { Input, ChakraProvider } from "@chakra-ui/react";
 import { Calendar } from "@/app/date-edit/calendar";
-import { CalendarDate, WeekStartDayString } from "@/app/date-edit/types-date-edit";
+import {
+  CalendarDate,
+  WeekStartDayString,
+} from "@/app/date-edit/types-date-edit";
 import { InputChangeEvent } from "../event-types-alias";
 import {
   toAddYoubiFormat,
@@ -38,8 +41,8 @@ export const DateEdit: FC<{
     <ChakraProvider>
       <RadioGroupButton
         list={[
-          {label: "日曜日始まり", value: "Sun"},
-          {label: "月曜日始まり", value: "Mon"}
+          { label: "日曜日始まり", value: "Sun" },
+          { label: "月曜日始まり", value: "Mon" },
         ]}
         checked={state.weekStartDay}
         onRadioChange={handleChangeRadio}
