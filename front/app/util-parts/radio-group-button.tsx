@@ -1,23 +1,19 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import { Radio, RadioGroup, Stack } from "@chakra-ui/react";
 
 export const RadioGroupButton: FC<{
-  list: string[];
+  list: {label: string, value: string}[];
   checked: string;
-  direction: "row" | "column";
-}> = ({ list, checked, direction = "row" }) => {
-  const [value, setValue] = useState(checked);
-
-  const handleRadioGroup = (value: string) => {
-    setValue(value);
-  };
+  onRadioChange: (value: string) => void;
+  direction?: "row" | "column";
+}> = ({ list, checked, onRadioChange, direction = "row" }) => {
 
   return (
-    <RadioGroup onChange={handleRadioGroup} value={value}>
+    <RadioGroup onChange={onRadioChange} value={checked}>
       <Stack direction={direction}>
-        {list.map((value) => (
-          <Radio key={value} value={value} checked={value === checked}>
-            {value}
+        {list.map((item) => (
+          <Radio key={item.value} value={item.value} checked={item.value === checked}>
+            {item.label}
           </Radio>
         ))}
       </Stack>

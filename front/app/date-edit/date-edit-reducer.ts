@@ -1,5 +1,9 @@
 import dayjs from "dayjs";
-import { WeekStartDay, CalendarDate } from "./types-date-edit";
+import {
+  WeekStartDayString,
+  CalendarDate,
+  WEEK_START_DAY,
+} from "./types-date-edit";
 import {
   adjustNextStartDay,
   toAddYoubiFormat,
@@ -9,7 +13,7 @@ import {
 export type State = {
   inputDate: string; // 入力値をそのまま反映するため、string型で保持する
   calendarDate: Date; // 日付形式の入力値の場合だけ、Date型に変換して保持したいので、inputDateとは別に保持する
-  weekStartDay: WeekStartDay;
+  weekStartDay: WeekStartDayString;
 };
 
 /**
@@ -18,7 +22,7 @@ export type State = {
 export type DateEditAction =
   | { type: "SET_SELECTED_DATE"; date: CalendarDate }
   | { type: "SET_INPUT_DATE"; inputDate: string }
-  | { type: "SET_WEEK_START_DAY"; weekStartDay: WeekStartDay };
+  | { type: "SET_WEEK_START_DAY"; weekStartDay: WeekStartDayString | string };
 
 export const dateEditReducer = (
   state: State,
@@ -57,14 +61,20 @@ export const dateEditReducer = (
      * 入力日やカレンダーで選択された日付は無視する
      */
     case "SET_WEEK_START_DAY":
-      const currentDate = new Date();
+      const weekStartDay = action.weekStartDay;
+      const exists = WEEK_START_DAY.find((day) => day === weekStartDay);
+      if (!exists) {
+        throw new Error(`Unexpected weekStartDay: ${weekStartDay}`);
+      }
 
+      const currentDate = new Date();
       return {
         ...state,
-        weekStartDay: action.weekStartDay,
-        inputDate: toAddYoubiFormat(currentDate, action.weekStartDay),
-        calendarDate: adjustNextStartDay(currentDate, action.weekStartDay),
+        weekStartDay: weekStartDay,
+        inputDate: toAddYoubiFormat(currentDate, weekStartDay),
+        calendarDate: adjustNextStartDay(currentDate, weekStartDay),
       };
+
     default:
       return state;
   }
