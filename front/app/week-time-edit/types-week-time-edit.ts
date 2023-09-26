@@ -3,7 +3,7 @@
  * あえて一ファイルに定義しています
  */
 export const YOUBI = ["月", "火", "水", "木", "金", "土", "日"] as const;
-export type Youbi = (typeof YOUBI)[number];
+export type YoubiString = (typeof YOUBI)[number];
 export type Week = typeof YOUBI;
 
 export const TIME_MEDIUM_TUPLE = ["AM", "PM"] as const;

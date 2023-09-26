@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { TimeEdit } from "@app/week-time-edit/time-select-box";
+import { DayTimeSelectBox } from "@app/week-time-edit/day-time-select-box";
 import {
   FULL_HOUR_TUPLE,
   HALF_HOUR_TUPLE,
@@ -7,10 +7,10 @@ import {
 } from "@app/week-time-edit/types-week-time-edit";
 
 const meta: Meta = {
-  title: "WeekTimeEdit/TimeEdit",
-  component: TimeEdit,
+  title: "WeekTimeEdit/DayTimeSelectBox",
+  component: DayTimeSelectBox,
   tags: ["autodocs"],
-} satisfies Meta<typeof TimeEdit>;
+} satisfies Meta<typeof DayTimeSelectBox>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -23,6 +23,7 @@ export const Default: Story = {
       hour: "10",
       minute: "00",
     },
+    youbi: "日",
   },
 };
 
@@ -34,5 +35,6 @@ export const HalfHour: Story = {
       hour: "10",
       minute: "00",
     },
+    youbi: "日",
   },
 };
