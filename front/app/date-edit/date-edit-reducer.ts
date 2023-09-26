@@ -1,6 +1,10 @@
 import dayjs from "dayjs";
 import { WeekStartDay, CalendarDate } from "./types-date-edit";
-import { adjustNextStartDay, toAddYoubiFormat } from "./date-edit-function";
+import {
+  adjustNextStartDay,
+  toAddYoubiFormat,
+  validMinDate,
+} from "./date-edit-function";
 
 export type State = {
   inputDate: string; // 入力値をそのまま反映するため、string型で保持する
@@ -36,7 +40,7 @@ export const dateEditReducer = (
      */
     case "SET_INPUT_DATE":
       const isValidDate = !isNaN(Date.parse(action.inputDate));
-      const oneWeekAgo = dayjs().subtract(1, "week");
+      const oneWeekAgo = validMinDate(new Date());
       const calendarDate =
         isValidDate && oneWeekAgo < dayjs(action.inputDate)
           ? new Date(action.inputDate)

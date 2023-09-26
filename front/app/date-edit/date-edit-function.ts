@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import {
   BaseWeekDays,
   WeekStartDay,
@@ -36,4 +36,9 @@ export const toAddYoubiFormat = (
 ): string => {
   const nextStartDay = adjustNextStartDay(calendarDate, weekStartDay);
   return dayjs(nextStartDay).format("YYYY/MM/DD(ddd)");
+};
+
+// 有効な最小の日付を返す
+export const validMinDate = (date: string | Date): Dayjs => {
+  return dayjs(date).subtract(1, "week");
 };

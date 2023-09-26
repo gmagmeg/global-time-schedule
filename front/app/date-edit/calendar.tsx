@@ -7,6 +7,7 @@ import {
   NullableCalendarDateRange,
   CalenderStyle,
 } from "@/app/date-edit/types-date-edit";
+import { validMinDate } from "@app/date-edit/date-edit-function";
 
 export const Calendar: FC<{
   targetDate: CalendarDate;
@@ -25,11 +26,14 @@ export const Calendar: FC<{
     onChangeDate(selectDate);
   };
 
+  const minDate = validMinDate(new Date()).toDate();
+
   return (
     <ReactCalendar
       onChange={handleSelectedDate}
       value={targetDate}
       calendarType={calendarType}
+      minDate={minDate}
     />
   );
 };
