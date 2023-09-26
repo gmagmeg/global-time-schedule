@@ -43,18 +43,24 @@ export const dateEditReducer = (
      * その場合は入力データをそのまま返却しています
      */
     case "SET_INPUT_DATE":
-      const isValidDate = !isNaN(Date.parse(action.inputDate));
+      const inputDateString = action.inputDate;
+      const isValidDate = !isNaN(Date.parse(inputDateString));
       const oneWeekAgo = validMinDate(new Date());
-      const calendarDate =
-        isValidDate && oneWeekAgo < dayjs(action.inputDate)
-          ? new Date(action.inputDate)
-          : state.calendarDate;
+      if (isValidDate && oneWeekAgo < dayjs(inputDateString)) {
+        const inputDate = new Date(inputDateString);
 
-      return {
-        ...state,
-        inputDate: action.inputDate,
-        calendarDate,
-      };
+        return {
+          ...state,
+          inputDate: inputDateString,
+          calendarDate: adjustNextStartDay(inputDate, state.weekStartDay),
+        };
+      } else {
+        return {
+          ...state,
+          inputDate: action.inputDate,
+          calendarDate: state.calendarDate,
+        };
+      }
     /**
      * 開始日の変更
      * 開始曜日を変更された場合は、現在日ベースで計算しなおす。

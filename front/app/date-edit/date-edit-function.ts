@@ -1,14 +1,14 @@
 import dayjs, { Dayjs } from "dayjs";
 import {
   BaseWeekDays,
-  WeekStartDay,
+  WeekStartDayString,
   CalendarDate,
 } from "@app/date-edit/types-date-edit";
 
 // 受け取った日付をベースに、指定された次の週の開始日に補正して返す
 export const adjustNextStartDay = (
   date: Date,
-  weekStartDay: WeekStartDay
+  weekStartDay: WeekStartDayString
 ): Date => {
   const day = dayjs(date);
 
@@ -32,7 +32,7 @@ export const adjustNextStartDay = (
 
 export const toAddYoubiFormat = (
   calendarDate: CalendarDate,
-  weekStartDay: WeekStartDay
+  weekStartDay: WeekStartDayString
 ): string => {
   const nextStartDay = adjustNextStartDay(calendarDate, weekStartDay);
   return dayjs(nextStartDay).format("YYYY/MM/DD(ddd)");

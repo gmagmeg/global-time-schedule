@@ -1,4 +1,4 @@
-import { adjustNextStartDay } from "./date-edit-function";
+import { adjustNextStartDay } from "../date-edit-function";
 import dayjs from "dayjs";
 
 // adjustNextSundayのユニットテスト
