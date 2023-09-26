@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { RadioGroupButton } from "../util-parts/radio-group-button";
 import { DayTimeSelectBox } from "./day-time-select-box";
 import {
@@ -10,6 +10,11 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import "@app/globals.css";
 
 export const WeekTimeEdit: FC<{}> = ({}) => {
+  const [timeOption, setTimeOption] = useState("12");
+  const handleTimeOption = (value: string) => {
+    setTimeOption(value);
+  };
+
   return (
     <>
       <RadioGroupButton
@@ -17,8 +22,8 @@ export const WeekTimeEdit: FC<{}> = ({}) => {
           { label: "12時間表記", value: "12" },
           { label: "24時間表記", value: "24" },
         ]}
-        checked={"12"}
-        onRadioChange={(value) => console.log(value)}
+        checked={timeOption}
+        onRadioChange={handleTimeOption}
       />
       {
         // １週間分の曜日選択セレクトボックス
