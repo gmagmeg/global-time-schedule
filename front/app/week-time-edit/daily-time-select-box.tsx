@@ -12,7 +12,7 @@ export const DailyTimeSelectBox: FC<DailyTimeSelectBoxPops> = ({
   onChangeMinutes,
 }) => {
   return (
-    <Flex gap={2}>
+    <Flex gap={2} align={"baseline"}>
       <Select width={90} onChange={onChangeHour} value={selected.hour}>
         {hours.map((hour) => (
           <option key={hour} value={hour}>

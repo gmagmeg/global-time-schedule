@@ -1,26 +1,26 @@
 /**
- * ChakraのRadioボタンのonClickにvalueを渡せるように拡張したコンポーネント
+ * ChakraのRadioボタンのonClickにexValueを渡せるように拡張したコンポーネント
  */
 import { MouseEvent } from "react";
 import { Radio as ChakraRadio, RadioProps } from "@chakra-ui/react";
 
-type ExtendedRadioProps = RadioProps & {
-  extendedOnClick?: (value: string, event: MouseEvent<HTMLDivElement>) => void;
-  value?: string;
+type ExtendedRadioProps<T> = RadioProps & {
+  customOnClick?: (customValue: T, event: MouseEvent<HTMLDivElement>) => void;
+  customValue?: T;
 };
 
-export const CustomRadioButton = ({
-  extendedOnClick,
+export const CustomRadioButton = <T,>({
+  customOnClick,
   onClick,
-  value,
+  customValue,
   ...props
-}: ExtendedRadioProps) => {
+}: ExtendedRadioProps<T>) => {
   const handleClick = (event: MouseEvent<HTMLDivElement>) => {
     if (onClick) {
       onClick(event);
     }
-    if (extendedOnClick && value !== undefined) {
-      extendedOnClick(value, event);
+    if (customOnClick && customValue !== undefined) {
+      customOnClick(customValue, event);
     }
   };
 

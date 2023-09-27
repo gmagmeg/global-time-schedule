@@ -1,46 +1,29 @@
-import { FC, useState } from "react";
-import { RadioGroupButton } from "../util-parts/radio-group-button";
-import { DailyTimeSelectBox } from "./daily-time-select-box";
-import {
-  HALF_HOUR_TUPLE,
-  MINUTES,
-  WEEK_TUPLE,
-  YoubiString,
-  TimeMeridiemString,
-} from "@app/week-time-edit/types-week-time-edit";
-import { Grid, GridItem } from "@chakra-ui/react";
+import { FC } from "react";
 import "@app/globals.css";
+import { DailyTimeMeridiemRadioProps } from "@app/week-time-edit/types/daily-time-meridiem-radio";
+import { DailyTimeSelectBoxPops } from "@app/week-time-edit/types/daily-time-select-box";
+import { DailyTimeEdit } from "./daily-time-edit";
+import { WEEK_TUPLE } from "@app/week-time-edit/types/week-time-edit";
+import { Grid } from "@chakra-ui/react";
+import { RadioGroupButton } from "../util-parts/radio-group-button";
+import { HourOption } from "@app/week-time-edit/hour-option";
 
-export const WeekTimeEdit: FC<{}> = ({}) => {
-  const [timeOption, setTimeOption] = useState("12");
-  const handleTimeOption = (value: string) => {
-    setTimeOption(value);
-  };
+type WeekTimeEditProps = {
+  timeMeridiem: DailyTimeMeridiemRadioProps;
+  timeSelectBox: DailyTimeSelectBoxPops;
+};
 
-  // AM/PMのラジオボタンの状態管理
-  const initTimeMediumList: { selected: TimeMeridiemString }[] = WEEK_TUPLE.map(
-    () => {
-      return { selected: "PM" };
-    }
-  );
-  const [timeMediumList, setTimeMediumList] = useState(initTimeMediumList);
-  const handleTimeMedium = (value: string) => {
-    setTimeMediumList([...timeMediumList]);
-  };
-
+export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
+  timeMeridiem,
+  timeSelectBox,
+}) => {
   return (
     <>
-      <RadioGroupButton
-        list={[
-          { label: "12時間表記", value: "12" },
-          { label: "24時間表記", value: "24" },
-        ]}
-        checked={timeOption}
-        onRadioChange={handleTimeOption}
+      <HourOption
+        checked={12}
+        onClick={() => {}}
       />
-      {
-        // １週間分の曜日選択セレクトボックス
-      }
+
       <Grid
         mt={4}
         templateColumns="repeat(4, 1fr)"
@@ -48,14 +31,11 @@ export const WeekTimeEdit: FC<{}> = ({}) => {
         className="week-time-select"
       >
         {WEEK_TUPLE.map((youbi) => (
-          <GridItem key={youbi}>
-            <DailyTimeSelectBox
-              hours={HALF_HOUR_TUPLE}
-              selected={{ hour: "10", minute: "30" }}
-              youbi={youbi}
-              onChangeTimeMedium={handleTimeMedium}
-            />
-          </GridItem>
+          <DailyTimeEdit
+            key={youbi}
+            timeMeridiem={timeMeridiem}
+            timeSelectBox={timeSelectBox}
+          />
         ))}
       </Grid>
     </>

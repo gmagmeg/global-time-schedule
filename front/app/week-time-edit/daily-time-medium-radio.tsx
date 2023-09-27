@@ -4,6 +4,7 @@ import { FC } from "react";
 import {
   DailyTimeMeridiemRadioProps,
   TIME_MEDIUM_TUPLE,
+  TimeMeridiemString,
 } from "@app/week-time-edit/types/daily-time-meridiem-radio";
 
 export const DailyTimeMeridiemRadio: FC<DailyTimeMeridiemRadioProps> = ({
@@ -20,11 +21,11 @@ export const DailyTimeMeridiemRadio: FC<DailyTimeMeridiemRadioProps> = ({
       <p>{targetYoubi}</p>
       <Stack direction={"column"}>
         {TIME_MEDIUM_TUPLE.map((timeMedium) => (
-          <CustomRadioButton
+          <CustomRadioButton<TimeMeridiemString>
             key={timeMedium}
             isChecked={checked === timeMedium}
             value={timeMedium}
-            extendedOnClick={(_, event) => onChange(targetYoubi, event)}
+            customOnClick={(_, event) => onChange(targetYoubi, event)}
           >
             {timeMedium}
           </CustomRadioButton>
