@@ -21,7 +21,6 @@ export const Default: Story = {
       hour: "10",
       minute: "00",
     },
-    youbi: "日",
   },
 };
 
@@ -32,6 +31,5 @@ export const HalfHour: Story = {
       hour: "10",
       minute: "00",
     },
-    youbi: "日",
   },
 };

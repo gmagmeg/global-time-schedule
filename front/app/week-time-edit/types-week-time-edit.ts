@@ -14,6 +14,10 @@ export const MINUTES = ["00", "30"] as const;
 export type MinutesTuple = typeof MINUTES;
 export type MinutesString = (typeof MINUTES)[number];
 
+export const HOURS_OPTION = ["12", "24"] as const;
+export type HoursOption = typeof HOURS_OPTION;
+export type HoursOptionString = (typeof HOURS_OPTION)[number];
+
 /**
  * 12時間表記の型定義と定数
  * 24時間表記はFULL_HOURSを参照

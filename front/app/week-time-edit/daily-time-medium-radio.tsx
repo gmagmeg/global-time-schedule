@@ -12,7 +12,7 @@ export const DailyTimeMeridiemRadio: FC<{
   checked: TimeMeridiemString;
   youbi: YoubiString;
   onRadioChange: (
-    addOnChangeParam: string,
+    changeMediumString: YoubiString,
     event: MouseEvent<HTMLDivElement>
   ) => void;
 }> = ({ checked, youbi, onRadioChange }) => {

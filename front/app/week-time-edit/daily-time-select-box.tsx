@@ -1,41 +1,31 @@
 import { Select, Flex } from "@chakra-ui/react";
-import { FC, useState } from "react";
+import { FC } from "react";
 import {
   MinutesString,
   HourString,
-  HourTuple,
-  YoubiString,
   MINUTES,
-} from "./types-week-time-edit";
-import { ChangeEvent } from "@app/event-types-alias";
+  HourTuple,
+} from "@app/week-time-edit/types-week-time-edit";
+import { SelectChangeEvent } from "@app/event-types-alias";
 
 export const DailyTimeSelectBox: FC<{
   hours: HourTuple;
   selected: {
     hour: HourString;
-    minute: MinutesString;
+    minutes: MinutesString;
   };
-  youbi: YoubiString;
-  onChangeTimeMedium: (value: string) => void;
-}> = ({ hours, }) => {
-  const [hour, setHour] = useState("10");
-
-  // 時間を変更したときの処理
-  const handleChangeTime = ({ target }: ChangeEvent) => {
-    setHour(target.value);
-  };
-
-  const handleChangeMinutes = () => {};
-
+  onChangeTimeHour: (event: SelectChangeEvent) => void;
+  onChangeMinutes: (event: SelectChangeEvent) => void;
+}> = ({ hours, selected, onChangeTimeHour, onChangeMinutes }) => {
   return (
     <Flex gap={2}>
       {
         // 時間のセレクトボックス
       }
-      <Select width={90} onChange={handleChangeTime} value={hour}>
-        {hours.map((optionValue) => (
-          <option key={optionValue} value={optionValue}>
-            {optionValue}
+      <Select width={90} onChange={onChangeTimeHour} value={selected.hour}>
+        {hours.map((hour) => (
+          <option key={hour} value={hour}>
+            {hour}
           </option>
         ))}
       </Select>
@@ -43,7 +33,7 @@ export const DailyTimeSelectBox: FC<{
       {
         // 分のセレクトボックス
       }
-      <Select width={90} onChange={handleChangeMinutes} value={"00"}>
+      <Select width={90} onChange={onChangeMinutes} value={selected.minutes}>
         {MINUTES.map((value) => (
           <option key={value} value={value}>
             {value}
