@@ -12,8 +12,8 @@ export const TimeMeridiemRadio: FC<TimeMeridiemRadioProps> = ({
   onChange,
 }) => {
   const handleChange = (value: string): void => {
-    onChange({value: toTimeMeridiem(value), targetYoubi});
-  }
+    onChange({ value: toTimeMeridiem(value), targetYoubi });
+  };
 
   return (
     <RadioGroup onChange={handleChange} value={checked}>

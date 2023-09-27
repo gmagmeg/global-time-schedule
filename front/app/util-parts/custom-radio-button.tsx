@@ -1,6 +1,6 @@
 /**
  * ChakraのRadioボタンのonClickにexValueを渡せるように拡張したコンポーネント
- * 
+ *
  * valueをジェネリクスにしたかったが、下記の理由により断念した
  * １：ChakraUIの元々持っているlabelの動作が効かなくなったため
  * ２：元々のInput要素のvalue属性がstringだけを想定しているため
@@ -28,5 +28,7 @@ export const CustomRadioButton = <T,>({
     }
   };
 
-  return <ChakraRadio onClick={handleClick} value={String(customValue)} {...props} />;
+  return (
+    <ChakraRadio onClick={handleClick} value={String(customValue)} {...props} />
+  );
 };
