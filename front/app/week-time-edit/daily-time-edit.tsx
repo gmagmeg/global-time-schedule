@@ -1,16 +1,11 @@
 import { FC } from "react";
 import { DailyTimeMeridiemRadio } from "./daily-time-medium-radio";
-import { DailyTimeMeridiemRadioProps } from "@app/week-time-edit/types/daily-time-meridiem-radio";
-import { DailyTimeSelectBoxPops } from "@app/week-time-edit/types/daily-time-select-box";
 import { DailyTimeSelectBox } from "./daily-time-select-box";
 import { Box, Flex } from "@chakra-ui/react";
+import { DailyTimeEditProps } from "./types/daily-time-edit";
 
-type LocalProps = {
-  timeMeridiem: DailyTimeMeridiemRadioProps;
-  timeSelectBox: DailyTimeSelectBoxPops;
-};
-
-export const DailyTimeEdit: FC<LocalProps> = ({
+export const DailyTimeEdit: FC<DailyTimeEditProps> = ({
+  targetYoubi,
   timeMeridiem,
   timeSelectBox,
 }) => {
@@ -18,7 +13,7 @@ export const DailyTimeEdit: FC<LocalProps> = ({
     <Flex>
       <DailyTimeMeridiemRadio
         checked={timeMeridiem.checked}
-        targetYoubi={timeMeridiem.targetYoubi}
+        targetYoubi={targetYoubi}
         onChange={timeMeridiem.onChange}
       />
       <Box mt={7} ml={4}>

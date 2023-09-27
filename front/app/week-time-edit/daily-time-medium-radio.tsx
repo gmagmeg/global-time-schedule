@@ -24,7 +24,7 @@ export const DailyTimeMeridiemRadio: FC<DailyTimeMeridiemRadioProps> = ({
           <CustomRadioButton<TimeMeridiemString>
             key={timeMedium}
             isChecked={checked === timeMedium}
-            value={timeMedium}
+            customValue={timeMedium}
             customOnClick={(_, event) => onChange(targetYoubi, event)}
           >
             {timeMedium}

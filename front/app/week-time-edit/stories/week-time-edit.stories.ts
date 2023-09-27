@@ -37,5 +37,6 @@ export const Default: Story = {
       onChangeHour: () => {},
       onChangeMinutes: () => {},
     },
+    week: ["日", "月", "火", "水", "木", "金", "土"],
   },
 };
