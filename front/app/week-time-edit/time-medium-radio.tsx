@@ -1,27 +1,34 @@
 import { RadioGroup, Stack } from "@chakra-ui/react";
 import { CustomRadioButton } from "@app/util-parts/custom-radio-button";
-import { FC } from "react";
+import { FC, MouseEvent } from "react";
 
-import { TIME_MEDIUM_TUPLE, TimeMeridiemString } from "./types-week-time-edit";
-import { MouseEvent } from "react";
+import {
+  TIME_MEDIUM_TUPLE,
+  TimeMeridiemString,
+  YoubiString,
+} from "./types-week-time-edit";
 
 export const TimeMeridiemRadio: FC<{
   checked: TimeMeridiemString;
-  onRadioChange: (changeTargetIndex: string, event: MouseEvent) => void;
-}> = ({ checked, onRadioChange }) => {
+  youbi: YoubiString;
+  onRadioChange: (
+    addOnChangeParam: string,
+    event: MouseEvent<HTMLDivElement>
+  ) => void;
+}> = ({ checked, youbi, onRadioChange }) => {
   /**
-   * 何番目のラジオボタンが選択されてたかを管理するために、
-   * index番号を返せるように拡張したCustomRadioButtonを使っている
+   * 何曜日のラジオボタンが選択されてたかを管理するために、
+   * 拡張したCustomRadioButtonを使っている
    */
   return (
     <RadioGroup>
       <Stack direction={"column"}>
-        {TIME_MEDIUM_TUPLE.map((timeMedium, index) => (
+        {TIME_MEDIUM_TUPLE.map((timeMedium) => (
           <CustomRadioButton
             key={timeMedium}
             isChecked={checked === timeMedium}
-            value={String(index)}
-            extendedOnClick={onRadioChange}
+            value={timeMedium}
+            extendedOnClick={(_, event) => onRadioChange(youbi, event)}
           >
             {timeMedium}
           </CustomRadioButton>
