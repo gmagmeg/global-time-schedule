@@ -8,7 +8,7 @@ import {
   YoubiString,
 } from "./types-week-time-edit";
 
-export const TimeMeridiemRadio: FC<{
+export const DailyTimeMeridiemRadio: FC<{
   checked: TimeMeridiemString;
   youbi: YoubiString;
   onRadioChange: (

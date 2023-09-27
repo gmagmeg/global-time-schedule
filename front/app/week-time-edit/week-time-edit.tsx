@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { RadioGroupButton } from "../util-parts/radio-group-button";
-import { DayTimeSelectBox } from "./day-time-select-box";
+import { DailyTimeSelectBox } from "./daily-time-select-box";
 import {
   HALF_HOUR_TUPLE,
   MINUTES,
@@ -49,7 +49,7 @@ export const WeekTimeEdit: FC<{}> = ({}) => {
       >
         {WEEK_TUPLE.map((youbi) => (
           <GridItem key={youbi}>
-            <DayTimeSelectBox
+            <DailyTimeSelectBox
               hours={HALF_HOUR_TUPLE}
               selected={{ hour: "10", minute: "30" }}
               youbi={youbi}

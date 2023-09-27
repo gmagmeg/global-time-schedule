@@ -1,14 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
-import { TimeMeridiemRadio } from "@app/week-time-edit/time-medium-radio";
+import { DailyTimeMeridiemRadio } from "@app/week-time-edit/daily-time-medium-radio";
 
 const documentation = `AM/PMを選択するラジオボタンです。
 event事返したいので、あえてutil-packageのChangeEventを使用していません。
 `;
 
 const meta = {
-  title: "WeekTimeEdit/TimeMeridiemRadio",
-  component: TimeMeridiemRadio,
+  title: "WeekTimeEdit/DailyTimeMeridiemRadio",
+  component: DailyTimeMeridiemRadio,
   tags: ["autodocs"],
   parameters: {
     docs: {
@@ -17,7 +17,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof TimeMeridiemRadio>;
+} satisfies Meta<typeof DailyTimeMeridiemRadio>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
