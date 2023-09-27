@@ -2,9 +2,9 @@
  * 定数と型定義を分けると、定義が分散して煩雑になるので、
  * あえて一ファイルに定義しています
  */
-export const YOUBI = ["月", "火", "水", "木", "金", "土", "日"] as const;
-export type YoubiString = (typeof YOUBI)[number];
-export type Week = typeof YOUBI;
+export const WEEK_TUPLE = ["月", "火", "水", "木", "金", "土", "日"] as const;
+export type WeekTuple = typeof WEEK_TUPLE;
+export type YoubiString = (typeof WEEK_TUPLE)[number];
 
 export const TIME_MEDIUM_TUPLE = ["AM", "PM"] as const;
 export type TimeMeridiemTuple = typeof TIME_MEDIUM_TUPLE;

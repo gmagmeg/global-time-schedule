@@ -2,23 +2,23 @@ import { Select, Flex } from "@chakra-ui/react";
 import { FC, useState } from "react";
 import {
   MinutesString,
-  MinutesTuple,
   HourString,
   HourTuple,
   YoubiString,
+  MINUTES,
 } from "./types-week-time-edit";
 import { ChangeEvent } from "@app/event-types-alias";
-import { RadioGroupButton } from "../util-parts/radio-group-button";
+import { RadioGroupButton } from "@app/util-parts/radio-group-button";
 
 export const DayTimeSelectBox: FC<{
   hours: HourTuple;
-  minutes: MinutesTuple;
   selected: {
     hour: HourString;
     minute: MinutesString;
   };
   youbi: YoubiString;
-}> = ({ hours, minutes, selected, youbi }) => {
+  onChangeTimeMedium: (value: string) => void;
+}> = ({ hours, selected, youbi, onChangeTimeMedium }) => {
   const [hour, setHour] = useState("18");
 
   // 時間を変更したときの処理
@@ -29,6 +29,12 @@ export const DayTimeSelectBox: FC<{
   // 一致した時間を選択状態にする
   const isSelectedTime = (timeValue: string) => {
     return timeValue === hour;
+  };
+
+  // AM/PMを変更したときの処理
+  const [timeMedium, setTimeMedium] = useState("PM");
+  const handleTimeMedium = (value: string) => {
+    setTimeMedium(value);
   };
 
   return (
@@ -43,8 +49,8 @@ export const DayTimeSelectBox: FC<{
             { label: "AM", value: "AM" },
             { label: "PM", value: "PM" },
           ]}
-          checked={"PM"}
-          onRadioChange={(value) => console.log(value)}
+          checked={timeMedium}
+          onRadioChange={onChangeTimeMedium}
           direction="column"
         />
         {
@@ -66,7 +72,7 @@ export const DayTimeSelectBox: FC<{
           // 分のセレクトボックス
         }
         <Select width={90}>
-          {minutes.map((value) => (
+          {MINUTES.map((value) => (
             <option key={value} value={value}>
               {value}
             </option>

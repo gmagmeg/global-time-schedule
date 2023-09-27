@@ -4,7 +4,9 @@ import { DayTimeSelectBox } from "./day-time-select-box";
 import {
   HALF_HOUR_TUPLE,
   MINUTES,
-  YOUBI,
+  WEEK_TUPLE,
+  YoubiString,
+  TimeMeridiemString,
 } from "@app/week-time-edit/types-week-time-edit";
 import { Grid, GridItem } from "@chakra-ui/react";
 import "@app/globals.css";
@@ -13,6 +15,17 @@ export const WeekTimeEdit: FC<{}> = ({}) => {
   const [timeOption, setTimeOption] = useState("12");
   const handleTimeOption = (value: string) => {
     setTimeOption(value);
+  };
+
+  // AM/PMのラジオボタンの状態管理
+  const initTimeMediumList: { selected: TimeMeridiemString }[] = WEEK_TUPLE.map(
+    () => {
+      return { selected: "PM" };
+    }
+  );
+  const [timeMediumList, setTimeMediumList] = useState(initTimeMediumList);
+  const handleTimeMedium = (value: string) => {
+    setTimeMediumList([...timeMediumList]);
   };
 
   return (
@@ -34,13 +47,13 @@ export const WeekTimeEdit: FC<{}> = ({}) => {
         gap={1}
         className="week-time-select"
       >
-        {YOUBI.map((youbi) => (
+        {WEEK_TUPLE.map((youbi) => (
           <GridItem key={youbi}>
             <DayTimeSelectBox
               hours={HALF_HOUR_TUPLE}
-              minutes={MINUTES}
               selected={{ hour: "10", minute: "30" }}
               youbi={youbi}
+              onChangeTimeMedium={handleTimeMedium}
             />
           </GridItem>
         ))}
