@@ -1,11 +1,11 @@
 import { Select, Flex } from "@chakra-ui/react";
 import { FC } from "react";
 import {
-  DailyTimeSelectBoxPops,
+  TimeSelectBoxPops,
   MINUTES,
-} from "@app/week-time-edit/types/daily-time-select-box";
+} from "@app/week-time-edit/types/time-select-box";
 
-export const DailyTimeSelectBox: FC<DailyTimeSelectBoxPops> = ({
+export const TimeSelectBox: FC<TimeSelectBoxPops> = ({
   hours,
   selected,
   onChangeHour,

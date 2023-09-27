@@ -22,6 +22,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    checked: 12,
+    checked: "12",
   },
 };

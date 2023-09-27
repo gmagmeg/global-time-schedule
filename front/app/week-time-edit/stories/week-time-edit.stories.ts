@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
 import { WeekTimeEdit } from "@app/week-time-edit/week-time-edit";
-import { FULL_HOUR_TUPLE } from "../types/daily-time-select-box";
+import { FULL_HOUR_TUPLE } from "../types/time-select-box";
 
 const documentation = `1週間分の時間を編集するコンポーネントです。`;
 
@@ -23,11 +23,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    timeMeridiem: {
-      checked: "PM",
-      targetYoubi: "日",
-      onChange: () => {},
-    },
     timeSelectBox: {
       hours: FULL_HOUR_TUPLE,
       selected: {

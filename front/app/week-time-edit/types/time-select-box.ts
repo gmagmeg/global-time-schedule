@@ -1,6 +1,6 @@
 import { SelectChangeEvent } from "@/app/event-types-alias";
 
-export type DailyTimeSelectBoxPops = {
+export type TimeSelectBoxPops = {
   hours: HourTuple;
   selected: {
     hour: HourString;

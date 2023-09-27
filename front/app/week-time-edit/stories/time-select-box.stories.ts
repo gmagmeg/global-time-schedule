@@ -1,18 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
-import { DailyTimeSelectBox } from "@app/week-time-edit/daily-time-select-box";
+import { TimeSelectBox } from "@app/week-time-edit/time-select-box";
 import {
   FULL_HOUR_TUPLE,
   HALF_HOUR_TUPLE,
-} from "@app/week-time-edit/types/daily-time-select-box";
+} from "@app/week-time-edit/types/time-select-box";
 
 const documentation = `時間を選択するセレクトボックスです。
 12時間表記と24時間表記の2種類があります。
 `;
 
 const meta: Meta = {
-  title: "WeekTimeEdit/DailyTimeSelectBox",
-  component: DailyTimeSelectBox,
+  title: "WeekTimeEdit/TimeSelectBox",
+  component: TimeSelectBox,
   tags: ["autodocs"],
   parameters: {
     docs: {
@@ -21,7 +21,7 @@ const meta: Meta = {
       },
     },
   },
-} satisfies Meta<typeof DailyTimeSelectBox>;
+} satisfies Meta<typeof TimeSelectBox>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;

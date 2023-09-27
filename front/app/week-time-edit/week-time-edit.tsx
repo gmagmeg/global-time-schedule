@@ -1,18 +1,18 @@
 import { FC, useState } from "react";
 import "@app/globals.css";
-import { TimeMeridiemString } from "@app/week-time-edit/types/daily-time-meridiem-radio";
-import { DailyTimeSelectBoxPops } from "@app/week-time-edit/types/daily-time-select-box";
+import { TimeMeridiemString } from "@app/week-time-edit/types/time-meridiem-radio";
+import { TimeSelectBoxPops } from "@app/week-time-edit/types/time-select-box";
 import { DailyTimeEdit } from "./daily-time-edit";
 import { WeekTuple } from "@app/week-time-edit/types/week-time-edit";
 import { Grid } from "@chakra-ui/react";
 import {
   HOUR_OPTION,
-  HourOptionNumber,
+  HourOptionString
 } from "@app/week-time-edit/types/hour-option";
 import { HourOption } from "@app/week-time-edit/hour-option";
 
 type WeekTimeEditProps = {
-  timeSelectBox: DailyTimeSelectBoxPops;
+  timeSelectBox: TimeSelectBoxPops;
   week: WeekTuple;
 };
 
@@ -32,18 +32,21 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
     { checked: "PM" },
     { checked: "PM" },
     { checked: "PM" },
-    { checked: "AM" },
+    { checked: "PM" },
     { checked: "PM" },
     { checked: "PM" },
   ];
   const [timeMeridiem, setTimeMeridiem] = useState(initTimeMeridiem);
 
   // 12時間制と24時間制の切り替え
-  const [hourOption, setHourOption] = useState<HourOptionNumber>(HOUR_OPTION.half);
+  const [hourOption, setHourOption] = useState<HourOptionString>(HOUR_OPTION.half);
+  const handleHourOption = (value: HourOptionString) => {
+    setHourOption(value)
+  }
 
   return (
     <>
-      <HourOption checked={hourOption} onClick={() => {}} />
+      <HourOption checked={hourOption} onChange={handleHourOption} />
       <Grid
         mt={4}
         templateColumns="repeat(4, 1fr)"

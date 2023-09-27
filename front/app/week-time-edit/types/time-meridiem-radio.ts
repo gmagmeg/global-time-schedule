@@ -5,11 +5,15 @@ export const TIME_MEDIUM_TUPLE = ["AM", "PM"] as const;
 export type TimeMeridiemTuple = typeof TIME_MEDIUM_TUPLE;
 export type TimeMeridiemString = (typeof TIME_MEDIUM_TUPLE)[number];
 
-export type DailyTimeMeridiemRadioProps = {
+export const toTimeMeridiem = (value: string) => {
+  return value === "AM" ? "AM" : "PM";
+};
+
+export type TimeMeridiemRadioProps = {
   checked: TimeMeridiemString;
   targetYoubi: WeekString;
-  onChange: (
-    changeMediumString: WeekString,
-    event: MouseEvent<HTMLDivElement>
-  ) => void;
+  onChange: (props: {
+    value: TimeMeridiemString;
+    targetYoubi: WeekString;
+  }) => void;
 };
