@@ -1,32 +1,30 @@
-import { Radio, RadioGroup, Stack } from "@chakra-ui/react";
+import { RadioGroup, Stack } from "@chakra-ui/react";
+import { CustomRadioButton } from "@app/util-parts/custom-radio-button";
 import { FC } from "react";
 
 import { TIME_MEDIUM_TUPLE, TimeMeridiemString } from "./types-week-time-edit";
-import { RadioChangeEvent } from "@app/event-types-alias";
+import { MouseEvent } from "react";
 
 export const TimeMeridiemRadio: FC<{
   checked: TimeMeridiemString;
-  onChange: RadioChangeEventHandler;
-}> = ({ checked, onChange }) => {
-  const handleRadioChange = (
-    event: RadioChangeEvent,
-    key: TimeMeridiemString
-  ) => {
-    onChange(target.value);
-  };
-
+  onRadioChange: (changeTargetIndex: string, event: MouseEvent) => void;
+}> = ({ checked, onRadioChange }) => {
+  /**
+   * 何番目のラジオボタンが選択されてたかを管理するために、
+   * index番号を返せるように拡張したCustomRadioButtonを使っている
+   */
   return (
-    <RadioGroup value={checked}>
-      <Stack direction={"row"}>
-        {TIME_MEDIUM_TUPLE.map((timeMedium) => (
-          <Radio
+    <RadioGroup>
+      <Stack direction={"column"}>
+        {TIME_MEDIUM_TUPLE.map((timeMedium, index) => (
+          <CustomRadioButton
             key={timeMedium}
-            value={timeMedium}
-            checked={timeMedium === checked}
-            onChange={handleRadioChange(event, timeMedium)}
+            isChecked={checked === timeMedium}
+            value={String(index)}
+            extendedOnClick={onRadioChange}
           >
             {timeMedium}
-          </Radio>
+          </CustomRadioButton>
         ))}
       </Stack>
     </RadioGroup>
