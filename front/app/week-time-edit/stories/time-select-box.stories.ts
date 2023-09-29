@@ -28,6 +28,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
+    targetYoubi: "日",
     hours: HALF_HOUR_TUPLE,
     selected: {
       hour: "10",
@@ -38,6 +39,7 @@ export const Default: Story = {
 
 export const FullHour: Story = {
   args: {
+    targetYoubi: "月",
     hours: FULL_HOUR_TUPLE,
     selected: {
       hour: "22",

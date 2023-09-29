@@ -1,22 +1,22 @@
 import { FC } from "react";
 import {
   SelectChangeEventHandler,
-  MinutesUnit,
+  MinutesUnion,
 } from "@app/time-picker/types-time-picker";
 
 // 分の単位を選択するセレクトボックス
 export const SelectTimeUnit: FC<{
   onChangeHandler: SelectChangeEventHandler;
-  minutesUnitList: MinutesUnit[];
-}> = ({ onChangeHandler, minutesUnitList }) => {
+  minutesList: MinutesUnion[];
+}> = ({ onChangeHandler, minutesList }) => {
   return (
     <>
       <label htmlFor="minutesUnit">分の単位</label>
       <select name="minutesUnit" id="minutesUnit" onChange={onChangeHandler}>
-        {minutesUnitList.map((minutesUnit) => {
+        {minutesList.map((minutes) => {
           return (
-            <option key={minutesUnit} value={minutesUnit}>
-              {minutesUnit}分
+            <option key={minutes} value={minutes}>
+              {minutes}分
             </option>
           );
         })}

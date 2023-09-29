@@ -1,22 +1,23 @@
-import { SelectChangeEvent } from "@/app/event-types-alias";
+import { WeekUnion } from "./week-time-edit";
 
 export type TimeSelectBoxPops = {
+  targetYoubi: WeekUnion;
   hours: HourTuple;
   selected: {
-    hour: HourString;
-    minutes: MinutesString;
+    hour: HourUnion;
+    minutes: MinutesUnion;
   };
-  onChangeHour: (event: SelectChangeEvent) => void;
-  onChangeMinutes: (event: SelectChangeEvent) => void;
+  onChangeHour: (youbi: WeekUnion, selectedHour: HourUnion) => void;
+  onChangeMinutes: (youbi: WeekUnion, selectedMinutes: MinutesUnion) => void;
 };
 
 export const MINUTES = ["00", "30"] as const;
 export type MinutesTuple = typeof MINUTES;
-export type MinutesString = (typeof MINUTES)[number];
+export type MinutesUnion = (typeof MINUTES)[number];
 
 export const HOURS_OPTION = ["12", "24"] as const;
 export type HoursOption = typeof HOURS_OPTION;
-export type HoursOptionString = (typeof HOURS_OPTION)[number];
+export type HoursOptionUnion = (typeof HOURS_OPTION)[number];
 
 /**
  * 12時間表記の型定義と定数
@@ -37,7 +38,7 @@ export const HALF_HOUR_TUPLE = [
   "11",
   "12",
 ] as const;
-export type HalfHourString = (typeof HALF_HOUR_TUPLE)[number];
+export type HalfHourUnion = (typeof HALF_HOUR_TUPLE)[number];
 
 /**
  * 24時間表記の型定義と定数
@@ -57,7 +58,7 @@ export const FULL_HOUR_TUPLE = [
   "22",
   "23",
 ] as const;
-export type FullHourString = (typeof HALF_HOUR_TUPLE)[number];
+export type FullHourUnion = (typeof HALF_HOUR_TUPLE)[number];
 
 export type HourTuple = typeof HALF_HOUR_TUPLE | typeof FULL_HOUR_TUPLE;
-export type HourString = FullHourString | HalfHourString;
+export type HourUnion = FullHourUnion | HalfHourUnion;

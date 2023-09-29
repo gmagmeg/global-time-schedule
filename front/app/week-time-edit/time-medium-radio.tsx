@@ -5,15 +5,21 @@ import {
   TIME_MEDIUM_TUPLE,
   toTimeMeridiem,
 } from "@app/week-time-edit/types/time-meridiem-radio";
+import { HourUnion, HoursOptionUnion } from "./types/time-select-box";
 
 export const TimeMeridiemRadio: FC<TimeMeridiemRadioProps> = ({
   checked,
+  hoursOption,
   targetYoubi,
   onChange,
 }) => {
   const handleChange = (value: string): void => {
     onChange({ value: toTimeMeridiem(value), targetYoubi });
   };
+
+  const isDisabled = (hourOption: HoursOptionUnion): boolean => {
+    return hourOption === "24";
+  }
 
   return (
     <RadioGroup onChange={handleChange} value={checked}>
@@ -24,6 +30,7 @@ export const TimeMeridiemRadio: FC<TimeMeridiemRadioProps> = ({
             key={timeMedium}
             isChecked={checked === timeMedium}
             value={timeMedium}
+            isDisabled={isDisabled(hoursOption)}
           >
             {timeMedium}
           </Radio>

@@ -24,7 +24,9 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     timeSelectBox: {
+      targetYoubi: "日",
       hours: FULL_HOUR_TUPLE,
+      hoursOption: "24",
       selected: {
         hour: "11",
         minutes: "00",

@@ -4,12 +4,13 @@ import {
   TimeMeridiemString,
   TimeMeridiemOnChangeProps,
 } from "@app/week-time-edit/types/time-meridiem-radio";
-import { TimeSelectBoxPops } from "@app/week-time-edit/types/time-select-box";
-import { DailyTimeEdit } from "./daily-time-edit";
 import {
-  WeekString,
-  WeekTuple,
-} from "@app/week-time-edit/types/week-time-edit";
+  TimeSelectBoxPops,
+  HourUnion,
+  MinutesUnion,
+} from "@app/week-time-edit/types/time-select-box";
+import { DailyTimeEdit } from "./daily-time-edit";
+import { WeekUnion, WeekTuple } from "@app/week-time-edit/types/week-time-edit";
 import { Grid } from "@chakra-ui/react";
 import {
   HOUR_OPTION,
@@ -32,13 +33,13 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
    * - ok AM/PMの切り替え
    * - ok 12時間制と24時間制の切り替え
    * - 時間選択
-   * 
+   *
    */
 
   /**
    * 各曜日のAM/PMの切り替え
    */
-  const initTimeMeridiem: { youbi: WeekString; checked: TimeMeridiemString }[] =
+  const initTimeMeridiem: { youbi: WeekUnion; checked: TimeMeridiemString }[] =
     [
       { youbi: "日", checked: "AM" },
       { youbi: "月", checked: "PM" },
@@ -64,9 +65,49 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
   };
 
   /**
-   * @todo
-   * 時間選択
+   * 各曜日の時間選択
    */
+  const initTimeSelect: {
+    youbi: WeekUnion;
+    selected: { hour: HourUnion; minutes: MinutesUnion };
+  }[] = [
+    { youbi: "日", selected: { hour: "01", minutes: "00" } },
+    { youbi: "月", selected: { hour: "02", minutes: "30" } },
+    { youbi: "火", selected: { hour: "03", minutes: "00" } },
+    { youbi: "水", selected: { hour: "04", minutes: "30" } },
+    { youbi: "木", selected: { hour: "05", minutes: "00" } },
+    { youbi: "金", selected: { hour: "06", minutes: "30" } },
+    { youbi: "土", selected: { hour: "07", minutes: "00" } },
+  ];
+  const [timeSelect, setTimeSelect] = useState(initTimeSelect);
+
+  const onChangeHour = (targetYoubi: WeekUnion, value: HourUnion) => {
+    const newTimeSelect = timeSelect.map((timeSelect) => {
+      if (timeSelect.youbi === targetYoubi) {
+        return {
+          youbi: timeSelect.youbi,
+          selected: { hour: value, minutes: timeSelect.selected.minutes },
+        };
+      } else {
+        return timeSelect;
+      }
+    });
+    setTimeSelect(newTimeSelect);
+  };
+
+  const onChangeMinutes = (targetYoubi: WeekUnion, value: MinutesUnion) => {
+    const newTimeSelect = timeSelect.map((timeSelect) => {
+      if (timeSelect.youbi === targetYoubi) {
+        return {
+          youbi: timeSelect.youbi,
+          selected: { hour: timeSelect.selected.hour, minutes: value },
+        };
+      } else {
+        return timeSelect;
+      }
+    });
+    setTimeSelect(newTimeSelect);
+  };
 
   /**
    * 12時間制と24時間制の切り替え
@@ -93,10 +134,17 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
             targetYoubi={youbi}
             timeMeridiem={{
               checked: timeMeridiem[index].checked,
+              hoursOption: hourOption,
               targetYoubi: youbi,
               onChange: handleTimeMeridiem,
             }}
-            timeSelectBox={timeSelectBox}
+            timeSelectBox={{
+              targetYoubi: youbi,
+              hours: timeSelectBox.hours,
+              selected: timeSelect[index].selected,
+              onChangeHour: onChangeHour,
+              onChangeMinutes: onChangeMinutes,
+            }}
           />
         ))}
       </Grid>

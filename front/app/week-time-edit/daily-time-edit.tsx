@@ -18,6 +18,7 @@ export const DailyTimeEdit: FC<DailyTimeEditProps> = ({
       />
       <Box mt={7} ml={4}>
         <TimeSelectBox
+          targetYoubi={targetYoubi}
           hours={timeSelectBox.hours}
           selected={timeSelectBox.selected}
           onChangeHour={timeSelectBox.onChangeHour}
