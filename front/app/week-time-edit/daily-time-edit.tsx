@@ -13,6 +13,7 @@ export const DailyTimeEdit: FC<DailyTimeEditProps> = ({
     <Flex>
       <TimeMeridiemRadio
         checked={timeMeridiem.checked}
+        hoursOption={timeMeridiem.hoursOption}
         targetYoubi={targetYoubi}
         onChange={timeMeridiem.onChange}
       />

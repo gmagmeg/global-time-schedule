@@ -58,7 +58,7 @@ export const FULL_HOUR_TUPLE = [
   "22",
   "23",
 ] as const;
-export type FullHourUnion = (typeof HALF_HOUR_TUPLE)[number];
+export type FullHourUnion = (typeof FULL_HOUR_TUPLE)[number];
 
 export type HourTuple = typeof HALF_HOUR_TUPLE | typeof FULL_HOUR_TUPLE;
 export type HourUnion = FullHourUnion | HalfHourUnion;
