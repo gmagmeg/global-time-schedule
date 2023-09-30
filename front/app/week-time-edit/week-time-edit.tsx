@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useReducer, useState } from "react";
 import "@app/globals.css";
 import {
   TimeMeridiemString,
@@ -9,6 +9,7 @@ import {
   HourUnion,
   MinutesUnion,
   HALF_HOUR_TUPLE,
+  HourTuple,
 } from "@app/week-time-edit/types/time-select-box";
 import { DailyTimeEdit } from "./daily-time-edit";
 import { WeekUnion, WeekTuple } from "@app/week-time-edit/types/week-time-edit";
@@ -18,6 +19,7 @@ import {
   HourOption as HourOptionType,
 } from "@app/week-time-edit/types/hour-option";
 import { HourOption } from "@app/week-time-edit/hour-option";
+import { weekEditReducer, StateWeekEditReducer } from "./week-time-reducer";
 
 type WeekTimeEditProps = {
   timeSelectBox: TimeSelectBoxPops;
@@ -28,13 +30,21 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
   timeSelectBox,
   week, // 日、月の開始日の設定によって変動するため、propsで渡す
 }) => {
+  const [reducerState, reducerDispatch] = useReducer(weekEditReducer, {
+    hourOption: HOUR_OPTION.half,
+    timeSelectBox: {
+      targetYoubi: "日",
+      hours: HALF_HOUR_TUPLE,
+    },
+  });
+
   /**
    * @todo
    * useStateを使って、stateを管理する。
    * - ok AM/PMの切り替え
    * - ok 12時間制と24時間制の切り替え
-   * - 時間選択
-   *
+   * - ok 時間選択
+   *reducerに移行する
    */
 
   /**
@@ -82,7 +92,7 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
   ];
   const [timeSelect, setTimeSelect] = useState(initTimeSelect);
 
-  const [timeSelectBoxHours, setTimeSelectBoxHours] = useState(HALF_HOUR_TUPLE);
+  const [timeSelectBoxHours, setTimeSelectBoxHours] = useState<HourTuple>(HALF_HOUR_TUPLE);
 
   const onChangeHour = (targetYoubi: WeekUnion, value: HourUnion) => {
     const newTimeSelect = timeSelect.map((timeSelect) => {
@@ -115,16 +125,14 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
   /**
    * 12時間制と24時間制の切り替え
    */
-  const [hourOption, setHourOption] = useState<HourOptionType>(
-    HOUR_OPTION.half
-  );
-  const handleHourOption = (value: HourOptionType) => {
-    setHourOption(value);
+  const handleHourOption = (hourOption: HourOptionType) => {
+    setTimeSelectBoxHours(timeSelectBoxHours);
+    reducerDispatch({ type: "ChangeHourOption", hourOption });
   };
 
   return (
     <>
-      <HourOption checked={hourOption} onChange={handleHourOption} />
+      <HourOption checked={reducerState.hourOption} onChange={handleHourOption} />
       <Grid
         mt={4}
         templateColumns="repeat(4, 1fr)"
@@ -137,7 +145,7 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
             targetYoubi={youbi}
             timeMeridiem={{
               checked: timeMeridiem[index].checked,
-              hoursOption: hourOption,
+              hoursOption: reducerState.hourOption,
               targetYoubi: youbi,
               onChange: handleTimeMeridiem,
             }}

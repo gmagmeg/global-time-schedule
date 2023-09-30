@@ -25,6 +25,7 @@ export const HALF_HOUR_TUPLE = [
   "09",
   "10",
   "11",
+  "12",
 ] as const;
 export type HalfHourUnion = (typeof HALF_HOUR_TUPLE)[number];
 
