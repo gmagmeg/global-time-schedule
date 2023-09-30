@@ -23,7 +23,6 @@ export const TimeMeridiemRadio: FC<TimeMeridiemRadioProps> = ({
 
   return (
     <RadioGroup onChange={handleChange} value={checked}>
-      <p>{targetYoubi}</p>
       <Stack direction={"column"}>
         {TIME_MEDIUM_TUPLE.map((timeMedium) => (
           <Radio

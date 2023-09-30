@@ -1,16 +1,5 @@
 import { WeekUnion } from "./week-time-edit";
 
-export type TimeSelectBoxPops = {
-  targetYoubi: WeekUnion;
-  hours: HourTuple;
-  selected: {
-    hour: HourUnion;
-    minutes: MinutesUnion;
-  };
-  onChangeHour: (youbi: WeekUnion, selectedHour: HourUnion) => void;
-  onChangeMinutes: (youbi: WeekUnion, selectedMinutes: MinutesUnion) => void;
-};
-
 export const MINUTES = ["00", "30"] as const;
 export type MinutesTuple = typeof MINUTES;
 export type MinutesUnion = (typeof MINUTES)[number];
@@ -36,7 +25,6 @@ export const HALF_HOUR_TUPLE = [
   "09",
   "10",
   "11",
-  "12",
 ] as const;
 export type HalfHourUnion = (typeof HALF_HOUR_TUPLE)[number];
 
@@ -57,8 +45,20 @@ export const FULL_HOUR_TUPLE = [
   "21",
   "22",
   "23",
+  "24",
 ] as const;
 export type FullHourUnion = (typeof FULL_HOUR_TUPLE)[number];
 
 export type HourTuple = typeof HALF_HOUR_TUPLE | typeof FULL_HOUR_TUPLE;
 export type HourUnion = FullHourUnion | HalfHourUnion;
+
+export type TimeSelectBoxPops = {
+  targetYoubi: WeekUnion;
+  hours: HourTuple;
+  selected: {
+    hour: HourUnion;
+    minutes: MinutesUnion;
+  };
+  onChangeHour: (youbi: WeekUnion, selectedHour: HourUnion) => void;
+  onChangeMinutes: (youbi: WeekUnion, selectedMinutes: MinutesUnion) => void;
+};

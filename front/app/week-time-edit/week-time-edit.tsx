@@ -8,6 +8,7 @@ import {
   TimeSelectBoxPops,
   HourUnion,
   MinutesUnion,
+  HALF_HOUR_TUPLE,
 } from "@app/week-time-edit/types/time-select-box";
 import { DailyTimeEdit } from "./daily-time-edit";
 import { WeekUnion, WeekTuple } from "@app/week-time-edit/types/week-time-edit";
@@ -81,6 +82,8 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
   ];
   const [timeSelect, setTimeSelect] = useState(initTimeSelect);
 
+  const [timeSelectBoxHours, setTimeSelectBoxHours] = useState(HALF_HOUR_TUPLE);
+
   const onChangeHour = (targetYoubi: WeekUnion, value: HourUnion) => {
     const newTimeSelect = timeSelect.map((timeSelect) => {
       if (timeSelect.youbi === targetYoubi) {
@@ -140,7 +143,7 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
             }}
             timeSelectBox={{
               targetYoubi: youbi,
-              hours: timeSelectBox.hours,
+              hours: timeSelectBoxHours,
               selected: timeSelect[index].selected,
               onChangeHour: onChangeHour,
               onChangeMinutes: onChangeMinutes,
