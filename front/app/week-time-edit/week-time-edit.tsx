@@ -9,7 +9,6 @@ import {
   HourUnion,
   MinutesUnion,
   HALF_HOUR_TUPLE,
-  HourTuple,
 } from "@app/week-time-edit/types/time-select-box";
 import { DailyTimeEdit } from "./daily-time-edit";
 import { WeekUnion, WeekTuple } from "@app/week-time-edit/types/week-time-edit";
@@ -19,33 +18,61 @@ import {
   HourOption as HourOptionType,
 } from "@app/week-time-edit/types/hour-option";
 import { HourOption } from "@app/week-time-edit/hour-option";
-import { weekEditReducer, StateWeekEditReducer } from "./week-time-reducer";
+import { weekEditReducer, StateWeekEditReducer } from "./hooks/week-time-reducer";
+import { useTimeSelect } from "@app/week-time-edit/hooks/use-time-select";
 
 type WeekTimeEditProps = {
   timeSelectBox: TimeSelectBoxPops;
   week: WeekTuple;
 };
 
+const initState: StateWeekEditReducer = {
+  hourOption: HOUR_OPTION.half,
+  hoursSelectOption: HALF_HOUR_TUPLE,
+  timeSelectBox: [
+    {
+      selectedYoubi: "日",
+        selectedHour: "00",
+        selectedMinutes: "00",
+    },
+    {
+      selectedYoubi: "月",
+        selectedHour: "00",
+        selectedMinutes: "00",
+    },
+    {
+      selectedYoubi: "火",
+        selectedHour: "00",
+        selectedMinutes: "00",
+    },
+    {
+      selectedYoubi: "水",
+        selectedHour: "00",
+        selectedMinutes: "00",
+    },
+    {
+      selectedYoubi: "木",
+        selectedHour: "00",
+        selectedMinutes: "00",
+    },
+    {
+      selectedYoubi: "金",
+        selectedHour: "00",
+        selectedMinutes: "00",
+    },
+    {
+      selectedYoubi: "土",
+        selectedHour: "00",
+        selectedMinutes: "00",
+    },
+  ],
+}
+
 export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
   timeSelectBox,
   week, // 日、月の開始日の設定によって変動するため、propsで渡す
 }) => {
-  const [reducerState, reducerDispatch] = useReducer(weekEditReducer, {
-    hourOption: HOUR_OPTION.half,
-    timeSelectBox: {
-      targetYoubi: "日",
-      hours: HALF_HOUR_TUPLE,
-    },
-  });
-
-  /**
-   * @todo
-   * useStateを使って、stateを管理する。
-   * - ok AM/PMの切り替え
-   * - ok 12時間制と24時間制の切り替え
-   * - ok 時間選択
-   *reducerに移行する
-   */
+  const [reducerState, reducerDispatch] = useReducer(weekEditReducer, initState);
 
   /**
    * 各曜日のAM/PMの切り替え
@@ -78,56 +105,19 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
   /**
    * 各曜日の時間選択
    */
-  const initTimeSelect: {
-    youbi: WeekUnion;
-    selected: { hour: HourUnion; minutes: MinutesUnion };
-  }[] = [
-    { youbi: "日", selected: { hour: "01", minutes: "00" } },
-    { youbi: "月", selected: { hour: "02", minutes: "30" } },
-    { youbi: "火", selected: { hour: "03", minutes: "00" } },
-    { youbi: "水", selected: { hour: "04", minutes: "30" } },
-    { youbi: "木", selected: { hour: "05", minutes: "00" } },
-    { youbi: "金", selected: { hour: "06", minutes: "30" } },
-    { youbi: "土", selected: { hour: "07", minutes: "00" } },
-  ];
-  const [timeSelect, setTimeSelect] = useState(initTimeSelect);
-
-  const [timeSelectBoxHours, setTimeSelectBoxHours] = useState<HourTuple>(HALF_HOUR_TUPLE);
-
-  const onChangeHour = (targetYoubi: WeekUnion, value: HourUnion) => {
-    const newTimeSelect = timeSelect.map((timeSelect) => {
-      if (timeSelect.youbi === targetYoubi) {
-        return {
-          youbi: timeSelect.youbi,
-          selected: { hour: value, minutes: timeSelect.selected.minutes },
-        };
-      } else {
-        return timeSelect;
-      }
-    });
-    setTimeSelect(newTimeSelect);
+  const onChangeHour = (targetYoubi: WeekUnion, changedHour: HourUnion) => {
+    reducerDispatch({ type: "CHANGE-TIME-HOUR", targetYoubi, changedHour });
   };
 
   const onChangeMinutes = (targetYoubi: WeekUnion, value: MinutesUnion) => {
-    const newTimeSelect = timeSelect.map((timeSelect) => {
-      if (timeSelect.youbi === targetYoubi) {
-        return {
-          youbi: timeSelect.youbi,
-          selected: { hour: timeSelect.selected.hour, minutes: value },
-        };
-      } else {
-        return timeSelect;
-      }
-    });
-    setTimeSelect(newTimeSelect);
+    // changeMinutes(targetYoubi, value)
   };
 
   /**
    * 12時間制と24時間制の切り替え
    */
   const handleHourOption = (hourOption: HourOptionType) => {
-    setTimeSelectBoxHours(timeSelectBoxHours);
-    reducerDispatch({ type: "ChangeHourOption", hourOption });
+    reducerDispatch({ type: "CHANGE-HOUR-OPTION", hourOption });
   };
 
   return (
@@ -151,8 +141,11 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
             }}
             timeSelectBox={{
               targetYoubi: youbi,
-              hours: timeSelectBoxHours,
-              selected: timeSelect[index].selected,
+              hours: reducerState.hoursSelectOption,
+              selected: {
+                hour: reducerState.timeSelectBox[index].selectedHour,
+                minutes: reducerState.timeSelectBox[index].selectedMinutes,
+              },
               onChangeHour: onChangeHour,
               onChangeMinutes: onChangeMinutes,
             }}
