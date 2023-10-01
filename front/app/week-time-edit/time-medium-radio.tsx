@@ -14,12 +14,12 @@ export const TimeMeridiemRadio: FC<TimeMeridiemRadioProps> = ({
   onChange,
 }) => {
   const handleChange = (value: string): void => {
-    onChange({ value: toTimeMeridiem(value), targetYoubi });
+    onChange(targetYoubi, toTimeMeridiem(value));
   };
 
   const isDisabled = (hourOption: HoursOptionUnion): boolean => {
     return hourOption === "24";
-  }
+  };
 
   return (
     <RadioGroup onChange={handleChange} value={checked}>

@@ -22,7 +22,7 @@ export const DailyTimeEdit: FC<DailyTimeEditProps> = ({
           onChangeMinutes={timeSelectBox.onChangeMinutes}
         />
       </Box>
-      <Spacer ml={3}/>
+      <Spacer ml={3} />
       <TimeMeridiemRadio
         checked={timeMeridiem.checked}
         hoursOption={timeMeridiem.hoursOption}
