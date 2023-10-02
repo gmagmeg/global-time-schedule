@@ -9,15 +9,17 @@ import { WeekUnion } from "@app/week-time-edit/types/week-time-edit";
 import { HOUR_OPTION, HourOption } from "@app/week-time-edit/types/hour-option";
 import { TimeMeridiemUnion } from "@app/week-time-edit/types/time-meridiem-radio";
 
+type TimeSelectBoxProps = {
+  selectedYoubi: WeekUnion;
+  selectedHour: HourUnion;
+  selectedMinutes: MinutesUnion;
+  selectedTimeMeridiem: TimeMeridiemUnion;
+};
+
 export type StateWeekEditReducer = {
   hourOption: HourOption;
   hoursSelectOption: HourTuple;
-  timeSelectBox: {
-    selectedYoubi: WeekUnion;
-    selectedHour: HourUnion;
-    selectedMinutes: MinutesUnion;
-    selectedTimeMeridiem: TimeMeridiemUnion;
-  }[];
+  timeSelectBox: TimeSelectBoxProps[];
 };
 
 export type ActionWeekEditReducerState =
@@ -37,13 +39,6 @@ export type ActionWeekEditReducerState =
       targetYoubi: WeekUnion;
       changedTimeMeridiem: TimeMeridiemUnion;
     };
-
-/**
- * // @todo if (timeSelectBox.selectedYoubi === action.targetYoubi) {
- * この部分を纏めたい
- * targetYoubiが同じかどうかを判定する関数を作成したい
- * find~的なやつ
- */
 
 export const weekEditReducer = (
   state: StateWeekEditReducer,
@@ -72,7 +67,7 @@ export const weekEditReducer = (
      */
     case "CHANGE-TIME-MERIDIEM":
       newValue = state.timeSelectBox.map((timeSelectBox) => {
-        if (timeSelectBox.selectedYoubi === action.targetYoubi) {
+        if (findTargetYoubi(timeSelectBox, action.targetYoubi)) {
           timeSelectBox.selectedTimeMeridiem = action.changedTimeMeridiem;
         }
 
@@ -89,7 +84,7 @@ export const weekEditReducer = (
      */
     case "CHANGE-TIME-HOUR":
       newValue = state.timeSelectBox.map((timeSelectBox) => {
-        if (timeSelectBox.selectedYoubi === action.targetYoubi) {
+        if (findTargetYoubi(timeSelectBox, action.targetYoubi)) {
           timeSelectBox.selectedHour = action.changedHour;
         }
 
@@ -105,7 +100,7 @@ export const weekEditReducer = (
      */
     case "CHANGE-TIME-MINUTES":
       newValue = state.timeSelectBox.map((timeSelectBox) => {
-        if (timeSelectBox.selectedYoubi === action.targetYoubi) {
+        if (findTargetYoubi(timeSelectBox, action.targetYoubi)) {
           timeSelectBox.selectedMinutes = action.changedMinutes;
         }
 
@@ -119,4 +114,60 @@ export const weekEditReducer = (
     default:
       throw new Error("割り振られていないアクションが実行されました。");
   }
+};
+
+const findTargetYoubi = (
+  timeSelectBox: TimeSelectBoxProps,
+  targetYoubi: WeekUnion
+) => {
+  return timeSelectBox.selectedYoubi === targetYoubi;
+};
+
+export const initialReduceState: StateWeekEditReducer = {
+  hourOption: HOUR_OPTION.half,
+  hoursSelectOption: HALF_HOUR_TUPLE,
+  timeSelectBox: [
+    {
+      selectedYoubi: "日",
+      selectedHour: "00",
+      selectedMinutes: "00",
+      selectedTimeMeridiem: "PM",
+    },
+    {
+      selectedYoubi: "月",
+      selectedHour: "00",
+      selectedMinutes: "00",
+      selectedTimeMeridiem: "PM",
+    },
+    {
+      selectedYoubi: "火",
+      selectedHour: "00",
+      selectedMinutes: "00",
+      selectedTimeMeridiem: "PM",
+    },
+    {
+      selectedYoubi: "水",
+      selectedHour: "00",
+      selectedMinutes: "00",
+      selectedTimeMeridiem: "PM",
+    },
+    {
+      selectedYoubi: "木",
+      selectedHour: "00",
+      selectedMinutes: "00",
+      selectedTimeMeridiem: "PM",
+    },
+    {
+      selectedYoubi: "金",
+      selectedHour: "00",
+      selectedMinutes: "00",
+      selectedTimeMeridiem: "PM",
+    },
+    {
+      selectedYoubi: "土",
+      selectedHour: "00",
+      selectedMinutes: "00",
+      selectedTimeMeridiem: "PM",
+    },
+  ],
 };

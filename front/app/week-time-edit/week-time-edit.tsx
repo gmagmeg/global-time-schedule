@@ -6,72 +6,21 @@ import {
 import {
   HourUnion,
   MinutesUnion,
-  HALF_HOUR_TUPLE,
 } from "@app/week-time-edit/types/time-select-box";
 import { DailyTimeEdit } from "./daily-time-edit";
 import { WeekUnion, WeekTuple } from "@app/week-time-edit/types/week-time-edit";
 import { Grid } from "@chakra-ui/react";
 import {
-  HOUR_OPTION,
   HourOption as HourOptionType,
 } from "@app/week-time-edit/types/hour-option";
 import { HourOption } from "@app/week-time-edit/hour-option";
 import {
   weekEditReducer,
-  StateWeekEditReducer,
+  initialReduceState
 } from "./hooks/week-time-reducer";
 
 type WeekTimeEditProps = {
   week: WeekTuple;
-};
-
-const initState: StateWeekEditReducer = {
-  hourOption: HOUR_OPTION.half,
-  hoursSelectOption: HALF_HOUR_TUPLE,
-  timeSelectBox: [
-    {
-      selectedYoubi: "日",
-      selectedHour: "00",
-      selectedMinutes: "00",
-      selectedTimeMeridiem: "PM",
-    },
-    {
-      selectedYoubi: "月",
-      selectedHour: "00",
-      selectedMinutes: "00",
-      selectedTimeMeridiem: "PM",
-    },
-    {
-      selectedYoubi: "火",
-      selectedHour: "00",
-      selectedMinutes: "00",
-      selectedTimeMeridiem: "PM",
-    },
-    {
-      selectedYoubi: "水",
-      selectedHour: "00",
-      selectedMinutes: "00",
-      selectedTimeMeridiem: "PM",
-    },
-    {
-      selectedYoubi: "木",
-      selectedHour: "00",
-      selectedMinutes: "00",
-      selectedTimeMeridiem: "PM",
-    },
-    {
-      selectedYoubi: "金",
-      selectedHour: "00",
-      selectedMinutes: "00",
-      selectedTimeMeridiem: "PM",
-    },
-    {
-      selectedYoubi: "土",
-      selectedHour: "00",
-      selectedMinutes: "00",
-      selectedTimeMeridiem: "PM",
-    },
-  ],
 };
 
 export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
@@ -79,7 +28,7 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
 }) => {
   const [reducerState, reducerDispatch] = useReducer(
     weekEditReducer,
-    initState
+    initialReduceState
   );
 
   /**
