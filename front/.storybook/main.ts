@@ -5,6 +5,7 @@ const config: StorybookConfig = {
   stories: [
     "../stories/**/*.mdx",
     "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
+    "../stories/**/**/*.stories.@(js|jsx|mjs|ts|tsx)",
     "../app/**/stories/*.stories.@(js|jsx|mjs|ts|tsx)",
   ],
   addons: [
@@ -30,6 +31,11 @@ const config: StorybookConfig = {
           ...baseConfig.resolve?.alias,
           "@app": path.resolve(__dirname, "../app/"),
           "@const": path.resolve(__dirname, "../const/"),
+          "@editContents": path.resolve(__dirname, "../app/_edit-contents/"),
+          "@resultContents": path.resolve(
+            __dirname,
+            "../app/_result-contents/"
+          ),
           "@": path.resolve(__dirname, "../"),
         },
       },
