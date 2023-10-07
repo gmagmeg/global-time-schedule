@@ -11,7 +11,7 @@ const documentation = `時間を選択するセレクトボックスです。
 `;
 
 const meta: Meta = {
-  title: "WeekTimeEdit/TimeSelectBox",
+  title: "WeekTimeEdit/DailyTimeEdit/TimeSelectBox",
   component: TimeSelectBox,
   tags: ["autodocs"],
   parameters: {

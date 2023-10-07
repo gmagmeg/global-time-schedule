@@ -14,7 +14,7 @@ export const EditContents: FC<{
 }> = ({ week, currentDate, weekStartDay }) => {
   return (
     <>
-      <Heading as="h2" size={"md"}>
+      <Heading as="h2" size={"md"} >
         <Icon as={SlCalender} mt={4} mr={2} />
         開始日選択
       </Heading>

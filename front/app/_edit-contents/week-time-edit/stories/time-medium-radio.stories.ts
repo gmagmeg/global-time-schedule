@@ -7,7 +7,7 @@ const documentation = `AM/PMを選択するラジオボタンです。
 `;
 
 const meta = {
-  title: "WeekTimeEdit/TimeMeridiemRadio",
+  title: "WeekTimeEdit/DailyTimeEdit/TimeMeridiemRadio",
   component: TimeMeridiemRadio,
   tags: ["autodocs"],
   parameters: {

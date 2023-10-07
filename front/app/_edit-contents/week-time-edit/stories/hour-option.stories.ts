@@ -5,7 +5,7 @@ import { HourOption } from "@editContents/week-time-edit/hour-option";
 const documentation = `12時間表記と24時間表記の切り替えを行います。`;
 
 const meta = {
-  title: "WeekTimeEdit/HourOption",
+  title: "WeekTimeEdit/DailyTimeEdit/HourOption",
   component: HourOption,
   tags: ["autodocs"],
   parameters: {
