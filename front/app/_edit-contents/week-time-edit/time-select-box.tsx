@@ -26,7 +26,7 @@ export const TimeSelectBox: FC<TimeSelectBoxPops> = ({
 
   return (
     <Flex gap={2} align={"baseline"}>
-      <Select width={90} onChange={handleChangeHour} value={selected.hour}>
+      <Select width={70} onChange={handleChangeHour} value={selected.hour}>
         {hours.map((hour) => (
           <option key={hour} value={hour}>
             {hour}
@@ -35,7 +35,7 @@ export const TimeSelectBox: FC<TimeSelectBoxPops> = ({
       </Select>
       <span>:</span>
       <Select
-        width={90}
+        width={70}
         onChange={handleChangeMinutes}
         value={selected.minutes}
       >

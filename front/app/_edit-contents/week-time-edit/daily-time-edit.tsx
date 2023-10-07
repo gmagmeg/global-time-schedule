@@ -1,8 +1,9 @@
 import { FC } from "react";
 import { TimeMeridiemRadio } from "./time-medium-radio";
 import { TimeSelectBox } from "./time-select-box";
-import { Box, Flex, Spacer } from "@chakra-ui/react";
+import { Box, Divider, Flex, Icon, Spacer } from "@chakra-ui/react";
 import { DailyTimeEditProps } from "./types/daily-time-edit";
+import {SiWakatime} from "react-icons/si"; 
 
 export const DailyTimeEdit: FC<DailyTimeEditProps> = ({
   targetYoubi,
@@ -10,8 +11,9 @@ export const DailyTimeEdit: FC<DailyTimeEditProps> = ({
   timeSelectBox,
 }) => {
   return (
-    <Flex>
-      <p>{targetYoubi}</p>
+    <Flex direction={"column"} pr={4}  className={'div-border'}>
+      <p><Icon as={SiWakatime} mr={2} />{targetYoubi}</p>
+      <Divider colorScheme="twitter" mb={2} />
       <Spacer ml={3} />
       <Box>
         <TimeSelectBox

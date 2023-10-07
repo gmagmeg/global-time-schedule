@@ -30,3 +30,7 @@ body {
 .week-time-select > :nth-child(n + 5) {
   margin-top: 40px;
 }
+
+.div-border {
+  border-color: #afacac;
+}
