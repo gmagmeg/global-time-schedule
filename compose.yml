@@ -7,8 +7,7 @@ services:
       context: ./
       dockerfile: ./Dockerfile
     volumes:
-      - ./front:/front
-      - /front/node_modules
+      - ./:/global-time-schedule
     ports:
       - "5000:3000"
     environment:

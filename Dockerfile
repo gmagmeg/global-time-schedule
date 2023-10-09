@@ -1,17 +1,14 @@
 FROM node:20.5.1
 
-ARG UID
-ARG GID
+USER root
+RUN mkdir /front && chown node:node /front
 
-RUN if getent passwd $UID ; then echo "User with UID $UID already exists." ; else useradd --uid $UID user ; fi
-RUN if getent group $GID ; then echo "Group with GID $GID already exists." ; else groupadd --gid $GID group ; fi
+USER node
 
 WORKDIR /front
 
-COPY ./front ./
+COPY --chown=node:node ./front ./
 
 RUN npm install
-
-USER $UID:$GID
 
 CMD ["npm", "run", "dev"]

@@ -3,9 +3,10 @@
   "dockerComposeFile": ["../../compose.yml"],
   "service": "global-time-schedule",
   "runServices": ["global-time-schedule"],
-  "workspaceFolder": "/front",
+  "workspaceFolder": "/global-time-schedule",
   "forwardPorts": [5000],
-  "postCreateCommand": "npm install && npm run storybook",
+  "postCreateCommand": "cd front && npm install && npm run storybook",
+  "remoteUser": "node",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -23,7 +24,9 @@
           "titleBar.activeBackground": "#3363a3",
           "titleBar.activeForeground": "#000"
         },
-        "json.schemaDownload.enable": true
+        "json.schemaDownload.enable": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
       }
     }
   }

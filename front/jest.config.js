@@ -1,5 +1,8 @@
 module.exports = {
-  testPathIgnorePatterns: ["front/.next/", "front/node_modules/"],
+  testPathIgnorePatterns: [
+    "global-time-schedule/front/.next/",
+    "global-time-schedule/front/node_modules/",
+  ],
   moduleNameMapper: {
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
     "^@app/(.*)$": "<rootDir>/app/$1",
