@@ -1,4 +1,4 @@
-import { Select, Flex } from "@chakra-ui/react";
+import { Select, Flex, Icon } from "@chakra-ui/react";
 import { FC, ChangeEvent } from "react";
 import {
   TimeSelectBoxPops,
@@ -6,6 +6,7 @@ import {
   HourUnion,
   MinutesUnion,
 } from "@editContents/week-time-edit/types/time-select-box";
+import { SiWakatime } from "react-icons/si";
 
 export const TimeSelectBox: FC<TimeSelectBoxPops> = ({
   targetYoubi,
@@ -26,6 +27,7 @@ export const TimeSelectBox: FC<TimeSelectBoxPops> = ({
 
   return (
     <Flex gap={2} align={"baseline"}>
+      <Icon as={SiWakatime} mr={2} />
       <Select width={70} onChange={handleChangeHour} value={selected.hour}>
         {hours.map((hour) => (
           <option key={hour} value={hour}>

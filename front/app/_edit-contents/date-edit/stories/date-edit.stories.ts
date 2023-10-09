@@ -11,7 +11,7 @@ const documentation = `・日付を選択するコンポーネントで、次の
 `;
 
 const meta = {
-  title: "DateEdit/DateEdit",
+  title: "WeekTimeEdit/DateEdit/DateEdit",
   component: DateEdit,
   tags: ["autodocs"],
   parameters: {

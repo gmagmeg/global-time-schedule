@@ -11,7 +11,12 @@ import { Tb12Hours, Tb24Hours } from "react-icons/tb";
  */
 export const HourOption: FC<HourOptionProps> = ({ checked, onChange }) => {
   return (
-    <RadioGroup display={"flex"} flexDirection={"column"} onChange={onChange} value={checked}>
+    <RadioGroup
+      display={"flex"}
+      flexDirection={"column"}
+      onChange={onChange}
+      value={checked}
+    >
       <Radio value={HOUR_OPTION.half}>
         <Flex direction={"row"} alignItems={"center"}>
           <Icon boxSize={6} as={Tb12Hours} mr={0.5} />

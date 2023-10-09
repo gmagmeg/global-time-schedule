@@ -7,7 +7,7 @@ calendarTypeは元々ライブラリが持っているpropsになります。
 `;
 
 const meta = {
-  title: "DateEdit/Calendar",
+  title: "WeekTimeEdit/DateEdit/Calendar",
   component: Calendar,
   tags: ["autodocs"],
   parameters: {

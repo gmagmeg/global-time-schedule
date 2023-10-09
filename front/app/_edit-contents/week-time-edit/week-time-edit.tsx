@@ -10,10 +10,11 @@ import {
   WeekUnion,
   WeekTuple,
 } from "@editContents/week-time-edit/types/week-time-edit";
-import { Grid } from "@chakra-ui/react";
+import { Grid, GridItem, List, ListIcon, ListItem, Select } from "@chakra-ui/react";
 import { HourOption as HourOptionType } from "@editContents/week-time-edit/types/hour-option";
 import { HourOption } from "@editContents/week-time-edit/hour-option";
 import { weekEditReducer, initialReduceState } from "./hooks/week-time-reducer";
+import { AiOutlineSchedule } from "react-icons/ai";
 
 type WeekTimeEditProps = {
   week: WeekTuple;
@@ -75,7 +76,8 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
       <Grid
         mt={4}
         templateColumns="repeat(4, 1fr)"
-        gap={1}
+        gap={2}
+        rowGap={10}
         className="week-time-select"
       >
         {week.map((youbi, index) => (
@@ -100,6 +102,59 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
             }}
           />
         ))}
+      </Grid>
+      <Grid
+        templateColumns="repeat(3, 1fr)"
+        gap={6}
+        >
+        <GridItem>
+        <Select>
+          <option>タイムゾーン</option>
+          <option>タイムゾーン</option>
+          <option>タイムゾーン</option>
+        </Select>
+        </GridItem>
+        <GridItem>
+        <Select>
+          <option>タイムゾーン</option>
+          <option>タイムゾーン</option>
+          <option>タイムゾーン</option>
+        </Select>
+        </GridItem>
+        <GridItem>
+        <Select>
+          <option>タイムゾーン</option>
+          <option>タイムゾーン</option>
+          <option>タイムゾーン</option>
+        </Select>
+        </GridItem>
+        <List>
+          <ListItem>
+            <ListIcon as={AiOutlineSchedule} verticalAlign={"baseline"} />
+            タイムゾーン 01:11 AM
+          </ListItem>
+          <ListItem ml={6}>タイムゾーン 03:33 AM</ListItem>
+          <ListItem ml={6}>未設定パターン --:-- --</ListItem>
+          <ListItem ml={6}>未設定パターン --:-- --</ListItem>
+        </List>
+        <List>
+          <ListItem>
+            <ListIcon as={AiOutlineSchedule} verticalAlign={"baseline"} />
+            タイムゾーン 01:11 AM
+          </ListItem>
+          <ListItem ml={6}>タイムゾーン 03:33 AM</ListItem>
+          <ListItem ml={6}>未設定パターン --:-- --</ListItem>
+          <ListItem ml={6}>未設定パターン --:-- --</ListItem>
+        </List>
+        <List>
+          <ListItem>
+            <ListIcon as={AiOutlineSchedule} verticalAlign={"baseline"} />
+            タイムゾーン 01:11 AM
+          </ListItem>
+          <ListItem ml={6}>タイムゾーン 03:33 AM</ListItem>
+          <ListItem ml={6}>未設定パターン --:-- --</ListItem>
+          <ListItem ml={6}>未設定パターン --:-- --</ListItem>
+        </List>
       </Grid>
     </>
   );

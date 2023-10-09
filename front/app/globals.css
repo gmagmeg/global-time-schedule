@@ -27,10 +27,6 @@ body {
   grid-template-columns: repeat(4, 1fr);
 }
 
-.week-time-select > :nth-child(n + 5) {
-  margin-top: 40px;
-}
-
 .div-border {
   border-color: #afacac;
 }

@@ -5,7 +5,7 @@ import {
   TIME_MEDIUM_TUPLE,
   toTimeMeridiem,
 } from "@editContents/week-time-edit/types/time-meridiem-radio";
-import { HourUnion, HoursOptionUnion } from "./types/time-select-box";
+import { HoursOptionUnion } from "./types/time-select-box";
 
 export const TimeMeridiemRadio: FC<TimeMeridiemRadioProps> = ({
   checked,
