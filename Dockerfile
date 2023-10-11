@@ -1,6 +1,7 @@
 FROM node:20.5.1
 
 USER root
+
 RUN mkdir /front && chown node:node /front
 
 USER node
