@@ -3,8 +3,6 @@ import path from "path";
 
 const config: StorybookConfig = {
   stories: [
-    "../stories/**/*.mdx",
-    "../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)",
     "../stories/**/**/*.stories.@(js|jsx|mjs|ts|tsx)",
     "../app/**/stories/*.stories.@(js|jsx|mjs|ts|tsx)",
   ],
@@ -36,6 +34,7 @@ const config: StorybookConfig = {
             __dirname,
             "../app/_result-contents/"
           ),
+          "@sideMenu": path.resolve(__dirname, "../app/_side-menu/"),
           "@": path.resolve(__dirname, "../"),
         },
       },

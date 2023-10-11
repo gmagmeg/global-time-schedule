@@ -10,7 +10,14 @@ import {
   WeekUnion,
   WeekTuple,
 } from "@editContents/week-time-edit/types/week-time-edit";
-import { Grid, GridItem, List, ListIcon, ListItem, Select } from "@chakra-ui/react";
+import {
+  Grid,
+  GridItem,
+  List,
+  ListIcon,
+  ListItem,
+  Select,
+} from "@chakra-ui/react";
 import { HourOption as HourOptionType } from "@editContents/week-time-edit/types/hour-option";
 import { HourOption } from "@editContents/week-time-edit/hour-option";
 import { weekEditReducer, initialReduceState } from "./hooks/week-time-reducer";
@@ -103,30 +110,27 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
           />
         ))}
       </Grid>
-      <Grid
-        templateColumns="repeat(3, 1fr)"
-        gap={6}
-        >
+      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
         <GridItem>
-        <Select>
-          <option>タイムゾーン</option>
-          <option>タイムゾーン</option>
-          <option>タイムゾーン</option>
-        </Select>
+          <Select>
+            <option>タイムゾーン</option>
+            <option>タイムゾーン</option>
+            <option>タイムゾーン</option>
+          </Select>
         </GridItem>
         <GridItem>
-        <Select>
-          <option>タイムゾーン</option>
-          <option>タイムゾーン</option>
-          <option>タイムゾーン</option>
-        </Select>
+          <Select>
+            <option>タイムゾーン</option>
+            <option>タイムゾーン</option>
+            <option>タイムゾーン</option>
+          </Select>
         </GridItem>
         <GridItem>
-        <Select>
-          <option>タイムゾーン</option>
-          <option>タイムゾーン</option>
-          <option>タイムゾーン</option>
-        </Select>
+          <Select>
+            <option>タイムゾーン</option>
+            <option>タイムゾーン</option>
+            <option>タイムゾーン</option>
+          </Select>
         </GridItem>
         <List>
           <ListItem>

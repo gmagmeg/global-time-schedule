@@ -5,7 +5,7 @@
   "runServices": ["global-time-schedule"],
   "workspaceFolder": "/global-time-schedule",
   "forwardPorts": [5000],
-  "postCreateCommand": "cd front && npm install && npm run storybook",
+  "postCreateCommand": "npm --prefix ./front install && npm --prefix ./front run storybook",
   "remoteUser": "node",
   "customizations": {
     "vscode": {

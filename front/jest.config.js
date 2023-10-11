@@ -8,5 +8,6 @@ module.exports = {
     "^@app/(.*)$": "<rootDir>/app/$1",
     "^@editContents/(.*)$": "<rootDir>/app/_edit-contents/$1",
     "^@resultContents/(.*)$": "<rootDir>/app/_result-contents/$1",
+    "^@sideMenu/(.*)$": "<rootDir>/app/_side-menu/$1",
   },
 };

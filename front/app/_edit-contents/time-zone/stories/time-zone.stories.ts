@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { TimeZone } from "@app/_edit-contents/time-zone/time-zone";
 
 const meta = {
-  title: "TimeZone/TimeZone",
+  title: "EditContents/TimeZone/TimeZone",
   component: TimeZone,
   tags: ["autodocs"],
 } satisfies Meta<typeof TimeZone>;

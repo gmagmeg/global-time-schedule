@@ -23,6 +23,7 @@
       "@app/*": ["./app/*"],
       "@editContents/*": ["./app/_edit-contents/*"],
       "@resultContents/*": ["./app/_result-contents/*"],
+      "@sideMenu/*": ["./app/_side-menu/*"],
       "@const/*": ["./const/*"]
     }
   },

@@ -1,8 +1,7 @@
 import { FC } from "react";
-import { CustomRadioButton } from "@app/util-parts/custom-radio-button";
 import { HOUR_OPTION } from "@editContents/week-time-edit/types/hour-option";
 import { HourOptionProps } from "@editContents/week-time-edit/types/hour-option";
-import { Flex, Icon, Radio, RadioGroup, flexbox } from "@chakra-ui/react";
+import { Flex, Icon, Radio, RadioGroup } from "@chakra-ui/react";
 import { Tb12Hours, Tb24Hours } from "react-icons/tb";
 
 /**
