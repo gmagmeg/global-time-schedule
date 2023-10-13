@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
-import { SideMenu } from "@sideMenu/side-menu";
+import { SideMenuItem } from "@sideMenu/side-menu-item";
 
-const documentation = `サイドメニューコンポーネント`;
+const documentation = `サイドメニューの１パーツ`;
 
 const meta = {
-  title: "SideMenu/SideMenu",
-  component: SideMenu,
+  title: "SideMenu/SideMenuItem",
+  component: SideMenuItem,
   tags: ["autodocs"],
   parameters: {
     docs: {
@@ -15,11 +15,14 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof SideMenu>;
+} satisfies Meta<typeof SideMenuItem>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    menuName: "startDate",
+    selected: true,
+  },
 };
