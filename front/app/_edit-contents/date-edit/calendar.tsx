@@ -7,7 +7,7 @@ import {
   NullableCalendarDateRange,
   CalenderStyle,
 } from "@editContents/date-edit/types-date-edit";
-import { validMinDate } from "@editContents/date-edit/date-edit-function";
+import { validMinDate } from "@editContents/date-edit/hooks/date-edit-function";
 
 export const Calendar: FC<{
   targetDate: CalendarDate;

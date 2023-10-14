@@ -2,7 +2,7 @@ import {
   dateEditReducer,
   State,
   DateEditAction,
-} from "@editContents/date-edit/date-edit-reducer";
+} from "@editContents/date-edit/hooks/date-edit-reducer";
 
 describe("dateEditReducer", () => {
   const initialState: State = {

@@ -3,40 +3,25 @@ import { SideMenuProps } from "@sideMenu/types/side-menu";
 import type { SideMenuName } from "@sideMenu/types/side-menu";
 
 export const useSelectSideMenu = () => {
-  const [selectedMenuItems, setSelectedMenuItems] = useState<SideMenuProps[]>([
-    {
-      menuName: "startDate",
-      selected: true,
-    },
-    {
-      menuName: "hour",
-      selected: false,
-    },
-    {
-      menuName: "timezone",
-      selected: false,
-    },
-    {
-      menuName: "schedule",
-      selected: false,
-    },
-  ]);
+  const [selectedMenuItems, setSelectedMenuItems] = useState<SideMenuProps>({
+    startDate: true,
+    hour: false,
+    timezone: false,
+    schedule: false,
+  });
 
-  const handleClickSideMenu = (selectedMenu: SideMenuName) => {
-    const result = selectedMenuItems.map((item) => {
-      const selected = item.menuName === selectedMenu;
-
-      return {
-        menuName: item.menuName,
-        selected,
-      };
+  const handleSelectedSideMenu = (selectedMenu: SideMenuName) => {
+    setSelectedMenuItems({
+      startDate: false,
+      hour: false,
+      timezone: false,
+      schedule: false,
+      [selectedMenu]: true,
     });
-
-    setSelectedMenuItems(result);
   };
 
   return {
     selectedMenuItems,
-    handleClickSideMenu,
+    handleSelectedSideMenu,
   };
 };

@@ -6,7 +6,8 @@ import { SideMenuName } from "./types/side-menu";
 export const SideMenuItem: FC<{
   menuName: SideMenuName;
   selected: boolean;
-}> = ({ menuName, selected }) => {
+  onClick: (selectedMenu: SideMenuName) => void;
+}> = ({ menuName, selected, onClick }) => {
   const selectedStyle = selected
     ? { bg: "white", color: "purple.300" }
     : { bg: "purple.300", color: "white" };
@@ -39,6 +40,7 @@ export const SideMenuItem: FC<{
 
   return (
     <Link
+      onClick={() => onClick(menuName)}
       display={"grid"}
       {...selectedStyle}
       w="100%"

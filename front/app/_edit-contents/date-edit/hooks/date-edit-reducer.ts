@@ -3,7 +3,7 @@ import {
   WeekStartDayString,
   CalendarDate,
   WEEK_START_DAY,
-} from "./types-date-edit";
+} from "../types-date-edit";
 import {
   adjustNextStartDay,
   toAddYoubiFormat,

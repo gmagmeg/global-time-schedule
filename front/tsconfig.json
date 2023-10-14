@@ -32,7 +32,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "app/week-time-edit/constants.js"
+    "app/week-time-edit/constants.js",
+    "app/_side-menu/hooks/use-select-side-menu.spec"
   ],
   "exclude": ["node_modules"]
 }

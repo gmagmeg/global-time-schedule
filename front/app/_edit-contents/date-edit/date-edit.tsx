@@ -18,8 +18,8 @@ import { InputChangeEvent } from "@app/event-types-alias";
 import {
   toAddYoubiFormat,
   adjustNextStartDay,
-} from "@editContents/date-edit/date-edit-function";
-import { dateEditReducer } from "@editContents/date-edit/date-edit-reducer";
+} from "@editContents/date-edit/hooks/date-edit-function";
+import { dateEditReducer } from "@editContents/date-edit/hooks/date-edit-reducer";
 import { TbBrandMonday } from "react-icons/tb";
 import { BsSun } from "react-icons/bs";
 
