@@ -30,3 +30,18 @@ body {
 .div-border {
   border-color: #afacac;
 }
+
+.header-title {
+  color: #5472cd;
+  border-bottom: solid 3px #cce4ff;
+  position: relative;
+}
+
+.header-title:after {
+  position: absolute;
+  content: " ";
+  display: block;
+  border-bottom: solid 3px #5472cd;
+  bottom: -3px;
+  width: 20%;
+}

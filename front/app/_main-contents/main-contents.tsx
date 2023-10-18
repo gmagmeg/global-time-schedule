@@ -6,7 +6,7 @@ import { WEEK } from "@editContents/week-time-edit/types/week-time-edit";
 
 export const MainContents: FC = () => {
   return (
-    <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+    <Grid templateColumns="1fr 4fr" gap={6}>
       <GridItem colSpan={1}>
         <SideMenu selectedMenu="startDate" />
       </GridItem>

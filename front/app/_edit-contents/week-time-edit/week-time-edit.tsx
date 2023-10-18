@@ -11,6 +11,7 @@ import {
   WeekTuple,
 } from "@editContents/week-time-edit/types/week-time-edit";
 import {
+  Box,
   Grid,
   GridItem,
   List,
@@ -80,11 +81,8 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
         checked={reducerState.hourOption}
         onChange={handleHourOption}
       />
-      <Grid
+      <Box
         mt={4}
-        templateColumns="repeat(4, 1fr)"
-        gap={2}
-        rowGap={10}
         className="week-time-select"
       >
         {week.map((youbi, index) => (
@@ -109,29 +107,23 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
             }}
           />
         ))}
-      </Grid>
-      <Grid templateColumns="repeat(3, 1fr)" gap={6}>
-        <GridItem>
+      </Box>
+      <Box>
           <Select>
             <option>タイムゾーン</option>
             <option>タイムゾーン</option>
             <option>タイムゾーン</option>
           </Select>
-        </GridItem>
-        <GridItem>
           <Select>
             <option>タイムゾーン</option>
             <option>タイムゾーン</option>
             <option>タイムゾーン</option>
           </Select>
-        </GridItem>
-        <GridItem>
           <Select>
             <option>タイムゾーン</option>
             <option>タイムゾーン</option>
             <option>タイムゾーン</option>
           </Select>
-        </GridItem>
         <List>
           <ListItem>
             <ListIcon as={AiOutlineSchedule} verticalAlign={"baseline"} />
@@ -159,7 +151,7 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
           <ListItem ml={6}>未設定パターン --:-- --</ListItem>
           <ListItem ml={6}>未設定パターン --:-- --</ListItem>
         </List>
-      </Grid>
+      </Box>
     </>
   );
 };
