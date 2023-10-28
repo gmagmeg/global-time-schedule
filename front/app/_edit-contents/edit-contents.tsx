@@ -14,14 +14,14 @@ export const EditContents: FC<{
 }> = ({ week, currentDate, weekStartDay }) => {
   return (
     <>
-      <Heading className="header-title" as="h2" size={"md"}>
+      <Heading className="header-title" as="h2" size={"xl"}>
         <Icon as={MdStart} boxSize="1em" mr={2} />
         開始日選択
       </Heading>
       <Spacer mt={2} />
       <DateEdit currentDate={currentDate} weekStartDay={weekStartDay} />
 
-      <Heading className="header-title" as="h2" size={"md"}>
+      <Heading className="header-title" as="h2" mt={4} size={"xl"}>
         <Icon as={BiTimeFive} mt={8} mr={2} />
         曜日ごとの時間設定
       </Heading>

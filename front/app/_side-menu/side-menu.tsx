@@ -15,7 +15,7 @@ export const SideMenu: FC<{
 
   return (
     <VStack
-      minH="100vh"
+      h="100%"
       spacing={3}
       alignItems="flex-start"
       bg="purple.300"

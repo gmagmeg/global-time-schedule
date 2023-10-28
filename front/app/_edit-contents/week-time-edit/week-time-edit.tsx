@@ -12,17 +12,25 @@ import {
 } from "@editContents/week-time-edit/types/week-time-edit";
 import {
   Box,
+  Card,
+  CardBody,
   Grid,
   GridItem,
+  Heading,
+  Icon,
   List,
   ListIcon,
   ListItem,
   Select,
+  Spacer,
+  Stack,
+  StackDivider,
 } from "@chakra-ui/react";
 import { HourOption as HourOptionType } from "@editContents/week-time-edit/types/hour-option";
 import { HourOption } from "@editContents/week-time-edit/hour-option";
 import { weekEditReducer, initialReduceState } from "./hooks/week-time-reducer";
 import { AiOutlineSchedule } from "react-icons/ai";
+import { SiWakatime } from "react-icons/si";
 
 type WeekTimeEditProps = {
   week: WeekTuple;
@@ -81,49 +89,59 @@ export const WeekTimeEdit: FC<WeekTimeEditProps> = ({
         checked={reducerState.hourOption}
         onChange={handleHourOption}
       />
-      <Box
-        mt={4}
-        className="week-time-select"
-      >
+      <Card mt={4} className="week-time-select">
         {week.map((youbi, index) => (
-          <DailyTimeEdit
-            key={youbi}
-            targetYoubi={youbi}
-            timeMeridiem={{
-              checked: reducerState.timeSelectBox[index].selectedTimeMeridiem,
-              hoursOption: reducerState.hourOption,
-              targetYoubi: youbi,
-              onChange: handleChangeTimeMeridiem,
-            }}
-            timeSelectBox={{
-              targetYoubi: youbi,
-              hours: reducerState.hoursSelectOption,
-              selected: {
-                hour: reducerState.timeSelectBox[index].selectedHour,
-                minutes: reducerState.timeSelectBox[index].selectedMinutes,
-              },
-              onChangeHour: handleChangeHour,
-              onChangeMinutes: handleMinutes,
-            }}
-          />
+          <CardBody key={youbi}>
+            <Stack spacing="4">
+              <Heading
+                className="time-select-box-day"
+                size="xs"
+                textTransform="uppercase"
+              >
+                <Icon as={SiWakatime} mr={2} />
+                {youbi}
+              </Heading>
+              <DailyTimeEdit
+                targetYoubi={youbi}
+                timeMeridiem={{
+                  checked:
+                    reducerState.timeSelectBox[index].selectedTimeMeridiem,
+                  hoursOption: reducerState.hourOption,
+                  targetYoubi: youbi,
+                  onChange: handleChangeTimeMeridiem,
+                }}
+                timeSelectBox={{
+                  targetYoubi: youbi,
+                  hours: reducerState.hoursSelectOption,
+                  selected: {
+                    hour: reducerState.timeSelectBox[index].selectedHour,
+                    minutes: reducerState.timeSelectBox[index].selectedMinutes,
+                  },
+                  onChangeHour: handleChangeHour,
+                  onChangeMinutes: handleMinutes,
+                }}
+              />
+              <Spacer mb={4} />
+            </Stack>
+          </CardBody>
         ))}
-      </Box>
+      </Card>
       <Box>
-          <Select>
-            <option>タイムゾーン</option>
-            <option>タイムゾーン</option>
-            <option>タイムゾーン</option>
-          </Select>
-          <Select>
-            <option>タイムゾーン</option>
-            <option>タイムゾーン</option>
-            <option>タイムゾーン</option>
-          </Select>
-          <Select>
-            <option>タイムゾーン</option>
-            <option>タイムゾーン</option>
-            <option>タイムゾーン</option>
-          </Select>
+        <Select>
+          <option>タイムゾーン</option>
+          <option>タイムゾーン</option>
+          <option>タイムゾーン</option>
+        </Select>
+        <Select>
+          <option>タイムゾーン</option>
+          <option>タイムゾーン</option>
+          <option>タイムゾーン</option>
+        </Select>
+        <Select>
+          <option>タイムゾーン</option>
+          <option>タイムゾーン</option>
+          <option>タイムゾーン</option>
+        </Select>
         <List>
           <ListItem>
             <ListIcon as={AiOutlineSchedule} verticalAlign={"baseline"} />

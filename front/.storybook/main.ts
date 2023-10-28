@@ -35,6 +35,7 @@ const config: StorybookConfig = {
             "../app/_result-contents/"
           ),
           "@sideMenu": path.resolve(__dirname, "../app/_side-menu/"),
+          "@globalMenu": path.resolve(__dirname, "../app/_global-menu/"),
           "@": path.resolve(__dirname, "../"),
         },
       },

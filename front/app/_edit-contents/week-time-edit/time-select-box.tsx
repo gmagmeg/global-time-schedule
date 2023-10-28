@@ -1,4 +1,11 @@
-import { Select, Flex, Icon } from "@chakra-ui/react";
+import { selectAnatomy } from "@chakra-ui/anatomy";
+import {
+  Box,
+  createMultiStyleConfigHelpers,
+  defineStyle,
+} from "@chakra-ui/react";
+
+import { Select, Flex, Icon, Highlight } from "@chakra-ui/react";
 import { FC, ChangeEvent } from "react";
 import {
   TimeSelectBoxPops,
@@ -6,7 +13,6 @@ import {
   HourUnion,
   MinutesUnion,
 } from "@editContents/week-time-edit/types/time-select-box";
-import { SiWakatime } from "react-icons/si";
 
 export const TimeSelectBox: FC<TimeSelectBoxPops> = ({
   targetYoubi,
@@ -26,27 +32,36 @@ export const TimeSelectBox: FC<TimeSelectBoxPops> = ({
   };
 
   return (
-    <Flex gap={2} align={"baseline"}>
-      <Icon as={SiWakatime} mr={2} />
-      <Select width={70} onChange={handleChangeHour} value={selected.hour}>
-        {hours.map((hour) => (
-          <option key={hour} value={hour}>
-            {hour}
-          </option>
-        ))}
-      </Select>
+    <Flex gap={2} direction={"row"} align={"baseline"}>
+      <Box className="time-select-box">
+        <Select
+          variant="flushed"
+          width={50}
+          onChange={handleChangeHour}
+          value={selected.hour}
+        >
+          {hours.map((hour) => (
+            <option key={hour} value={hour}>
+              {hour}
+            </option>
+          ))}
+        </Select>
+      </Box>
       <span>:</span>
-      <Select
-        width={70}
-        onChange={handleChangeMinutes}
-        value={selected.minutes}
-      >
-        {MINUTES.map((value) => (
-          <option key={value} value={value}>
-            {value}
-          </option>
-        ))}
-      </Select>
+      <Box className="time-select-box">
+        <Select
+          variant="flushed"
+          width={50}
+          onChange={handleChangeMinutes}
+          value={selected.minutes}
+        >
+          {MINUTES.map((value) => (
+            <option key={value} value={value}>
+              {value}
+            </option>
+          ))}
+        </Select>
+      </Box>
     </Flex>
   );
 };

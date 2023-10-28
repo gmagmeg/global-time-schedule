@@ -8,9 +8,6 @@ export const MainContents: FC = () => {
   return (
     <Grid templateColumns="1fr 4fr" gap={6}>
       <GridItem colSpan={1}>
-        <SideMenu selectedMenu="startDate" />
-      </GridItem>
-      <GridItem colSpan={1}>
         <EditContents week={WEEK} currentDate={new Date()} weekStartDay="Sun" />
       </GridItem>
     </Grid>

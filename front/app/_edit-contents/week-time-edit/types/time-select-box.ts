@@ -54,6 +54,7 @@ export type HourTuple = typeof HALF_HOUR_TUPLE | typeof FULL_HOUR_TUPLE;
 export type HourUnion = FullHourUnion | HalfHourUnion;
 
 export type TimeSelectBoxPops = {
+  className?: string;
   targetYoubi: WeekUnion;
   hours: HourTuple;
   selected: {
