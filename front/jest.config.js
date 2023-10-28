@@ -9,5 +9,6 @@ module.exports = {
     "^@editContents/(.*)$": "<rootDir>/app/_edit-contents/$1",
     "^@resultContents/(.*)$": "<rootDir>/app/_result-contents/$1",
     "^@sideMenu/(.*)$": "<rootDir>/app/_side-menu/$1",
+    "^@globalMenu/(.*)$": "<rootDir>/app/_global-menu/$1",
   },
 };

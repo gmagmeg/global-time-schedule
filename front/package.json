@@ -9,7 +9,7 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "format": "npx prettier --write ./app/ ",
+    "format": "sh /global-time-schedule/format-changed-files.sh",
     "test": "jest"
   },
   "dependencies": {
