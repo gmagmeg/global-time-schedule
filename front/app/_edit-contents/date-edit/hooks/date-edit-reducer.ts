@@ -42,7 +42,7 @@ export const dateEditReducer = (
      * 入力途中の日付は無効な日付形式になっていることがあるので、
      * その場合は入力データをそのまま返却しています
      */
-    case "SET_INPUT_DATE":
+    case "SET_INPUT_DAT":
       const inputDateString = action.inputDate;
       const isValidDate = !isNaN(Date.parse(inputDateString));
       const oneWeekAgo = validMinDate(new Date());

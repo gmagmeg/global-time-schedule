@@ -33,3 +33,5 @@ front/yarn-error.log*
 # typescript
 front/*.tsbuildinfo
 front/next-env.d.ts
+
+front/storybook-static

@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# Get the list of changed files
 changed_files=$(git diff --name-only --diff-filter=d)
+new_files=$(git diff --name-only --diff-filter=A)
 
-# Loop through each file and format it with Prettier
-for file in $changed_files; do
-  # Prepend the directory name to the file path
-  file_path="/global-time-schedule/$file"
-  # Run Prettier on the file
-  npx prettier --write $file_path
+all_files=($changed_files $new_files)
+
+for file in ${all_files[@]}; do
+    file_path="/global-time-schedule/$file"
+    npx prettier --write $file_path
+  fi
 done

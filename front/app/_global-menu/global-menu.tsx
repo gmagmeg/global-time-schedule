@@ -1,3 +1,4 @@
+import { FC, useReducer } from "react";
 import {
   Box,
   Flex,
@@ -9,10 +10,15 @@ import {
 } from "@chakra-ui/react";
 import { TbWorldCheck } from "react-icons/tb";
 
+import { GlobalMenuReducer } from "./reducer/global-menu-reducer";
+import { GlobalMenuState } from "./reducer/global-menu-state";
+
 
 const Links = ["Dashboard", "Projects", "Team"];
 
-export const GlobalMenu = () => {
+export const GlobalMenu: FC = () => {
+  const [globalMenuState, globalMenuDispatch] = useReducer(GlobalMenuReducer, GlobalMenuState);
+
   return (
     <>
       <Box bgColor={"#B4C6EA"} px={4} roundedTopLeft={12} roundedTopRight={12}>
