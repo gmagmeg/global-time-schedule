@@ -1,6 +1,8 @@
 const fs = require("fs");
 const path = require("path");
 
+// @todo typesの定義も追加する
+
 const templateSettings = new Map([
   [
     "react",
