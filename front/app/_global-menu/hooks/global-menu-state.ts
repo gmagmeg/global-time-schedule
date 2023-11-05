@@ -8,7 +8,7 @@ let currentDate = dayjs();
 let baseDate =
   currentDate.weekday() === 0 ? currentDate : currentDate.weekday(0);
 
-const selectedDate = baseDate.format("MM/DD");
+const selectedStartDate = baseDate.format("MM/DD");
 
 const startDateList = [
   {
@@ -26,6 +26,6 @@ const startDateList = [
 ];
 
 export const GlobalMenuState = {
-  selectedDate,
+  selectedStartDate,
   startDateList,
 };

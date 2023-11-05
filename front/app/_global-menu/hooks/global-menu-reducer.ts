@@ -23,7 +23,7 @@ export const GlobalMenuReducer = (
     case "SELECTED_START_DATE_ACTION":
       return {
         ...state,
-        selectedDate: action.selectedDate,
+        selectedStartDate: action.selectedDate,
       };
     default:
       return state;

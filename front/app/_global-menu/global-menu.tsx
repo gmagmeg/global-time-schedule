@@ -10,14 +10,17 @@ import {
 } from "@chakra-ui/react";
 import { TbWorldCheck } from "react-icons/tb";
 
-import { GlobalMenuReducer } from "./reducer/global-menu-reducer";
-import { GlobalMenuState } from "./reducer/global-menu-state";
-
+import { GlobalMenuReducer } from "./hooks/global-menu-reducer";
+import { GlobalMenuState } from "./hooks/global-menu-state";
+import { SelectStartDate } from "./select-start-date";
 
 const Links = ["Dashboard", "Projects", "Team"];
 
 export const GlobalMenu: FC = () => {
-  const [globalMenuState, globalMenuDispatch] = useReducer(GlobalMenuReducer, GlobalMenuState);
+  const [globalMenuState, globalMenuDispatch] = useReducer(
+    GlobalMenuReducer,
+    GlobalMenuState
+  );
 
   return (
     <>
@@ -40,6 +43,13 @@ export const GlobalMenu: FC = () => {
             </HStack>
           </HStack>
         </Flex>
+      </Box>
+      <Box mt={6}>
+        <SelectStartDate
+          startDateList={globalMenuState.startDateList}
+          selectedStartDate={globalMenuState.selectedStartDate}
+          handleStartDate={globalMenuDispatch}
+        />
       </Box>
     </>
   );

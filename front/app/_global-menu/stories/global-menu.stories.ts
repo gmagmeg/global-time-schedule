@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
 import { GlobalMenu } from "../global-menu";
-import { GlobalMenuState } from "../reducer/global-menu-state";
+import { GlobalMenuState } from "../hooks/global-menu-state";
 
 const documentation = `グローバルメニューのコンポーネントです。
 固定ヘッダーになっており、スクロールしても常にヘッダーに固定されます。`;
