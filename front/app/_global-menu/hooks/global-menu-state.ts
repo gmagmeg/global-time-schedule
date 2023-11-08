@@ -1,4 +1,4 @@
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import timezone from "dayjs/plugin/weekday";
 import { StartDate, DateString } from "../type-global-menu";
 
@@ -12,7 +12,6 @@ export const correctToSunday = (date: DateString): DateString => {
 };
 
 const currentDate = correctToSunday(dayjs().format("YYYY-MM-DD"));
-
 const selectedStartDate = dayjs(currentDate).format("MM/DD");
 
 export const createStartDateList = (currentDate: string): StartDate[] => {

@@ -20,27 +20,4 @@ describe("GlobalMenuState", () => {
       expect(result).toEqual("2023-11-05");
     });
   });
-  // describe("GlobalMenuState", () => {
-  //   it("should create a start date list", () => {
-  //     // Arrange
-  //     const baseDate = "2023-11-03";
-  //     // Act
-  //     const result = createStartDateList(baseDate);
-  //     // Assert
-  //     expect(result).toEqual([
-  //       {
-  //         sun: "10/29",
-  //         mon: "10/30",
-  //       },
-  //       {
-  //         sun: "11/05",
-  //         mon: "11/06",
-  //       },
-  //       {
-  //         sun: "11/12",
-  //         mon: "11/13",
-  //       },
-  //     ]);
-  //   });
-  // });
 });

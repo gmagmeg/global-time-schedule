@@ -1,14 +1,6 @@
 import { FC, useReducer } from "react";
-import {
-  Box,
-  Flex,
-  HStack,
-  InputGroup,
-  InputLeftElement,
-  Input,
-  Icon,
-} from "@chakra-ui/react";
-import { TbWorldCheck } from "react-icons/tb";
+import { Box } from "@chakra-ui/react";
+import { SearchTimeZone } from "./search-time-zone";
 
 import { GlobalMenuReducer } from "./hooks/global-menu-reducer";
 import { GlobalMenuState } from "./hooks/global-menu-state";
@@ -25,24 +17,7 @@ export const GlobalMenu: FC = () => {
   return (
     <>
       <Box bgColor={"#B4C6EA"} px={4} roundedTopLeft={12} roundedTopRight={12}>
-        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          <HStack spacing={8} alignItems={"center"}>
-            <HStack
-              as={"nav"}
-              spacing={4}
-              display={{ base: "none", md: "flex" }}
-            >
-              {Links.map((link) => (
-                <InputGroup key={link}>
-                  <InputLeftElement pointerEvents="none">
-                    <Icon as={TbWorldCheck} boxSize={6} />
-                  </InputLeftElement>
-                  <Input type="tel" placeholder="Phone number" bg="white" />
-                </InputGroup>
-              ))}
-            </HStack>
-          </HStack>
-        </Flex>
+        <SearchTimeZone />
       </Box>
       <Box mt={6}>
         <SelectStartDate
