@@ -28,13 +28,7 @@ const config: StorybookConfig = {
         alias: {
           ...baseConfig.resolve?.alias,
           "@app": path.resolve(__dirname, "../app/"),
-          "@const": path.resolve(__dirname, "../const/"),
-          "@editContents": path.resolve(__dirname, "../app/_edit-contents/"),
-          "@resultContents": path.resolve(
-            __dirname,
-            "../app/_result-contents/"
-          ),
-          "@sideMenu": path.resolve(__dirname, "../app/_side-menu/"),
+          "@lib": path.resolve(__dirname, "../library/"),
           "@globalMenu": path.resolve(__dirname, "../app/_global-menu/"),
           "@": path.resolve(__dirname, "../"),
         },

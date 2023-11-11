@@ -1,12 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
-import { SearchTimeZone } from "@app/_global-menu/search-time-zone";
+import { SelectWeekDays } from "@app/_global-menu/select-week-days";
 
 const documentation = `コンポーネントの説明`;
 
 const meta = {
-  title: "GlobalMenu/SearchTimeZone",
-  component: SearchTimeZone,
+  title: "GlobalMenu/SelectWeekDays",
+  component: SelectWeekDays,
   tags: ["autodocs"],
   parameters: {
     docs: {
@@ -15,7 +15,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof SearchTimeZone>;
+} satisfies Meta<typeof SelectWeekDays>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
