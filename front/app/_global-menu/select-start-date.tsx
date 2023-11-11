@@ -29,16 +29,18 @@ export const SelectStartDate: FC<{
       <Stack direction="row" justifyContent={"space-between"}>
         {startDateList.map((startDate, index) => (
           <>
+            {index === 0 && <Icon as={BiFirstPage} boxSize={6} mr={4} />}
             <Box key={startDate.sun}>
-              {index === 0 && <Icon as={BiFirstPage} boxSize={6} mr={4} />}
+              
               <Radio value={startDate.sun} mr={2}>
                 <Text color="red">{startDate.sun}（日）</Text>
               </Radio>
               <Radio value={startDate.mon}>{startDate.mon}（月）</Radio>
-              {index === startDateList.length - 1 && (
+
+            </Box>
+            {index === startDateList.length - 1 && (
                 <Icon as={BiLastPage} boxSize={6} ml={4} />
               )}
-            </Box>
           </>
         ))}
       </Stack>

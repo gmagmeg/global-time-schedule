@@ -6,7 +6,7 @@ import { GlobalMenuState } from "../hooks/global-menu-state";
 const documentation = `コンポーネントの説明`;
 
 const meta = {
-  title: "GlobalMenu/SelectStartDate",
+  title: "GlobalMenu/Att/SelectStartDate",
   component: SelectStartDate,
   tags: ["autodocs"],
   parameters: {
@@ -24,6 +24,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     startDateList: GlobalMenuState.startDateList,
-    selectStartDate: GlobalMenuState.selectedDate,
+    selectedStartDate: GlobalMenuState.selectedStartDate,
   },
 };

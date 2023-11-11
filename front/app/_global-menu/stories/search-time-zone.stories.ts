@@ -5,7 +5,7 @@ import { SearchTimeZone } from "@app/_global-menu/search-time-zone";
 const documentation = `コンポーネントの説明`;
 
 const meta = {
-  title: "GlobalMenu/SearchTimeZone",
+  title: "GlobalMenu/Att/SearchTimeZone",
   component: SearchTimeZone,
   tags: ["autodocs"],
   parameters: {

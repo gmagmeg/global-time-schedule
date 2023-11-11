@@ -6,6 +6,6 @@ module.exports = {
   moduleNameMapper: {
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
     "^@app/(.*)$": "<rootDir>/app/$1",
-    "^@library/(.*)$": "<rootDir>/library/$1",
+    "^@lib/(.*)$": "<rootDir>/library/$1",
   },
 };

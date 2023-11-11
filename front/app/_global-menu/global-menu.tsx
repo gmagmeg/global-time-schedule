@@ -5,6 +5,7 @@ import { SearchTimeZone } from "./search-time-zone";
 import { GlobalMenuReducer } from "./hooks/global-menu-reducer";
 import { GlobalMenuState } from "./hooks/global-menu-state";
 import { SelectStartDate } from "./select-start-date";
+import { SelectWeekDays } from "./select-week-days";
 
 const Links = ["Dashboard", "Projects", "Team"];
 
@@ -26,6 +27,12 @@ export const GlobalMenu: FC = () => {
           handleStartDate={globalMenuDispatch}
         />
       </Box>
+      <Box mt={6}>
+        <SelectWeekDays 
+          baseDate={globalMenuState.selectedStartDate}
+          selectedDate={globalMenuState.selectedStartDate}
+        />
+        </Box>
     </>
   );
 };

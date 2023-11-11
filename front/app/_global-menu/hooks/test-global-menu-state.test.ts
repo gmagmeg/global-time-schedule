@@ -1,4 +1,4 @@
-import { correctToSunday } from "./global-menu-state";
+import { correctToSunday } from "./global-menu-function";
 
 describe("GlobalMenuState", () => {
   describe("correctToSunday", () => {
