@@ -40,6 +40,14 @@ function generateFiles(componentPath, componentName) {
       .replace(/__COMPONENT_PATH__/g, `@app/${componentPath}/${componentName}`)
       .replace(/\.\/app\//g, "");
 
+    // ファイルを書き込むディレクトリのパス
+    const dirPath = path.join(componentPath, templateSetting.directory);
+
+    // ディレクトリが存在しない場合は作成
+    if (!fs.existsSync(dirPath)) {
+      fs.mkdirSync(dirPath, { recursive: true });
+    }
+
     // 置換した内容を書き込み
     fs.writeFileSync(
       path.join(
