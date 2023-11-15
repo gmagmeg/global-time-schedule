@@ -1,13 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
-import { DayButton } from "@app/_common-button/day-button";
-import { customDayjs } from "@/library/dayjs";
+import { SelectAmPmAll } from "@app/_day-schedule/select-am-pm-all";
+import { timeTypeOptions } from "../hooks/day-schedule-state";
 
 const documentation = `コンポーネントの説明`;
 
 const meta = {
-  title: "CommonButton/DayButton",
-  component: DayButton,
+  title: "DaySchedule/SelectAmPmAll",
+  component: SelectAmPmAll,
   tags: ["autodocs"],
   parameters: {
     docs: {
@@ -16,21 +16,14 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof DayButton>;
+} satisfies Meta<typeof SelectAmPmAll>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    isSelected: true,
-    date: customDayjs().format("YYYY-MM-DD"),
-  },
-};
-
-export const NotSelected: Story = {
-  args: {
-    isSelected: false,
-    date: customDayjs().format("YYYY-MM-DD"),
+    timeTypeOptions: timeTypeOptions,
+    selectedTimeType: "PM",
   },
 };

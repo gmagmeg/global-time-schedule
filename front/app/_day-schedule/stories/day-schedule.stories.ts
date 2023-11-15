@@ -1,11 +1,14 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
 import { DaySchedule } from "@app/_day-schedule/day-schedule";
+import { minutes, hour12, hour24 } from "../hooks/day-schedule-state";
+import { dayScheduleState } from "../hooks/day-schedule-state";
 
-const documentation = `コンポーネントの説明`;
+const documentation = `12時間/AM、PMの選択と
+24時間の選択ができるコンポーネント２つがある`;
 
 const meta = {
-  title: "DaySchedule",
+  title: "DaySchedule/DaySchedule",
   component: DaySchedule,
   tags: ["autodocs"],
   parameters: {
@@ -20,6 +23,13 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
-  args: {},
+export const Hour12: Story = {
+  args: dayScheduleState,
+};
+
+export const Hour24: Story = {
+  args: {
+    ...dayScheduleState,
+    hourOptions: hour24,
+  },
 };

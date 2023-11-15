@@ -41,7 +41,10 @@ function generateFiles(componentPath, componentName) {
       .replace(/\.\/app\//g, "");
 
     // ファイルを書き込むディレクトリのパス
-    const dirPath = path.join(componentPath, templateSetting.directory);
+    const dirPath = path.join(
+      `front/app/${componentPath}`,
+      templateSetting.directory
+    );
 
     // ディレクトリが存在しない場合は作成
     if (!fs.existsSync(dirPath)) {
@@ -51,7 +54,7 @@ function generateFiles(componentPath, componentName) {
     // 置換した内容を書き込み
     fs.writeFileSync(
       path.join(
-        componentPath,
+        `front/app/${componentPath}`,
         `${templateSetting.directory}${componentName}.${templateSetting.extension}`
       ),
       componentContent

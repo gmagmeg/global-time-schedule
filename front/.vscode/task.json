@@ -5,15 +5,40 @@
       "label": "format code",
       "type": "shell",
       "command": "npm",
-      "args": [
-        "run",
-        "format"
-      ],
+      "args": ["run", "format"],
       "group": "npm",
       "presentation": {
         "reveal": "always",
         "panel": "new"
       }
+    },
+    {
+      "label": "create new component",
+      "type": "shell",
+      "command": "/global-time-schedule/format-changed-files.sh",
+      "args": ["${input:componentPath}", "${input:componentName}"],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "presentation": {
+        "reveal": "always",
+        "panel": "new"
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "componentPath",
+      "description": "appから始まるcomponentのパスを入力してください。",
+      "default": "app/"
+    },
+    {
+      "type": "promptString",
+      "id": "componentName",
+      "description": "新規作成するcomponentの名称を入力してください",
+      "default": ""
     }
   ]
 }

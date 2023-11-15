@@ -41,3 +41,7 @@ body {
 .time-select-box {
   border-bottom: 1px solid #a0add7;
 }
+
+.copy-button {
+  margin: 0.5em;
+}

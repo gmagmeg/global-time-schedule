@@ -1,15 +1,12 @@
-import dayjs from "dayjs";
-import timezone from "dayjs/plugin/weekday";
+import { customDayjs } from "@lib/dayjs";
 import { StartDate, DateString } from "../type-global-menu";
 import { correctToSunday } from "./global-menu-function";
 
-dayjs.extend(timezone);
-
-const currentDate = correctToSunday(dayjs().format("YYYY-MM-DD"));
-const selectedStartDate = dayjs(currentDate).format("MM/DD");
+const currentDate = correctToSunday(customDayjs().format("YYYY-MM-DD"));
+const selectedStartDate = customDayjs(currentDate).format("MM/DD");
 
 export const createStartDateList = (currentDate: string): StartDate[] => {
-  const currentDayjs = dayjs(currentDate);
+  const currentDayjs = customDayjs(currentDate);
   const baseDate =
     currentDayjs.weekday() === 0 ? currentDayjs : currentDayjs.weekday(0);
 
