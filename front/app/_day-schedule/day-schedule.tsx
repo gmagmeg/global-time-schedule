@@ -58,7 +58,12 @@ export const DaySchedule: FC<DayScheduleState> = ({
         <Box mt={2} borderRight={"2px"}>
           &nbsp;
         </Box>
-        <CopyButton enableCopy={true} />
+        <Box>
+          <CopyButton enableCopy={true} />
+        </Box>
+        <Box>
+          <Text>--:-- -- --</Text>
+        </Box>
       </Flex>
     </>
   );

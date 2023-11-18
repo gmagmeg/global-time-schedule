@@ -1,5 +1,5 @@
 import { customDayjs } from "@lib/dayjs";
-import { StartDate, DateString } from "../type-global-menu";
+import { StartDate } from "../type-global-menu";
 import { correctToSunday } from "./global-menu-function";
 
 const currentDate = correctToSunday(customDayjs().format("YYYY-MM-DD"));

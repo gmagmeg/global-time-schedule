@@ -1,11 +1,12 @@
-import { GlobalMenuState, DateString } from "../type-global-menu";
+import { GlobalMenuState } from "../type-global-menu";
+import { DateString } from "@/library/type-date";
 
 /**
  * ここの型定義がreducerの引数の型定義になる
  */
 export type GlobalMenuAction = {
   type: "SELECTED_START_DATE_ACTION";
-  selectedDate: DateString;
+  selectedStartDate: DateString;
 };
 
 /**
@@ -23,7 +24,7 @@ export const GlobalMenuReducer = (
     case "SELECTED_START_DATE_ACTION":
       return {
         ...state,
-        selectedStartDate: action.selectedDate,
+        selectedStartDate: action.selectedStartDate,
       };
     default:
       return state;

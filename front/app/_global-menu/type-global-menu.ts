@@ -1,5 +1,4 @@
-// ex: 2023-01-01
-export type DateString = string;
+import { DateString } from "@/library/type-date";
 
 export const toDateString = (from: string): DateString => {
   return from;

@@ -1,4 +1,4 @@
-import { DateString } from "../_global-menu/type-global-menu";
+import { DateString } from "@/library/type-date";
 
 export type DayScheduleState = {
   startDate: DateString;
