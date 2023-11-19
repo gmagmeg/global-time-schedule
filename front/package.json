@@ -9,7 +9,7 @@
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "format": "cd /global-time-schedule/front && bash /global-time-schedule/format-changed-files.sh",
+    "format": "bash /global-time-schedule/format-changed-files.sh",
     "test": "jest"
   },
   "dependencies": {

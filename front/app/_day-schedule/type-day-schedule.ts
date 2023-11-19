@@ -41,3 +41,4 @@ export type HourNumber =
 
 export type MinutesNumber = 0 | 30;
 export type TimeType = "AM" | "PM" | "24h";
+export type HourOrMinutes = HourNumber | MinutesNumber;

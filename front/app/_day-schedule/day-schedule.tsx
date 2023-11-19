@@ -1,4 +1,4 @@
-import { Box, Flex, Select, Text } from "@chakra-ui/react";
+import { Box, Flex, Select, Spacer, Text } from "@chakra-ui/react";
 import { FC } from "react";
 import { SelectAmPmAll } from "./select-am-pm-all";
 import { timeTypeOptions } from "./hooks/day-schedule-state";
@@ -16,8 +16,10 @@ export const DaySchedule: FC<DayScheduleState> = ({
     <>
       <Flex alignItems={"baseline"}>
         <DayButton date={dayScheduleState.startDate} isSelected={true} />
+        <Spacer maxW={4} />
         <Select
           value={selectedTime.hour}
+          w={"auto"}
           placeholder={hourOptions[0].toString()}
           border="none"
           borderBottom="1px solid"
@@ -35,6 +37,7 @@ export const DaySchedule: FC<DayScheduleState> = ({
         </Select>
         <Text mx={2}>:</Text>
         <Select
+          w={"auto"}
           value={selectedTime.minute}
           placeholder={minuteOptions[0].toString()}
           border="none"
@@ -51,6 +54,7 @@ export const DaySchedule: FC<DayScheduleState> = ({
             </option>
           ))}
         </Select>
+        <Spacer maxW={4} />
         <SelectAmPmAll
           timeTypeOptions={timeTypeOptions}
           selectedTimeType={timeTypeOptions[0]}
