@@ -1,4 +1,5 @@
 import { DateString } from "@/library/type-date";
+import { TimeZone } from "@/library/type-date";
 
 export type DayScheduleState = {
   startDate: DateString;
@@ -10,6 +11,7 @@ export type DayScheduleState = {
   };
   timeTypeOptions: TimeType[];
   selectedTimeType: TimeType;
+  timeZones: TimeZone[];
 };
 
 export type HourNumber =

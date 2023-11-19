@@ -5,10 +5,10 @@ import { FC } from "react";
 
 export const DisplayTimezoneTime: FC<{
   displayTime: DateString;
-  timeZone: TimeZone;
-}> = ({ displayTime, timeZone }) => {
+  timeZones: TimeZone[];
+}> = ({ displayTime, timeZones }) => {
   const formattedDateTime = customDayjs(displayTime)
-    .tz(timeZone)
+    .tz(timeZones[0])
     .format("hh:mm A [JST]");
 
   return (

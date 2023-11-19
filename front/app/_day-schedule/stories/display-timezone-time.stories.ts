@@ -1,11 +1,12 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
 import { DisplayTimezoneTime } from "@app/_day-schedule/display-timezone-time";
+import { dayScheduleState } from "../hooks/day-schedule-state";
 
 const documentation = `コンポーネントの説明`;
 
 const meta = {
-  title: "DaySchedule/DisplayTimezoneTime",
+  title: "DaySchedule/Sub/DisplayTimezoneTime",
   component: DisplayTimezoneTime,
   tags: ["autodocs"],
   parameters: {
@@ -21,9 +22,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { displayTime: "2023-11-16 22:00" },
+  args: {
+    displayTime: "2023-11-16 22:00",
+    timeZones: dayScheduleState.timeZones,
+  },
 };
 
 export const Empty: Story = {
-  args: { displayTime: "" },
+  args: { displayTime: "", timeZones: dayScheduleState.timeZones },
 };

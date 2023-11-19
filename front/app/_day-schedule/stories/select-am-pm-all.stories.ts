@@ -6,7 +6,7 @@ import { timeTypeOptions } from "../hooks/day-schedule-state";
 const documentation = `コンポーネントの説明`;
 
 const meta = {
-  title: "DaySchedule/SelectAmPmAll",
+  title: "DaySchedule/Sub/SelectAmPmAll",
   component: SelectAmPmAll,
   tags: ["autodocs"],
   parameters: {

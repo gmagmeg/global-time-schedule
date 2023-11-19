@@ -4,6 +4,7 @@ import type {
   TimeType,
   DayScheduleState,
 } from "../type-day-schedule";
+import { customDayjs } from "@/library/dayjs";
 
 export const minutes: MinutesNumber[] = [0, 30];
 export const hour12: HourNumber[] = Array.from(
@@ -18,7 +19,7 @@ export const hour24: HourNumber[] = Array.from(
 export const timeTypeOptions: TimeType[] = ["AM", "PM", "24h"];
 
 export const dayScheduleState: DayScheduleState = {
-  startDate: "2023-11-12",
+  startDate: customDayjs().format("YYYY-MM-DD 00:00"),
   hourOptions: hour12,
   minuteOptions: minutes,
   selectedTime: {
@@ -27,4 +28,5 @@ export const dayScheduleState: DayScheduleState = {
   },
   timeTypeOptions: timeTypeOptions,
   selectedTimeType: "AM",
+  timeZones: ["Asia/Tokyo", "America/New_York", "Europe/Paris"],
 };

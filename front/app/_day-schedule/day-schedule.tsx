@@ -1,4 +1,4 @@
-import { Box, Flex, Select, Spacer, Text } from "@chakra-ui/react";
+import { Box, Flex, Spacer, Text } from "@chakra-ui/react";
 import { FC } from "react";
 import { SelectAmPmAll } from "./select-am-pm-all";
 import { timeTypeOptions } from "./hooks/day-schedule-state";
@@ -6,6 +6,8 @@ import { dayScheduleState } from "./hooks/day-schedule-state";
 import { DayScheduleState } from "./type-day-schedule";
 import { DayButton } from "../_common-button/day-button";
 import { CopyButton } from "../_common-button/copy-button";
+import { SelectHourMinutes } from "./select-hour-minutes";
+import { DisplayTimezoneTime } from "./display-timezone-time";
 
 export const DaySchedule: FC<DayScheduleState> = ({
   hourOptions,
@@ -17,57 +19,30 @@ export const DaySchedule: FC<DayScheduleState> = ({
       <Flex alignItems={"baseline"}>
         <DayButton date={dayScheduleState.startDate} isSelected={true} />
         <Spacer maxW={4} />
-        <Select
-          value={selectedTime.hour}
-          w={"auto"}
+        <SelectHourMinutes 
+          selectedTime={selectedTime.hour}
+          selectTimeList={hourOptions}
           placeholder={hourOptions[0].toString()}
-          border="none"
-          borderBottom="1px solid"
-          borderRadius="0"
-          _focus={{
-            boxShadow: "none",
-            borderBottom: "2px solid",
-          }}
-        >
-          {hourOptions.map((hour) => (
-            <option key={hour} value={hour}>
-              {hour}
-            </option>
-          ))}
-        </Select>
+        />
         <Text mx={2}>:</Text>
-        <Select
-          w={"auto"}
-          value={selectedTime.minute}
+        <SelectHourMinutes 
+          selectedTime={selectedTime.minute}
+          selectTimeList={minuteOptions}
           placeholder={minuteOptions[0].toString()}
-          border="none"
-          borderBottom="1px solid"
-          borderRadius="0"
-          _focus={{
-            boxShadow: "none",
-            borderBottom: "2px solid",
-          }}
-        >
-          {minuteOptions.map((minute) => (
-            <option key={minute} value={minute}>
-              {minute}
-            </option>
-          ))}
-        </Select>
+        />
         <Spacer maxW={4} />
         <SelectAmPmAll
           timeTypeOptions={timeTypeOptions}
           selectedTimeType={timeTypeOptions[0]}
         />
-        <Box mt={2} borderRight={"2px"}>
-          &nbsp;
-        </Box>
+        <Spacer h={12} mx={4} borderRight={"1px"} />
         <Box>
           <CopyButton enableCopy={true} />
         </Box>
-        <Box>
-          <Text>--:-- -- --</Text>
-        </Box>
+        <DisplayTimezoneTime 
+          displayTime={dayScheduleState.startDate}
+          timeZones={dayScheduleState.timeZones}
+        />
       </Flex>
     </>
   );
