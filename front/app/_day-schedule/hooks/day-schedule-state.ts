@@ -4,7 +4,7 @@ import type {
   TimeType,
   DayScheduleState,
 } from "../type-day-schedule";
-import { customDayjs } from "@/library/dayjs";
+import { customDayjs } from "@lib/dayjs";
 
 export const minutes: MinutesNumber[] = [0, 30];
 export const hour12: HourNumber[] = Array.from(
@@ -24,7 +24,7 @@ export const dayScheduleState: DayScheduleState = {
   minuteOptions: minutes,
   selectedTime: {
     hour: 0,
-    minute: 0,
+    minute: 30,
   },
   timeTypeOptions: timeTypeOptions,
   selectedTimeType: "AM",

@@ -9,8 +9,9 @@ import {
 } from "@chakra-ui/react";
 import { FC } from "react";
 import { BiFirstPage, BiLastPage } from "react-icons/bi";
-import { StartDate, DateString, toDateString } from "./type-global-menu";
+import { StartDate, toDateString } from "./type-global-menu";
 import { GlobalMenuAction } from "./hooks/global-menu-reducer";
+import { DateString } from "@lib/type-date";
 
 export const SelectStartDate: FC<{
   startDateList: StartDate[];

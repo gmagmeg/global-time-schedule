@@ -6,8 +6,8 @@ export type DayScheduleState = {
   hourOptions: HourNumber[];
   minuteOptions: MinutesNumber[];
   selectedTime: {
-    hour: HourNumber;
-    minute: MinutesNumber;
+    hour: HourOrMinutes;
+    minute: HourOrMinutes;
   };
   timeTypeOptions: TimeType[];
   selectedTimeType: TimeType;
