@@ -20,8 +20,10 @@ export const timeTypeOptions: TimeType[] = ["AM", "PM", "24h"];
 
 export const dayScheduleState: DayScheduleState = {
   startDate: customDayjs().format("YYYY-MM-DD 00:00"),
-  hourOptions: hour12,
-  minuteOptions: minutes,
+  timesOptions: {
+    hourOptions: hour12,
+    minuteOptions: minutes,
+  },
   selectedTime: {
     hour: 0,
     minute: 30,

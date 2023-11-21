@@ -23,16 +23,14 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    selectedTime: 9,
-    selectTimeList: hour12,
-    placeholder: "",
-  },
-};
-
-export const Minutes: Story = {
-  args: {
-    selectedTime: 30,
-    selectTimeList: minutes,
-    placeholder: "",
+    selectedTime: {
+      hour: 0,
+      minute: 30,
+    },
+    selectTimeList: {
+      hourOptions: hour12,
+      minuteOptions: minutes,
+    },
+    placeholder: "--:--",
   },
 };

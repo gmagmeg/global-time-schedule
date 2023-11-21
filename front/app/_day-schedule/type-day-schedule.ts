@@ -3,8 +3,10 @@ import { TimeZone } from "@/library/type-date";
 
 export type DayScheduleState = {
   startDate: DateString;
-  hourOptions: HourNumber[];
-  minuteOptions: MinutesNumber[];
+  timesOptions: {
+    hourOptions: HourNumber[];
+    minuteOptions: MinutesNumber[];
+  };
   selectedTime: {
     hour: HourOrMinutes;
     minute: HourOrMinutes;

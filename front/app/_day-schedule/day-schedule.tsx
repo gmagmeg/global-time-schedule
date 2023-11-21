@@ -11,8 +11,7 @@ import { DisplayTimezoneTime } from "./display-timezone-time";
 import { DayScheduleReducer } from "./hooks/day-schedule-reducer";
 
 export const DaySchedule: FC<DayScheduleState> = ({
-  hourOptions,
-  minuteOptions,
+  timesOptions,
   selectedTime,
 }) => {
   const [state, dispatch] = useReducer(DayScheduleReducer, dayScheduleState);
@@ -24,16 +23,9 @@ export const DaySchedule: FC<DayScheduleState> = ({
         <Spacer maxW={4} />
         <SelectHourMinutes
           handleChange={dispatch}
-          selectedTime={state.selectedTime.hour}
-          selectTimeList={hourOptions}
-          placeholder={hourOptions[0].toString()}
-        />
-        <Text mx={2}>:</Text>
-        <SelectHourMinutes
-          handleChange={dispatch}
-          selectedTime={state.selectedTime.minute}
-          selectTimeList={minuteOptions}
-          placeholder={minuteOptions[0].toString()}
+          selectedTime={state.selectedTime}
+          selectTimeList={state.timesOptions}
+          placeholder="--:--"
         />
         <Spacer maxW={4} />
         <SelectAmPmAll
