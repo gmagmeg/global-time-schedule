@@ -8,6 +8,7 @@ services:
       dockerfile: ./Dockerfile
     volumes:
       - ./:/global-time-schedule
+      - /global-time-schedule/front/node_modules
       - ${HOME}/.ssh:/home/node/.ssh
     ports:
       - "5000:3000"
