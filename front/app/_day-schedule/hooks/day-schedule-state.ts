@@ -30,5 +30,18 @@ export const dayScheduleState: DayScheduleState = {
     timeType: "AM",
   },
   timeTypeOptions: timeTypeOptions,
-  timeZones: ["Asia/Tokyo", "America/New_York", "Europe/Paris"],
+  timeZones: [
+    {
+      timeZone: "Asia/Tokyo",
+      timeZoneTime: "09-01 AM",
+    },
+    {
+      timeZone: "America/New_York",
+      timeZoneTime: "09-01 AM",
+    },
+    {
+      timeZone: "Europe/Paris",
+      timeZoneTime: "09-01 AM",
+    },
+  ],
 };

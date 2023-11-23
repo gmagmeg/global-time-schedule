@@ -20,8 +20,8 @@ const meta = {
 
 export default meta;
 type Story = StoryObj<typeof meta>;
- 
-const { selectedTime } = dayScheduleState
+
+const { selectedTime } = dayScheduleState;
 
 export const Default: Story = {
   args: {

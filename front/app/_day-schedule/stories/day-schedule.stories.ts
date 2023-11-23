@@ -33,6 +33,6 @@ export const Hour24: Story = {
     timesOptions: {
       hourOptions: hour24,
       minuteOptions: minutes,
-    }
+    },
   },
 };

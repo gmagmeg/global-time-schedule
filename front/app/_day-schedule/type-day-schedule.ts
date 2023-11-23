@@ -1,10 +1,12 @@
-import { DateString } from "@/library/type-date";
-import { TimeZone } from "@/library/type-date";
+import { DateString, TimeZone } from "@/library/type-date";
 
 /**
  * 型変換の関数は型と一緒に使うことが多いので、
  * このファイルに定義する
  */
+
+// ex：11:00 AM
+export type TimeZoneTime = string;
 
 export type DayScheduleState = {
   startDate: DateString;
@@ -18,7 +20,10 @@ export type DayScheduleState = {
     timeType: TimeType;
   };
   timeTypeOptions: TimeType[];
-  timeZones: TimeZone[];
+  timeZones: {
+    timeZone: TimeZone;
+    timeZoneTime: TimeZoneTime;
+  }[];
 };
 
 export type HourNumber =
