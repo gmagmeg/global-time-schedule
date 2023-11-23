@@ -3,7 +3,7 @@ import type { Preview } from "@storybook/react";
 import { ChakraProvider } from '@chakra-ui/react';
 
 const preview: Preview = {
-  decorators: [
+decorators: [
     (Story) => (
         <ChakraProvider>
           <Story />
