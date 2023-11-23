@@ -1,4 +1,4 @@
-import { Box, Flex, Spacer, Text } from "@chakra-ui/react";
+import { Box, Flex, Spacer } from "@chakra-ui/react";
 import { FC, useReducer } from "react";
 import { SelectAmPmAll } from "./select-am-pm-all";
 import { timeTypeOptions } from "./hooks/day-schedule-state";
@@ -22,21 +22,22 @@ export const DaySchedule: FC<DayScheduleState> = ({
         <DayButton date={dayScheduleState.startDate} isSelected={true} />
         <Spacer maxW={4} />
         <SelectHourMinutes
-          handleChange={dispatch}
           selectedTime={state.selectedTime}
           selectTimeList={state.timesOptions}
           placeholder="--:--"
+          handleChange={dispatch}
         />
         <Spacer maxW={4} />
         <SelectAmPmAll
           timeTypeOptions={timeTypeOptions}
           selectedTimeType={timeTypeOptions[0]}
+          handleChange={dispatch}
         />
         <Spacer h={12} mx={4} borderRight={"1px"} />
         <Box>
           <CopyButton enableCopy={true} />
         </Box>
-        <DisplayTimezoneTime 
+        <DisplayTimezoneTime
           displayTime={dayScheduleState.startDate}
           timeZones={dayScheduleState.timeZones}
         />
