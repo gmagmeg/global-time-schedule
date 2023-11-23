@@ -2,6 +2,8 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
 import { SelectHourMinutes } from "@app/_day-schedule/select-hour-minutes";
 import { hour12, minutes } from "@app/_day-schedule/hooks/day-schedule-state";
+import { dayScheduleState } from "../hooks/day-schedule-state";
+
 
 const documentation = `時間と分を選択するコンポーネントです。`;
 
@@ -21,12 +23,11 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 
+const { selectedTime } = dayScheduleState;
+
 export const Default: Story = {
   args: {
-    selectedTime: {
-      hour: 0,
-      minute: 30,
-    },
+    selectedTime,
     selectTimeList: {
       hourOptions: hour12,
       minuteOptions: minutes,

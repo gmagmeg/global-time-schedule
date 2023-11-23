@@ -23,12 +23,21 @@ export type DayScheduleAction =
       timeType: TimeType;
     };
 
+/**
+ * @todo 各Caseで、右端の時間フォーマットを変更する処理を定義する
+ * @todo コンフルのAPIもChatGPTで調べる
+ */
 export const DayScheduleReducer = (
   state: DayScheduleState,
   action: DayScheduleAction
 ): DayScheduleState => {
   switch (action.type) {
+    /**
+     * 時間の選択肢を変更する
+     */
     case "CHANGE_HOUR_SELECT_BOX":
+      // dayjsにhourとminuteを渡して、HH:mmの形式で文字列を作成する
+      // この時にtimezoneも渡す
       return {
         ...state,
         selectedTime: {
@@ -36,6 +45,9 @@ export const DayScheduleReducer = (
           hour: action.hour,
         },
       };
+    /*
+     * 分の選択肢を変更する
+     */
     case "CHANGE_MINUTES_SELECT_BOX":
       return {
         ...state,
@@ -70,8 +82,8 @@ export const DayScheduleReducer = (
         selectedTime: {
           ...state.selectedTime,
           hour: selectedHour,
+          timeType: action.timeType,
         },
-        selectedTimeType: action.timeType,
       };
     default:
       return state;

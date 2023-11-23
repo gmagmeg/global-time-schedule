@@ -30,6 +30,9 @@ export const Hour12: Story = {
 export const Hour24: Story = {
   args: {
     ...dayScheduleState,
-    hourOptions: hour24,
+    timesOptions: {
+      hourOptions: hour24,
+      minuteOptions: minutes,
+    }
   },
 };

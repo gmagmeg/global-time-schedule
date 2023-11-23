@@ -15,9 +15,9 @@ export type DayScheduleState = {
   selectedTime: {
     hour: HourOrMinutes;
     minute: HourOrMinutes;
+    timeType: TimeType;
   };
   timeTypeOptions: TimeType[];
-  selectedTimeType: TimeType;
   timeZones: TimeZone[];
 };
 

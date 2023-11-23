@@ -27,8 +27,8 @@ export const dayScheduleState: DayScheduleState = {
   selectedTime: {
     hour: 0,
     minute: 30,
+    timeType: "AM",
   },
   timeTypeOptions: timeTypeOptions,
-  selectedTimeType: "AM",
   timeZones: ["Asia/Tokyo", "America/New_York", "Europe/Paris"],
 };
