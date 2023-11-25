@@ -10,6 +10,4 @@ WORKDIR /front
 
 COPY --chown=node:node ./front ./
 
-RUN npm install
-
 CMD ["npm", "run", "dev"]

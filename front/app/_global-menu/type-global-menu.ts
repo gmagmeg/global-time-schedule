@@ -1,4 +1,4 @@
-import { DateString } from "@/library/type-date";
+import { DateString } from "@lib/type-date";
 
 export const toDateString = (from: string): DateString => {
   return from;

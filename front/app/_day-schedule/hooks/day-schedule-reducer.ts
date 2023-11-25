@@ -7,7 +7,14 @@ import {
 import { hour12, hour24 } from "./day-schedule-state";
 
 /**
- * @todo SelectAmPmAllのReducerを作成する
+ * DayScheduleAction タイプは、日スケジュールに関するアクションの種類を定義します。
+ * 以下の3つのアクションタイプがあります:
+ * 1. CHANGE_HOUR_SELECT_BOX: 時間の選択を変更するアクション
+ *    - hour: HourOrMinutes - 選択された時間
+ * 2. CHANGE_MINUTES_SELECT_BOX: 分の選択を変更するアクション
+ *    - minutes: HourOrMinutes - 選択された分
+ * 3. CHANGE_AM_PM_ALL: 午前/午後の選択を変更するアクション
+ *    - timeType: TimeType - 選択された午前/午後
  */
 export type DayScheduleAction =
   | {

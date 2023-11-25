@@ -21,7 +21,7 @@ export const SelectStartDate: FC<{
   const onChange = (nextValue: string) => {
     handleStartDate({
       type: "SELECTED_START_DATE_ACTION",
-      selectedDate: toDateString(nextValue),
+      selectedStartDate: toDateString(nextValue),
     });
   };
 

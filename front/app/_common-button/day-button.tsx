@@ -1,7 +1,7 @@
 import { customDayjs } from "@/library/dayjs";
 import { Button } from "@chakra-ui/react";
 import { FC } from "react";
-import { DateString } from "../_global-menu/type-global-menu";
+import { DateString } from "@lib/type-date";
 
 export const DayButton: FC<{ date: DateString; isSelected: boolean }> = ({
   date,
