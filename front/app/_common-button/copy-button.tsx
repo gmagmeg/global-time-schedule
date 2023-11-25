@@ -1,3 +1,7 @@
+/**
+ * @module CommonButton
+ */
+
 import { Box, Button } from "@chakra-ui/react";
 import { FC } from "react";
 import { FiCopy } from "react-icons/fi";

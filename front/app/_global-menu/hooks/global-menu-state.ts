@@ -1,3 +1,7 @@
+/**
+ * @module GlobalMenu
+ */
+
 import { customDayjs } from "@lib/dayjs";
 import { StartDate } from "../type-global-menu";
 import { correctToSunday } from "./global-menu-function";

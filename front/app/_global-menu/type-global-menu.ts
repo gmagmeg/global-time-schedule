@@ -1,3 +1,7 @@
+/**
+ * @module GlobalMenu
+ */
+
 import { DateString } from "@lib/type-date";
 
 export const toDateString = (from: string): DateString => {

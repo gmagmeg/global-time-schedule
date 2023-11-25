@@ -1,3 +1,7 @@
+/**
+ * @module DaySchedule
+ */
+
 import { DateString, TimeZone } from "@/library/type-date";
 
 /**

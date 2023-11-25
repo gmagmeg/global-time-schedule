@@ -1,3 +1,7 @@
+/**
+ * @module GlobalMenu
+ */
+
 import { FC, useReducer } from "react";
 import { Box } from "@chakra-ui/react";
 import { SearchTimeZone } from "./search-time-zone";

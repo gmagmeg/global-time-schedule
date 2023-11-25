@@ -1,3 +1,7 @@
+/**
+ * @module GlobalMenu
+ */
+
 import { customDayjs } from "@lib/dayjs";
 import { DateString } from "@/library/type-date";
 

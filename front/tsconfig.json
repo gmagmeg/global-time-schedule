@@ -34,7 +34,11 @@
   ],
   "exclude": ["node_modules"],
   "typedocOptions": {
-    "entryPoints": ["app/**/*", "library/*"],
-    "out": "docs"
+    "entryPoints": ["app/**/*.tsx", "app/**/*.ts", "library/*"],
+    "exclude": ["app/**/stories/*", "app/**/**/*.test.*"],
+    "out": "docs",
+    "plugin": ["typedoc-plugin-merge-modules"],
+    "mergeModulesRenameDefaults": true,
+    "mergeModulesMergeMode": "module"
   }
 }

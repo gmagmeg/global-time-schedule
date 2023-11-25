@@ -1,3 +1,7 @@
+/**
+ * @module DaySchedule
+ */
+
 import { customDayjs } from "@/library/dayjs";
 import { DateString, TimeZone } from "@/library/type-date";
 import { DayScheduleState } from "./type-day-schedule";

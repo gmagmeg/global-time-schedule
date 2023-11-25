@@ -1,3 +1,7 @@
+/**
+ * @module DaySchedule
+ */
+
 import { FC } from "react";
 import { TimeType } from "./type-day-schedule";
 import { Radio, RadioGroup, Stack } from "@chakra-ui/react";

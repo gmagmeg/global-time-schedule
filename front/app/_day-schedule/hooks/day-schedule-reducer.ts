@@ -1,3 +1,7 @@
+/**
+ * @module DaySchedule
+ */
+
 import {
   DayScheduleState,
   HourOrMinutes,

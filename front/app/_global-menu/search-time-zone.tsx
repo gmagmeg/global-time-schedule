@@ -1,3 +1,7 @@
+/**
+ * @module GlobalMenu
+ */
+
 import {
   Icon,
   Input,

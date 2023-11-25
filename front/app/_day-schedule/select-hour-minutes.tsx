@@ -1,3 +1,7 @@
+/**
+ * @module DaySchedule
+ */
+
 import { DayScheduleAction } from "./hooks/day-schedule-reducer";
 import { Select, Text } from "@chakra-ui/react";
 import { FC } from "react";

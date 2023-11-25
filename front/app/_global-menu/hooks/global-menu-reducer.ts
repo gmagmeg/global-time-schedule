@@ -1,3 +1,7 @@
+/**
+ * @module GlobalMenu
+ */
+
 import { GlobalMenuState } from "../type-global-menu";
 import { DateString } from "@/library/type-date";
 

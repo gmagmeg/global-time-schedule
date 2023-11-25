@@ -1,9 +1,12 @@
+/**
+ * @module GlobalMenu
+ */
+
 import {
   Box,
   Icon,
   Radio,
   RadioGroup,
-  Spacer,
   Stack,
   Text,
 } from "@chakra-ui/react";

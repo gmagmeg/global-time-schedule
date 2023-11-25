@@ -1,3 +1,7 @@
+/**
+ * @module CommonButton
+ */
+
 import { customDayjs } from "@/library/dayjs";
 import { Button } from "@chakra-ui/react";
 import { FC } from "react";

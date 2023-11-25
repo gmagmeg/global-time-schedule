@@ -1,3 +1,7 @@
+/**
+ * @module DaySchedule
+ */
+
 import { Box, Flex, Spacer } from "@chakra-ui/react";
 import { FC, useReducer } from "react";
 import { SelectAmPmAll } from "./select-am-pm-all";

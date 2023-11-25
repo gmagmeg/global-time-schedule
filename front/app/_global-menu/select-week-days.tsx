@@ -1,3 +1,7 @@
+/**
+ * @module GlobalMenu
+ */
+
 import { SimpleGrid } from "@chakra-ui/react";
 import { FC } from "react";
 import { DateString } from "@lib/type-date";
