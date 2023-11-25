@@ -1,5 +1,5 @@
 /**
- * @module GlobalMenu
+ * @module _global-menu
  */
 
 import { GlobalMenuState } from "../type-global-menu";

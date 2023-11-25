@@ -1,5 +1,5 @@
 /**
- * @module CommonButton
+ * @module _common-button
  */
 
 import { customDayjs } from "@/library/dayjs";

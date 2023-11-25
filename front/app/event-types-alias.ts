@@ -1,5 +1,5 @@
 /**
- * @module EventTypesAlias
+ * @module event-types-alias
  */
 
 import { ChangeEvent as OriginChangeEvent } from "react";

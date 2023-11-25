@@ -1,5 +1,5 @@
 /**
- * @module DaySchedule
+ * @module _day-schedule
  */
 
 import { DateString, TimeZone } from "@/library/type-date";

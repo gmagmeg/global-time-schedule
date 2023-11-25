@@ -1,5 +1,5 @@
 /**
- * @module DaySchedule
+ * @module _day-schedule
  */
 
 import { Box, Flex, Spacer } from "@chakra-ui/react";

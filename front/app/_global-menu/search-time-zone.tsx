@@ -1,5 +1,5 @@
 /**
- * @module GlobalMenu
+ * @module _global-menu
  */
 
 import {

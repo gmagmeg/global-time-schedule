@@ -1,5 +1,5 @@
 /**
- * @module GlobalMenu
+ * @module _global-menu
  */
 
 import { DateString } from "@lib/type-date";

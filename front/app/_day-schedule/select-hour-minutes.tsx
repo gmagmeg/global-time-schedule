@@ -1,5 +1,5 @@
 /**
- * @module DaySchedule
+ * @module _day-schedule
  */
 
 import { DayScheduleAction } from "./hooks/day-schedule-reducer";

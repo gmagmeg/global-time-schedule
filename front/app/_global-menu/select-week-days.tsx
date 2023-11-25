@@ -1,5 +1,5 @@
 /**
- * @module GlobalMenu
+ * @module _global-menu
  */
 
 import { SimpleGrid } from "@chakra-ui/react";

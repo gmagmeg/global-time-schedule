@@ -1,5 +1,5 @@
 /**
- * @module CommonButton
+ * @module _common-button
  */
 
 import { Box, Button } from "@chakra-ui/react";
