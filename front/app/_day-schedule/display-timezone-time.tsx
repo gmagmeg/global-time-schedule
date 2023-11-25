@@ -4,9 +4,9 @@
 
 import { customDayjs } from "@/library/dayjs";
 import { DateString, TimeZone } from "@/library/type-date";
-import { DayScheduleState } from "./type-day-schedule";
 import { Text } from "@chakra-ui/react";
 import { FC } from "react";
+import { DayScheduleState } from "./hooks/day-schedule-state";
 
 export const DisplayTimezoneTime: FC<{
   displayTime: DateString;

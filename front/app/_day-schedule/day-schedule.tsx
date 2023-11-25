@@ -5,8 +5,7 @@
 import { Box, Flex, Spacer } from "@chakra-ui/react";
 import { FC, useReducer } from "react";
 import { SelectAmPmAll } from "./select-am-pm-all";
-import { dayScheduleState } from "./hooks/day-schedule-state";
-import { DayScheduleState } from "./type-day-schedule";
+import { dayScheduleState, DayScheduleState } from "./hooks/day-schedule-state";
 import { DayButton } from "../_common-button/day-button";
 import { CopyButton } from "../_common-button/copy-button";
 import { SelectHourMinutes } from "./select-hour-minutes";

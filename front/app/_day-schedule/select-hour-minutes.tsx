@@ -5,7 +5,8 @@
 import { DayScheduleAction } from "./hooks/day-schedule-reducer";
 import { Select, Text } from "@chakra-ui/react";
 import { FC, useEffect, useState } from "react";
-import { HourOrMinutes, DayScheduleState } from "./type-day-schedule";
+import { DayScheduleState } from "./hooks/day-schedule-state";
+import { HourOrMinutes } from "./type-day-schedule";
 import { hour12, hour24, minutes } from "./_day-schedule-function";
 
 export const SelectHourMinutes: FC<{

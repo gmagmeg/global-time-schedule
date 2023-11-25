@@ -2,12 +2,8 @@
  * @module _day-schedule
  */
 
-import {
-  DayScheduleState,
-  HourOrMinutes,
-  TimeType,
-  toHourOrMinutes,
-} from "../type-day-schedule";
+import { DayScheduleState } from "../hooks/day-schedule-state";
+import { HourOrMinutes, TimeType, toHourOrMinutes } from "../type-day-schedule";
 
 /**
  * DayScheduleAction タイプは、日スケジュールに関するアクションの種類を定義します。

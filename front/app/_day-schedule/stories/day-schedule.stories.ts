@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
 import { DaySchedule } from "@app/_day-schedule/day-schedule";
-import { minutes, hour12, hour24 } from "../hooks/day-schedule-state";
 import { dayScheduleState } from "../hooks/day-schedule-state";
 
 const documentation = `12時間/AM、PMの選択と
@@ -30,9 +29,5 @@ export const Hour12: Story = {
 export const Hour24: Story = {
   args: {
     ...dayScheduleState,
-    timesOptions: {
-      hourOptions: hour24,
-      minuteOptions: minutes,
-    },
   },
 };

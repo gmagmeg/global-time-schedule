@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
 import { SelectAmPmAll } from "@app/_day-schedule/select-am-pm-all";
-import { dayScheduleState, timeTypeOptions } from "../hooks/day-schedule-state";
+import { dayScheduleState } from "../hooks/day-schedule-state";
 
 const documentation = `AM/PM/24hを切り替える`;
 
@@ -25,7 +25,7 @@ const { selectedTime } = dayScheduleState;
 
 export const Default: Story = {
   args: {
-    timeTypeOptions: timeTypeOptions,
     selectedTimeType: selectedTime.timeType,
+    handleChange: () => {},
   },
 };
