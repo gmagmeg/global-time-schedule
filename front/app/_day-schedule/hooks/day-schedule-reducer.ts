@@ -8,7 +8,6 @@ import {
   TimeType,
   toHourOrMinutes,
 } from "../type-day-schedule";
-import { hour12, hour24 } from "./day-schedule-state";
 
 /**
  * DayScheduleAction タイプは、日スケジュールに関するアクションの種類を定義します。
@@ -71,25 +70,16 @@ export const DayScheduleReducer = (
      * AM/PM/24hの切り替えに合わせて、時間の選択肢も変更する
      */
     case "CHANGE_AM_PM_ALL":
-      let hourOptions = hour12;
       let selectedHour = state.selectedTime.hour;
-      if (action.timeType === "24h") {
-        hourOptions = hour24;
-      } else {
-        /**
-         * 12時間表示の場合、時間の表記を補正する
-         */
-        if (selectedHour > 12) {
-          selectedHour = toHourOrMinutes(state.selectedTime.hour - 12);
-        }
+      /**
+       * 12時間表示の場合、時間の表記を補正する
+       */
+      if (selectedHour > 12) {
+        selectedHour = toHourOrMinutes(state.selectedTime.hour - 12);
       }
 
       return {
         ...state,
-        timesOptions: {
-          ...state.timesOptions,
-          hourOptions,
-        },
         selectedTime: {
           ...state.selectedTime,
           hour: selectedHour,

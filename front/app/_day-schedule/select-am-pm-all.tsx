@@ -8,10 +8,11 @@ import { Radio, RadioGroup, Stack } from "@chakra-ui/react";
 import { DayScheduleAction } from "./hooks/day-schedule-reducer";
 
 export const SelectAmPmAll: FC<{
-  timeTypeOptions: TimeType[];
   selectedTimeType: TimeType;
   handleChange: (action: DayScheduleAction) => void;
-}> = ({ timeTypeOptions, selectedTimeType, handleChange }) => {
+}> = ({ selectedTimeType, handleChange }) => {
+  const timeTypeOptions: TimeType[] = ["AM", "PM", "24h"];
+
   const onChangeTimeType = (nextValue: string) => {
     const timeType = nextValue as TimeType;
     handleChange({

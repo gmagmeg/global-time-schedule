@@ -5,7 +5,6 @@
 import { Box, Flex, Spacer } from "@chakra-ui/react";
 import { FC, useReducer } from "react";
 import { SelectAmPmAll } from "./select-am-pm-all";
-import { timeTypeOptions } from "./hooks/day-schedule-state";
 import { dayScheduleState } from "./hooks/day-schedule-state";
 import { DayScheduleState } from "./type-day-schedule";
 import { DayButton } from "../_common-button/day-button";
@@ -15,7 +14,6 @@ import { DisplayTimezoneTime } from "./display-timezone-time";
 import { DayScheduleReducer } from "./hooks/day-schedule-reducer";
 
 export const DaySchedule: FC<DayScheduleState> = ({
-  timesOptions,
   selectedTime,
 }) => {
   const [state, dispatch] = useReducer(DayScheduleReducer, dayScheduleState);
@@ -26,15 +24,15 @@ export const DaySchedule: FC<DayScheduleState> = ({
         <DayButton date={dayScheduleState.startDate} isSelected={true} />
         <Spacer maxW={4} />
         <SelectHourMinutes
-          selectedTime={state.selectedTime}
-          selectTimeList={state.timesOptions}
+          selectedHour={state.selectedTime.hour}
+          selectedMinute={state.selectedTime.minute}
+          selectedTimeType={state.selectedTime.timeType}
           placeholder="--:--"
           handleChange={dispatch}
         />
         <Spacer maxW={4} />
         <SelectAmPmAll
-          timeTypeOptions={timeTypeOptions}
-          selectedTimeType={timeTypeOptions[0]}
+          selectedTimeType={state.selectedTime.timeType}
           handleChange={dispatch}
         />
         <Spacer h={12} mx={4} borderRight={"1px"} />

@@ -4,30 +4,21 @@
 
 import { DayScheduleAction } from "./hooks/day-schedule-reducer";
 import { Select, Text } from "@chakra-ui/react";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { HourOrMinutes, DayScheduleState } from "./type-day-schedule";
+import { hour12, hour24, minutes } from "./_day-schedule-function";
 
 export const SelectHourMinutes: FC<{
-  selectedTime: DayScheduleState["selectedTime"];
-  selectTimeList: DayScheduleState["timesOptions"];
+  selectedHour: DayScheduleState["selectedTime"]["hour"];
+  selectedMinute: DayScheduleState["selectedTime"]["minute"];
+  selectedTimeType: DayScheduleState["selectedTime"]["timeType"];
   placeholder: string;
   handleChange: (action: DayScheduleAction) => void;
-}> = ({ selectedTime, selectTimeList, placeholder = "", handleChange }) => {
+}> = ({ selectedHour, selectedMinute, selectedTimeType, placeholder = "", handleChange }) => {
 
-  const onChangeHour = (nextValue: string) => {
-    const hour = Number(nextValue) as HourOrMinutes;
-    handleChange({
-      type: "CHANGE_HOUR_SELECT_BOX",
-      hour: hour,
-  })}
-
-  const onChangeMinutes = (nextValue: string) => {
-    const minutes = Number(nextValue) as HourOrMinutes;
-    handleChange({
-      type: "CHANGE_MINUTES_SELECT_BOX",
-      minutes: minutes,
-  })};
-
+  /**
+   * 時間と分のセレクトボックスの共通スタイル
+  */
   const commonSelectStyles = {
     w: "auto",
     placeholder: "",
@@ -40,14 +31,48 @@ export const SelectHourMinutes: FC<{
     },
   };
 
+  /**
+   * 時間のセレクトボックスの値が変更された時の処理
+   */
+  const onChangeHour = (nextValue: string) => {
+    const hour = Number(nextValue) as HourOrMinutes;
+    handleChange({
+      type: "CHANGE_HOUR_SELECT_BOX",
+      hour: hour,
+  })}
+
+  /**
+   * 分のセレクトボックスの値が変更された時の処理
+   */
+  const onChangeMinutes = (nextValue: string) => {
+    const minutes = Number(nextValue) as HourOrMinutes;
+    handleChange({
+      type: "CHANGE_MINUTES_SELECT_BOX",
+      minutes: minutes,
+  })};
+
+  /**
+   * 時間のセレクトボックスの値が変更された時の処理
+   */
+  const [hourOptions, setHourOptions] = useState(hour12);
+  useEffect(() => {
+    if (selectedTimeType === "24h") {
+      setHourOptions(hour24);
+    } else {
+      setHourOptions(hour12);
+    };
+  }, [selectedTimeType]);
+
+  const minuteOptions = minutes;
+
   return (
     <>
     <Select
       onChange={(e) => onChangeHour(e.target.value)}
-      value={selectedTime.hour}
+      value={selectedHour}
       {...commonSelectStyles}
     >
-      {selectTimeList.hourOptions.map((time) => (
+      {hourOptions.map((time) => (
         <option key={time} value={time}>
           {time}
         </option>
@@ -56,10 +81,10 @@ export const SelectHourMinutes: FC<{
     <Text mx={2}>:</Text>
     <Select
       onChange={(e) => onChangeMinutes(e.target.value)}
-      value={selectedTime.minute}
+      value={selectedMinute}
       {...commonSelectStyles}
     >
-      {selectTimeList.minuteOptions.map((time) => (
+      {minuteOptions.map((time) => (
         <option key={time} value={time}>
           {time}
         </option>

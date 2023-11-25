@@ -10,6 +10,7 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "format": "bash /global-time-schedule/format-changed-files.sh",
+    "doc": "typedoc",
     "test": "jest"
   },
   "dependencies": {
