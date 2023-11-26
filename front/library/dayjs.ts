@@ -4,7 +4,7 @@ import timezone from "dayjs/plugin/timezone";
 import localDate from "dayjs/plugin/localeData";
 import weekday from "dayjs/plugin/weekday";
 import { DayScheduleState } from "@/app/_day-schedule/hooks/day-schedule-state";
-import { TimeZone, DateTimeString, DateString } from "./type-date";
+import { TimeZone, DateString } from "./type-date";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -29,10 +29,11 @@ export const toTimeZoneTime = (
 ): string => {
   const { hour, minute } = selectedTime;
 
+  const baseYmd = dayjs(baseDate).format("YYYY-MM-DD");
   const timeInBaseTimezone = dayjs.tz(
-    `${baseDate}T${hour}:${minute}:00`,
+    `${baseYmd}T${hour}:${minute}:00`,
     baseTimeZone
   );
 
-  return timeInBaseTimezone.tz(convertTimeZone).format("YYYY-MM-DD HH:mm A");
+  return timeInBaseTimezone.tz(convertTimeZone).format("HH:mm A");
 };

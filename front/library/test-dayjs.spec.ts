@@ -25,7 +25,7 @@ describe("toTimeZoneTime", () => {
     );
 
     // Assert
-    expect(result).toBe("2023-11-25 18:00 PM");
+    expect(result).toBe("18:00 PM");
   });
 
   it("日本時間をベースに、America/New_Yorkへ変換する", () => {
@@ -47,6 +47,6 @@ describe("toTimeZoneTime", () => {
     );
 
     // Assert
-    expect(result).toBe("2023-11-25 17:00 PM");
+    expect(result).toBe("17:00 PM");
   });
 });

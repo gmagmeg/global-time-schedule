@@ -22,7 +22,7 @@ export const SearchTimeZone: FC = () => {
           <InputLeftElement pointerEvents="none">
             <Icon as={TbWorldCheck} boxSize={6} />
           </InputLeftElement>
-          <Input type="tel" placeholder="Phone number" bg="white" />
+          <Input type="tel" placeholder="タイムゾーンを選択してください" bg="white" />
         </InputGroup>
       ))}
     </SimpleGrid>

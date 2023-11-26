@@ -23,11 +23,16 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    displayTime: "2023-11-16 22:00",
+    startDate: "2023-11-16",
+    selectedTime: dayScheduleState.selectedTime,
     timeZones: dayScheduleState.timeZones,
   },
 };
 
 export const Empty: Story = {
-  args: { displayTime: "", timeZones: dayScheduleState.timeZones },
+  args: {
+    startDate: "",
+    selectedTime: dayScheduleState.selectedTime,
+    timeZones: dayScheduleState.timeZones,
+  },
 };
