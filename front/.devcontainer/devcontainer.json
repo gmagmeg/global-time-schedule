@@ -15,7 +15,8 @@
         "esbenp.prettier-vscode",
         "Orta.vscode-jest",
         "streetsidesoftware.code-spell-checker",
-        "zokugun.explicit-folding"
+        "zokugun.explicit-folding",
+        "ygkn.storybook-opener"
       ],
       "settings": {
         "workbench.colorCustomizations": {

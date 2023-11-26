@@ -14,14 +14,10 @@ import { DayScheduleReducer } from "./hooks/day-schedule-reducer";
 import { DateString } from "@/library/type-date";
 
 export const DaySchedule: FC<{
-  baseDate: DateString,
-  isSelectedDate: boolean,
-  handleClickDayButton: (clickDate: DateString) => void,
-}> = ({
-  baseDate,
-  isSelectedDate,
-  handleClickDayButton
-}) => {
+  baseDate: DateString;
+  isSelectedDate: boolean;
+  handleClickDayButton: (clickDate: DateString) => void;
+}> = ({ baseDate, isSelectedDate, handleClickDayButton }) => {
   const [state, dispatch] = useReducer(DayScheduleReducer, dayScheduleState);
 
   const onClickDayButton = (): void => {
@@ -29,54 +25,56 @@ export const DaySchedule: FC<{
   };
 
   let selectedBackground = {};
-  let addStyle = {}
+  let addStyle = {};
   if (isSelectedDate) {
     selectedBackground = {
-      bg: "#C794CF",
-      alignItems: "White",
+      bg: "#D7D5F0",
     };
 
     addStyle = {
-      borderRadius: '8px',
-    }
+      borderRadius: "8px",
+    };
   }
 
-
   return (
-    <>
-      <Flex {...selectedBackground} style={ addStyle}>
-        <DayButton date={baseDate} isSelected={isSelectedDate} onClick={onClickDayButton} />
-        <Spacer maxW={4} />
-        <SelectHourMinutes
-          selectedTime={state.selectedTime}
-          placeholder="--:--"
-          handleChange={dispatch}
-        />
-        <Spacer maxW={4} />
-        <SelectAmPmAll
-          selectedTimeType={state.selectedTime.timeType}
-          handleChange={dispatch}
-        />
-        <Spacer h={12} mx={4} borderRight={"1px"} />
-        <Box>
-          <CopyButton enableCopy={true} />
-        </Box>
-        <DisplayTimezoneTime
-          baseDate={baseDate}
-          selectedTime={state.selectedTime}
-          timeZones={dayScheduleState.timeZones}
-        />
-        <DisplayTimezoneTime
-          baseDate={baseDate}
-          selectedTime={state.selectedTime}
-          timeZones={dayScheduleState.timeZones}
-        />
-        <DisplayTimezoneTime
-          baseDate={baseDate}
-          selectedTime={state.selectedTime}
-          timeZones={dayScheduleState.timeZones}
-        />
-      </Flex>
-    </>
+    <Flex p={4} align={"center"} {...selectedBackground} style={addStyle}>
+      <DayButton
+        date={baseDate}
+        isSelected={isSelectedDate}
+        onClick={onClickDayButton}
+      />
+      <Spacer maxW={4} />
+      <SelectHourMinutes
+        selectedTime={state.selectedTime}
+        placeholder="--:--"
+        handleChange={dispatch}
+      />
+      <Spacer maxW={4} />
+      <SelectAmPmAll
+        selectedTimeType={state.selectedTime.timeType}
+        handleChange={dispatch}
+      />
+      <Box h={10} mx={4} borderRight={"1px"} />
+      <Box mr={8}>
+        <CopyButton enableCopy={true} />
+      </Box>
+      <DisplayTimezoneTime
+        baseDate={baseDate}
+        selectedTime={state.selectedTime}
+        timeZones={dayScheduleState.timeZones}
+      />
+      <Spacer maxW={8} />
+      <DisplayTimezoneTime
+        baseDate={baseDate}
+        selectedTime={state.selectedTime}
+        timeZones={dayScheduleState.timeZones}
+      />
+      <Spacer maxW={8} />
+      <DisplayTimezoneTime
+        baseDate={baseDate}
+        selectedTime={state.selectedTime}
+        timeZones={dayScheduleState.timeZones}
+      />
+    </Flex>
   );
 };

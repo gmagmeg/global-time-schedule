@@ -26,8 +26,8 @@ export const CopyButton: FC<{enableCopy: boolean}> = ({enableCopy}) => {
       <FiCopy />
       </Box>
     } 
-      w={"6.5rem"}
-      h={"3rem"}
+      w={"5.5rem"}
+      h={"2.5rem"}
       bg={buttonColorScheme.bgColor}
       color={buttonColorScheme.color}
     >
