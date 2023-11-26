@@ -5,22 +5,47 @@
 import { Box, Flex, Spacer } from "@chakra-ui/react";
 import { FC, useReducer } from "react";
 import { SelectAmPmAll } from "./select-am-pm-all";
-import { dayScheduleState, DayScheduleState } from "./hooks/day-schedule-state";
+import { dayScheduleState } from "./hooks/day-schedule-state";
 import { DayButton } from "../_common-button/day-button";
 import { CopyButton } from "../_common-button/copy-button";
 import { SelectHourMinutes } from "./select-hour-minutes";
 import { DisplayTimezoneTime } from "./display-timezone-time";
 import { DayScheduleReducer } from "./hooks/day-schedule-reducer";
+import { DateString } from "@/library/type-date";
 
-export const DaySchedule: FC<DayScheduleState> = ({
-  selectedTime,
+export const DaySchedule: FC<{
+  baseDate: DateString,
+  isSelectedDate: boolean,
+  handleClickDayButton: (clickDate: DateString) => void,
+}> = ({
+  baseDate,
+  isSelectedDate,
+  handleClickDayButton
 }) => {
   const [state, dispatch] = useReducer(DayScheduleReducer, dayScheduleState);
 
+  const onClickDayButton = (): void => {
+    handleClickDayButton(baseDate);
+  };
+
+  let selectedBackground = {};
+  let addStyle = {}
+  if (isSelectedDate) {
+    selectedBackground = {
+      bg: "#C794CF",
+      alignItems: "White",
+    };
+
+    addStyle = {
+      borderRadius: '8px',
+    }
+  }
+
+
   return (
     <>
-      <Flex alignItems={"baseline"}>
-        <DayButton date={dayScheduleState.startDate} isSelected={true} />
+      <Flex {...selectedBackground} style={ addStyle}>
+        <DayButton date={baseDate} isSelected={isSelectedDate} onClick={onClickDayButton} />
         <Spacer maxW={4} />
         <SelectHourMinutes
           selectedTime={state.selectedTime}
@@ -37,7 +62,17 @@ export const DaySchedule: FC<DayScheduleState> = ({
           <CopyButton enableCopy={true} />
         </Box>
         <DisplayTimezoneTime
-          startDate={dayScheduleState.startDate}
+          baseDate={baseDate}
+          selectedTime={state.selectedTime}
+          timeZones={dayScheduleState.timeZones}
+        />
+        <DisplayTimezoneTime
+          baseDate={baseDate}
+          selectedTime={state.selectedTime}
+          timeZones={dayScheduleState.timeZones}
+        />
+        <DisplayTimezoneTime
+          baseDate={baseDate}
           selectedTime={state.selectedTime}
           timeZones={dayScheduleState.timeZones}
         />

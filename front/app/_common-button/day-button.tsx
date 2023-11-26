@@ -6,10 +6,12 @@ import { customDayjs } from "@/library/dayjs";
 import { Button } from "@chakra-ui/react";
 import { FC } from "react";
 import { DateString } from "@lib/type-date";
+import { ClickButtonEvent } from "../event-types-alias";
 
-export const DayButton: FC<{ date: DateString; isSelected: boolean }> = ({
+export const DayButton: FC<{ date: DateString; isSelected: boolean, onClick: ClickButtonEvent; }> = ({
   date,
   isSelected,
+  onClick
 }) => {
   const selectedColorScheme = {
     bgColor: "#C794CF",
@@ -26,6 +28,7 @@ export const DayButton: FC<{ date: DateString; isSelected: boolean }> = ({
 
   return (
     <Button
+      onClick={onClick}
       w={"5rem"}
       h={"3rem"}
       bg={buttonColorScheme.bgColor}

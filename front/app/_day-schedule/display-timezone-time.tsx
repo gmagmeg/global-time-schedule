@@ -9,12 +9,12 @@ import { FC } from "react";
 import { DayScheduleState } from "./hooks/day-schedule-state";
 
 export const DisplayTimezoneTime: FC<{
-  startDate: DateString;
+  baseDate: DateString;
   selectedTime: DayScheduleState["selectedTime"];
   timeZones: DayScheduleState["timeZones"];
-}> = ({ startDate, timeZones, selectedTime }) => {
+}> = ({ baseDate, timeZones, selectedTime }) => {
   const formattedDateTime = toTimeZoneTime(
-    startDate,
+    baseDate,
     selectedTime,
     timeZones[0].timeZone,
     timeZones[0].timeZone,
@@ -23,8 +23,8 @@ export const DisplayTimezoneTime: FC<{
   return (
     <>
       <Text>
-        {startDate === "" && "--:-- -- --"}
-        {startDate !== "" && formattedDateTime}
+        {baseDate === "" && "--:-- -- --"}
+        {baseDate !== "" && formattedDateTime}
       </Text>
     </>
   );

@@ -23,7 +23,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    startDate: "2023-11-16",
+    baseDate: "2023-11-16",
     selectedTime: dayScheduleState.selectedTime,
     timeZones: dayScheduleState.timeZones,
   },
@@ -31,7 +31,7 @@ export const Default: Story = {
 
 export const Empty: Story = {
   args: {
-    startDate: "",
+    baseDate: "",
     selectedTime: dayScheduleState.selectedTime,
     timeZones: dayScheduleState.timeZones,
   },

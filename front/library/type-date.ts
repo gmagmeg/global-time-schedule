@@ -2,6 +2,9 @@
  * ex: 2023-01-01
  */
 export type DateString = string;
+export const toDateString = (from: string): DateString => {
+  return from;
+};
 
 /**
  * ex: 2023-01-01T12:34:00

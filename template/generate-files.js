@@ -42,7 +42,7 @@ function generateFiles(componentPath, componentName) {
 
     // ファイルを書き込むディレクトリのパス
     const dirPath = path.join(
-      `front/app/${componentPath}`,
+      `/global-time-schedule/front/app/${componentPath}`,
       templateSetting.directory
     );
 
@@ -54,7 +54,7 @@ function generateFiles(componentPath, componentName) {
     // 置換した内容を書き込み
     fs.writeFileSync(
       path.join(
-        `front/app/${componentPath}`,
+        `/global-time-schedule/front/app/${componentPath}`,
         `${templateSetting.directory}${componentName}.${templateSetting.extension}`
       ),
       componentContent

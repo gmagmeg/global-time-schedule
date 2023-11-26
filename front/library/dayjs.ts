@@ -37,3 +37,18 @@ export const toTimeZoneTime = (
 
   return timeInBaseTimezone.tz(convertTimeZone).format("HH:mm A");
 };
+
+/**
+ * 開始日を基準に、1週間の日付を作成する
+ * @param baseDate
+ * @returns
+ */
+export const createWeekRange = (baseDate: DateString): DateString[] => {
+  const startDate = customDayjs(baseDate);
+  const weekRange = [];
+  for (let i = 0; i <= 6; i++) {
+    weekRange.push(startDate.add(i, "day").format("YYYY-MM-DD"));
+  }
+
+  return weekRange;
+};
