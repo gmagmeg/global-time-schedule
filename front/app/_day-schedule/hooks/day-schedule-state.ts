@@ -42,7 +42,7 @@ export const dayScheduleState: DayScheduleState = {
   startDate: customDayjs().format("YYYY-MM-DD 00:00"),
   selectedTime: {
     hour: 0,
-    minute: 30,
+    minute: 0,
     timeType: "AM",
   },
   timeZones: [

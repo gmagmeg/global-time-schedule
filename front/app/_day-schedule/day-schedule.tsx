@@ -23,9 +23,7 @@ export const DaySchedule: FC<DayScheduleState> = ({
         <DayButton date={dayScheduleState.startDate} isSelected={true} />
         <Spacer maxW={4} />
         <SelectHourMinutes
-          selectedHour={state.selectedTime.hour}
-          selectedMinute={state.selectedTime.minute}
-          selectedTimeType={state.selectedTime.timeType}
+          selectedTime={state.selectedTime}
           placeholder="--:--"
           handleChange={dispatch}
         />
@@ -39,7 +37,8 @@ export const DaySchedule: FC<DayScheduleState> = ({
           <CopyButton enableCopy={true} />
         </Box>
         <DisplayTimezoneTime
-          displayTime={dayScheduleState.startDate}
+          startDate={dayScheduleState.startDate}
+          selectedTime={state.selectedTime}
           timeZones={dayScheduleState.timeZones}
         />
       </Flex>

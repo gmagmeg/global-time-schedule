@@ -2,25 +2,29 @@
  * @module _day-schedule
  */
 
-import { customDayjs } from "@/library/dayjs";
-import { DateString, TimeZone } from "@/library/type-date";
+import { toTimeZoneTime } from "@/library/dayjs";
+import { DateString } from "@/library/type-date";
 import { Text } from "@chakra-ui/react";
 import { FC } from "react";
 import { DayScheduleState } from "./hooks/day-schedule-state";
 
 export const DisplayTimezoneTime: FC<{
-  displayTime: DateString;
+  startDate: DateString;
+  selectedTime: DayScheduleState["selectedTime"];
   timeZones: DayScheduleState["timeZones"];
-}> = ({ displayTime, timeZones }) => {
-  const formattedDateTime = customDayjs(displayTime)
-    .tz(timeZones[0].timeZone)
-    .format("hh:mm A [JST]");
+}> = ({ startDate, timeZones, selectedTime }) => {
+  const formattedDateTime = toTimeZoneTime(
+    startDate,
+    selectedTime,
+    timeZones[0].timeZone,
+    timeZones[0].timeZone,
+  );
 
   return (
     <>
       <Text>
-        {displayTime === "" && "--:-- -- --"}
-        {displayTime !== "" && formattedDateTime}
+        {startDate === "" && "--:-- -- --"}
+        {startDate !== "" && formattedDateTime}
       </Text>
     </>
   );

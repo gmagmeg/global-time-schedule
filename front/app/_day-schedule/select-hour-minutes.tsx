@@ -10,13 +10,11 @@ import { HourOrMinutes } from "./type-day-schedule";
 import { hour12, hour24, minutes } from "./_day-schedule-function";
 
 export const SelectHourMinutes: FC<{
-  selectedHour: DayScheduleState["selectedTime"]["hour"];
-  selectedMinute: DayScheduleState["selectedTime"]["minute"];
-  selectedTimeType: DayScheduleState["selectedTime"]["timeType"];
+  selectedTime: DayScheduleState["selectedTime"];
   placeholder: string;
   handleChange: (action: DayScheduleAction) => void;
-}> = ({ selectedHour, selectedMinute, selectedTimeType, placeholder = "", handleChange }) => {
-
+}> = ({ selectedTime, placeholder = "", handleChange }) => {
+  
   /**
    * 時間と分のセレクトボックスの共通スタイル
   */
@@ -57,12 +55,12 @@ export const SelectHourMinutes: FC<{
    */
   const [hourOptions, setHourOptions] = useState(hour12);
   useEffect(() => {
-    if (selectedTimeType === "24h") {
+    if (selectedTime.timeType === "24h") {
       setHourOptions(hour24);
     } else {
       setHourOptions(hour12);
     };
-  }, [selectedTimeType]);
+  }, [selectedTime.timeType]);
 
   const minuteOptions = minutes;
 
@@ -70,7 +68,7 @@ export const SelectHourMinutes: FC<{
     <>
     <Select
       onChange={(e) => onChangeHour(e.target.value)}
-      value={selectedHour}
+      value={selectedTime.hour}
       {...commonSelectStyles}
     >
       {hourOptions.map((time) => (
@@ -82,7 +80,7 @@ export const SelectHourMinutes: FC<{
     <Text mx={2}>:</Text>
     <Select
       onChange={(e) => onChangeMinutes(e.target.value)}
-      value={selectedMinute}
+      value={selectedTime.minute}
       {...commonSelectStyles}
     >
       {minuteOptions.map((time) => (
