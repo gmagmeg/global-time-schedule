@@ -12,9 +12,7 @@ import { createWeekRange } from "@/library/dayjs";
 import { DateString } from "@/library/type-date";
 import { Box } from "@chakra-ui/react";
 
-export const WeekSchedule: FC<{ startDate: DateString }> = ({
-  startDate = "2023-11-26",
-}) => {
+export const WeekSchedule: FC<{ startDate: DateString }> = ({ startDate }) => {
   const [state, dispatch] = useReducer(weekScheduleReducer, weekScheduleState);
 
   const weekRange = createWeekRange(startDate);

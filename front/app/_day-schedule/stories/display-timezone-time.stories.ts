@@ -6,7 +6,7 @@ import { dayScheduleState } from "../hooks/day-schedule-state";
 const documentation = `コンポーネントの説明`;
 
 const meta = {
-  title: "DaySchedule/Sub/DisplayTimezoneTime",
+  title: "WeekSchedule/DaySchedule/DisplayTimezoneTime",
   component: DisplayTimezoneTime,
   tags: ["autodocs"],
   parameters: {

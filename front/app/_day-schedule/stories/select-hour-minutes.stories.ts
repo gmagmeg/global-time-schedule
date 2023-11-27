@@ -11,7 +11,7 @@ import { dayScheduleState } from "../hooks/day-schedule-state";
 const documentation = `時間と分を選択するコンポーネントです。`;
 
 const meta = {
-  title: "DaySchedule/Sub/SelectHourMinutes",
+  title: "WeekSchedule/DaySchedule/SelectHourMinutes",
   component: SelectHourMinutes,
   tags: ["autodocs"],
   parameters: {

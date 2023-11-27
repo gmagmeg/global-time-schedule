@@ -7,7 +7,7 @@ const documentation = `12時間/AM、PMの選択と
 24時間の選択ができるコンポーネント２つがある`;
 
 const meta = {
-  title: "DaySchedule/DaySchedule",
+  title: "WeekSchedule/DaySchedule/DaySchedule",
   component: DaySchedule,
   tags: ["autodocs"],
   parameters: {

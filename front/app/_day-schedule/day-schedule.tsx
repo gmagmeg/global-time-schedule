@@ -37,7 +37,13 @@ export const DaySchedule: FC<{
   }
 
   return (
-    <Flex p={4} align={"center"} {...selectedBackground} style={addStyle}>
+    <Flex
+      p={4}
+      align={"center"}
+      {...selectedBackground}
+      style={addStyle}
+      onClick={onClickDayButton}
+    >
       <DayButton
         date={baseDate}
         isSelected={isSelectedDate}

@@ -6,7 +6,7 @@ import { dayScheduleState } from "../hooks/day-schedule-state";
 const documentation = `AM/PM/24hを切り替える`;
 
 const meta = {
-  title: "DaySchedule/Sub/SelectAmPmAll",
+  title: "WeekSchedule/DaySchedule/SelectAmPmAll",
   component: SelectAmPmAll,
   tags: ["autodocs"],
   parameters: {

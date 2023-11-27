@@ -3,7 +3,7 @@
   "dockerComposeFile": ["../../compose.yml"],
   "service": "global-time-schedule",
   "runServices": ["global-time-schedule"],
-  "workspaceFolder": "/global-time-schedule",
+  "workspaceFolder": "/global-time-schedule/front",
   "forwardPorts": [5000],
   "remoteUser": "node",
   "customizations": {

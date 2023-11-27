@@ -8,11 +8,11 @@ import { FC } from "react";
 import { DateString } from "@lib/type-date";
 import { ClickButtonEvent } from "../event-types-alias";
 
-export const DayButton: FC<{ date: DateString; isSelected: boolean, onClick: ClickButtonEvent; }> = ({
-  date,
-  isSelected,
-  onClick
-}) => {
+export const DayButton: FC<{
+  date: DateString;
+  isSelected: boolean;
+  onClick: ClickButtonEvent;
+}> = ({ date, isSelected }) => {
   const selectedColorScheme = {
     bgColor: "#C794CF",
     color: "White",
@@ -28,11 +28,11 @@ export const DayButton: FC<{ date: DateString; isSelected: boolean, onClick: Cli
 
   return (
     <Button
-      onClick={onClick}
       w={"5rem"}
       h={"3rem"}
       bg={buttonColorScheme.bgColor}
       color={buttonColorScheme.color}
+      _hover={{ bg: "#C794CF" }}
     >
       {formatDate.format("ddd")}
       <br />
