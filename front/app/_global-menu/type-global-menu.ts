@@ -13,6 +13,7 @@ export type StartDate = {
   mon: DateString;
 };
 
+// @todo startDateListはコンポーネントにいてよさそう
 export type GlobalMenuState = {
   selectedStartDate: DateString;
   startDateList: StartDate[];

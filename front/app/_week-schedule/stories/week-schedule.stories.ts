@@ -21,5 +21,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {},
+  args: {
+    startDate: "2023-11-26",
+  },
 };

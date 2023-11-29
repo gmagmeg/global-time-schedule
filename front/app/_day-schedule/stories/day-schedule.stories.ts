@@ -23,11 +23,15 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Hour12: Story = {
-  args: dayScheduleState,
+  args: {
+    baseDate: "2023-11-26",
+    isSelectedDate: true,
+  },
 };
 
 export const Hour24: Story = {
   args: {
-    ...dayScheduleState,
+    baseDate: "2023-11-26",
+    isSelectedDate: true,
   },
 };

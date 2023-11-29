@@ -1,3 +1,0 @@
-/**
- * @module _global-menu
- */

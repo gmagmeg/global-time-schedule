@@ -22,7 +22,7 @@ export const WeekSchedule: FC<{ startDate: DateString }> = ({ startDate }) => {
 
   const handleClickDayButton = (clickDate: DateString): void => {
     dispatch({
-      type: "CLICK_DATE_BUTTON",
+      type: "CLICK_GLOBAL_MENU_DATE_BUTTON",
       clickDate,
     });
   };

@@ -15,11 +15,18 @@ export const SelectWeekDays: FC<{
   const weekRange = createWeekRange(baseDate);
 
   return (
-    <SimpleGrid minChildWidth="1rem" spacing="40px" p={2}>
+    <>
       {weekRange.map((date, index) => {
         const isSelected = customDayjs(selectedDate).isSame(date, "day");
-        return <DayButton key={index} date={date} isSelected={isSelected} />;
+        return (
+          <DayButton
+            key={index}
+            date={date}
+            isSelected={isSelected}
+            onClick={() => {}}
+          />
+        );
       })}
-    </SimpleGrid>
+    </>
   );
 };

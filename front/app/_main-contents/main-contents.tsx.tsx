@@ -1,5 +1,5 @@
 /**
- * @module @app/_main-contents/main-contents.tsx
+ * @module _main-contents/main-contents
  */
 
 import { Box, Grid, Menu } from "@chakra-ui/react";
@@ -9,14 +9,12 @@ import { WeekSchedule } from "../_week-schedule/week-schedule";
 
 export const MainContents: FC = () => {
   return (
-    <Grid>
-      <Menu strategy="fixed">
-    <GlobalMenu />
-    </Menu>
-    <Box mt={8}>
-    <WeekSchedule startDate="2023-11-26" />
-    </Box>
+    <Grid templateColumns="1fr" gap={6}>
+      <GlobalMenu />
+      {/* WeekSchedule コンポーネントをスクロール可能にするためのラッパー要素 */}
+      <Box overflowY="auto" maxHeight={"60%"}>
+        <WeekSchedule startDate="2023-11-26" />
+      </Box>
     </Grid>
   );
 };
-

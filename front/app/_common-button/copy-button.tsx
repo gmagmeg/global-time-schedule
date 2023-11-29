@@ -6,7 +6,10 @@ import { Box, Button } from "@chakra-ui/react";
 import { FC } from "react";
 import { FiCopy } from "react-icons/fi";
 
-export const CopyButton: FC<{enableCopy: boolean}> = ({enableCopy}) => {
+export const CopyButton: FC<{
+  enableCopy: boolean;
+  content?: string;
+}> = ({ enableCopy, content = "コピー" }) => {
   const selectedColorScheme = {
     bgColor: "#4A7AF8",
     color: "White",
@@ -22,17 +25,16 @@ export const CopyButton: FC<{enableCopy: boolean}> = ({enableCopy}) => {
   return (
     <Button
       leftIcon={
-        <Box pl={1} >
-      <FiCopy />
-      </Box>
-    } 
-      w={"5.5rem"}
+        <Box pl={1}>
+          <FiCopy />
+        </Box>
+      }
+      w={"100%"}
       h={"2.5rem"}
       bg={buttonColorScheme.bgColor}
       color={buttonColorScheme.color}
     >
-      コピー
+      {content}
     </Button>
   );
 };
-

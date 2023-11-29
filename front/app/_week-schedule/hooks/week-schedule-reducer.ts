@@ -1,4 +1,7 @@
-import { DateString } from "@/library/type-date";
+/**
+ * @module _week-schedule
+ */
+import { DateString } from "@lib/type-date";
 
 export type WeekScheduleState = {
   /**
@@ -11,7 +14,7 @@ export const weekScheduleState: WeekScheduleState = {
 };
 
 export type WeekScheduleAction = {
-  type: "CLICK_DATE_BUTTON";
+  type: "CLICK_GLOBAL_MENU_DATE_BUTTON";
   clickDate: DateString;
 };
 
@@ -20,7 +23,7 @@ export const weekScheduleReducer = (
   action: WeekScheduleAction
 ): WeekScheduleState => {
   switch (action.type) {
-    case "CLICK_DATE_BUTTON":
+    case "CLICK_GLOBAL_MENU_DATE_BUTTON":
       return {
         ...state,
         selectedDate: action.clickDate,

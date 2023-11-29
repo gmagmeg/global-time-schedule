@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
 import { SelectStartDate } from "@app/_global-menu/select-start-date";
-import { GlobalMenuState } from "../hooks/global-menu-state";
 
 const documentation = `コンポーネントの説明`;
 
@@ -23,7 +22,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    startDateList: GlobalMenuState.startDateList,
-    selectedStartDate: GlobalMenuState.selectedStartDate,
+    selectedStartDate: "2023-11-26",
+    handleStartDate: () => {},
   },
 };
