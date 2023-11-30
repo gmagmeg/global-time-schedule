@@ -23,7 +23,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    baseDate: correctToSunday(customDayjs().format("YYYY-MM-DD")),
     selectedDate: correctToSunday(customDayjs().format("YYYY-MM-DD")),
   },
 };

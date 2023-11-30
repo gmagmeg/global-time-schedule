@@ -2,16 +2,19 @@
  * @module _global-menu
  */
 
-import { FC } from "react";
+import { FC, useState, useEffect } from "react";
 import { DateString } from "@lib/type-date";
 import { customDayjs, createWeekRange } from "@lib/dayjs";
 import { DayButton } from "@app/_common-button/day-button";
 
 export const SelectWeekDays: FC<{
-  baseDate: DateString;
   selectedDate: DateString;
-}> = ({ baseDate, selectedDate }) => {
-  const weekRange = createWeekRange(baseDate);
+}> = ({ selectedDate }) => {
+  const [weekRange, setWeekRange] = useState(createWeekRange(selectedDate));
+
+  useEffect(() => {
+    setWeekRange(createWeekRange(selectedDate));
+  }, [selectedDate]);
 
   return (
     <>
