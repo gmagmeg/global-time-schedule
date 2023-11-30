@@ -1,8 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
 import { SelectWeekDays } from "@app/_global-menu/select-week-days";
-import { correctToSunday } from "../hooks/global-menu-function";
-import { customDayjs } from "@/library/dayjs";
+import { customDayjs, correctToSunday } from "@/library/dayjs";
 
 const documentation = `コンポーネントの説明`;
 

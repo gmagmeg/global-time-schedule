@@ -2,7 +2,6 @@
  * @module _global-menu
  */
 
-import { SimpleGrid } from "@chakra-ui/react";
 import { FC } from "react";
 import { DateString } from "@lib/type-date";
 import { customDayjs, createWeekRange } from "@lib/dayjs";
