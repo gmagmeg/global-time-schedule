@@ -1,3 +1,0 @@
-/**
- * @module _day-schedule
- */

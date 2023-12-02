@@ -75,7 +75,7 @@ export const DaySchedule: FC<{
       <Box mr={8}>
         <CopyButton enableCopy={true} />
       </Box>
-      {/* <DisplayTimezoneTime
+      <DisplayTimezoneTime
         baseDate={baseDate}
         selectedTime={selectedTime}
         timeZones={dayScheduleState.timeZones}
@@ -91,7 +91,7 @@ export const DaySchedule: FC<{
         baseDate={baseDate}
         selectedTime={state.selectedTime}
         timeZones={dayScheduleState.timeZones}
-      /> */}
+      />
     </Flex>
   );
 };

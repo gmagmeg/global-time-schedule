@@ -7,6 +7,7 @@ import { replaceLineBreak } from "@/story-book-function";
 import { SelectHourMinutes } from "@app/_day-schedule/select-hour-minutes";
 import { DayScheduleAction } from "../hooks/day-schedule-reducer";
 import { dayScheduleState } from "../hooks/day-schedule-state";
+import { hour12, minutes } from "../_day-schedule-function";
 
 const documentation = `時間と分を選択するコンポーネントです。`;
 
@@ -31,7 +32,10 @@ const { selectedTime } = dayScheduleState;
 export const Default: Story = {
   args: {
     selectedTime: selectedTime,
-    placeholder: "--:--",
+    timeSelectOption: {
+      hour: hour12,
+      minute: minutes,
+    },
     handleChange: (action: DayScheduleAction) => {
       console.log(action);
     },

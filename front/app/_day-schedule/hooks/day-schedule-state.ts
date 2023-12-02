@@ -9,13 +9,21 @@
 
 import { DateString, TimeZone } from "@/library/type-date";
 import { customDayjs } from "@lib/dayjs";
-import { HourOrMinutes, TimeType, TimeZoneTime } from "../type-day-schedule";
+import { HourOrMinutes, TimeType } from "../type-day-schedule";
+import { hour12, minutes } from "../_day-schedule-function";
 
 export type DayScheduleState = {
   /**
    * 開始日を表す日付文字列
    */
   startDate: DateString;
+  /**
+   * 時間と分の選択肢を表すオブジェクト
+   */
+  timeSelectOption: {
+    hour: HourOrMinutes[];
+    minute: HourOrMinutes[];
+  };
   /**
    * 選択された時間を表すオブジェクト
    * - hour: 選択された時間（時）
@@ -25,38 +33,29 @@ export type DayScheduleState = {
   selectedTime: {
     hour: HourOrMinutes;
     minute: HourOrMinutes;
-    timeType: TimeType;
+    type: TimeType;
   };
   /**
    * タイムゾーンに関する情報を含む配列
-   * - timeZone: タイムゾーンを表す文字列
-   * - timeZoneTime: タイムゾーンに応じた時間
+   * - from: タイムゾーンを表す文字列
+   * - to: タイムゾーンに応じた時間
    */
-  timeZones: {
-    timeZone: TimeZone;
-    timeZoneTime: TimeZoneTime;
-  }[];
+  timeZone: {
+    from: TimeZone;
+    to: TimeZone[];
+  };
 };
 
 export const dayScheduleState: DayScheduleState = {
   startDate: customDayjs().format("YYYY-MM-DD 00:00"),
+  timeSelectOption: {
+    hour: hour12,
+    minute: minutes,
+  },
   selectedTime: {
     hour: 0,
     minute: 0,
-    timeType: "AM",
+    type: "AM",
   },
-  timeZones: [
-    {
-      timeZone: "Asia/Tokyo",
-      timeZoneTime: "09-01 AM",
-    },
-    {
-      timeZone: "America/New_York",
-      timeZoneTime: "09-01 AM",
-    },
-    {
-      timeZone: "Europe/Paris",
-      timeZoneTime: "09-01 AM",
-    },
-  ],
+  timeZone: { from: "Asia/Tokyo", to: ["America/New_York", "Europe/Paris"] },
 };

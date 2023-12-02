@@ -2,6 +2,7 @@
  * @module _day-schedule
  */
 
+import { hour12, hour24 } from "../_day-schedule-function";
 import { DayScheduleState } from "../hooks/day-schedule-state";
 import { HourOrMinutes, TimeType, toHourOrMinutes } from "../type-day-schedule";
 
@@ -29,10 +30,6 @@ export type DayScheduleAction =
       timeType: TimeType;
     };
 
-/**
- * @todo 各Caseで、右端の時間フォーマットを変更する処理を定義する
- * @todo コンフルのAPIもChatGPTで調べる
- */
 export const DayScheduleReducer = (
   state: DayScheduleState,
   action: DayScheduleAction
@@ -63,15 +60,20 @@ export const DayScheduleReducer = (
         },
       };
     /**
-     * AM/PM/24hの切り替えに合わせて、時間の選択肢も変更する
+     * AM/PM/24hの切り替えに合わせて、次のことを行う
+     * - 時間の選択肢を変更する
+     * - 24時間表示 → 12時間表示の場合、時間の表記を補正する
      */
     case "CHANGE_AM_PM_ALL":
       let selectedHour = state.selectedTime.hour;
-      /**
-       * 12時間表示の場合、時間の表記を補正する
-       */
-      if (selectedHour > 12) {
-        selectedHour = toHourOrMinutes(state.selectedTime.hour - 12);
+      let hourOptions = hour24;
+      if (action.timeType === "24h") {
+        hourOptions = hour24;
+      } else {
+        hourOptions = hour12;
+        if (selectedHour > 12) {
+          selectedHour = toHourOrMinutes(state.selectedTime.hour - 12);
+        }
       }
 
       return {
@@ -79,7 +81,7 @@ export const DayScheduleReducer = (
         selectedTime: {
           ...state.selectedTime,
           hour: selectedHour,
-          timeType: action.timeType,
+          type: action.timeType,
         },
       };
     default:

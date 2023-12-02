@@ -27,25 +27,18 @@ export type CustomDayjs = Dayjs;
  * @returns
  */
 
-/**
- * @todo baseTimeZone, convertTimeZoneはオブジェクトとして纏める
- * 多分baseDateが不要なはず
- */
 export const toTimeZoneTime = (
   dateTime: DateString,
-  time: {
-    hour: HourNumber;
-    minute: MinutesNumber;
-    type: TimeType;
-  },
-  timeZone: { from: TimeZone; to: TimeZone }
+  time: DayScheduleState["selectedTime"],
+  fromTimeZone: TimeZone,
+  toTimeZone: TimeZone
 ): string => {
   const timeInBaseTimezone = dayjs.tz(
     `${dateTime} ${time.hour}:${time.minute} ${time.type}`,
-    timeZone.from
+    fromTimeZone
   );
 
-  return timeInBaseTimezone.tz(timeZone.to).format("HH:mm A");
+  return timeInBaseTimezone.tz(toTimeZone).format("HH:mm A");
 };
 
 /**

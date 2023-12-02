@@ -25,14 +25,6 @@ export const Default: Story = {
   args: {
     baseDate: "2023-11-16",
     selectedTime: dayScheduleState.selectedTime,
-    timeZones: dayScheduleState.timeZones,
-  },
-};
-
-export const Empty: Story = {
-  args: {
-    baseDate: "",
-    selectedTime: dayScheduleState.selectedTime,
-    timeZones: dayScheduleState.timeZones,
+    timeZone: dayScheduleState.timeZone,
   },
 };
