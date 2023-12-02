@@ -1,5 +1,12 @@
 import { toTimeZoneTime, customDayjs, correctToSunday } from "./dayjs";
 import { DayScheduleState } from "@/app/_day-schedule/hooks/day-schedule-state";
+import { DateString, TimeZone } from "./type-date";
+import {
+  HourNumber,
+  MinutesNumber,
+  TimeType,
+  toHourOrMinutes,
+} from "@/app/_day-schedule/type-day-schedule";
 
 describe("toTimeZoneTime", () => {
   beforeAll(() => {});
@@ -8,21 +15,18 @@ describe("toTimeZoneTime", () => {
 
   it("日本時間をベースに、America/New_Yorkへ変換する", () => {
     // Arrange
-    const selectedTime: DayScheduleState["selectedTime"] = {
-      hour: 8,
-      minute: 0,
-      timeType: "AM",
+    const selectedTime = {
+      hour: 8 as HourNumber,
+      minute: 0 as MinutesNumber,
+      type: "AM" as TimeType,
     };
-    const baseTimeZone = "Asia/Tokyo";
-    const convertTimeZone = "America/New_York";
+    const timeZone = {
+      from: "Asia/Tokyo",
+      to: "America/New_York",
+    };
 
     // Act
-    const result = toTimeZoneTime(
-      "2023-11-26",
-      selectedTime,
-      baseTimeZone,
-      convertTimeZone
-    );
+    const result = toTimeZoneTime("2023-11-26", selectedTime, timeZone);
 
     // Assert
     expect(result).toBe("18:00 PM");
@@ -30,24 +34,21 @@ describe("toTimeZoneTime", () => {
 
   it("日本時間をベースに、America/New_Yorkへ変換する", () => {
     // Arrange
-    const selectedTime: DayScheduleState["selectedTime"] = {
-      hour: 9,
-      minute: 0,
-      timeType: "AM",
+    const selectedTime = {
+      hour: 9 as HourNumber,
+      minute: 0 as MinutesNumber,
+      type: "PM" as TimeType,
     };
-    const baseTimeZone = "Asia/Tokyo";
-    const convertTimeZone = "America/Edmonton";
+    const timeZone = {
+      from: "Asia/Tokyo",
+      to: "America/New_York",
+    };
 
     // Act
-    const result = toTimeZoneTime(
-      "2023-11-26",
-      selectedTime,
-      baseTimeZone,
-      convertTimeZone
-    );
+    const result = toTimeZoneTime("2023-11-26", selectedTime, timeZone);
 
     // Assert
-    expect(result).toBe("17:00 PM");
+    expect(result).toBe("07:00 AM");
   });
 });
 

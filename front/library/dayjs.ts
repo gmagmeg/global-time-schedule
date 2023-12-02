@@ -5,6 +5,11 @@ import localDate from "dayjs/plugin/localeData";
 import weekday from "dayjs/plugin/weekday";
 import { DayScheduleState } from "@/app/_day-schedule/hooks/day-schedule-state";
 import { TimeZone, DateString } from "./type-date";
+import {
+  HourNumber,
+  MinutesNumber,
+  TimeType,
+} from "@/app/_day-schedule/type-day-schedule";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -21,21 +26,26 @@ export type CustomDayjs = Dayjs;
  * @param timeZone
  * @returns
  */
-export const toTimeZoneTime = (
-  baseDate: DateString,
-  selectedTime: DayScheduleState["selectedTime"],
-  baseTimeZone: TimeZone,
-  convertTimeZone: TimeZone
-): string => {
-  const { hour, minute } = selectedTime;
 
-  const baseYmd = dayjs(baseDate).format("YYYY-MM-DD");
+/**
+ * @todo baseTimeZone, convertTimeZoneはオブジェクトとして纏める
+ * 多分baseDateが不要なはず
+ */
+export const toTimeZoneTime = (
+  dateTime: DateString,
+  time: {
+    hour: HourNumber;
+    minute: MinutesNumber;
+    type: TimeType;
+  },
+  timeZone: { from: TimeZone; to: TimeZone }
+): string => {
   const timeInBaseTimezone = dayjs.tz(
-    `${baseYmd}T${hour}:${minute}:00`,
-    baseTimeZone
+    `${dateTime} ${time.hour}:${time.minute} ${time.type}`,
+    timeZone.from
   );
 
-  return timeInBaseTimezone.tz(convertTimeZone).format("HH:mm A");
+  return timeInBaseTimezone.tz(timeZone.to).format("HH:mm A");
 };
 
 /**

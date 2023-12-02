@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
 import { DaySchedule } from "@app/_day-schedule/day-schedule";
-import { dayScheduleState } from "../hooks/day-schedule-state";
 
 const documentation = `12時間/AM、PMの選択と
 24時間の選択ができるコンポーネント２つがある`;
@@ -26,6 +25,7 @@ export const Hour12: Story = {
   args: {
     baseDate: "2023-11-26",
     isSelectedDate: true,
+    handleClickDayButton: () => {},
   },
 };
 
@@ -33,5 +33,6 @@ export const Hour24: Story = {
   args: {
     baseDate: "2023-11-26",
     isSelectedDate: true,
+    handleClickDayButton: () => {},
   },
 };

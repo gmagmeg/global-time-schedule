@@ -10,11 +10,14 @@ import { SelectStartDate } from "./select-start-date";
 import { SelectWeekDays } from "./select-week-days";
 import { CopyButton } from "../_common-button/copy-button";
 import { DateString } from "@/library/type-date";
+import { createWeekRange } from "@/library/dayjs";
 
 export const GlobalMenu: FC = () => {
   const [selectDate, setSelectDate] = useState("2023-11-26");
+  const [weekRange, setWeekRange] = useState(createWeekRange("2023-11-26"));
   const handleSelectDate = (selectDate: DateString) => {
     setSelectDate(selectDate);
+    setWeekRange(createWeekRange(selectDate));
   };
 
   return (
@@ -29,7 +32,7 @@ export const GlobalMenu: FC = () => {
         />
       </Box>
       <SimpleGrid minChildWidth="1rem" spacing="40px" p={2} mt={1}>
-        <SelectWeekDays selectedDate={selectDate} />
+        <SelectWeekDays selectedDate={selectDate} weekRange={weekRange} />
         <CopyButton enableCopy={true} content="全件コピー" />
       </SimpleGrid>
     </>
