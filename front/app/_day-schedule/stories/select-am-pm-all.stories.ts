@@ -25,7 +25,7 @@ const { selectedTime } = dayScheduleState;
 
 export const Default: Story = {
   args: {
-    selectedTimeType: selectedTime.timeType,
+    selectedTimeType: selectedTime.type,
     handleChange: () => {},
   },
 };

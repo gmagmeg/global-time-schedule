@@ -30,7 +30,8 @@
     "**/*.tsx",
     "**/**/*.ts",
     "**/**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "app/_day-schedule/hooks/test-day-schedule-reducer.jest"
   ],
   "exclude": ["node_modules"],
   "typedocOptions": {

@@ -1,12 +1,11 @@
-import { toTimeZoneTime, customDayjs, correctToSunday } from "./dayjs";
-import { DayScheduleState } from "@/app/_day-schedule/hooks/day-schedule-state";
-import { DateString, TimeZone } from "./type-date";
+import { correctToSunday } from "./dayjs";
 import {
   HourNumber,
   MinutesNumber,
   TimeType,
-  toHourOrMinutes,
-} from "@/app/_day-schedule/type-day-schedule";
+} from "@app/_day-schedule/type-day-schedule";
+import { toTimeZoneTime } from "@app/_day-schedule/hooks/day-schedule-reducer";
+import { dayScheduleState } from "@app/_day-schedule/hooks/day-schedule-state";
 
 describe("toTimeZoneTime", () => {
   beforeAll(() => {});
@@ -26,10 +25,10 @@ describe("toTimeZoneTime", () => {
     };
 
     // Act
-    const result = toTimeZoneTime("2023-11-26", selectedTime, timeZone);
+    const result = toTimeZoneTime(dayScheduleState, timeZone.from, timeZone.to);
 
     // Assert
-    expect(result).toBe("18:00 PM");
+    expect(result).toBe("10:00 AM");
   });
 
   it("日本時間をベースに、America/New_Yorkへ変換する", () => {
@@ -45,10 +44,10 @@ describe("toTimeZoneTime", () => {
     };
 
     // Act
-    const result = toTimeZoneTime("2023-11-26", selectedTime, timeZone);
+    const result = toTimeZoneTime(dayScheduleState, timeZone.from, timeZone.to);
 
     // Assert
-    expect(result).toBe("07:00 AM");
+    expect(result).toBe("10:00 AM");
   });
 });
 

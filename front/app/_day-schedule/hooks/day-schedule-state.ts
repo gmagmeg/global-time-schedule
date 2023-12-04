@@ -7,7 +7,7 @@
  * このファイルに定義する
  */
 
-import { DateString, TimeZone } from "@/library/type-date";
+import { DateString, HourMinutesFormat, TimeZone } from "@/library/type-date";
 import { customDayjs } from "@lib/dayjs";
 import { HourOrMinutes, TimeType } from "../type-day-schedule";
 import { hour12, minutes } from "../_day-schedule-function";
@@ -35,7 +35,10 @@ export type DayScheduleState = {
     minute: HourOrMinutes;
     type: TimeType;
   };
+  displayTimes: HourMinutesFormat[];
   /**
+   * @todo 後でこの情報は上のコンポーネントに移動する
+   *
    * タイムゾーンに関する情報を含む配列
    * - from: タイムゾーンを表す文字列
    * - to: タイムゾーンに応じた時間
@@ -57,5 +60,6 @@ export const dayScheduleState: DayScheduleState = {
     minute: 0,
     type: "AM",
   },
+  displayTimes: ["00:00 AM", "00:00 AM", "00:00 AM"],
   timeZone: { from: "Asia/Tokyo", to: ["America/New_York", "Europe/Paris"] },
 };
