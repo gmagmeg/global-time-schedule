@@ -81,30 +81,28 @@ export const DayScheduleReducer = (
       let selectedHour = state.selectedTime.hour;
       let hourOptions = hour24;
       if (action.timeType === "24h") {
-        console.log("24");
         hourOptions = hour24;
       } else {
         hourOptions = hour12;
         if (selectedHour > 12) {
-          console.log("AM/PM");
           selectedHour = toHourOrMinutes(state.selectedTime.hour - 12);
         }
       }
 
       return {
         ...state,
-        // selectedTime: {
-        //   ...state.selectedTime,
-        //   hour: selectedHour,
-        //   type: action.timeType,
-        // },
+        selectedTime: {
+          ...state.selectedTime,
+          hour: selectedHour,
+          type: action.timeType,
+        },
         timeSelectOption: {
           ...state.timeSelectOption,
           hour: hourOptions,
         },
-        // displayTimes: [
-        //   toTimeZoneTime(state, state.timeZone.from, state.timeZone.to[0]),
-        // ],
+        displayTimes: [
+          toTimeZoneTime(state, state.timeZone.from, state.timeZone.to[0]),
+        ],
       };
 
     default:
@@ -126,8 +124,16 @@ export const toTimeZoneTime = (
 ): string => {
   const { startDate, selectedTime } = state;
 
+  /**
+   * @todo dayjsを使わずに、こっちの方がいいかも
+   *   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat#using_locales
+   */
+
   const YMD = customDayjs(startDate).format("YYYY-MM-DD");
-  const baseTime = `${YMD} ${selectedTime.hour}:${selectedTime.minute} ${selectedTime.type}`;
+  let baseTime = `${YMD} ${selectedTime.hour}:${selectedTime.minute} ${selectedTime.type}`;
+  if (selectedTime.type === "24h") {
+    baseTime = `${YMD} ${selectedTime.hour}:${selectedTime.minute}`;
+  }
 
   const timeInBaseTimezone = dayjs.tz(`${baseTime}`, fromTimeZone);
 

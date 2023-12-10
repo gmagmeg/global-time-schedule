@@ -22,12 +22,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Main: Story = {
   args: {
-    enableCopy: true,
-  },
-};
-
-export const DisableCopy: Story = {
-  args: {
-    enableCopy: false,
+    copyText: "コピーされる文章",
   },
 };
