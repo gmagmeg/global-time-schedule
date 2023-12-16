@@ -9,6 +9,9 @@
 
 // ex：11:00 AM
 export type TimeZoneTime = string;
+export const toTimeZoneTime = (timeZone: string): TimeZoneTime => {
+  return timeZone as TimeZoneTime;
+};
 
 export type HourNumber =
   | 0

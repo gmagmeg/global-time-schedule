@@ -13,7 +13,6 @@ import { DayScheduleReducer } from "./hooks/day-schedule-reducer";
 import { DateString } from "@/library/type-date";
 import { TimeType } from "./type-day-schedule";
 
-
 export const DaySchedule: FC<{
   baseDate: DateString;
   isSelectedDate: boolean;
@@ -35,20 +34,20 @@ export const DaySchedule: FC<{
     });
   };
 
-   /**
+  /**
    * スタイルの設定
    */
-   let selectedBackground = {};
-   let addStyle = {};
-   if (isSelectedDate) {
-     selectedBackground = {
-       bg: "#D7D5F0",
-     };
- 
-     addStyle = {
-       borderRadius: "8px",
-     };
-   }
+  let selectedBackground = {};
+  let addStyle = {};
+  if (isSelectedDate) {
+    selectedBackground = {
+      bg: "#D7D5F0",
+    };
+
+    addStyle = {
+      borderRadius: "8px",
+    };
+  }
 
   return (
     <Flex
@@ -76,7 +75,7 @@ export const DaySchedule: FC<{
       />
       <Box h={10} mx={4} borderRight={"1px"} />
       <Box mr={8}>
-        <CopyButton enableCopy={true} />
+        <CopyButton copyText="" />
       </Box>
       <Text>{state.displayTimes[0]}</Text>
       <Spacer maxW={8} />
