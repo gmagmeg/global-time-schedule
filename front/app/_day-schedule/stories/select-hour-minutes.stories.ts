@@ -6,8 +6,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
 import { SelectHourMinutes } from "@app/_day-schedule/select-hour-minutes";
 import { DayScheduleAction } from "../hooks/day-schedule-reducer";
-import { dayScheduleState } from "../hooks/day-schedule-state";
-import { hour12, minutes } from "../_day-schedule-function";
+import { dayScheduleState, hour12, minutes } from "../hooks/day-schedule-state";
 
 const documentation = `時間と分を選択するコンポーネントです。`;
 

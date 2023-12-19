@@ -1,730 +1,222 @@
-export const timezones = [
-  {
-    add: "ACDT",
-    full: "ACDT(Australian Central Daylight Saving Time)",
-  },
-  {
-    add: "ACST",
-    full: "ACST(Australian Central Standard Time)",
-  },
-  {
-    add: "ACT",
-    full: "ACT(Acre Time)",
-  },
-  {
-    add: "ADT",
-    full: "ADT(Atlantic Daylight Time)",
-  },
-  {
-    add: "AEDT",
-    full: "AEDT(Australian Eastern Daylight Saving Time)",
-  },
-  {
-    add: "AEST",
-    full: "AEST(Australian Eastern Standard Time)",
-  },
-  {
-    add: "AET",
-    full: "AET(Australian Eastern Time)",
-  },
-  {
-    add: "AFT",
-    full: "AFT(Afghanistan Time)",
-  },
-  {
-    add: "AKDT",
-    full: "AKDT(Alaska Daylight Time)",
-  },
-  {
-    add: "AKST",
-    full: "AKST(Alaska Standard Time)",
-  },
-  {
-    add: "ALMT",
-    full: "ALMT(Alma-Ata Time)",
-  },
-  {
-    add: "AMST",
-    full: "AMST(Amazon Summer Time (Brazil)",
-  },
-  {
-    add: "AMT",
-    full: "AMT(Amazon Time (Brazil)",
-  },
-  {
-    add: "AQTT",
-    full: "AQTT(Aqtobe Time)",
-  },
-  {
-    add: "ART",
-    full: "ART(Argentina Time)",
-  },
-  {
-    add: "AST",
-    full: "AST(Atlantic Standard Time)",
-  },
-  {
-    add: "AWST",
-    full: "AWST(Australian Western Standard Time)",
-  },
-  {
-    add: "AZOST",
-    full: "AZOST(Azores Summer Time)",
-  },
-  {
-    add: "AZOT",
-    full: "AZOT(Azores Standard Time)",
-  },
-  {
-    add: "AZT",
-    full: "AZT(Azerbaijan Time)",
-  },
-  {
-    add: "BIOT",
-    full: "BIOT(British Indian Ocean Time)",
-  },
-  {
-    add: "BNT",
-    full: "BNT(Brunei Time)",
-  },
-  {
-    add: "BOT",
-    full: "BOT(Bolivia Time)",
-  },
-  {
-    add: "BRST",
-    full: "BRST(Brasília Summer Time)",
-  },
-  {
-    add: "BRT",
-    full: "BRT(Brasilia Time)",
-  },
-  {
-    add: "BST",
-    full: "BST(Bangladesh Standard Time)",
-  },
-  {
-    add: "BTT",
-    full: "BTT(Bhutan Time)",
-  },
-  {
-    add: "CAT",
-    full: "CAT(Central Africa Time)",
-  },
-  {
-    add: "CCT",
-    full: "CCT(Cocos Islands Time)",
-  },
-  {
-    add: "CDT",
-    full: "CDT(Central Daylight Time (North America)",
-  },
-  {
-    add: "CEST",
-    full: "CEST(Central European Summer Time)",
-  },
-  {
-    add: "CET",
-    full: "CET(Central European Time)",
-  },
-  {
-    add: "CHADT",
-    full: "CHADT(Chatham Daylight Time)",
-  },
-  {
-    add: "CHAST",
-    full: "CHAST(Chatham Standard Time)",
-  },
-  {
-    add: "CHOST",
-    full: "CHOST(Choibalsan Summer Time)",
-  },
-  {
-    add: "CHOT",
-    full: "CHOT(Choibalsan Standard Time)",
-  },
-  {
-    add: "CHST",
-    full: "CHST(Chamorro Standard Time)",
-  },
-  {
-    add: "CHUT",
-    full: "CHUT(Chuuk Time)",
-  },
-  {
-    add: "CIST",
-    full: "CIST(Clipperton Island Standard Time)",
-  },
-  {
-    add: "CKT",
-    full: "CKT(Cook Island Time)",
-  },
-  {
-    add: "CLST",
-    full: "CLST(Chile Summer Time)",
-  },
-  {
-    add: "CLT",
-    full: "CLT(Chile Standard Time)",
-  },
-  {
-    add: "COST",
-    full: "COST(Colombia Summer Time)",
-  },
-  {
-    add: "COT",
-    full: "COT(Colombia Time)",
-  },
-  {
-    add: "CST",
-    full: "CST(Central Standard Time (North America)",
-  },
-  {
-    add: "CT",
-    full: "CT(Central Time)",
-  },
-  {
-    add: "CVT",
-    full: "CVT(Cape Verde Time)",
-  },
-  {
-    add: "CXT",
-    full: "CXT(Christmas Island Time)",
-  },
-  {
-    add: "DAVT",
-    full: "DAVT(Davis Time)",
-  },
-  {
-    add: "DDUT",
-    full: "DDUT(Dumont d'Urville Time)",
-  },
-  {
-    add: "EASST",
-    full: "EASST(Easter Island Summer Time)",
-  },
-  {
-    add: "EAST",
-    full: "EAST(Easter Island Standard Time)",
-  },
-  {
-    add: "EAT",
-    full: "EAT(East Africa Time)",
-  },
-  {
-    add: "ECT",
-    full: "ECT(Ecuador Time)",
-  },
-  {
-    add: "EDT",
-    full: "EDT(Eastern Daylight Time (North America)",
-  },
-  {
-    add: "EEST",
-    full: "EEST(Eastern European Summer Time)",
-  },
-  {
-    add: "EET",
-    full: "EET(Eastern European Time)",
-  },
-  {
-    add: "EGST",
-    full: "EGST(Eastern Greenland Summer Time)",
-  },
-  {
-    add: "EGT",
-    full: "EGT(Eastern Greenland Time)",
-  },
-  {
-    add: "EST",
-    full: "EST(Eastern Standard Time (North America)",
-  },
-  {
-    add: "ET",
-    full: "ET(Eastern Time Zone)",
-  },
-  {
-    add: "FET",
-    full: "FET(Further-eastern European Time)",
-  },
-  {
-    add: "FJT",
-    full: "FJT(Fiji Time)",
-  },
-  {
-    add: "FKST",
-    full: "FKST(Falkland Islands Summer Time)",
-  },
-  {
-    add: "FKT",
-    full: "FKT(Falkland Islands Time)",
-  },
-  {
-    add: "FNT",
-    full: "FNT(Fernando de Noronha Time)",
-  },
-  {
-    add: "GAMT",
-    full: "GAMT(Gambier Islands Time)",
-  },
-  {
-    add: "GET",
-    full: "GET(Georgia Standard Time)",
-  },
-  {
-    add: "GFT",
-    full: "GFT(French Guiana Time)",
-  },
-  {
-    add: "GILT",
-    full: "GILT(Gilbert Island Time)",
-  },
-  {
-    add: "GIT",
-    full: "GIT(Gambier Island Time)",
-  },
-  {
-    add: "GMT",
-    full: "GMT(Greenwich Mean Time)",
-  },
-  {
-    add: "GST",
-    full: "GST(South Georgia and the South Sandwich Islands Time)",
-  },
-  {
-    add: "GYT",
-    full: "GYT(Guyana Time)",
-  },
-  {
-    add: "HDT",
-    full: "HDT(Hawaii-Aleutian Daylight Time)",
-  },
-  {
-    add: "HKT",
-    full: "HKT(Hong Kong Time)",
-  },
-  {
-    add: "HMT",
-    full: "HMT(Heard and McDonald Islands Time)",
-  },
-  {
-    add: "HOVT",
-    full: "HOVT(Hovd Time)",
-  },
-  {
-    add: "HST",
-    full: "HST(Hawaii-Aleutian Standard Time)",
-  },
-  {
-    add: "ICT",
-    full: "ICT(Indochina Time)",
-  },
-  {
-    add: "IDLW",
-    full: "IDLW(International Day Line West time zone)",
-  },
-  {
-    add: "IDT",
-    full: "IDT(Israel Daylight Time)",
-  },
-  {
-    add: "IOT",
-    full: "IOT(Indian Ocean Time)",
-  },
-  {
-    add: "IRDT",
-    full: "IRDT(Iran Daylight Time)",
-  },
-  {
-    add: "IRKT",
-    full: "IRKT(Irkutsk Time)",
-  },
-  {
-    add: "IRST",
-    full: "IRST(Iran Standard Time)",
-  },
-  {
-    add: "IST",
-    full: "IST(Irish Standard Time)",
-  },
-  {
-    add: "JST",
-    full: "JST(Japan Standard Time)",
-  },
-  {
-    add: "KALT",
-    full: "KALT(Kaliningrad Time)",
-  },
-  {
-    add: "KGT",
-    full: "KGT(Kyrgyzstan Time)",
-  },
-  {
-    add: "KOST",
-    full: "KOST(Kosrae Time)",
-  },
-  {
-    add: "KRAT",
-    full: "KRAT(Krasnoyarsk Time)",
-  },
-  {
-    add: "KST",
-    full: "KST(Korea Standard Time)",
-  },
-  {
-    add: "LHST",
-    full: "LHST(Lord Howe Standard Time)",
-  },
-  {
-    add: "LINT",
-    full: "LINT(Line Islands Time)",
-  },
-  {
-    add: "MAGT",
-    full: "MAGT(Magadan Time)",
-  },
-  {
-    add: "MART",
-    full: "MART(Marquesas Islands Time)",
-  },
-  {
-    add: "MAWT",
-    full: "MAWT(Mawson Station Time)",
-  },
-  {
-    add: "MDT",
-    full: "MDT(Mountain Daylight Time (North America)",
-  },
-  {
-    add: "MEST",
-    full: "MEST(Middle European Summer Time)",
-  },
-  {
-    add: "MET",
-    full: "MET(Middle European Time)",
-  },
-  {
-    add: "MHT",
-    full: "MHT(Marshall Islands Time)",
-  },
-  {
-    add: "MIST",
-    full: "MIST(Macquarie Island Station Time)",
-  },
-  {
-    add: "MIT",
-    full: "MIT(Marquesas Islands Time)",
-  },
-  {
-    add: "MMT",
-    full: "MMT(Myanmar Standard Time)",
-  },
-  {
-    add: "MSK",
-    full: "MSK(Moscow Time)",
-  },
-  {
-    add: "MST",
-    full: "MST(Mountain Standard Time (North America)",
-  },
-  {
-    add: "MUT",
-    full: "MUT(Mauritius Time)",
-  },
-  {
-    add: "MVT",
-    full: "MVT(Maldives Time)",
-  },
-  {
-    add: "MYT",
-    full: "MYT(Malaysia Time)",
-  },
-  {
-    add: "NCT",
-    full: "NCT(New Caledonia Time)",
-  },
-  {
-    add: "NDT",
-    full: "NDT(Newfoundland Daylight Time)",
-  },
-  {
-    add: "NFT",
-    full: "NFT(Norfolk Island Time)",
-  },
-  {
-    add: "NOVT",
-    full: "NOVT(Novosibirsk Time)",
-  },
-  {
-    add: "NPT",
-    full: "NPT(Nepal Time)",
-  },
-  {
-    add: "NST",
-    full: "NST(Newfoundland Standard Time)",
-  },
-  {
-    add: "NT",
-    full: "NT(Newfoundland Time)",
-  },
-  {
-    add: "NZDT",
-    full: "NZDT(New Zealand Daylight Time)",
-  },
-  {
-    add: "NZST",
-    full: "NZST(New Zealand Standard Time)",
-  },
-  {
-    add: "OMST",
-    full: "OMST(Omsk Time)",
-  },
-  {
-    add: "ORAT",
-    full: "ORAT(Oral Time)",
-  },
-  {
-    add: "PDT",
-    full: "PDT(Pacific Daylight Time (North America)",
-  },
-  {
-    add: "PET",
-    full: "PET(Peru Time)",
-  },
-  {
-    add: "PETT",
-    full: "PETT(Kamchatka Time)",
-  },
-  {
-    add: "PGT",
-    full: "PGT(Papua New Guinea Time)",
-  },
-  {
-    add: "PHOT",
-    full: "PHOT(Phoenix Island Time)",
-  },
-  {
-    add: "PHST",
-    full: "PHST(Philippine Standard Time)",
-  },
-  {
-    add: "PHT",
-    full: "PHT(Philippine Time)",
-  },
-  {
-    add: "PKT",
-    full: "PKT(Pakistan Standard Time)",
-  },
-  {
-    add: "PMDT",
-    full: "PMDT(Saint Pierre and Miquelon Daylight Time)",
-  },
-  {
-    add: "PMST",
-    full: "PMST(Saint Pierre and Miquelon Standard Time)",
-  },
-  {
-    add: "PONT",
-    full: "PONT(Pohnpei Standard Time)",
-  },
-  {
-    add: "PST",
-    full: "PST(Pacific Standard Time (North America)",
-  },
-  {
-    add: "PWT",
-    full: "PWT(Palau Time)",
-  },
-  {
-    add: "PYST",
-    full: "PYST(Paraguay Summer Time)",
-  },
-  {
-    add: "PYT",
-    full: "PYT(Paraguay Time)",
-  },
-  {
-    add: "RET",
-    full: "RET(Réunion Time)",
-  },
-  {
-    add: "SAKT",
-    full: "SAKT(Sakhalin Island Time)",
-  },
-  {
-    add: "SAMT",
-    full: "SAMT(Samara Time)",
-  },
-  {
-    add: "SAST",
-    full: "SAST(South African Standard Time)",
-  },
-  {
-    add: "SBT",
-    full: "SBT(Solomon Islands Time)",
-  },
-  {
-    add: "SCT",
-    full: "SCT(Seychelles Time)",
-  },
-  {
-    add: "SDT",
-    full: "SDT(Samoa Daylight Time)",
-  },
-  {
-    add: "SGT",
-    full: "SGT(Singapore Time)",
-  },
-  {
-    add: "SLST",
-    full: "SLST(Sri Lanka Standard Time)",
-  },
-  {
-    add: "SRET",
-    full: "SRET(Srednekolymsk Time)",
-  },
-  {
-    add: "SRT",
-    full: "SRT(Suriname Time)",
-  },
-  {
-    add: "SST",
-    full: "SST(Samoa Standard Time)",
-  },
-  {
-    add: "TAHT",
-    full: "TAHT(Tahiti Time)",
-  },
-  {
-    add: "TFT",
-    full: "TFT(French Southern and Antarctic Time)",
-  },
-  {
-    add: "THA",
-    full: "THA(Thailand Standard Time)",
-  },
-  {
-    add: "TJT",
-    full: "TJT(Tajikistan Time)",
-  },
-  {
-    add: "TKT",
-    full: "TKT(Tokelau Time)",
-  },
-  {
-    add: "TLT",
-    full: "TLT(Timor Leste Time)",
-  },
-  {
-    add: "TMT",
-    full: "TMT(Turkmenistan Time)",
-  },
-  {
-    add: "TOT",
-    full: "TOT(Tonga Time)",
-  },
-  {
-    add: "TRT",
-    full: "TRT(Turkey Time)",
-  },
-  {
-    add: "TVT",
-    full: "TVT(Tuvalu Time)",
-  },
-  {
-    add: "ULAST",
-    full: "ULAST(Ulaanbaatar Summer Time)",
-  },
-  {
-    add: "ULAT",
-    full: "ULAT(Ulaanbaatar Standard Time)",
-  },
-  {
-    add: "UTC",
-    full: "UTC(Coordinated Universal Time)",
-  },
-  {
-    add: "UYST",
-    full: "UYST(Uruguay Summer Time)",
-  },
-  {
-    add: "UYT",
-    full: "UYT(Uruguay Standard Time)",
-  },
-  {
-    add: "UZT",
-    full: "UZT(Uzbekistan Time)",
-  },
-  {
-    add: "VET",
-    full: "VET(Venezuelan Standard Time)",
-  },
-  {
-    add: "VLAT",
-    full: "VLAT(Vladivostok Time)",
-  },
-  {
-    add: "VOLT",
-    full: "VOLT(Volgograd Time)",
-  },
-  {
-    add: "VOST",
-    full: "VOST(Vostok Station Time)",
-  },
-  {
-    add: "VUT",
-    full: "VUT(Vanuatu Time)",
-  },
-  {
-    add: "WAKT",
-    full: "WAKT(Wake Island Time)",
-  },
-  {
-    add: "WAST",
-    full: "WAST(West Africa Summer Time)",
-  },
-  {
-    add: "WAT",
-    full: "WAT(West Africa Time)",
-  },
-  {
-    add: "WEST",
-    full: "WEST(Western European Summer Time)",
-  },
-  {
-    add: "WET",
-    full: "WET(Western European Time)",
-  },
-  {
-    add: "WGST",
-    full: "WGST(West Greenland Summer Time)",
-  },
-  {
-    add: "WGT",
-    full: "WGT(West Greenland Time)",
-  },
-  {
-    add: "WIB",
-    full: "WIB(Western Indonesian Time)",
-  },
-  {
-    add: "WIT",
-    full: "WIT(Eastern Indonesian Time)",
-  },
-  {
-    add: "WITA",
-    full: "WITA(Central Indonesia Time)",
-  },
-  {
-    add: "WST",
-    full: "WST(Western Standard Time)",
-  },
-  {
-    add: "YAKT",
-    full: "YAKT(Yakutsk Time)",
-  },
-  {
-    add: "YEKT",
-    full: "YEKT(Yekaterinburg Time)",
-  },
+[
+  {
+    abb: "ACDT",
+    full: "Australian Central Daylight Savings Time",
+    utc: "UTC+10:30",
+  },
+  { abb: "ACST", full: "Australian Central Standard Time", utc: "UTC+9:30" },
+  { abb: "ACT", full: "Acre Time", utc: "UTC-5" },
+  {
+    abb: "ACWST",
+    full: "Australian Central Western Standard Time",
+    utc: "UTC+8:45",
+  },
+  { abb: "ADT", full: "Atlantic Daylight Time", utc: "UTC-3" },
+  {
+    abb: "AEDT",
+    full: "Australian Eastern Daylight Savings Time",
+    utc: "UTC+11",
+  },
+  { abb: "AEST", full: "Australian Eastern Standard Time", utc: "UTC+10" },
+  { abb: "AFT", full: "Afghanistan Time", utc: "UTC+4:30" },
+  { abb: "AKDT", full: "Alaska Daylight Time", utc: "UTC-8" },
+  { abb: "AKST", full: "Alaska Standard Time", utc: "UTC-9" },
+  { abb: "AMST", full: "Amazon Summer Time", utc: "UTC-3" },
+  { abb: "AMT", full: "Amazon Time", utc: "UTC-4" },
+  { abb: "AMT", full: "Armenia Time", utc: "UTC+4" },
+  { abb: "ART", full: "Argentina Time", utc: "UTC-3" },
+  { abb: "AST", full: "Atlantic Standard Time", utc: "UTC-4" },
+  { abb: "AST", full: "Arabia Standard Time", utc: "UTC+3" },
+  { abb: "AT", full: "Atlantic Time", utc: "UTC-4/UTC-3" },
+  { abb: "AWST", full: "Australian Western Standard Time", utc: "UTC+8" },
+  { abb: "AZOST", full: "Azores Summer Time", utc: "UTC+0" },
+  { abb: "AZOT", full: "Azores Standard Time", utc: "UTC-1" },
+  { abb: "AZT", full: "Azerbaijan Time", utc: "UTC+4" },
+  { abb: "BDT", full: "Brunei Time", utc: "UTC+8" },
+  { abb: "BIT", full: "Baker Island Time", utc: "UTC-12" },
+  { abb: "BNT", full: "Brunei Darussalam Time", utc: "UTC+8" },
+  { abb: "BOT", full: "Bolivia Time", utc: "UTC-4" },
+  { abb: "BRST", full: "Brasilia Summer Time", utc: "UTC-2" },
+  { abb: "BRT", full: "Brasilia Time", utc: "UTC-3" },
+  { abb: "BST", full: "British Summer Time", utc: "UTC+1" },
+  { abb: "BST", full: "Bangladesh Standard Time", utc: "UTC+6" },
+  { abb: "BST", full: "Bougainville Standard Time", utc: "UTC+11" },
+  { abb: "BTT", full: "Bhutan Time", utc: "UTC+6" },
+  { abb: "CAT", full: "Central Africa Time", utc: "UTC+2" },
+  { abb: "CCT", full: "Cocos Islands Time", utc: "UTC+6:30" },
+  { abb: "CDT", full: "Central Daylight Time", utc: "UTC-5" },
+  { abb: "CDT", full: "Cuba Daylight Time", utc: "UTC-4" },
+  { abb: "CEST", full: "Central European Summer Time", utc: "UTC+2" },
+  { abb: "CET", full: "Central European Time", utc: "UTC+1" },
+  { abb: "CHADT", full: "Chatham Daylight", utc: "UTC+13:45" },
+  { abb: "CHAST", full: "Chatham Standard", utc: "UTC+12:45" },
+  { abb: "CHOST", full: "Choibalsan Summer Time", utc: "UTC+9" },
+  { abb: "CHOT", full: "Choibalsan Standard Time", utc: "UTC+8" },
+  { abb: "CHST", full: "Chamorro Standard Time", utc: "UTC+10" },
+  { abb: "CHUT", full: "Chuuk Time", utc: "UTC+10" },
+  { abb: "CIST", full: "Clipperton Island Standard Time", utc: "UTC-8" },
+  { abb: "CIT", full: "Central Indonesia Time", utc: "UTC+8" },
+  { abb: "CKT", full: "Cook Island Time", utc: "UTC-10" },
+  { abb: "CLST", full: "Chile Summer Time", utc: "UTC-3" },
+  { abb: "CLT", full: "Chile Standard Time", utc: "UTC-4" },
+  { abb: "COST", full: "Colombia Summer Time", utc: "UTC-4" },
+  { abb: "COT", full: "Colombia Time", utc: "UTC-5" },
+  { abb: "CST", full: "Central Standard Time", utc: "UTC-6" },
+  { abb: "CST", full: "Cuba Standard Time", utc: "UTC-5" },
+  { abb: "CST", full: "China Standard Time", utc: "UTC+8" },
+  { abb: "CT", full: "Central Time", utc: "UTC-6/UTC-5" },
+  { abb: "CVT", full: "Cape Verde Time", utc: "UTC-1" },
+  { abb: "CWST", full: "Central Western Standard Time", utc: "UTC+8:45" },
+  { abb: "CXT", full: "Christmas Island Time", utc: "UTC+7" },
+  { abb: "DAVT", full: "Davis Time", utc: "UTC+7" },
+  { abb: "DDUT", full: "Dumont d'Urville Time", utc: "UTC+10" },
+  { abb: "EASST", full: "Easter Island Summer Time", utc: "UTC-5" },
+  { abb: "EAST", full: "Easter Island Standard Time", utc: "UTC-6" },
+  { abb: "EAT", full: "East Africa Time", utc: "UTC+3" },
+  { abb: "ECT", full: "Ecuador Time", utc: "UTC-5" },
+  { abb: "EDT", full: "Eastern Daylight Time", utc: "UTC-4" },
+  { abb: "EEST", full: "Eastern European Summer Time", utc: "UTC+3" },
+  { abb: "EET", full: "Eastern European Time", utc: "UTC+2" },
+  { abb: "EGST", full: "Eastern Greenland Summer Time", utc: "UTC+0" },
+  { abb: "EGT", full: "Eastern Greenland Time", utc: "UTC-1" },
+  { abb: "EIT", full: "Eastern Indonesian Time", utc: "UTC+9" },
+  { abb: "EST", full: "Eastern Standard Time", utc: "UTC-5" },
+  { abb: "ET", full: "Eastern Time", utc: "UTC-5/UTC-4" },
+  { abb: "FET", full: "Further-eastern European Time", utc: "UTC+3" },
+  { abb: "FJT", full: "Fiji Time", utc: "UTC+12" },
+  { abb: "FKST", full: "Falkland Islands Summer Time", utc: "UTC-3" },
+  { abb: "FKT", full: "Falkland Islands Time", utc: "UTC-4" },
+  { abb: "FNT", full: "Fernando de Noronha Time", utc: "UTC-2" },
+  { abb: "GALT", full: "Galapagos Time", utc: "UTC-6" },
+  { abb: "GAMT", full: "Gambier Islands", utc: "UTC-9" },
+  { abb: "GET", full: "Georgia Standard Time", utc: "UTC+4" },
+  { abb: "GFT", full: "French Guiana Time", utc: "UTC-3" },
+  { abb: "GILT", full: "Gilbert Island Time", utc: "UTC+12" },
+  { abb: "GIT", full: "Gambier Island Time", utc: "UTC-9" },
+  { abb: "GMT", full: "Greenwich Mean Time", utc: "UTC+0" },
+  { abb: "GST", full: "Gulf Standard Time", utc: "UTC+4" },
+  { abb: "GST", full: "South Georgia Time", utc: "UTC-2" },
+  { abb: "GYT", full: "Guyana Time", utc: "UTC-4" },
+  { abb: "HADT", full: "Hawaii-Aleutian Daylight Time", utc: "UTC-9" },
+  { abb: "HAST", full: "Hawaii-Aleutian Standard Time", utc: "UTC-10" },
+  { abb: "HKT", full: "Hong Kong Time", utc: "UTC+8" },
+  { abb: "HMT", full: "Heard and McDonald Islands Time", utc: "UTC+5" },
+  { abb: "HOVST", full: "Khovd Summer Time", utc: "UTC+8" },
+  { abb: "HOVT", full: "Khovd Standard Time", utc: "UTC+7" },
+  { abb: "ICT", full: "Indochina Time", utc: "UTC+7" },
+  { abb: "IDT", full: "Israel Daylight Time", utc: "UTC+3" },
+  { abb: "IOT", full: "Indian Chagos Time", utc: "UTC+6" },
+  { abb: "IRDT", full: "Iran Daylight Time", utc: "UTC+4:30" },
+  { abb: "IRKT", full: "Irkutsk Time", utc: "UTC+8" },
+  { abb: "IRST", full: "Iran Standard Time", utc: "UTC+3:30" },
+  { abb: "IST", full: "Indian Standard Time", utc: "UTC+5:30" },
+  { abb: "IST", full: "Irish Standard Time", utc: "UTC+1" },
+  { abb: "IST", full: "Israel Standard Time", utc: "UTC+2" },
+  { abb: "JST", full: "Japan Standard Time", utc: "UTC+9" },
+  { abb: "KGT", full: "Kyrgyzstan time", utc: "UTC+6" },
+  { abb: "KOST", full: "Kosrae Time", utc: "UTC+11" },
+  { abb: "KRAT", full: "Krasnoyarsk Time", utc: "UTC+7" },
+  { abb: "KST", full: "Korea Standard Time", utc: "UTC+9" },
+  { abb: "LHDT", full: "Lord Howe Daylight Time", utc: "UTC+11" },
+  { abb: "LHST", full: "Lord Howe Standard Time", utc: "UTC+10:30" },
+  { abb: "LINT", full: "Line Islands Time", utc: "UTC+14" },
+  { abb: "MAGT", full: "Magadan Time", utc: "UTC+11" },
+  { abb: "MART", full: "Marquesas Islands Time", utc: "UTC-9:30" },
+  { abb: "MAWT", full: "Mawson Station Time", utc: "UTC+5" },
+  { abb: "MDT", full: "Mountain Daylight Time", utc: "UTC-6" },
+  { abb: "MHT", full: "Marshall Islands", utc: "UTC+12" },
+  { abb: "MIST", full: "Macquarie Island Station Time", utc: "UTC+11" },
+  { abb: "MIT", full: "Marquesas Islands Time", utc: "UTC-9:30" },
+  { abb: "MMT", full: "Myanmar Standard Time", utc: "UTC+6:30" },
+  { abb: "MSK", full: "Moscow Time", utc: "UTC+3" },
+  { abb: "MST", full: "Mountain Standard Time", utc: "UTC-7" },
+  { abb: "MST", full: "Malaysia Standard Time", utc: "UTC+8" },
+  { abb: "MT", full: "Mountain Time", utc: "UTC-7/UTC-6" },
+  { abb: "MUT", full: "Mauritius Time", utc: "UTC+4" },
+  { abb: "MVT", full: "Maldives Time", utc: "UTC+5" },
+  { abb: "MYT", full: "Malaysia Time", utc: "UTC+8" },
+  { abb: "NCT", full: "New Caledonia Time", utc: "UTC+11" },
+  { abb: "NDT", full: "Newfoundland Daylight Time", utc: "UTC-2:30" },
+  { abb: "NFT", full: "Norfolk Time", utc: "UTC+11" },
+  { abb: "NPT", full: "Nepal Time", utc: "UTC+5:45" },
+  { abb: "NRT", full: "Nauru Time", utc: "UTC+12" },
+  { abb: "NST", full: "Newfoundland Standard Time", utc: "UTC-3:30" },
+  { abb: "NT", full: "Newfoundland Time", utc: "UTC-3:30" },
+  { abb: "NUT", full: "Niue Time", utc: "UTC-11" },
+  { abb: "NZDT", full: "New Zealand Daylight Time", utc: "UTC+13" },
+  { abb: "NZST", full: "New Zealand Standard Time", utc: "UTC+12" },
+  { abb: "OMST", full: "Omsk Time", utc: "UTC+6" },
+  { abb: "ORAT", full: "Oral Time", utc: "UTC+5" },
+  { abb: "PDT", full: "Pacific Daylight Time", utc: "UTC-7" },
+  { abb: "PET", full: "Peru Time", utc: "UTC-5" },
+  { abb: "PETT", full: "Kamchatka Time", utc: "UTC+12" },
+  { abb: "PGT", full: "Papua New Guinea Time", utc: "UTC+10" },
+  { abb: "PHOT", full: "Phoenix Island Time", utc: "UTC+13" },
+  { abb: "PhST", full: "Philippine Standard Time", utc: "UTC+8" },
+  { abb: "PHT", full: "Philippine Time", utc: "UTC+8" },
+  { abb: "PKT", full: "Pakistan Standard Time", utc: "UTC+5" },
+  {
+    abb: "PMDT",
+    full: "Saint Pierre and Miquelon Daylight time",
+    utc: "UTC-2",
+  },
+  {
+    abb: "PMST",
+    full: "Saint Pierre and Miquelon Standard Time",
+    utc: "UTC-3",
+  },
+  { abb: "PONT", full: "Pohnpei Standard Time", utc: "UTC+11" },
+  { abb: "PST", full: "Pacific Standard Time", utc: "UTC-8" },
+  { abb: "PT", full: "Pacific Time", utc: "UTC-8/UTC-7" },
+  { abb: "PWT", full: "Palau Time", utc: "UTC+9" },
+  { abb: "PYST", full: "Paraguay Summer Time", utc: "UTC-3" },
+  { abb: "PYT", full: "Paraguay Time", utc: "UTC-4" },
+  { abb: "RET", full: "Réunion Time", utc: "UTC+4" },
+  { abb: "ROTT", full: "Rothera Research Station Time", utc: "UTC-3" },
+  { abb: "SAKT", full: "Sakhalin Island time", utc: "UTC+11" },
+  { abb: "SAMT", full: "Samara Time", utc: "UTC+4" },
+  { abb: "SAST", full: "South African Standard Time", utc: "UTC+2" },
+  { abb: "SBT", full: "Solomon Islands Time", utc: "UTC+11" },
+  { abb: "SCT", full: "Seychelles Time", utc: "UTC+4" },
+  { abb: "SGT", full: "Singapore Time", utc: "UTC+8" },
+  { abb: "SLST", full: "Sri Lanka Standard Time", utc: "UTC+5:30" },
+  { abb: "SRET", full: "Srednekolymsk Time", utc: "UTC+11" },
+  { abb: "SRT", full: "Suriname Time", utc: "UTC-3" },
+  { abb: "SST", full: "Samoa Standard Time", utc: "UTC-11" },
+  { abb: "SYOT", full: "Showa Station Time", utc: "UTC+3" },
+  { abb: "TAHT", full: "Tahiti Time", utc: "UTC-10" },
+  { abb: "TFT", full: "French Southern and Antarctic Time", utc: "UTC+5" },
+  { abb: "THA", full: "Thailand Standard Time", utc: "UTC+7" },
+  { abb: "TJT", full: "Tajikistan Time", utc: "UTC+5" },
+  { abb: "TKT", full: "Tokelau Time", utc: "UTC+13" },
+  { abb: "TLT", full: "Timor Leste Time", utc: "UTC+9" },
+  { abb: "TMT", full: "Turkmenistan Time", utc: "UTC+5" },
+  { abb: "TOT", full: "Tonga Time", utc: "UTC+13" },
+  { abb: "TRT", full: "Turkey Time", utc: "UTC+3" },
+  { abb: "TVT", full: "Tuvalu Time", utc: "UTC+12" },
+  { abb: "ULAST", full: "Ulaanbaatar Summer Time", utc: "UTC+9" },
+  { abb: "ULAT", full: "Ulaanbaatar Standard Time", utc: "UTC+8" },
+  { abb: "USZ1", full: "Kaliningrad Time", utc: "UTC+2" },
+  { abb: "UTC", full: "Coordinated Universal Time", utc: "UTC+0" },
+  { abb: "UYST", full: "Uruguay Summer Time", utc: "UTC-2" },
+  { abb: "UYT", full: "Uruguay Standard Time", utc: "UTC-3" },
+  { abb: "UZT", full: "Uzbekistan Time", utc: "UTC+5" },
+  { abb: "VET", full: "Venezuelan Standard Time", utc: "UTC-4" },
+  { abb: "VLAT", full: "Vladivostok Time", utc: "UTC+10" },
+  { abb: "VOLT", full: "Volgograd Time", utc: "UTC+4" },
+  { abb: "VOST", full: "Vostok Station Time", utc: "UTC+6" },
+  { abb: "VUT", full: "Vanuatu Time", utc: "UTC+11" },
+  { abb: "WAKT", full: "Wake Island Time", utc: "UTC+12" },
+  { abb: "WAST", full: "West Africa Summer Time", utc: "UTC+2" },
+  { abb: "WAT", full: "West Africa Time", utc: "UTC+1" },
+  { abb: "WEST", full: "Western European Summer Time", utc: "UTC+1" },
+  { abb: "WET", full: "Western European Time", utc: "UTC+0" },
+  { abb: "WFT", full: "Wallis and Futuna Time", utc: "UTC+12" },
+  { abb: "WGST", full: "West Greenland Time", utc: "UTC-3" },
+  { abb: "WGST", full: "West Greenland Summer Time", utc: "UTC-2" },
+  { abb: "WIB", full: "Western Indonesia Time", utc: "UTC+7" },
+  { abb: "WIT", full: "Eastern Indonesia Time", utc: "UTC+9" },
+  { abb: "WST", full: "Western Standard Time", utc: "UTC+8" },
+  { abb: "YAKT", full: "Yakutsk Time", utc: "UTC+9" },
+  { abb: "YEKT", full: "Yekaterinburg Time", utc: "UTC+5" },
 ];

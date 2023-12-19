@@ -2,11 +2,8 @@
  * @module _day-schedule
  */
 
-import { TimeZone } from "@lib/type-date";
-import { hour12, hour24 } from "../_day-schedule-function";
-import { DayScheduleState } from "../hooks/day-schedule-state";
+import { DayScheduleState, hour12, hour24 } from "../hooks/day-schedule-state";
 import { HourOrMinutes, TimeType, toHourOrMinutes } from "../type-day-schedule";
-import { customDayjs } from "@lib/dayjs";
 import dayjs from "dayjs";
 
 /**
@@ -51,8 +48,6 @@ export const DayScheduleReducer = (
           ...state.selectedTime,
           hour: action.hour,
         },
-        /** @todo 実際にエラーが起きてるのこっちかも。
-         * 要調査 */
         displayTimes: [
           toTimeZoneTime(state, state.timeZone.from, state.timeZone.to[0]),
         ],
@@ -111,31 +106,24 @@ export const DayScheduleReducer = (
 };
 
 /**
- *
- * @param state
- * @param fromTimeZone
- * @param toTimeZoneTime
- * @returns
+ * 基準日をタイムゾーンに応じた時間に変換する
  */
 export const toTimeZoneTime = (
-  state: DayScheduleState,
-  fromTimeZone: TimeZone,
-  toTimeZoneTime: TimeZone
+  baseDate: DayScheduleState["startDate"],
+  timezone: DayScheduleState["timeZone"]
 ): string => {
-  const { startDate, selectedTime } = state;
+  // UTC文字列から数値を取得する
+  const convertUTCNum = (utcString: string): number => {
+    const utcNum = Number(utcString.replace("UTC", "").replace(/:\d{2}/, ""));
+    return utcNum;
+  };
 
-  /**
-   * @todo dayjsを使わずに、こっちの方がいいかも
-   *   https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DateTimeFormat#using_locales
-   */
+  const fromUTCNum = convertUTCNum(timezone.from.utc);
+  const toUTCNum = convertUTCNum(timezone.to[timezone.toIndex].utc);
+  const currentHour = dayjs(baseDate).hour();
+  const correctHour = currentHour + (fromUTCNum - toUTCNum);
 
-  const YMD = customDayjs(startDate).format("YYYY-MM-DD");
-  let baseTime = `${YMD} ${selectedTime.hour}:${selectedTime.minute} ${selectedTime.type}`;
-  if (selectedTime.type === "24h") {
-    baseTime = `${YMD} ${selectedTime.hour}:${selectedTime.minute}`;
-  }
-
-  const timeInBaseTimezone = dayjs.tz(`${baseTime}`, fromTimeZone);
-
-  return timeInBaseTimezone.tz(toTimeZoneTime).format("HH:mm A");
+  return correctHour <= 0
+    ? dayjs(baseDate).add(correctHour, "hour").format("hh:mm A")
+    : dayjs(baseDate).subtract(correctHour, "hour").format("hh:mm A");
 };

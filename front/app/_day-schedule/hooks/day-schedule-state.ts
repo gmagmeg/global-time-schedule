@@ -9,13 +9,47 @@
 
 import { DateString, HourMinutesFormat, TimeZone } from "@/library/type-date";
 import { customDayjs } from "@lib/dayjs";
-import { HourOrMinutes, TimeType } from "../type-day-schedule";
-import { hour12, minutes } from "../_day-schedule-function";
+import {
+  HourNumber,
+  HourOrMinutes,
+  MinutesNumber,
+  TimeType,
+} from "../type-day-schedule";
+
+/**
+ * 0と30のみを選択できるようにしている
+ */
+export const minutes: MinutesNumber[] = [0, 30];
+/**
+ * 0から12までの時間を扱う
+ */
+export const hour12: HourNumber[] = Array.from(
+  { length: 13 },
+  (_, index) => index as HourNumber
+);
+/**
+ * 0から24までの時間を扱う
+ */
+export const hour24: HourNumber[] = Array.from(
+  { length: 25 },
+  (_, index) => index as HourNumber
+);
+
+/**
+ * 例：UTC+10, UTC-8
+ */
+type UtcString = string;
+
+/**
+ * abb: Timezone
+ */
+export type TimeZoneInfo = {
+  abb: TimeZone;
+  full: HourMinutesFormat;
+  utc: UtcString;
+};
 
 export type DayScheduleState = {
-  /**
-   * 開始日を表す日付文字列
-   */
   startDate: DateString;
   /**
    * 時間と分の選択肢を表すオブジェクト
@@ -37,19 +71,21 @@ export type DayScheduleState = {
   };
   displayTimes: HourMinutesFormat[];
   /**
-   * @todo 後でこの情報は上のコンポーネントに移動する
-   *
    * タイムゾーンに関する情報を含む配列
    * - from: タイムゾーンを表す文字列
    * - to: タイムゾーンに応じた時間
    */
   timeZone: {
-    from: TimeZone;
-    to: TimeZone[];
+    from: TimeZoneInfo;
+    to: TimeZoneInfo[];
+    toIndex: number;
   };
 };
 
 export const dayScheduleState: DayScheduleState = {
+  /**
+   *  スケジュールの開始日時を "YYYY-MM-DD 00:00" の形式で格納します。
+   */
   startDate: customDayjs().format("YYYY-MM-DD 00:00"),
   timeSelectOption: {
     hour: hour12,
@@ -61,5 +97,9 @@ export const dayScheduleState: DayScheduleState = {
     type: "AM",
   },
   displayTimes: ["00:00 AM", "00:00 AM", "00:00 AM"],
-  timeZone: { from: "Asia/Tokyo", to: ["America/New_York", "Europe/Paris"] },
+  timeZone: {
+    from: { abb: "JST", full: "Japan Standard Time", utc: "UTC+9" },
+    to: [{ abb: "UTC", full: "Coordinated Universal Time", utc: "UTC+0" }],
+    toIndex: 0,
+  },
 };

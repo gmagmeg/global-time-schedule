@@ -1,58 +1,48 @@
 import { correctToSunday } from "./dayjs";
-import {
-  HourNumber,
-  MinutesNumber,
-  TimeType,
-} from "@app/_day-schedule/type-day-schedule";
 import { toTimeZoneTime } from "@app/_day-schedule/hooks/day-schedule-reducer";
-import { dayScheduleState } from "@app/_day-schedule/hooks/day-schedule-state";
 
-describe("toTimeZoneTime", () => {
-  beforeAll(() => {});
+describe("日本時間をベースに、他のタイムゾーン時間へ変換する", () => {
+  it.each([
+    ["UTC+1", "04:00 PM"],
+    ["UTC-5", "10:00 AM"],
+    ["UTC-8", "07:00 AM"],
+  ])(
+    "日本時間をベースに、%sのタイムゾーンの時間へ変換する",
+    (toUTC, expected) => {
+      /**
+       * Arrange
+       */
+      const timeZone = {
+        from: {
+          abb: "JST",
+          full: "Japan Standard Time",
+          utc: "UTC+9",
+        },
+        to: [
+          {
+            abb: toUTC,
+            full: "",
+            utc: toUTC,
+          },
+        ],
+        toIndex: 0,
+      };
 
-  afterAll(() => {});
+      /**
+       * Act
+       */
+      const result = toTimeZoneTime("2023-12-17T12:00:00", timeZone);
 
-  it("日本時間をベースに、America/New_Yorkへ変換する", () => {
-    // Arrange
-    const selectedTime = {
-      hour: 8 as HourNumber,
-      minute: 0 as MinutesNumber,
-      type: "AM" as TimeType,
-    };
-    const timeZone = {
-      from: "Asia/Tokyo",
-      to: "America/New_York",
-    };
-
-    // Act
-    const result = toTimeZoneTime(dayScheduleState, timeZone.from, timeZone.to);
-
-    // Assert
-    expect(result).toBe("10:00 AM");
-  });
-
-  it("日本時間をベースに、America/New_Yorkへ変換する", () => {
-    // Arrange
-    const selectedTime = {
-      hour: 9 as HourNumber,
-      minute: 0 as MinutesNumber,
-      type: "PM" as TimeType,
-    };
-    const timeZone = {
-      from: "Asia/Tokyo",
-      to: "America/New_York",
-    };
-
-    // Act
-    const result = toTimeZoneTime(dayScheduleState, timeZone.from, timeZone.to);
-
-    // Assert
-    expect(result).toBe("10:00 AM");
-  });
+      /**
+       * Assert
+       */
+      expect(result).toBe(expected);
+    }
+  );
 });
 
 describe("GlobalMenuState", () => {
-  describe("correctToSunday", () => {
+  describe("１週間の日付を日曜日始まりに補正する", () => {
     it.each([
       ["2023-10-30"], // 月曜日
       ["2023-10-31"], // 火曜日
