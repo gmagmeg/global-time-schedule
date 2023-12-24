@@ -23,6 +23,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    timeZones: ["JST", "UTC"],
+    timeZones: ["JST (UTC+8)", "UTC (UTC+0)", "-----"],
   },
 };

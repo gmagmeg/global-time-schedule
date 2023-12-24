@@ -2,6 +2,7 @@
  * @module _day-schedule
  */
 
+import { DateTimeString } from "@/library/type-date";
 import { DayScheduleState, hour12, hour24 } from "../hooks/day-schedule-state";
 import { HourOrMinutes, TimeType, toHourOrMinutes } from "../type-day-schedule";
 import dayjs from "dayjs";
@@ -42,15 +43,15 @@ export const DayScheduleReducer = (
      * - 表示時間の表記を修正する
      */
     case "CHANGE_HOUR_SELECT_BOX":
+      let dateTimeString = toTimeZoneTime(state.startDate, state.timeZone);
       return {
         ...state,
         selectedTime: {
           ...state.selectedTime,
           hour: action.hour,
         },
-        displayTimes: [
-          toTimeZoneTime(state, state.timeZone.from, state.timeZone.to[0]),
-        ],
+        // @todo 配列にする
+        displayTimes: [dateTimeString],
       };
     /*
      * 分の選択肢を変更する
@@ -63,9 +64,7 @@ export const DayScheduleReducer = (
           ...state.selectedTime,
           minute: action.minutes,
         },
-        displayTimes: [
-          toTimeZoneTime(state, state.timeZone.from, state.timeZone.to[0]),
-        ],
+        displayTimes: [toTimeZoneTime(state.startDate, state.timeZone)],
       };
     /**
      * AM/PM/24hの切り替えに合わせて、次のことを行う
@@ -95,9 +94,7 @@ export const DayScheduleReducer = (
           ...state.timeSelectOption,
           hour: hourOptions,
         },
-        displayTimes: [
-          toTimeZoneTime(state, state.timeZone.from, state.timeZone.to[0]),
-        ],
+        displayTimes: [toTimeZoneTime(state.startDate, state.timeZone)],
       };
 
     default:
@@ -111,7 +108,7 @@ export const DayScheduleReducer = (
 export const toTimeZoneTime = (
   baseDate: DayScheduleState["startDate"],
   timezone: DayScheduleState["timeZone"]
-): string => {
+): DateTimeString => {
   // UTC文字列から数値を取得する
   const convertUTCNum = (utcString: string): number => {
     const utcNum = Number(utcString.replace("UTC", "").replace(/:\d{2}/, ""));

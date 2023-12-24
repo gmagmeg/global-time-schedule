@@ -38,7 +38,7 @@ export const hour24: HourNumber[] = Array.from(
 /**
  * 例：UTC+10, UTC-8
  */
-type UtcString = string;
+export type UtcString = string;
 
 /**
  * abb: Timezone

@@ -19,6 +19,6 @@ export type DateTimeString = string;
 export type HourMinutesFormat = string;
 
 /**
- * 出来れば厳密にしたいが、如何せん多すぎるので、stringで妥協する
+ * ex：UTC, AST
  */
 export type TimeZone = string;

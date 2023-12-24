@@ -1,16 +1,16 @@
 /**
- * @module _main-contents
+ * @module schedule
  */
 
 import { TimeZone } from "@/library/type-date";
 
-export type MainContentsState = {
+export type ScheduleState = {
   /**
    * タイムゾーンを表す文字列
    */
   timeZones: TimeZone[];
 };
 
-export const mainContentsState: MainContentsState = {
+export const scheduleState: ScheduleState = {
   timeZones: ["JST", "UTF"],
 };

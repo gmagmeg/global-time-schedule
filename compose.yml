@@ -12,4 +12,4 @@ services:
     ports:
       - "5000:3000"
     environment:
-      - TZ=Asia/Tokyoz
+      - TZ=Asia/Tokyo

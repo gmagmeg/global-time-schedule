@@ -1,19 +1,19 @@
+"use client"
 /**
- * @module _main-contents/main-contents
+ * @module schedule/page
  */
-
 import { Box, Grid, useDisclosure } from "@chakra-ui/react";
 import { FC, useReducer } from "react";
 import { GlobalMenu } from "../_global-menu/global-menu";
 import { WeekSchedule } from "../_week-schedule/week-schedule";
-import { mainContentsReducer } from "./hooks/main-contents-reducer";
-import { mainContentsState } from "./hooks/main-contents-state";
+import { mainContentsReducer } from "./hooks/schedule-reducer";
+import { scheduleState } from "./hooks/schedule-state";
 import { toTimeZoneTime } from "@app/_day-schedule/type-day-schedule"
 
-export const MainContents: FC = () => {
+export default function Schedule() {
   const [mainState, mainDispatch] = useReducer(
     mainContentsReducer,
-    mainContentsState
+    scheduleState
   );
 
   const { onClose } = useDisclosure();

@@ -1,20 +1,20 @@
 /**
- * @module _main-contents
+ * @module schedule
  */
 
 import { TimeZone } from "@lib/type-date";
-import { MainContentsState } from "./main-contents-state";
+import { ScheduleState } from "./schedule-state";
 
-export type MainContentsAction = {
+export type ScheduleAction = {
   type: "CHANGE_TIME_ZONE";
   timeZone: TimeZone;
   index: number;
 };
 
 export const mainContentsReducer = (
-  state: MainContentsState,
-  action: MainContentsAction
-): MainContentsState => {
+  state: ScheduleState,
+  action: ScheduleAction
+): ScheduleState => {
   switch (action.type) {
     case "CHANGE_TIME_ZONE":
       return {

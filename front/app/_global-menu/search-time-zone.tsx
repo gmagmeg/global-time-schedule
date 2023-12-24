@@ -13,7 +13,7 @@ import {
   Radio,
   RadioGroup,
 } from "@chakra-ui/react";
-import { timezones as initTimezones } from "@lib/timezone_mapping.js";
+import { timezones as initTimezones } from "@lib/timezone_mapping";
 import { RiFilterLine } from "react-icons/ri";
 
 import { FC, useState } from "react";
@@ -70,9 +70,9 @@ export const SearchTimeZone: FC<{
           ml={2}
           onChange={(value) => onClickedTimeZone(value)}
         >
-          {timeZones.map(({ add, full }) => (
-            <ListItem mb={2} key={add} value={add}>
-              <Radio value={add}>{full}</Radio>
+          {timeZones.map(({ abb, full }) => (
+            <ListItem mb={2} key={abb} value={abb}>
+              <Radio value={abb}>{full}</Radio>
             </ListItem>
           ))}
         </RadioGroup>
