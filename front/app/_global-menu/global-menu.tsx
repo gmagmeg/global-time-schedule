@@ -25,23 +25,25 @@ import { CopyButton } from "../_common-button/copy-button";
 import { DateString, TimeZone } from "@/library/type-date";
 import { createWeekRange } from "@/library/dayjs";
 import { ImCancelCircle } from "react-icons/im";
-import Image from "next/image";
-import Head from "next/head";
-
 
 export const GlobalMenu: FC<{
-  timeZones: TimeZone[];
+  weekStartDate: DateString;
+  handleChangeWeekStartDate: (weekStartDate: DateString) => void;
   handleChangeTimeZone: (timeZone: string) => void;
   handleModalClose: () => void;
-}> = ({ timeZones, handleChangeTimeZone }) => {
-  const [selectDate, setSelectDate] = useState("2023-11-26");
+}> = ({
+  handleChangeWeekStartDate,
+  weekStartDate,
+  timeZones,
+  handleChangeTimeZone,
+}) => {
   const [weekRange, setWeekRange] = useState(createWeekRange("2023-11-26"));
 
   /**
    * 日付の選択を変更した時の処理
    */
   const handleSelectDate = (selectDate: DateString) => {
-    setSelectDate(selectDate);
+    handleChangeWeekStartDate(selectDate);
     setWeekRange(createWeekRange(selectDate));
   };
 
@@ -57,12 +59,14 @@ export const GlobalMenu: FC<{
   };
 
   return (
-    <Box bgColor={"#B4C6EA"} >
-      <Heading as={"h1"} >ここにロゴを入れる</Heading>
-      {/* <Image src="/sitelogo.png" width={500} height={100} alt={"VTubeWorld Scheduler"} /> */}
+    <Box bgColor={"#B4C6EA"}>
       {/* タイムゾーンの設定ボタン */}
-      <Flex px={4} roundedTopLeft={12} roundedTopRight={12} alignItems={"baseline"}>
-
+      <Flex
+        px={4}
+        roundedTopLeft={12}
+        roundedTopRight={12}
+        alignItems={"baseline"}
+      >
         {timeZones.map((timeZone: TimeZone, index: number) => (
           <Flex key={timeZone} w={"30%"} alignItems={"baseline"} mt={6}>
             <Text pr={2}>
@@ -91,19 +95,19 @@ export const GlobalMenu: FC<{
           />
           <Button onClick={onClose}>
             <Icon as={ImCancelCircle} mr={2} />
-            入力キャンセル</Button>
+            入力キャンセル
+          </Button>
         </ModalContent>
       </Modal>
       <Box mt={1}>
         <SelectStartDate
-          selectedStartDate={selectDate}
+          selectedStartDate={weekStartDate}
           handleStartDate={handleSelectDate}
         />
       </Box>
       <SimpleGrid minChildWidth="1rem" spacing="40px" p={2} mt={1}>
-        <SelectWeekDays selectedDate={selectDate} weekRange={weekRange} />
-        
+        <SelectWeekDays selectedDate={weekStartDate} weekRange={weekRange} />
       </SimpleGrid>
-      </Box>
+    </Box>
   );
 };

@@ -8,5 +8,6 @@ module.exports = {
     "^@/(.*)$": "<rootDir>/$1",
     "^@app/(.*)$": "<rootDir>/app/$1",
     "^@lib/(.*)$": "<rootDir>/library/$1",
+    "^@hooks/(.*)$": "<rootDir>/hooks/$1",
   },
 };

@@ -12,10 +12,12 @@ import { createWeekRange } from "@/library/dayjs";
 import { DateString } from "@/library/type-date";
 import { Box } from "@chakra-ui/react";
 
-export const WeekSchedule: FC<{ startDate: DateString }> = ({ startDate }) => {
+export const WeekSchedule: FC<{ weekStartDate: DateString }> = ({
+  weekStartDate,
+}) => {
   const [state, dispatch] = useReducer(weekScheduleReducer, weekScheduleState);
 
-  const weekRange = createWeekRange(startDate);
+  const weekRange = createWeekRange(weekStartDate);
   const isSelectedDate = (targetDate: DateString): boolean => {
     return state.selectedDate === targetDate;
   };

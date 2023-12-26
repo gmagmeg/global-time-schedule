@@ -74,11 +74,16 @@ export const DaySchedule: FC<{
         handleChange={onChangeTimeType}
       />
       <Box h={10} mx={4} borderRight={"1px"} />
-      <Box mr={8}>
-        <CopyButton copyText="" />
-      </Box>
-      <Text>{state.displayTimes[0]}</Text>
+
+      {state.displayTimes.map((displayTime, index) => (
+        <Text key={index} mr={8}>
+          {displayTime}
+        </Text>
+      ))}
       <Spacer maxW={8} />
+      <Box mr={8}>
+        <CopyButton />
+      </Box>
     </Flex>
   );
 };

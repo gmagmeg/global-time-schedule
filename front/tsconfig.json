@@ -21,7 +21,8 @@
     "paths": {
       "@/*": ["./*"],
       "@app/*": ["./app/*"],
-      "@lib/*": ["./library/*"]
+      "@lib/*": ["./library/*"],
+      "@hooks/*": ["./hooks/*"]
     }
   },
   "include": [
@@ -31,8 +32,9 @@
     "**/**/*.ts",
     "**/**/*.tsx",
     ".next/types/**/*.ts",
-    "app/_day-schedule/hooks/test-day-schedule-reducer.jest"
-, "app/main/page.js"  ],
+    "app/_day-schedule/hooks/test-day-schedule-reducer.jest",
+    "app/main/page.js"
+  ],
   "exclude": ["node_modules"],
   "typedocOptions": {
     "entryPoints": ["app/**/*.tsx", "app/**/*.ts", "library/*"],

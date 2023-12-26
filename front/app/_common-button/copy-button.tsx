@@ -8,10 +8,10 @@ import { FiCopy } from "react-icons/fi";
 import { FaCheck } from "react-icons/fa";
 
 export const CopyButton: FC<{
-  copyText: string;
+  copyText?: string;
   width?: string;
   handleClickCopyButton?: () => void;
-}> = ({ copyText = "コピーする", width="100%" }) => {
+}> = ({ copyText = "コピーする", width = "100%" }) => {
   const [isCopied, setIsCopied] = useState(false);
 
   const copyToClipboard = async () => {

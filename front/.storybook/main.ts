@@ -28,6 +28,7 @@ const config: StorybookConfig = {
           ...baseConfig.resolve?.alias,
           "@app": path.resolve(__dirname, "../app/"),
           "@lib": path.resolve(__dirname, "../library/"),
+          "@hooks": path.resolve(__dirname, "../hooks/"),
           "@": path.resolve(__dirname, "../"),
         },
       },

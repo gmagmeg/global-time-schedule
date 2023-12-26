@@ -11,7 +11,7 @@ export type ScheduleAction = {
   index: number;
 };
 
-export const mainContentsReducer = (
+export const scheduleReducer = (
   state: ScheduleState,
   action: ScheduleAction
 ): ScheduleState => {

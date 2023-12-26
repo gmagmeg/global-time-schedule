@@ -2,7 +2,15 @@
  * @module _global-menu
  */
 
-import { Box, Icon, Radio, RadioGroup, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Icon,
+  Radio,
+  RadioGroup,
+  Stack,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { FC, useState } from "react";
 import { BiFirstPage, BiLastPage } from "react-icons/bi";
 import { StartDate, toDateString } from "./type-global-menu";
@@ -80,12 +88,12 @@ export const SelectStartDate: FC<{
           mr={4}
         />
         {startDateRange.map((startDate, index) => (
-          <Box key={startDate.sun}>
-            <Radio value={startDate.sun} mr={2}>
+          <VStack key={startDate.sun}>
+            <Radio value={startDate.sun}>
               <Text color="red">{startDate.sun}（日）</Text>
             </Radio>
             <Radio value={startDate.mon}>{startDate.mon}（月）</Radio>
-          </Box>
+          </VStack>
         ))}
         <Icon
           onClick={() => handleClickMoveDateRange("next")}

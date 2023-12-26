@@ -1,46 +1,83 @@
-"use client"
+"use client";
 /**
  * @module schedule/page
  */
-import { Box, Grid, useDisclosure } from "@chakra-ui/react";
-import { FC, useReducer } from "react";
+import { Box, Grid, Heading, useDisclosure } from "@chakra-ui/react";
+import { useReducer } from "react";
 import { GlobalMenu } from "../_global-menu/global-menu";
 import { WeekSchedule } from "../_week-schedule/week-schedule";
-import { mainContentsReducer } from "./hooks/schedule-reducer";
-import { scheduleState } from "./hooks/schedule-state";
-import { toTimeZoneTime } from "@app/_day-schedule/type-day-schedule"
+import {
+  scheduleDateState as _scheduleDateState,
+  ScheduleDateReducer,
+} from "@hooks/schedule-date-reducer";
+import {
+  TimeZoneReducer,
+  timeZoneState as _timeZoneState,
+  toTimeZone,
+} from "@hooks/time-zone-reducer";
+import { toDateString } from "@/library/type-date";
+import { TimeZoneSetting } from "../_time-zone-setting/time-zone-setting";
 
 export default function Schedule() {
-  const [mainState, mainDispatch] = useReducer(
-    mainContentsReducer,
-    scheduleState
+  /**
+   * タイムゾーンに関する状態を扱う
+   */
+  const [timeZoneState, timeZoneDispatch] = useReducer(
+    TimeZoneReducer,
+    _timeZoneState
   );
 
+  /**
+   * 日付に関する状態を扱う
+   */
+  const [scheduleDateState, scheduleDateDispatch] = useReducer(
+    ScheduleDateReducer,
+    _scheduleDateState
+  );
+  const onChangeWeekStartDate = (weekStartDate: string): void => {
+    scheduleDateDispatch({
+      type: "DECIDE_SCHEDULE_START_DATE",
+      weekStartDate: toDateString(weekStartDate),
+    });
+  };
+
+  /**
+   * モーダルに関する制御を行う
+   */
   const { onClose } = useDisclosure();
 
   const onChangeTimeZone = (timeZone: string): void => {
-    mainDispatch({
+    timeZoneDispatch({
       type: "CHANGE_TIME_ZONE",
-      timeZone: toTimeZoneTime(timeZone),
-      index: 0
+      timeZone: toTimeZone(timeZone),
+      index: 0,
     });
-  }
+  };
 
   const _onClose = (): void => {
-    onClose()
-  }
+    onClose();
+  };
 
   return (
     <Grid templateColumns="1fr" gap={6}>
-      <GlobalMenu
-        timeZones={mainState.timeZones}
+      <Box bgColor={"#B4C6EA"}>
+        <Heading as={"h1"}>ここにロゴを入れる</Heading>
+        {/* <Image src="/sitelogo.png" width={500} height={100} alt={"VTubeWorld Scheduler"} /> */}
+      </Box>
+      {
+        /** TimeZoneSettingの中をうまいこと整理しながら、reducerの再定義 */
+      }
+      <TimeZoneSetting
+        weekStartDate={scheduleDateState.weekStartDate}
         handleChangeTimeZone={onChangeTimeZone}
+        handleChangeWeekStartDate={onChangeWeekStartDate}
+        timeZones={timeZoneState.timeZones}
         handleModalClose={_onClose}
       />
       {/* WeekSchedule コンポーネントをスクロール可能にするためのラッパー要素 */}
       <Box overflowY="auto" maxHeight={"60%"}>
-        <WeekSchedule startDate="2023-11-26" />
+        <WeekSchedule weekStartDate={scheduleDateState.weekStartDate} />
       </Box>
     </Grid>
   );
-};
+}
