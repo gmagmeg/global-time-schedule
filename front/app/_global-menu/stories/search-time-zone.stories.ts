@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
-import { SearchTimeZone } from "@app/_global-menu/search-time-zone";
+import { SearchTimeZone } from "@/app/_time-zone-setting/search-time-zone";
 
 const documentation = `コンポーネントの説明`;
 

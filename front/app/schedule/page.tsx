@@ -2,9 +2,8 @@
 /**
  * @module schedule/page
  */
-import { Box, Grid, Heading, useDisclosure } from "@chakra-ui/react";
+import { Box, Grid, Heading } from "@chakra-ui/react";
 import { useReducer } from "react";
-import { GlobalMenu } from "../_global-menu/global-menu";
 import { WeekSchedule } from "../_week-schedule/week-schedule";
 import {
   scheduleDateState as _scheduleDateState,
@@ -17,6 +16,7 @@ import {
 } from "@hooks/time-zone-reducer";
 import { toDateString } from "@/library/type-date";
 import { TimeZoneSetting } from "../_time-zone-setting/time-zone-setting";
+import { WeekDayRange } from "../_week-day-range/week-day-range";
 
 export default function Schedule() {
   /**
@@ -41,21 +41,15 @@ export default function Schedule() {
     });
   };
 
-  /**
-   * モーダルに関する制御を行う
-   */
-  const { onClose } = useDisclosure();
-
-  const onChangeTimeZone = (timeZone: string): void => {
+  const onChangeTimeZone = (
+    changeTimezoneIndex: number,
+    timeZone: string
+  ): void => {
     timeZoneDispatch({
       type: "CHANGE_TIME_ZONE",
       timeZone: toTimeZone(timeZone),
-      index: 0,
+      index: changeTimezoneIndex,
     });
-  };
-
-  const _onClose = (): void => {
-    onClose();
   };
 
   return (
@@ -64,20 +58,19 @@ export default function Schedule() {
         <Heading as={"h1"}>ここにロゴを入れる</Heading>
         {/* <Image src="/sitelogo.png" width={500} height={100} alt={"VTubeWorld Scheduler"} /> */}
       </Box>
-      {
-        /** TimeZoneSettingの中をうまいこと整理しながら、reducerの再定義 */
-      }
+      {/** TimeZoneSettingの中をうまいこと整理しながら、reducerの再定義 */}
       <TimeZoneSetting
-        weekStartDate={scheduleDateState.weekStartDate}
         handleChangeTimeZone={onChangeTimeZone}
-        handleChangeWeekStartDate={onChangeWeekStartDate}
         timeZones={timeZoneState.timeZones}
-        handleModalClose={_onClose}
       />
+      {/* handleChangeWeekStartDate={onChangeWeekStartDate} */}
+      {/* handleModalClose={_onClose} */}
       {/* WeekSchedule コンポーネントをスクロール可能にするためのラッパー要素 */}
-      <Box overflowY="auto" maxHeight={"60%"}>
-        <WeekSchedule weekStartDate={scheduleDateState.weekStartDate} />
-      </Box>
+      <WeekDayRange
+        weekStartDate={scheduleDateState.weekStartDate}
+        handleChangeWeekStartDate={onChangeWeekStartDate}
+      />
+      <WeekSchedule weekStartDate={scheduleDateState.weekStartDate} />
     </Grid>
   );
 }

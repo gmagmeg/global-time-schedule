@@ -1,5 +1,5 @@
 /**
- * @module _global-menu
+ * @module _select-start-date
  */
 
 import {

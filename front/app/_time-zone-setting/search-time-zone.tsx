@@ -1,7 +1,6 @@
 /**
- * @module _global-menu
+ * @module time-zone-setting
  */
-
 import {
   Box,
   Icon,
@@ -21,10 +20,8 @@ import { TimeZone } from "@/library/type-date";
 
 export const SearchTimeZone: FC<{
   selectedTimezone: TimeZone;
-  timezoneIndex: number;
   handleChangeTimeZone: (timeZone: string) => void;
-  handleModalClose: () => void;
-}> = ({ selectedTimezone, timezoneIndex, handleChangeTimeZone, handleModalClose }) => {
+}> = ({ selectedTimezone, handleChangeTimeZone }) => {
   /**
    * タイムゾーンの絞り込みを行う処理
    */
@@ -39,16 +36,6 @@ export const SearchTimeZone: FC<{
       );
       setTimeZones(filteredResult);
     }
-  };
-
-  /**
-   * タイムゾーンが選択された時の処理
-   * モーダルで開かれている都合上、indexの指定が難しいため、ここでは0で固定する。
-   * 親コンポーネント側で再度指定する
-   */
-  const onClickedTimeZone = (timeZone: string): void => {
-    handleChangeTimeZone(timeZone);
-    handleModalClose();
   };
 
   return (
@@ -68,7 +55,7 @@ export const SearchTimeZone: FC<{
         <RadioGroup
           value={selectedTimezone}
           ml={2}
-          onChange={(value) => onClickedTimeZone(value)}
+          onChange={(value) => handleChangeTimeZone(value)}
         >
           {timeZones.map(({ abb, full }) => (
             <ListItem mb={2} key={abb} value={abb}>

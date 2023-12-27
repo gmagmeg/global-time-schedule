@@ -16,7 +16,7 @@ import {
   Text,
   useDisclosure,
 } from "@chakra-ui/react";
-import { SearchTimeZone } from "./search-time-zone";
+import { SearchTimeZone } from "../_time-zone-setting/search-time-zone";
 import { CiTimer } from "react-icons/ci";
 
 import { SelectStartDate } from "./select-start-date";
