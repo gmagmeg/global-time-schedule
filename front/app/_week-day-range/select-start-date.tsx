@@ -1,9 +1,8 @@
 /**
- * @module _select-start-date
+ * @module _week-day-range
  */
 
 import {
-  Box,
   Icon,
   Radio,
   RadioGroup,
@@ -11,9 +10,8 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { BiFirstPage, BiLastPage } from "react-icons/bi";
-import { StartDate, toDateString } from "./type-global-menu";
 import { DateString } from "@lib/type-date";
 import { customDayjs } from "@/library/dayjs";
 
@@ -23,40 +21,56 @@ export const SelectStartDate: FC<{
   selectedStartDate: DateString;
   handleStartDate: (nextValue: string) => void;
 }> = ({ selectedStartDate, handleStartDate }) => {
-  const selectedDay = customDayjs(selectedStartDate).format("MM/DD");
 
   /**
    * 選択日を基準とした、開始日のリストを作成する
    */
-  const createStartDateList = (currentDate: string): StartDate[] => {
+  const createStartDateList = (currentDate: string): {
+    sun: {
+      display: string;
+      value: string;
+    },
+    mon: {
+      display: string;
+      value: string
+    };
+    }[] => {
     const currentDayjs = customDayjs(currentDate);
     const baseDate =
       currentDayjs.weekday() === 0 ? currentDayjs : currentDayjs.weekday(0);
 
     return [
       {
-        sun: baseDate.subtract(1, "week").format("MM/DD"),
-        mon: baseDate.subtract(6, "day").format("MM/DD"),
+        sun: {
+          display: baseDate.subtract(1, "week").format("MM/DD"),
+          value: baseDate.subtract(1, "week").format("YYYY-MM-DD"),
+        },
+        mon: {
+          display: baseDate.subtract(6, "day").format("MM/DD"),
+          value: baseDate.subtract(6, "day").format("MM/DD"),
+        }
       },
       {
-        sun: baseDate.format("MM/DD"),
-        mon: baseDate.add(1, "day").format("MM/DD"),
+        sun: {
+          display: baseDate.format("MM/DD"),
+          value: baseDate.format("YYYY-MM-DD"),
+        },
+        mon: {
+          display: baseDate.add(1, "day").format("MM/DD"),
+          value: baseDate.add(1, "day").format("YYYY-MM-DD"),
+        }
       },
       {
-        sun: baseDate.add(1, "week").format("MM/DD"),
-        mon: baseDate.add(8, "day").format("MM/DD"),
+        sun: {
+          display: baseDate.add(1, "week").format("MM/DD"),
+          value: baseDate.add(1, "week").format("YYYY-MM-DD"),
+        },
+        mon: {
+          display: baseDate.add(8, "day").format("MM/DD"),
+          value: baseDate.add(8, "day").format("YYYY-MM-DD"),
+        }
       },
     ];
-  };
-  const [startDateRange, setStartDateRange] = useState(
-    createStartDateList(selectedStartDate)
-  );
-
-  /**
-   * 開始日を変更したときの処理
-   */
-  const onChange = (nextValue: string) => {
-    handleStartDate(toDateString(nextValue));
   };
 
   /**
@@ -74,12 +88,11 @@ export const SelectStartDate: FC<{
         .format("YYYY-MM-DD");
     }
 
-    setStartDateRange(createStartDateList(moveDate));
     handleStartDate(moveDate);
   };
 
   return (
-    <RadioGroup value={selectedDay} onChange={onChange} size={"lg"}>
+    <RadioGroup value={selectedStartDate} onChange={handleStartDate} size={"lg"}>
       <Stack direction="row" justifyContent={"space-between"}>
         <Icon
           onClick={() => handleClickMoveDateRange("prev")}
@@ -87,12 +100,13 @@ export const SelectStartDate: FC<{
           boxSize={6}
           mr={4}
         />
-        {startDateRange.map((startDate, index) => (
-          <VStack key={startDate.sun}>
-            <Radio value={startDate.sun}>
-              <Text color="red">{startDate.sun}（日）</Text>
+        {/** 週の開始日選択肢 */}
+        {createStartDateList(selectedStartDate).map((startDate) => (
+          <VStack key={startDate.sun.value}>
+            <Radio value={startDate.sun.value}>
+              <Text color="red">{startDate.sun.display}（日）</Text>
             </Radio>
-            <Radio value={startDate.mon}>{startDate.mon}（月）</Radio>
+            <Radio value={startDate.mon.value}>{startDate.mon.display}（月）</Radio>
           </VStack>
         ))}
         <Icon

@@ -19,7 +19,7 @@ import {
 import { SearchTimeZone } from "../_time-zone-setting/search-time-zone";
 import { CiTimer } from "react-icons/ci";
 
-import { SelectStartDate } from "./select-start-date";
+import { SelectStartDate } from "../_week-day-range/select-start-date";
 import { SelectWeekDays } from "./select-week-days";
 import { CopyButton } from "../_common-button/copy-button";
 import { DateString, TimeZone } from "@/library/type-date";

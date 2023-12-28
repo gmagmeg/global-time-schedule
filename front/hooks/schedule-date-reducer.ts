@@ -14,6 +14,9 @@ export type ScheduleDateState = {
   weekStartDate: DateString;
 };
 
+/**
+ * ex: 2023-11-26
+ */
 export const scheduleDateState = {
   weekStartDate: "2023-11-26",
 };
