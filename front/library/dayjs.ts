@@ -3,8 +3,7 @@ import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import localDate from "dayjs/plugin/localeData";
 import weekday from "dayjs/plugin/weekday";
-import { DayScheduleState } from "@/app/_day-schedule/hooks/day-schedule-state";
-import { TimeZone, DateString } from "./type-date";
+import { DateString, toDateString } from "./type-date";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -17,14 +16,14 @@ export type CustomDayjs = Dayjs;
 
 /**
  * 開始日を基準に、1週間の日付を作成する
- * @param baseDate
- * @returns
  */
 export const createWeekRange = (baseDate: DateString): DateString[] => {
   const startDate = customDayjs(baseDate);
-  const weekRange = [];
+  const weekRange: DateString[] = [];
+  let dateString: DateString;
   for (let i = 0; i <= 6; i++) {
-    weekRange.push(startDate.add(i, "day").format("YYYY-MM-DD"));
+    dateString = toDateString(startDate.add(i, "day").format("YYYY-MM-DD"));
+    weekRange.push(dateString);
   }
 
   return weekRange;
@@ -34,5 +33,5 @@ export const createWeekRange = (baseDate: DateString): DateString[] => {
 export const correctToSunday = (date: DateString): DateString => {
   const now = customDayjs(date);
   const nextSunday = now.day(7);
-  return nextSunday.format("YYYY-MM-DD");
+  return toDateString(nextSunday.format("YYYY-MM-DD"));
 };

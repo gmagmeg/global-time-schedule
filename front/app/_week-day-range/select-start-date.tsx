@@ -76,8 +76,8 @@ export const SelectStartDate: FC<{
   /**
    * 左右の矢印をクリックして、日付の範囲を変更する場合の処理
    */
-  const handleClickMoveDateRange = (moveType: MoveDateRange): undefined => {
-    let moveDate = selectedStartDate;
+  const handleClickMoveDateRange = (moveType: MoveDateRange, selectedStartDate: DateString): undefined => {
+    let moveDate: string;
     if (moveType === "prev") {
       moveDate = customDayjs(selectedStartDate)
         .subtract(1, "week")
@@ -95,7 +95,7 @@ export const SelectStartDate: FC<{
     <RadioGroup value={selectedStartDate} onChange={handleStartDate} size={"lg"}>
       <Stack direction="row" justifyContent={"space-between"}>
         <Icon
-          onClick={() => handleClickMoveDateRange("prev")}
+          onClick={() => handleClickMoveDateRange("prev", selectedStartDate)}
           as={BiFirstPage}
           boxSize={6}
           mr={4}
@@ -110,7 +110,7 @@ export const SelectStartDate: FC<{
           </VStack>
         ))}
         <Icon
-          onClick={() => handleClickMoveDateRange("next")}
+          onClick={() => handleClickMoveDateRange("next", selectedStartDate)}
           as={BiLastPage}
           boxSize={6}
           ml={4}

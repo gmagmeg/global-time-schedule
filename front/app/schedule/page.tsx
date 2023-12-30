@@ -74,7 +74,10 @@ export default function Schedule() {
         /** １週間の詳細なスケジュール設定 */
       }
 
-      <WeekSchedule weekStartDate={scheduleDateState.weekStartDate} />
+      <WeekSchedule
+        weekStartDate={scheduleDateState.weekStartDate}
+        handleChangeWeekStartDate={onChangeWeekStartDate}
+      />
     </Grid>
   );
 }

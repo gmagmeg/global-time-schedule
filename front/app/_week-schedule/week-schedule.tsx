@@ -2,44 +2,52 @@
  * @module _week-schedule
  */
 
-import { FC, useReducer } from "react";
-import { DaySchedule } from "../_day-schedule/day-schedule";
-import {
-  weekScheduleState,
-  weekScheduleReducer,
-} from "./hooks/week-schedule-reducer";
-import { createWeekRange } from "@/library/dayjs";
-import { DateString } from "@/library/type-date";
-import { Box } from "@chakra-ui/react";
+import { FC } from "react";
+import { DaySchedule } from "./day-schedule";
+import { createWeekRange } from "@lib/dayjs";
+import { DateString } from "@lib/type-date";
+import { Box, Flex, Spacer } from "@chakra-ui/react";
+import { DayButton } from "../_common-button/day-button";
+import { CopyButton } from "../_common-button/copy-button";
 
-export const WeekSchedule: FC<{ weekStartDate: DateString }> = ({
+export const WeekSchedule: FC<{ weekStartDate: DateString, handleChangeWeekStartDate: (weekStartDate: DateString) => void;  }> = ({
   weekStartDate,
+  handleChangeWeekStartDate
 }) => {
-  const [state, dispatch] = useReducer(weekScheduleReducer, weekScheduleState);
-
   const weekRange = createWeekRange(weekStartDate);
   const isSelectedDate = (targetDate: DateString): boolean => {
-    return state.selectedDate === targetDate;
-  };
-
-  const handleClickDayButton = (clickDate: DateString): void => {
-    dispatch({
-      type: "CLICK_GLOBAL_MENU_DATE_BUTTON",
-      clickDate,
-    });
+    return weekStartDate === targetDate;
   };
 
   return (
     <>
-      {weekRange.map((baseDate) => {
+      {weekRange.map((date) => {
         return (
-          <Box key={baseDate} mb={5}>
-            <DaySchedule
-              baseDate={baseDate}
-              isSelectedDate={isSelectedDate(baseDate)}
-              handleClickDayButton={handleClickDayButton}
+          <Flex
+            key={date}
+            p={4}
+            align={"center"}
+            style={isSelectedDate(date) ? {backgroundColor: "#D7D5F0"} : {}}
+            onClick={() => handleChangeWeekStartDate}
+          >
+            <DayButton
+              date={date}
+              isSelected={isSelectedDate(weekStartDate)}
+              onClick={() => handleChangeWeekStartDate}
             />
-          </Box>
+            <Spacer maxW={4} />
+            {
+              /**
+               * @todo ここの判定を既存のisSelectDateとは分ける
+               */
+            }
+            <DaySchedule
+              isSelectedDate={isSelectedDate(weekStartDate)}
+            />
+            <Box mr={8}>
+              <CopyButton />
+            </Box>
+          </Flex>
         );
       })}
     </>

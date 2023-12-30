@@ -2,11 +2,11 @@
  * @module _day-schedule
  */
 
-import { DayScheduleAction } from "./hooks/day-schedule-reducer";
+import { DayScheduleAction } from "../_day-schedule/hooks/day-schedule-reducer";
 import { Select, Text } from "@chakra-ui/react";
 import { FC } from "react";
-import { DayScheduleState } from "./hooks/day-schedule-state";
-import { HourOrMinutes } from "./type-day-schedule";
+import { DayScheduleState } from "../_day-schedule/hooks/day-schedule-state";
+import { HourOrMinutes } from "../_day-schedule/type-day-schedule";
 
 export const SelectHourMinutes: FC<{
   selectedTime: DayScheduleState["selectedTime"];

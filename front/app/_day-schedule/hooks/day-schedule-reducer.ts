@@ -2,7 +2,11 @@
  * @module _day-schedule
  */
 
-import { DateTimeString } from "@/library/type-date";
+import {
+  DateTimeString,
+  toDateString,
+  toDateTimeString,
+} from "@/library/type-date";
 import { DayScheduleState, hour12, hour24 } from "../hooks/day-schedule-state";
 import { HourOrMinutes, TimeType, toHourOrMinutes } from "../type-day-schedule";
 import dayjs from "dayjs";
@@ -120,7 +124,10 @@ export const toTimeZoneTime = (
   const currentHour = dayjs(baseDate).hour();
   const correctHour = currentHour + (fromUTCNum - toUTCNum);
 
-  return correctHour <= 0
-    ? dayjs(baseDate).add(correctHour, "hour").format("hh:mm A")
-    : dayjs(baseDate).subtract(correctHour, "hour").format("hh:mm A");
+  const result =
+    correctHour <= 0
+      ? dayjs(baseDate).add(correctHour, "hour").format("hh:mm A")
+      : dayjs(baseDate).subtract(correctHour, "hour").format("hh:mm A");
+
+  return toDateTimeString(result);
 };

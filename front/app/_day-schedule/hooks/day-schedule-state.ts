@@ -7,7 +7,12 @@
  * このファイルに定義する
  */
 
-import { DateString, HourMinutesFormat, TimeZone } from "@/library/type-date";
+import {
+  DateTimeString,
+  HourMinutesFormat,
+  TimeZone,
+  toDateTimeString,
+} from "@/library/type-date";
 import { customDayjs } from "@lib/dayjs";
 import {
   HourNumber,
@@ -50,7 +55,7 @@ export type TimeZoneInfo = {
 };
 
 export type DayScheduleState = {
-  startDate: DateString;
+  startDate: DateTimeString;
   /**
    * 時間と分の選択肢を表すオブジェクト
    */
@@ -86,7 +91,7 @@ export const dayScheduleState: DayScheduleState = {
   /**
    *  スケジュールの開始日時を "YYYY-MM-DD 00:00" の形式で格納します。
    */
-  startDate: customDayjs().format("YYYY-MM-DD 00:00"),
+  startDate: toDateTimeString(customDayjs().format("YYYY-MM-DD 00:00")),
   timeSelectOption: {
     hour: hour12,
     minute: minutes,

@@ -10,4 +10,7 @@ module.exports = {
     "^@lib/(.*)$": "<rootDir>/library/$1",
     "^@hooks/(.*)$": "<rootDir>/hooks/$1",
   },
+  transform: {
+    "^.+\\.(js|jsx|ts|tsx)$": ["babel-jest", { presets: ["next/babel"] }],
+  },
 };

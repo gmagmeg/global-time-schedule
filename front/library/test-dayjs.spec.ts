@@ -1,5 +1,6 @@
 import { correctToSunday } from "./dayjs";
 import { toTimeZoneTime } from "@app/_day-schedule/hooks/day-schedule-reducer";
+import { toDateString, toDateTimeString } from "./type-date";
 
 describe("日本時間をベースに、他のタイムゾーン時間へ変換する", () => {
   it.each([
@@ -31,7 +32,8 @@ describe("日本時間をベースに、他のタイムゾーン時間へ変換�
       /**
        * Act
        */
-      const result = toTimeZoneTime("2023-12-17T12:00:00", timeZone);
+      const dateTime = toDateTimeString("2023-12-17T12:00:00");
+      const result = toTimeZoneTime(dateTime, timeZone);
 
       /**
        * Assert
@@ -52,7 +54,7 @@ describe("GlobalMenuState", () => {
       ["2023-11-04"], // 土曜日
     ])("%sを日曜日に補正する", (baseDate) => {
       // Arrange
-      const date = baseDate;
+      const date = toDateString(baseDate);
 
       // Act
       const result = correctToSunday(date);

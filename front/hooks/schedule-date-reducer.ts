@@ -5,7 +5,7 @@
  * 時間は含まず、サマータイムの影響は別に管理する
  */
 
-import { DateString } from "@lib/type-date";
+import { DateString, toDateString } from "@lib/type-date";
 
 /********************************************
  * TypeとStateの定義
@@ -17,8 +17,8 @@ export type ScheduleDateState = {
 /**
  * ex: 2023-11-26
  */
-export const scheduleDateState = {
-  weekStartDate: "2023-11-26",
+export const scheduleDateState: ScheduleDateState = {
+  weekStartDate: toDateString("2023-11-26"),
 };
 
 /********************************************
