@@ -4,16 +4,30 @@
  * 日付に関する状態は別に管理する
  */
 
-import { TimeZone } from "@/library/type-date";
+import { DateString, HourMinutesFormat, TimeZone } from "@/library/type-date";
 
 /********************************************
  * TypeとStateの定義
  *********************************************/
 export type TimeZoneState = {
   /**
-   * タイムゾーンを表す文字列
+   * ex：["JST", "UTF", "GMT"]
    */
+  /**
+   * ex: <
+   *  "2023-01-01", {
+   *    abb: "UTC";
+   *    full: "Coordinated Universal Time";
+   *    utc: "UTC+0"";
+   *  }>
+   */
+  // @todo ↑に持たせた方がいい
   timeZones: TimeZone[];
+  // ↑　Map<DateString, TimeZoneInfo>にしたい
+  /**
+   * ex: < "2023-01-01", "12:00 AM" >
+   */
+  dateTime: Map<DateString, HourMinutesFormat>;
 };
 
 export const toTimeZone = (timeZone: string): TimeZone => {
@@ -22,20 +36,24 @@ export const toTimeZone = (timeZone: string): TimeZone => {
 
 export const timeZoneState: TimeZoneState = {
   timeZones: ["JST", "UTF"],
+  dateTime: new Map(),
 };
 
 /********************************************
- * Action定義
+ * ActionとReducer定義
  *********************************************/
-export type TimeZoneAction = {
-  type: "CHANGE_TIME_ZONE";
-  timeZone: TimeZone;
-  index: number;
-};
+export type TimeZoneAction =
+  | {
+      type: "CHANGE_TIME_ZONE";
+      timeZone: TimeZone;
+      index: number;
+    }
+  | {
+      type: "CHANGE_HOUR_MINUTES";
+      date: DateString;
+      hourMinutes: HourMinutesFormat;
+    };
 
-/********************************************
- * Reducer定義
- *********************************************/
 export const TimeZoneReducer = (
   state: TimeZoneState,
   action: TimeZoneAction
@@ -47,6 +65,11 @@ export const TimeZoneReducer = (
         timeZones: state.timeZones.map((timeZone: TimeZone, index) => {
           return index === action.index ? action.timeZone : timeZone;
         }),
+      };
+    case "CHANGE_HOUR_MINUTES":
+      return {
+        ...state,
+        dateTime: new Map(state.dateTime).set(action.date, action.hourMinutes),
       };
     default:
       return state;

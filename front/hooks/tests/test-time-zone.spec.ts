@@ -1,6 +1,7 @@
-import { correctToSunday } from "./dayjs";
+import { correctToSunday } from "../../library/dayjs";
 import { toTimeZoneTime } from "@app/_day-schedule/hooks/day-schedule-reducer";
-import { toDateString, toDateTimeString } from "./type-date";
+import { convertTimeZoneTime } from "../time-zone-function";
+import { toDateString, toDateTimeString } from "@/library/type-date";
 
 describe("日本時間をベースに、他のタイムゾーン時間へ変換する", () => {
   it.each([
@@ -19,26 +20,26 @@ describe("日本時間をベースに、他のタイムゾーン時間へ変換�
           full: "Japan Standard Time",
           utc: "UTC+9",
         },
-        to: [
-          {
-            abb: toUTC,
-            full: "",
-            utc: toUTC,
-          },
-        ],
-        toIndex: 0,
+        to: {
+          abb: toUTC,
+          full: "",
+          utc: toUTC,
+        },
       };
 
       /**
        * Act
        */
-      const dateTime = toDateTimeString("2023-12-17T12:00:00");
-      const result = toTimeZoneTime(dateTime, timeZone);
+      const dateTime = convertTimeZoneTime(
+        toDateTimeString("2023-12-17T12:00:00"),
+        timeZone.from,
+        timeZone.to
+      );
 
       /**
        * Assert
        */
-      expect(result).toBe(expected);
+      expect(dateTime).toBe(expected);
     }
   );
 });

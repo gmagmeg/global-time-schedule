@@ -2,17 +2,17 @@
  * @module _day-schedule
  */
 
-import { DayScheduleAction } from "../_day-schedule/hooks/day-schedule-reducer";
-import { Select, Text } from "@chakra-ui/react";
+import { Radio, RadioGroup, Select, Stack, Text } from "@chakra-ui/react";
 import { FC } from "react";
-import { DayScheduleState } from "../_day-schedule/hooks/day-schedule-state";
-import { HourOrMinutes } from "../_day-schedule/type-day-schedule";
+import { HourNumber, HourOrMinutes } from "../_day-schedule/type-day-schedule";
+import { DateTimeString } from "@/library/type-date";
+import { TimeZoneAction } from "@/hooks/time-zone-reducer";
+import { SelectAmPmAll } from "./select-am-pm-all";
 
 export const SelectHourMinutes: FC<{
-  selectedTime: DayScheduleState["selectedTime"];
-  timeSelectOption: DayScheduleState["timeSelectOption"];
-  handleChange: (action: DayScheduleAction) => void;
-}> = ({ selectedTime, timeSelectOption, handleChange }) => {
+  selectedTime: DateTimeString|string;
+  timeZoneDispatch: (action: TimeZoneAction) => void;
+}> = ({ selectedTime, timeZoneDispatch }) => {
   
   /**
    * 時間と分のセレクトボックスの共通スタイル
@@ -33,47 +33,63 @@ export const SelectHourMinutes: FC<{
    * 時間のセレクトボックスの値が変更された時の処理
    */
   const onChangeHour = (nextValue: string) => {
-    const hour = Number(nextValue) as HourOrMinutes;
-    handleChange({
-      type: "CHANGE_HOUR_SELECT_BOX",
-      hour: hour,
-  })}
+  }
+
+  /**
+   * 0から12までの時間を扱う
+   */
+  const hour12: HourNumber[] = Array.from(
+    { length: 13 },
+    (_, index) => index as HourNumber
+  );
+  /**
+   * 0から24までの時間を扱う
+   */
+  const hour24: HourNumber[] = Array.from(
+    { length: 25 },
+    (_, index) => index as HourNumber
+  );
 
   /**
    * 分のセレクトボックスの値が変更された時の処理
    */
   const onChangeMinutes = (nextValue: string) => {
     const minutes = Number(nextValue) as HourOrMinutes;
-    handleChange({
-      type: "CHANGE_MINUTES_SELECT_BOX",
-      minutes: minutes,
-  })};
+  }
+
+  const onChangeTimeType = (nextValue: string) => {
+  }
 
   return (
     <>
-    <Select
-      onChange={(e) => onChangeHour(e.target.value)}
-      value={selectedTime.hour}
-      {...commonSelectStyles}
-    >
-      {timeSelectOption.hour.map((time) => (
-        <option key={time} value={time}>
-          {time}
-        </option>
-      ))}
-    </Select>
-    <Text mx={2}>:</Text>
-    <Select
-      onChange={(e) => onChangeMinutes(e.target.value)}
-      value={selectedTime.minute}
-      {...commonSelectStyles}
-    >
-      {timeSelectOption.minute.map((time) => (
-        <option key={time} value={time}>
-          {time}
-        </option>
-      ))}
-    </Select>
+      <Select
+        onChange={(e) => onChangeHour(e.target.value)}
+        value={"10"}
+        {...commonSelectStyles}
+      >
+        {hour12.map((time) => (
+          <option key={time} value={time}>
+            {time}
+          </option>
+        ))}
+      </Select>
+      <Text mx={2}>:</Text>
+      <Select
+        onChange={(e) => onChangeMinutes(e.target.value)}
+        value={"30"}
+        {...commonSelectStyles}
+      >
+        {["00", "30"].map((time) => (
+          <option key={time} value={time}>
+            {time}
+          </option>
+        ))}
+      </Select>
+    
+      <SelectAmPmAll
+        selectedTimeType={"AM"}
+        handleChange={() => {}}
+      />
     </>
   );
 };

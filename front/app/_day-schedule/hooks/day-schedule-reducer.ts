@@ -2,11 +2,7 @@
  * @module _day-schedule
  */
 
-import {
-  DateTimeString,
-  toDateString,
-  toDateTimeString,
-} from "@/library/type-date";
+import { DateTimeString, toDateTimeString } from "@/library/type-date";
 import { DayScheduleState, hour12, hour24 } from "../hooks/day-schedule-state";
 import { HourOrMinutes, TimeType, toHourOrMinutes } from "../type-day-schedule";
 import dayjs from "dayjs";

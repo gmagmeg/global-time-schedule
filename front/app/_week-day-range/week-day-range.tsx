@@ -29,6 +29,10 @@ export const WeekDayRange: FC<{
       handleStartDate={onChangeWeekStartDate}
     />
   </Box>
+  {/* 
+  @todo ここいらんのでは？
+  出来上がってから再度確認する
+
   <SimpleGrid minChildWidth="1rem" spacing="40px" p={2} mt={1}>
   {createWeekRange(weekStartDate).map((date, index) => {
     const isSelected = customDayjs(weekStartDate).isSame(date, "day");
@@ -41,7 +45,7 @@ export const WeekDayRange: FC<{
       />
     );
   })}
-  </SimpleGrid>
+  </SimpleGrid> */}
 </> 
 )
 }

@@ -50,7 +50,7 @@ export type UtcString = string;
  */
 export type TimeZoneInfo = {
   abb: TimeZone;
-  full: HourMinutesFormat;
+  full: string;
   utc: UtcString;
 };
 

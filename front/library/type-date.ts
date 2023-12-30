@@ -16,10 +16,11 @@ export const toDateTimeString = (from: string): DateTimeString => {
 
 /**
  * ex: 11:00 AM
- * or
- * ex: 23:00
  */
-export type HourMinutesFormat = string;
+export type HourMinutesFormat = string & { __brand: "hourMinutesFormat" };
+export const toHourMinutesFormat = (from: string): HourMinutesFormat => {
+  return from as HourMinutesFormat;
+};
 
 /**
  * ex：UTC, AST

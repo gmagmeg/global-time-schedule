@@ -9,10 +9,13 @@ import { DateString } from "@lib/type-date";
 import { Box, Flex, Spacer } from "@chakra-ui/react";
 import { DayButton } from "../_common-button/day-button";
 import { CopyButton } from "../_common-button/copy-button";
+import { TimeZoneAction } from "@/hooks/time-zone-reducer";
+import { SelectHourMinutes } from "./select-hour-minutes";
 
-export const WeekSchedule: FC<{ weekStartDate: DateString, handleChangeWeekStartDate: (weekStartDate: DateString) => void;  }> = ({
+export const WeekSchedule: FC<{ weekStartDate: DateString, handleChangeWeekStartDate: (weekStartDate: DateString) => void; timeZoneDispatch: (action: TimeZoneAction) => void; }> = ({
   weekStartDate,
-  handleChangeWeekStartDate
+  handleChangeWeekStartDate,
+  timeZoneDispatch
 }) => {
   const weekRange = createWeekRange(weekStartDate);
   const isSelectedDate = (targetDate: DateString): boolean => {
@@ -27,8 +30,10 @@ export const WeekSchedule: FC<{ weekStartDate: DateString, handleChangeWeekStart
             key={date}
             p={4}
             align={"center"}
-            style={isSelectedDate(date) ? {backgroundColor: "#D7D5F0"} : {}}
             onClick={() => handleChangeWeekStartDate}
+            _hover={{
+              backgroundColor: "#D7D5F0",
+            }}
           >
             <DayButton
               date={date}
@@ -38,12 +43,15 @@ export const WeekSchedule: FC<{ weekStartDate: DateString, handleChangeWeekStart
             <Spacer maxW={4} />
             {
               /**
-               * @todo ここの判定を既存のisSelectDateとは分ける
+               * @todo 多分DayScheduleコンポーネントのほうにCopyButtonを移動したほうがよさそう
+               * コンテンツコピーするのが難しそう
                */
             }
-            <DaySchedule
-              isSelectedDate={isSelectedDate(weekStartDate)}
+            <SelectHourMinutes
+              selectedTime={"2023-12-30T12:00:00"}
+              timeZoneDispatch={timeZoneDispatch}
             />
+            <DaySchedule />
             <Box mr={8}>
               <CopyButton />
             </Box>
