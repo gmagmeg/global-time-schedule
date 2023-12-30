@@ -6,9 +6,9 @@ import { Box, Grid, Heading } from "@chakra-ui/react";
 import { useReducer } from "react";
 import { WeekSchedule } from "../_week-schedule/week-schedule";
 import {
-  scheduleDateState as _scheduleDateState,
-  ScheduleDateReducer,
-} from "@hooks/schedule-date-reducer";
+  scheduleState as _scheduleState,
+  ScheduleReducer,
+} from "./hooks/schedule-reducer";
 import {
   TimeZoneReducer,
   timeZoneState as _timeZoneState,
@@ -20,36 +20,27 @@ import { WeekDayRange } from "../_week-day-range/week-day-range";
 
 export default function Schedule() {
   /**
-   * タイムゾーンに関する状態を扱う
-   */
-  const [timeZoneState, timeZoneDispatch] = useReducer(
-    TimeZoneReducer,
-    _timeZoneState
-  );
-
-  /**
    * 日付に関する状態を扱う
    */
-  const [scheduleDateState, scheduleDateDispatch] = useReducer(
-    ScheduleDateReducer,
-    _scheduleDateState
+  const [scheduleState, scheduleDispatch] = useReducer(
+    ScheduleReducer,
+    _scheduleState
   );
   const onChangeWeekStartDate = (weekStartDate: string): void => {
-    scheduleDateDispatch({
+    scheduleDispatch({
       type: "DECIDE_SCHEDULE_START_DATE",
       weekStartDate: toDateString(weekStartDate),
     });
   };
 
-
   /**
-   * タイムゾーン関連の処理
+   * タイムゾーンの変更
    */
   const onChangeTimeZone = (
     changeTimezoneIndex: number,
     timeZone: string
   ): void => {
-    timeZoneDispatch({
+    scheduleDispatch({
       type: "CHANGE_TIME_ZONE",
       timeZone: toTimeZone(timeZone),
       index: changeTimezoneIndex,
@@ -61,7 +52,7 @@ export default function Schedule() {
     hourMinutes: HourMinutesFormat,
   ): void => {
     
-    timeZoneDispatch({
+    scheduleDispatch({
       type: "CHANGE_HOUR_MINUTES",
       date,
       hourMinutes: hourMinutes,
@@ -80,7 +71,7 @@ export default function Schedule() {
       {/* handleModalClose={_onClose} */}
       {/* WeekSchedule コンポーネントをスクロール可能にするためのラッパー要素 */}
       <WeekDayRange
-        weekStartDate={scheduleDateState.weekStartDate}
+        weekStartDate={scheduleState.weekStartDate}
         handleChangeWeekStartDate={onChangeWeekStartDate}
       />
       {
@@ -88,12 +79,12 @@ export default function Schedule() {
       }
       <TimeZoneSetting
         handleChangeTimeZone={onChangeTimeZone}
-        timeZones={timeZoneState.timeZones}
+        timeZones={scheduleState.timeZones}
       />
       <WeekSchedule
-        weekStartDate={scheduleDateState.weekStartDate}
+        weekStartDate={scheduleState.weekStartDate}
         handleChangeWeekStartDate={onChangeWeekStartDate}
-        timeZoneDispatch={timeZoneDispatch}
+        timeZoneDispatch={scheduleDispatch}
       />
     </Grid>
   );

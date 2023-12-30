@@ -5,6 +5,7 @@
  */
 
 import { DateString, HourMinutesFormat, TimeZone } from "@/library/type-date";
+import dayjs from "dayjs";
 
 /********************************************
  * TypeとStateの定義
@@ -36,7 +37,12 @@ export const toTimeZone = (timeZone: string): TimeZone => {
 
 export const timeZoneState: TimeZoneState = {
   timeZones: ["JST", "UTF"],
-  dateTime: new Map(),
+  dateTime: new Map<DateString, HourMinutesFormat>([
+    [
+      dayjs().format("YYYY-MM-DD") as DateString,
+      "00:00 AM" as HourMinutesFormat,
+    ],
+  ]),
 };
 
 /********************************************

@@ -2,7 +2,7 @@
  * @module _day-schedule
  */
 
-import { Radio, RadioGroup, Select, Stack, Text } from "@chakra-ui/react";
+import { Select, Text } from "@chakra-ui/react";
 import { FC } from "react";
 import { HourNumber, HourOrMinutes } from "../_day-schedule/type-day-schedule";
 import { DateTimeString } from "@/library/type-date";

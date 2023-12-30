@@ -47,11 +47,10 @@ export const WeekSchedule: FC<{ weekStartDate: DateString, handleChangeWeekStart
                * コンテンツコピーするのが難しそう
                */
             }
-            <SelectHourMinutes
-              selectedTime={"2023-12-30T12:00:00"}
-              timeZoneDispatch={timeZoneDispatch}
+            <DaySchedule
+              weekStartDateTime={weekStartDate}
+              timeZoneDispatch // ここで渡して、開始時間の変更も受け取るようにす
             />
-            <DaySchedule />
             <Box mr={8}>
               <CopyButton />
             </Box>
