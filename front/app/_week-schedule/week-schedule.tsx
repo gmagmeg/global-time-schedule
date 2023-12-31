@@ -4,12 +4,10 @@
 
 import { FC } from "react";
 import { DaySchedule } from "./day-schedule";
-import { createWeekRange } from "@lib/dayjs";
 import { DateString } from "@lib/type-date";
 import { Box, Flex, Spacer } from "@chakra-ui/react";
 import { DayButton } from "../_common-button/day-button";
 import { CopyButton } from "../_common-button/copy-button";
-import { TimeZoneAction } from "@/hooks/time-zone-reducer";
 import {
   ScheduleAction,
   WeekDateTime,
@@ -20,14 +18,8 @@ import { toKeyArray } from "@/library/common";
 export const WeekSchedule: FC<{
   weekStartDate: DateString;
   weekDateTimes: WeekDateTimes;
-  handleChangeWeekStartDate: (weekStartDate: DateString) => void;
   scheduleDispatch: (action: ScheduleAction) => void;
-}> = ({
-  weekStartDate,
-  weekDateTimes,
-  handleChangeWeekStartDate,
-  scheduleDispatch,
-}) => {
+}> = ({ weekStartDate, weekDateTimes, scheduleDispatch }) => {
   const isSelectedDate = (targetDate: DateString): boolean => {
     return weekStartDate === targetDate;
   };
@@ -75,13 +67,6 @@ export const WeekSchedule: FC<{
               updateDate={date}
               handleUpdateWeekDateTime={handleUpdateWeekDateTime}
             />
-            {/**
-             * @todo 多分DayScheduleコンポーネントのほうにCopyButtonを移動したほうがよさそう
-             * コンテンツコピーするのが難しそう
-             */}
-            <Box mr={8}>
-              <CopyButton />
-            </Box>
           </Flex>
         );
       })}

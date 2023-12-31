@@ -10,18 +10,12 @@ import {
   ScheduleReducer,
 } from "./hooks/schedule-reducer";
 import {
-  TimeZoneReducer,
   timeZoneState as _timeZoneState,
   toTimeZone,
 } from "@hooks/time-zone-reducer";
-import {
-  DateString,
-  HourMinutesFormat,
-  toDateString,
-  toHourMinutesFormat,
-} from "@/library/type-date";
 import { TimeZoneSetting } from "../_time-zone-setting/time-zone-setting";
 import { WeekDayRange } from "../_week-day-range/week-day-range";
+import { TimeZoneTimes } from "../_time-zone-time/time-zone-times";
 
 export default function Schedule() {
   /**
@@ -31,12 +25,6 @@ export default function Schedule() {
     ScheduleReducer,
     _scheduleState
   );
-  const onChangeWeekStartDate = (weekStartDate: string): void => {
-    scheduleDispatch({
-      type: "DECIDE_SCHEDULE_START_DATE",
-      weekStartDate: toDateString(weekStartDate),
-    });
-  };
 
   /**
    * タイムゾーンの変更
@@ -52,34 +40,19 @@ export default function Schedule() {
     });
   };
 
-  const onChangeHourMinutes = (
-    date: DateString,
-    hourMinutes: HourMinutesFormat
-  ): void => {
-    scheduleDispatch({
-      type: "CHANGE_HOUR_MINUTES",
-      date,
-      hourMinutes: hourMinutes,
-    });
-  };
-
   return (
     <Grid templateColumns="1fr" gap={3}>
       <Box bgColor={"#B4C6EA"}>
         <Heading as={"h1"}>ここにロゴを入れる</Heading>
         {/* <Image src="/sitelogo.png" width={500} height={100} alt={"VTubeWorld Scheduler"} /> */}
       </Box>
-      {/** TimeZoneSettingの中をうまいこと整理しながら、reducerの再定義 */}
-
-      {/* handleChangeWeekStartDate={onChangeWeekStartDate} */}
-      {/* handleModalClose={_onClose} */}
-      {/* WeekSchedule コンポーネントをスクロール可能にするためのラッパー要素 */}
       <WeekDayRange
         weekStartDate={scheduleState.weekStartDate}
-        handleChangeWeekStartDate={onChangeWeekStartDate}
+        scheduleDispatch={scheduleDispatch}
       />
       {
         // タイムゾーンの設定
+        // @todo フォーマットをオブジェクト形式に変更する
       }
       <TimeZoneSetting
         handleChangeTimeZone={onChangeTimeZone}
@@ -91,9 +64,9 @@ export default function Schedule() {
       <WeekSchedule
         weekStartDate={scheduleState.weekStartDate}
         weekDateTimes={scheduleState.weekDateTimes}
-        handleChangeWeekStartDate={onChangeWeekStartDate}
-        timeZoneDispatch={scheduleDispatch}
+        scheduleDispatch={scheduleDispatch}
       />
+      {/* <TimeZoneTimes /> */}
     </Grid>
   );
 }

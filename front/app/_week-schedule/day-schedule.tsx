@@ -65,16 +65,19 @@ export const DaySchedule: FC<{
           ...updateTime,
           hour: toHourNumber(nextValue),
         };
+        break;
       case "minutes":
         updateTime = {
           ...updateTime,
           minutes: toMinutesNumber(nextValue),
         };
+        break;
       case "type":
         updateTime = {
           ...updateTime,
           type: toTimeType(nextValue),
         };
+        break;
     }
 
     handleUpdateWeekDateTime(updateDate, updateTime);
@@ -96,6 +99,9 @@ export const DaySchedule: FC<{
 
   return (
     <>
+      <p>
+        {time.hour},{time.minutes}
+      </p>
       {
         // 時間
       }

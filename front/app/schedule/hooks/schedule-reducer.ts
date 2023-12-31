@@ -4,18 +4,10 @@
  * 日付に関する状態は別に管理する
  */
 
-import { createWeekRange, customDayjs } from "@/library/dayjs";
-import {
-  DateString,
-  DateTimeString,
-  HourMinutesFormat,
-  TimeZone,
-  toDateString,
-} from "@/library/type-date";
+import { DateString, TimeZone, toDateString } from "@/library/type-date";
 import dayjs from "dayjs";
 import {
-  initWeekDateTimes,
-  toWeekDateTimes,
+  reMappingWeekDateTimes,
   updateWeekDateTimes,
 } from "./schedule-reducer-function";
 import {
@@ -67,7 +59,7 @@ export const toTimeZone = (timeZone: string): TimeZone => {
 const initDate = dayjs().format("YYYY-MM-DD") as DateString;
 export const scheduleState: ScheduleState = {
   timeZones: ["JST", "UTF"],
-  weekDateTimes: initWeekDateTimes(initDate),
+  weekDateTimes: reMappingWeekDateTimes(initDate),
   weekStartDate: toDateString("2023-11-26"),
 };
 
@@ -96,10 +88,12 @@ export const ScheduleReducer = (
 ): ScheduleState => {
   switch (action.type) {
     case "DECIDE_SCHEDULE_START_DATE":
-      const decideWeekRange = createWeekRange(action.weekStartDate);
       return {
         ...state,
-        weekDateTimes: toWeekDateTimes(),
+        weekDateTimes: reMappingWeekDateTimes(
+          action.weekStartDate,
+          state.weekDateTimes
+        ),
         weekStartDate: action.weekStartDate,
       };
     case "CHANGE_TIME_ZONE":
