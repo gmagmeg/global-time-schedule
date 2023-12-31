@@ -14,6 +14,7 @@ import {
   MinutesNumber,
   TimeType,
 } from "@/app/_day-schedule/type-day-schedule";
+import { moveToNextSunday } from "@/hooks/time-zone-function";
 
 describe("reMappingWeekDateTimes", () => {
   it("時間が何も指定されていない場合、１週間分の日付と時間の紐づきを初期化する", () => {
@@ -156,5 +157,42 @@ describe("UPDATE_HOUR_MINUTES", () => {
         ["2024-01-07", expected],
       ])
     );
+  });
+});
+
+describe("moveToNextSunday １週間の日付を日曜日始まりに補正する", () => {
+  describe("moveToNextSunday 日曜日以外で始まったときは、翌週の日曜日始まりに補正する", () => {
+    it.each([
+      ["2023-10-30"], // 月曜日
+      ["2023-10-31"], // 火曜日
+      ["2023-11-01"], // 水曜日
+      ["2023-11-02"], // 木曜日
+      ["2023-11-03"], // 金曜日
+      ["2023-11-04"], // 土曜日
+    ])("%sを日曜日に補正する", (baseDate) => {
+      // Arrange
+      const date = toDateString(baseDate);
+
+      // Act
+      const result = moveToNextSunday(date);
+
+      // Assert
+      expect(result).toEqual("2023-11-05");
+    });
+  });
+
+  describe("moveToNextSunday 日曜日で始まったときは、翌週の日曜日始まりに補正する", () => {
+    it.each([
+      ["2023-11-05"], // 日曜日
+    ])("%sを日曜日に補正する", (baseDate) => {
+      // Arrange
+      const date = toDateString(baseDate);
+
+      // Act
+      const result = moveToNextSunday(date);
+
+      // Assert
+      expect(result).toEqual("2023-11-12");
+    });
   });
 });

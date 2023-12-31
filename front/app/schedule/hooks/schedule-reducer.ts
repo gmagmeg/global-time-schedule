@@ -1,10 +1,9 @@
 /**
  * @module schedule
- * スケジュールの時間に関する状態を管理する
- * 日付に関する状態は別に管理する
+ * スケジュール関する状態を管理する
  */
 
-import { DateString, TimeZone, toDateString } from "@/library/type-date";
+import { DateString, TimeZone } from "@/library/type-date";
 import dayjs from "dayjs";
 import {
   reMappingWeekDateTimes,
@@ -15,6 +14,7 @@ import {
   MinutesNumber,
   TimeType,
 } from "@/app/_day-schedule/type-day-schedule";
+import { moveToNextSunday } from "@/hooks/time-zone-function";
 
 /********************************************
  * TypeとStateの定義
@@ -60,7 +60,7 @@ const initDate = dayjs().format("YYYY-MM-DD") as DateString;
 export const scheduleState: ScheduleState = {
   timeZones: ["JST", "UTF"],
   weekDateTimes: reMappingWeekDateTimes(initDate),
-  weekStartDate: toDateString("2023-11-26"),
+  weekStartDate: moveToNextSunday(),
 };
 
 /********************************************

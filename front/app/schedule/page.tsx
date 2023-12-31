@@ -15,7 +15,6 @@ import {
 } from "@hooks/time-zone-reducer";
 import { TimeZoneSetting } from "../_time-zone-setting/time-zone-setting";
 import { WeekDayRange } from "../_week-day-range/week-day-range";
-import { TimeZoneTimes } from "../_time-zone-time/time-zone-times";
 
 export default function Schedule() {
   /**
