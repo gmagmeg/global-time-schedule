@@ -17,30 +17,50 @@ import { FC, useState } from "react";
 import { CopyButton } from "../_common-button/copy-button";
 import { SearchTimeZone } from "./search-time-zone";
 import { ImCancelCircle } from "react-icons/im";
+import { ScheduleAction, TimeZoneAbb, TimeZoneKey, TimeZoneValue, TimeZones } from "../schedule/hooks/schedule-reducer";
+import { toTimeZone } from "@/hooks/time-zone-reducer";
+import { toKeyArray } from "@/library/common";
 
 export const TimeZoneSetting: FC<{
-  handleChangeTimeZone: (changeTimezoneIndex: number, timeZone: string) => void;
-  timeZones: TimeZone[];
-}> = ({ handleChangeTimeZone, timeZones }) => {
+  timeZones: TimeZones;
+  scheduleDispatch: (action: ScheduleAction) => void;
+}> = ({ timeZones, scheduleDispatch }) => {
   /**
    * 何番目のタイムゾーンを変更するかを特定するために、
    * クリックされたタイムゾーンの位置を保持する
    */
-  const [selectedTimeZoneIndex, setSelectedTimeZoneIndex] = useState<number>(0);
+  const [selectedTimeZoneKey, setSelectedTimeZoneKey] = useState<TimeZoneKey>("first");
 
   /**
    * タイムゾーン設定モーダルの開閉を管理
    */
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const onModalOpen = (targetIndex: number): undefined => {
-    setSelectedTimeZoneIndex(targetIndex);
+  const onModalOpen = (timeZoneKey: TimeZoneKey): undefined => {
+    setSelectedTimeZoneKey(timeZoneKey);
     onOpen();
   };
 
-  const onClickedTimeZone = (timeZone: string): void => {
-    handleChangeTimeZone(selectedTimeZoneIndex, timeZone);
-    onClose();
+  /**
+   * タイムゾーンの変更
+   */
+  const onChangeTimeZone = (
+    timeZoneAbb: string
+  ): void => {
+    scheduleDispatch({
+      type: "CHANGE_TIME_ZONE",
+      updateTimeZoneAbb: timeZoneAbb as TimeZoneAbb,
+      updateTimeZoneKey: selectedTimeZoneKey,
+    });
   };
+
+  const getTimeZoneValue = (timeZoneKey: TimeZoneKey): TimeZoneValue => {
+    const result = timeZones.get(timeZoneKey);
+    if (!result) {
+      throw new Error("タイムゾーンが見つかりません");
+    }
+    
+    return result;
+  }
 
   return (
     <Flex
@@ -49,12 +69,12 @@ export const TimeZoneSetting: FC<{
       roundedTopRight={12}
       alignItems={"baseline"}
     >
-      {timeZones.map((timeZone: TimeZone, index: number) => (
-        <Flex key={timeZone} w={"30%"} alignItems={"baseline"} mt={6}>
+      {toKeyArray(timeZones).map((timeZoneKey: TimeZoneKey) => (
+        <Flex key={timeZoneKey} w={"30%"} alignItems={"baseline"} mt={6}>
           <Text pr={2}>
-            <Icon as={CiTimer}></Icon> {timeZone}
+            <Icon as={CiTimer}></Icon> {getTimeZoneValue(timeZoneKey).abb}
           </Text>
-          <Button mb={4} onClick={() => onModalOpen(index)}>
+          <Button mb={4} onClick={() => onModalOpen(timeZoneKey)}>
             変更する
           </Button>
         </Flex>
@@ -68,8 +88,8 @@ export const TimeZoneSetting: FC<{
         <ModalOverlay />
         <ModalContent>
           <SearchTimeZone
-            selectedTimezone={timeZones[selectedTimeZoneIndex]}
-            handleChangeTimeZone={onClickedTimeZone}
+            selectedTimezone={getTimeZoneValue(selectedTimeZoneKey).abb}
+            handleChangeTimeZone={onChangeTimeZone}
           />
           <Button onClick={onClose}>
             <Icon as={ImCancelCircle} mr={2} />

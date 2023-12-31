@@ -1,6 +1,24 @@
-import { TimeZoneInfo } from "@/app/_day-schedule/hooks/day-schedule-state";
+import {
+  TimeZoneAbb,
+  TimeZoneValue,
+} from "@/app/schedule/hooks/schedule-reducer";
 
-export const timezones: TimeZoneInfo[] = [
+/**
+ * 略称名で部分一致（not完全一致）したタイムゾーンの情報を返す。
+ */
+export const filterTimeZones = (timezoneAbb: TimeZoneAbb): TimeZoneValue[] => {
+  const result = mappingTimezone.filter((item) =>
+    item.full.includes(timezoneAbb)
+  );
+
+  if (result.length === 0) {
+    return [{ abb: "", full: "", utc: "" }];
+  }
+
+  return result;
+};
+
+export const mappingTimezone: TimeZoneValue[] = [
   {
     abb: "ACDT",
     full: "Australian Central Daylight Savings Time",

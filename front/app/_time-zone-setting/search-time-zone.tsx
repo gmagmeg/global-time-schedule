@@ -12,29 +12,27 @@ import {
   Radio,
   RadioGroup,
 } from "@chakra-ui/react";
-import { timezones as initTimezones } from "@lib/timezone_mapping";
+import { filterTimeZones, mappingTimezone as initTimezones } from "@lib/mapping-timezone";
 import { RiFilterLine } from "react-icons/ri";
 
 import { FC, useState } from "react";
 import { TimeZone } from "@/library/type-date";
+import { TimeZoneAbb } from "../schedule/hooks/schedule-reducer";
 
 export const SearchTimeZone: FC<{
   selectedTimezone: TimeZone;
-  handleChangeTimeZone: (timeZone: string) => void;
+  handleChangeTimeZone: (timeZoneAbb: string) => void;
 }> = ({ selectedTimezone, handleChangeTimeZone }) => {
   /**
    * タイムゾーンの絞り込みを行う処理
    */
-  const [timeZones, setTimeZones] = useState(initTimezones);
-  const onTimeZones = (inputTimeZone: string): void => {
-    // 選択肢の初期化
-    if (inputTimeZone === "") {
-      setTimeZones(initTimezones);
+  const [timeZoneValues, setTimeZoneValues] = useState(initTimezones);
+  const onTimeZones = (timeZoneAbbString: string): void => {
+    const timeZoneAbb = timeZoneAbbString as TimeZoneAbb;
+    if (timeZoneAbb === "") {
+      setTimeZoneValues(initTimezones);
     } else {
-      const filteredResult = initTimezones.filter((item) =>
-        item.full.includes(inputTimeZone)
-      );
-      setTimeZones(filteredResult);
+      setTimeZoneValues(filterTimeZones(timeZoneAbb));
     }
   };
 
@@ -55,9 +53,9 @@ export const SearchTimeZone: FC<{
         <RadioGroup
           value={selectedTimezone}
           ml={2}
-          onChange={(value) => handleChangeTimeZone(value)}
+          onChange={(abb) => handleChangeTimeZone(abb)}
         >
-          {timeZones.map(({ abb, full }) => (
+          {timeZoneValues.map(({ abb, full }) => (
             <ListItem mb={2} key={abb} value={abb}>
               <Radio value={abb}>{full}</Radio>
             </ListItem>

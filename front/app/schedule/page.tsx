@@ -25,19 +25,7 @@ export default function Schedule() {
     _scheduleState
   );
 
-  /**
-   * タイムゾーンの変更
-   */
-  const onChangeTimeZone = (
-    changeTimezoneIndex: number,
-    timeZone: string
-  ): void => {
-    scheduleDispatch({
-      type: "CHANGE_TIME_ZONE",
-      timeZone: toTimeZone(timeZone),
-      index: changeTimezoneIndex,
-    });
-  };
+  
 
   return (
     <Grid templateColumns="1fr" gap={3}>
@@ -54,8 +42,8 @@ export default function Schedule() {
         // @todo フォーマットをオブジェクト形式に変更する
       }
       <TimeZoneSetting
-        handleChangeTimeZone={onChangeTimeZone}
         timeZones={scheduleState.timeZones}
+        scheduleDispatch={scheduleDispatch}
       />
       {
         // １週間分のスケジュール設定

@@ -15,6 +15,7 @@ import {
   TimeType,
 } from "@/app/_day-schedule/type-day-schedule";
 import { moveToNextSunday } from "@/hooks/time-zone-function";
+import { mappingTimezone } from "@lib/mapping-timezone";
 
 /********************************************
  * TypeとStateの定義
@@ -29,19 +30,26 @@ export type WeekDateTime = {
 };
 export type WeekDateTimes = Map<WeekDateTime["Date"], WeekDateTime["Time"]>;
 
+/** ex：GMT, UTF, JST */
+export type TimeZoneAbb = string & { __brand: "dateTimeString" };
+export type TimeZoneKey = "first" | "second" | "third";
+export type TimeZoneValue = {
+  abb: string;
+  full: string;
+  utc: string;
+};
+
+export type TimeZones = Map<TimeZoneKey, TimeZoneValue>;
+
 export type ScheduleState = {
   /**
-   * ex：["JST", "UTF", "GMT"]
-   */
-  /**
    * ex: <
-   *  "2023-01-01", {
-   *    abb: "UTC";
-   *    full: "Coordinated Universal Time";
-   *    utc: "UTC+0"";
+   *  "first", {abb: "UTC", full: "Coordinated Universal Time", utc: "UTC+0",
+   *  "second", {abb: "", full: "", utc: "", // 未定義の場合は空で定義
+   *  "third", {abb: "", full: "", utc: "",
    *  }>
    */
-  timeZones: TimeZone[];
+  timeZones: TimeZones;
   /**
    * ex: <
    * ["2023-01-01", {hour: 12 minutes: 00, type: {"AM"}} ],
@@ -49,6 +57,7 @@ export type ScheduleState = {
    * ・・・>
    */
   weekDateTimes: WeekDateTimes;
+  /** ex:2023-01-01 */
   weekStartDate: DateString;
 };
 
@@ -58,7 +67,11 @@ export const toTimeZone = (timeZone: string): TimeZone => {
 
 const initDate = dayjs().format("YYYY-MM-DD") as DateString;
 export const scheduleState: ScheduleState = {
-  timeZones: ["JST", "UTF"],
+  timeZones: new Map<TimeZoneKey, TimeZoneValue>([
+    ["first", { abb: "UTC", full: "Coordinated Universal Time", utc: "UTC+0" }],
+    ["second", { abb: "", full: "", utc: "" }],
+    ["third", { abb: "", full: "", utc: "" }],
+  ]),
   weekDateTimes: reMappingWeekDateTimes(initDate),
   weekStartDate: moveToNextSunday(),
 };
@@ -73,8 +86,8 @@ export type ScheduleAction =
     }
   | {
       type: "CHANGE_TIME_ZONE";
-      timeZone: TimeZone;
-      index: number;
+      updateTimeZoneAbb: TimeZoneAbb;
+      updateTimeZoneKey: TimeZoneKey;
     }
   | {
       type: "UPDATE_HOUR_MINUTES";
@@ -97,6 +110,25 @@ export const ScheduleReducer = (
         weekStartDate: action.weekStartDate,
       };
     case "CHANGE_TIME_ZONE":
+      /**
+       * @todo ここにupdateの処理を書く
+       *
+       * updateTimeZoneKeyが更新するstateの要素のkey
+       * updateTimeZoneAbbがタイムゾーン一覧から、情報を引っ張ってくるためのkey
+       *
+       * 1:
+       * updateTimeZoneAbbがタイムゾーン一覧から、情報を引っ張ってくる
+       *
+       * 2：
+       * updateTimeZoneAbbを使って、タイムゾーン一覧から、更新後のTimezoneValueを取得する
+       *
+       * 3：
+       * state.timeZonesの値を更新する
+       * Mapで管理しているので、foreachで回して、新しい値を作る
+       *
+       * ↑ ここまでをfunctionファイルに切り出す
+       */
+
       return {
         ...state,
         timeZones: state.timeZones.map((timeZone: TimeZone, index) => {

@@ -37,7 +37,7 @@ export const convertTimeZoneTime = (
 
 /**
  * スケジュールの設定開始日を日曜日にするために、
- * 何曜日に実行しても、翌週の日曜日に補正する
+ * 何曜日始まりであっても、翌週の日曜日に補正する
  */
 export const moveToNextSunday = (date?: string): DateString => {
   const now = customDayjs(date) ?? customDayjs();
