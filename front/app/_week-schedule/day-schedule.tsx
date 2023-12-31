@@ -2,32 +2,32 @@
  * @module _day-schedule
  */
 
-import { Box, Radio, RadioGroup, Select, Spacer, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Radio,
+  RadioGroup,
+  Select,
+  Spacer,
+  Stack,
+} from "@chakra-ui/react";
 import { FC } from "react";
-import { HourNumber, TimeType } from "../_day-schedule/type-day-schedule";
-import { DateTimeString } from "@/library/type-date";
-import { customDayjs } from "@/library/dayjs";
+import {
+  HourNumber,
+  TimeType,
+  toHourNumber,
+  toMinutesNumber,
+  toTimeType,
+} from "../_day-schedule/type-day-schedule";
+import { WeekDateTime } from "../schedule/hooks/schedule-reducer";
 
-export const DaySchedule: FC<{weekStartDateTime: DateTimeString}> = ({weekStartDateTime}) => {
-
-  /**
-   * ステータスを減らすために、開始時間を解析して
-   * 時、分、AM・PM・24hの情報に分解する形をとっている
-   */
-  const createTimes = (weekStartDate: DateTimeString): [number, number, TimeType] => {
-    let timeType: TimeType = "24h";
-    if (weekStartDate.includes("AM")) {
-      timeType = "AM";
-    } else if (weekStartDate.includes("PM")) {
-      timeType = "PM";
-    }
-    const day = customDayjs(weekStartDate);
-
-    return [day.hour(), day.minute(), timeType];
-  }
-  const [selectedHour, selectedMinutes, selectedTimeType] = createTimes(weekStartDateTime);
- 
-
+export const DaySchedule: FC<{
+  time: WeekDateTime["Time"];
+  updateDate: WeekDateTime["Date"];
+  handleUpdateWeekDateTime: (
+    updateDate: WeekDateTime["Date"],
+    updateTime: WeekDateTime["Time"]
+  ) => void;
+}> = ({ updateDate, time, handleUpdateWeekDateTime }) => {
   /**
    * （AM・PM）or 24hの選択に合わせて、選択できる時間の選択肢を切り替る
    */
@@ -43,20 +43,42 @@ export const DaySchedule: FC<{weekStartDateTime: DateTimeString}> = ({weekStartD
     );
 
     return timeType === "24h" ? hour24 : hour12;
-  }
-
-  const onChangeHour = (nextValue: string) => {
-  }
-
-  const onChangeMinutes = (nextValue: string) => {
-  }
-
-  /**
-   * AM/PMの全選択を変更した時の処理
-   */
-  const onChangeTimeType = (timeType: string): void => {
   };
 
+  /**
+   * やりたいことはWeekDateTime["Time"]の値を更新することで共通しているので、
+   * type引数で更新する値を切り替えている
+   */
+  const onChangeTime = (
+    nextValue: string,
+    itemName: "hour" | "minutes" | "type"
+  ): void => {
+    let updateTime = {
+      hour: time.hour,
+      minutes: time.minutes,
+      type: time.type,
+    };
+
+    switch (itemName) {
+      case "hour":
+        updateTime = {
+          ...updateTime,
+          hour: toHourNumber(nextValue),
+        };
+      case "minutes":
+        updateTime = {
+          ...updateTime,
+          minutes: toMinutesNumber(nextValue),
+        };
+      case "type":
+        updateTime = {
+          ...updateTime,
+          type: toTimeType(nextValue),
+        };
+    }
+
+    handleUpdateWeekDateTime(updateDate, updateTime);
+  };
 
   /**
    * CSS設定
@@ -70,19 +92,19 @@ export const DaySchedule: FC<{weekStartDateTime: DateTimeString}> = ({weekStartD
       boxShadow: "none",
       borderBottom: "2px solid",
     },
-  }
- 
+  };
+
   return (
     <>
       {
         // 時間
       }
       <Select
-        onChange={(e) => onChangeHour(e.target.value)}
-        value={selectedHour}
+        onChange={(e) => onChangeTime(e.target.value, "hour")}
+        value={time.hour}
         {...selectBoxStyle}
       >
-        {changeHourOptions(selectedTimeType).map((time) => (
+        {changeHourOptions(time.type).map((time) => (
           <option key={time} value={time}>
             {time}
           </option>
@@ -93,8 +115,8 @@ export const DaySchedule: FC<{weekStartDateTime: DateTimeString}> = ({weekStartD
         // 分
       }
       <Select
-        onChange={(e) => onChangeMinutes(e.target.value)}
-        value={selectedMinutes}
+        onChange={(e) => onChangeTime(e.target.value, "minutes")}
+        value={time.minutes}
         {...selectBoxStyle}
       >
         {[0, 30].map((time) => (
@@ -107,8 +129,8 @@ export const DaySchedule: FC<{weekStartDateTime: DateTimeString}> = ({weekStartD
         // AM・PM・24h
       }
       <RadioGroup
-        onChange={(value) => onChangeTimeType(value)}
-        defaultValue={selectedTimeType}
+        onChange={(value) => onChangeTime(value, "type")}
+        defaultValue={time.type}
       >
         <Stack spacing={4} direction="row">
           {["AM", "PM", "24h"].map((timeOption) => (
@@ -119,7 +141,6 @@ export const DaySchedule: FC<{weekStartDateTime: DateTimeString}> = ({weekStartD
         </Stack>
       </RadioGroup>
       <Box h={10} mx={4} borderRight={"1px"} />
-
     </>
   );
 };

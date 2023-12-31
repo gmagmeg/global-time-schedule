@@ -14,7 +14,12 @@ import {
   timeZoneState as _timeZoneState,
   toTimeZone,
 } from "@hooks/time-zone-reducer";
-import { DateString, HourMinutesFormat, toDateString, toHourMinutesFormat } from "@/library/type-date";
+import {
+  DateString,
+  HourMinutesFormat,
+  toDateString,
+  toHourMinutesFormat,
+} from "@/library/type-date";
 import { TimeZoneSetting } from "../_time-zone-setting/time-zone-setting";
 import { WeekDayRange } from "../_week-day-range/week-day-range";
 
@@ -49,15 +54,14 @@ export default function Schedule() {
 
   const onChangeHourMinutes = (
     date: DateString,
-    hourMinutes: HourMinutesFormat,
+    hourMinutes: HourMinutesFormat
   ): void => {
-    
     scheduleDispatch({
       type: "CHANGE_HOUR_MINUTES",
       date,
       hourMinutes: hourMinutes,
     });
-  }
+  };
 
   return (
     <Grid templateColumns="1fr" gap={3}>
@@ -66,7 +70,7 @@ export default function Schedule() {
         {/* <Image src="/sitelogo.png" width={500} height={100} alt={"VTubeWorld Scheduler"} /> */}
       </Box>
       {/** TimeZoneSettingの中をうまいこと整理しながら、reducerの再定義 */}
-      
+
       {/* handleChangeWeekStartDate={onChangeWeekStartDate} */}
       {/* handleModalClose={_onClose} */}
       {/* WeekSchedule コンポーネントをスクロール可能にするためのラッパー要素 */}
@@ -75,14 +79,18 @@ export default function Schedule() {
         handleChangeWeekStartDate={onChangeWeekStartDate}
       />
       {
-        /** １週間の詳細なスケジュール設定 */
+        // タイムゾーンの設定
       }
       <TimeZoneSetting
         handleChangeTimeZone={onChangeTimeZone}
         timeZones={scheduleState.timeZones}
       />
+      {
+        // １週間分のスケジュール設定
+      }
       <WeekSchedule
         weekStartDate={scheduleState.weekStartDate}
+        weekDateTimes={scheduleState.weekDateTimes}
         handleChangeWeekStartDate={onChangeWeekStartDate}
         timeZoneDispatch={scheduleDispatch}
       />

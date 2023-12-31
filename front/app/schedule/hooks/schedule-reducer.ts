@@ -4,17 +4,39 @@
  * 日付に関する状態は別に管理する
  */
 
+import { createWeekRange, customDayjs } from "@/library/dayjs";
 import {
   DateString,
+  DateTimeString,
   HourMinutesFormat,
   TimeZone,
   toDateString,
 } from "@/library/type-date";
 import dayjs from "dayjs";
+import {
+  initWeekDateTimes,
+  toWeekDateTimes,
+  updateWeekDateTimes,
+} from "./schedule-reducer-function";
+import {
+  HourNumber,
+  MinutesNumber,
+  TimeType,
+} from "@/app/_day-schedule/type-day-schedule";
 
 /********************************************
  * TypeとStateの定義
  *********************************************/
+export type WeekDateTime = {
+  Date: DateString;
+  Time: {
+    hour: HourNumber;
+    minutes: MinutesNumber;
+    type: TimeType;
+  };
+};
+export type WeekDateTimes = Map<WeekDateTime["Date"], WeekDateTime["Time"]>;
+
 export type ScheduleState = {
   /**
    * ex：["JST", "UTF", "GMT"]
@@ -29,9 +51,12 @@ export type ScheduleState = {
    */
   timeZones: TimeZone[];
   /**
-   * ex: < "2023-01-01", "12:00 AM" >
+   * ex: <
+   * ["2023-01-01", {hour: 12 minutes: 00, type: {"AM"}} ],
+   * ["2023-01-02", {hour: 10 minutes: 30, type: {"PM"}} ]
+   * ・・・>
    */
-  dateTimes: Map<DateString, HourMinutesFormat>;
+  weekDateTimes: WeekDateTimes;
   weekStartDate: DateString;
 };
 
@@ -39,14 +64,10 @@ export const toTimeZone = (timeZone: string): TimeZone => {
   return timeZone as TimeZone;
 };
 
+const initDate = dayjs().format("YYYY-MM-DD") as DateString;
 export const scheduleState: ScheduleState = {
   timeZones: ["JST", "UTF"],
-  dateTimes: new Map<DateString, HourMinutesFormat>([
-    [
-      dayjs().format("YYYY-MM-DD") as DateString,
-      "00:00 AM" as HourMinutesFormat,
-    ],
-  ]),
+  weekDateTimes: initWeekDateTimes(initDate),
   weekStartDate: toDateString("2023-11-26"),
 };
 
@@ -64,9 +85,9 @@ export type ScheduleAction =
       index: number;
     }
   | {
-      type: "CHANGE_HOUR_MINUTES";
-      date: DateString;
-      hourMinutes: HourMinutesFormat;
+      type: "UPDATE_HOUR_MINUTES";
+      updateDate: WeekDateTime["Date"];
+      updateTime: WeekDateTime["Time"];
     };
 
 export const ScheduleReducer = (
@@ -75,8 +96,10 @@ export const ScheduleReducer = (
 ): ScheduleState => {
   switch (action.type) {
     case "DECIDE_SCHEDULE_START_DATE":
+      const decideWeekRange = createWeekRange(action.weekStartDate);
       return {
         ...state,
+        weekDateTimes: toWeekDateTimes(),
         weekStartDate: action.weekStartDate,
       };
     case "CHANGE_TIME_ZONE":
@@ -86,12 +109,13 @@ export const ScheduleReducer = (
           return index === action.index ? action.timeZone : timeZone;
         }),
       };
-    case "CHANGE_HOUR_MINUTES":
+    case "UPDATE_HOUR_MINUTES":
       return {
         ...state,
-        dateTimes: new Map(state.dateTimes).set(
-          action.date,
-          action.hourMinutes
+        weekDateTimes: updateWeekDateTimes(
+          state.weekDateTimes,
+          action.updateDate,
+          action.updateTime
         ),
       };
     default:

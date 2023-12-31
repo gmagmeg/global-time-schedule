@@ -41,7 +41,17 @@ export type HourNumber =
   | 24;
 
 export type MinutesNumber = 0 | 30;
+export const toHourNumber = (value: number | string): HourNumber => {
+  return Number(value) as HourNumber;
+};
+export const toMinutesNumber = (value: number | string): MinutesNumber => {
+  return Number(value) as MinutesNumber;
+};
+
 export type TimeType = "AM" | "PM" | "24h";
+export const toTimeType = (value: string): TimeType => {
+  return value as TimeType;
+};
 export type HourOrMinutes = HourNumber | MinutesNumber;
 
 export const toHourOrMinutes = (number: number): HourOrMinutes => {
