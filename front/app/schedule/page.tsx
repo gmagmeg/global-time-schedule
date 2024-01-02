@@ -9,10 +9,7 @@ import {
   scheduleState as _scheduleState,
   ScheduleReducer,
 } from "./hooks/schedule-reducer";
-import {
-  timeZoneState as _timeZoneState,
-  toTimeZone,
-} from "@hooks/time-zone-reducer";
+import { timeZoneState as _timeZoneState } from "@hooks/time-zone-reducer";
 import { TimeZoneSetting } from "../_time-zone-setting/time-zone-setting";
 import { WeekDayRange } from "../_week-day-range/week-day-range";
 
@@ -24,8 +21,6 @@ export default function Schedule() {
     ScheduleReducer,
     _scheduleState
   );
-
-  
 
   return (
     <Grid templateColumns="1fr" gap={3}>
@@ -51,6 +46,7 @@ export default function Schedule() {
       <WeekSchedule
         weekStartDate={scheduleState.weekStartDate}
         weekDateTimes={scheduleState.weekDateTimes}
+        timeZones={scheduleState.timeZones}
         scheduleDispatch={scheduleDispatch}
       />
       {/* <TimeZoneTimes /> */}

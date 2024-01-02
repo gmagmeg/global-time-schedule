@@ -12,7 +12,10 @@ import {
   Radio,
   RadioGroup,
 } from "@chakra-ui/react";
-import { filterTimeZones, mappingTimezone as initTimezones } from "@lib/mapping-timezone";
+import {
+  filterTimeZones,
+  mappingTimezone as initTimezones,
+} from "@lib/mapping-timezone";
 import { RiFilterLine } from "react-icons/ri";
 
 import { FC, useState } from "react";
@@ -26,13 +29,13 @@ export const SearchTimeZone: FC<{
   /**
    * タイムゾーンの絞り込みを行う処理
    */
-  const [timeZoneValues, setTimeZoneValues] = useState(initTimezones);
+  const [timeZoneOptions, setTimeZoneOptions] = useState(initTimezones);
   const onTimeZones = (timeZoneAbbString: string): void => {
     const timeZoneAbb = timeZoneAbbString as TimeZoneAbb;
     if (timeZoneAbb === "") {
-      setTimeZoneValues(initTimezones);
+      setTimeZoneOptions(initTimezones);
     } else {
-      setTimeZoneValues(filterTimeZones(timeZoneAbb));
+      setTimeZoneOptions(filterTimeZones(timeZoneAbb));
     }
   };
 
@@ -49,19 +52,28 @@ export const SearchTimeZone: FC<{
           onChange={(e) => onTimeZones(e.target.value)}
         />
       </InputGroup>
-      <List overflowY={"auto"} style={{ height: "60vh" }}>
-        <RadioGroup
-          value={selectedTimezone}
-          ml={2}
-          onChange={(abb) => handleChangeTimeZone(abb)}
-        >
-          {timeZoneValues.map(({ abb, full }) => (
-            <ListItem mb={2} key={abb} value={abb}>
-              <Radio value={abb}>{full}</Radio>
-            </ListItem>
-          ))}
-        </RadioGroup>
-      </List>
+      {timeZoneOptions[0].abb === "" && (
+        <p>タイムゾーンが見つかりませんでした</p>
+      )}
+      {timeZoneOptions[0].abb !== "" && (
+        <List overflowY={"auto"} style={{ height: "60vh" }}>
+          <RadioGroup
+            value={selectedTimezone}
+            ml={2}
+            onChange={(abb) => handleChangeTimeZone(abb)}
+          >
+            {timeZoneOptions.map(({ abb, full }) => (
+              <ListItem mb={2} key={abb} value={abb}>
+                <Radio value={abb}>
+                  {abb}
+                  <br />
+                  {full}
+                </Radio>
+              </ListItem>
+            ))}
+          </RadioGroup>
+        </List>
+      )}
     </Box>
   );
 };

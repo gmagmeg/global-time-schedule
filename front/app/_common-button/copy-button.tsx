@@ -3,15 +3,18 @@
  */
 
 import { Box, Button } from "@chakra-ui/react";
-import { FC, useState } from "react";
+import { useState } from "react";
 import { FiCopy } from "react-icons/fi";
 import { FaCheck } from "react-icons/fa";
 
-export const CopyButton: FC<{
+export const CopyButton = ({
+  copyText = "コピーする",
+  width = "100%",
+}: {
   copyText?: string;
   width?: string;
   handleClickCopyButton?: () => void;
-}> = ({ copyText = "コピーする", width = "100%" }) => {
+}) => {
   const [isCopied, setIsCopied] = useState(false);
 
   const copyToClipboard = async () => {

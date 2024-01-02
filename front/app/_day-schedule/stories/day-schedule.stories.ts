@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { replaceLineBreak } from "@/story-book-function";
-import { DaySchedule } from "@/app/_week-schedule/day-schedule";
+import { DaySchedule } from "@/app/_week-schedule/day-hour-minutes";
 
 const documentation = `12時間/AM、PMの選択と
 24時間の選択ができるコンポーネント２つがある`;

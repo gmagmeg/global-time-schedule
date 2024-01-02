@@ -1,5 +1,5 @@
-import { WeekDateTime, WeekDateTimes } from "./schedule-reducer";
-import { createWeekRange } from "@/library/dayjs";
+import { TimeZoneValue, WeekDateTime, WeekDateTimes } from "./schedule-reducer";
+import { createWeekRange, customDayjs } from "@/library/dayjs";
 import { ScheduleState } from "./schedule-reducer";
 
 /**
@@ -58,4 +58,36 @@ export const updateWeekDateTimes = (
   });
 
   return updateWeekDateTimes;
+};
+
+/**
+ * 基準日をもとに、それぞれのタイムゾーンに応じた時間に変換する
+ */
+export const convertTimeZoneTime = (
+  date: WeekDateTime["Date"],
+  time: WeekDateTime["Time"],
+  from: TimeZoneValue,
+  to: TimeZoneValue
+): string => {
+  // UTC文字列から数値だけを取得する
+  const convertUTCNum = (utcString: string): number => {
+    const utcNum = Number(utcString.replace("UTC", "").replace(/:\d{2}/, ""));
+    return utcNum;
+  };
+
+  const baseDateTime = `${date} ${time.hour}:${time.minutes}`;
+
+  const fromUTCNum = convertUTCNum(from.utc);
+  const toUTCNum = convertUTCNum(to.utc);
+  const currentHour = customDayjs(baseDateTime).hour();
+  const diffHour = currentHour + (fromUTCNum - toUTCNum);
+
+  const dateFormat = time.type === "24h" ? "HH:mm" : "hh:mm A";
+
+  const result =
+    diffHour <= 0
+      ? customDayjs(baseDateTime).add(diffHour, "hour").format(dateFormat)
+      : customDayjs(baseDateTime).subtract(diffHour, "hour").format(dateFormat);
+
+  return result;
 };

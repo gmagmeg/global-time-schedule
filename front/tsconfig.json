@@ -35,7 +35,7 @@
     "app/_day-schedule/hooks/test-day-schedule-reducer.jest",
     "app/main/page.js"
   ],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "node_modules/**/*"],
   "typedocOptions": {
     "entryPoints": ["app/**/*.tsx", "app/**/*.ts", "library/*"],
     "exclude": ["app/**/stories/*", "app/**/**/*.test.*"],

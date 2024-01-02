@@ -7,12 +7,26 @@ import {
  * 略称名で部分一致（not完全一致）したタイムゾーンの情報を返す。
  */
 export const filterTimeZones = (timezoneAbb: TimeZoneAbb): TimeZoneValue[] => {
-  const result = mappingTimezone.filter((item) =>
-    item.full.includes(timezoneAbb)
-  );
+  const result = mappingTimezone.filter((item) => {
+    return `${item.abb}${item.full}`.includes(timezoneAbb);
+  });
 
   if (result.length === 0) {
     return [{ abb: "", full: "", utc: "" }];
+  }
+
+  return result;
+};
+
+/**
+ * 略称名で完全一致したタイムゾーンの情報を返す。
+ * 今後fullで検索したくなった場合、この関数を拡張する
+ */
+export const findTimeZoneValue = (searchWord: TimeZoneAbb): TimeZoneValue => {
+  const result = mappingTimezone.find((item) => item.abb === searchWord);
+
+  if (result === undefined) {
+    return { abb: "", full: "", utc: "" };
   }
 
   return result;

@@ -15,7 +15,7 @@ import {
   TimeType,
 } from "@/app/_day-schedule/type-day-schedule";
 import { moveToNextSunday } from "@/hooks/time-zone-function";
-import { mappingTimezone } from "@lib/mapping-timezone";
+import { findTimeZoneValue, mappingTimezone } from "@lib/mapping-timezone";
 
 /********************************************
  * TypeとStateの定義
@@ -110,30 +110,25 @@ export const ScheduleReducer = (
         weekStartDate: action.weekStartDate,
       };
     case "CHANGE_TIME_ZONE":
-      /**
-       * @todo ここにupdateの処理を書く
-       *
-       * updateTimeZoneKeyが更新するstateの要素のkey
-       * updateTimeZoneAbbがタイムゾーン一覧から、情報を引っ張ってくるためのkey
-       *
-       * 1:
-       * updateTimeZoneAbbがタイムゾーン一覧から、情報を引っ張ってくる
-       *
-       * 2：
-       * updateTimeZoneAbbを使って、タイムゾーン一覧から、更新後のTimezoneValueを取得する
-       *
-       * 3：
-       * state.timeZonesの値を更新する
-       * Mapで管理しているので、foreachで回して、新しい値を作る
-       *
-       * ↑ ここまでをfunctionファイルに切り出す
-       */
+      const changeTimeZone = (timeZones: ScheduleState["timeZones"]) => {
+        const newTimeZoneMap = new Map<TimeZoneKey, TimeZoneValue>([]);
+        timeZones.forEach((value, key) => {
+          if (key === action.updateTimeZoneKey) {
+            newTimeZoneMap.set(
+              key,
+              findTimeZoneValue(action.updateTimeZoneAbb)
+            );
+          } else {
+            newTimeZoneMap.set(key, value);
+          }
+        });
+
+        return newTimeZoneMap;
+      };
 
       return {
         ...state,
-        timeZones: state.timeZones.map((timeZone: TimeZone, index) => {
-          return index === action.index ? action.timeZone : timeZone;
-        }),
+        timeZones: changeTimeZone(state.timeZones),
       };
     case "UPDATE_HOUR_MINUTES":
       return {

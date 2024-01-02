@@ -2,24 +2,31 @@
  * @module _week-schedule
  */
 
-import { FC } from "react";
 import { DaySchedule } from "./day-schedule";
+import { DayHourMinutes } from "./day-hour-minutes";
 import { DateString } from "@lib/type-date";
-import { Box, Flex, Spacer } from "@chakra-ui/react";
+import { Flex, Spacer } from "@chakra-ui/react";
 import { DayButton } from "../_common-button/day-button";
 import { CopyButton } from "../_common-button/copy-button";
 import {
   ScheduleAction,
+  ScheduleState,
   WeekDateTime,
   WeekDateTimes,
 } from "../schedule/hooks/schedule-reducer";
 import { toKeyArray } from "@/library/common";
 
-export const WeekSchedule: FC<{
+export const WeekSchedule = ({
+  weekStartDate,
+  weekDateTimes,
+  timeZones,
+  scheduleDispatch,
+}: {
   weekStartDate: DateString;
   weekDateTimes: WeekDateTimes;
+  timeZones: ScheduleState["timeZones"];
   scheduleDispatch: (action: ScheduleAction) => void;
-}> = ({ weekStartDate, weekDateTimes, scheduleDispatch }) => {
+}) => {
   const isSelectedDate = (targetDate: DateString): boolean => {
     return weekStartDate === targetDate;
   };
@@ -46,7 +53,7 @@ export const WeekSchedule: FC<{
 
   return (
     <>
-      {toKeyArray(weekDateTimes).map((date) => {
+      {toKeyArray(weekDateTimes).map((date: DateString) => {
         return (
           <Flex
             key={date}
@@ -62,10 +69,16 @@ export const WeekSchedule: FC<{
               onClick={() => {}}
             />
             <Spacer maxW={4} />
-            <DaySchedule
+            <DayHourMinutes
               time={getTime(date)}
               updateDate={date}
               handleUpdateWeekDateTime={handleUpdateWeekDateTime}
+            />
+            <CopyButton />
+            <DaySchedule
+              baseDate={date}
+              baseTime={getTime(date)}
+              timeZones={timeZones}
             />
           </Flex>
         );

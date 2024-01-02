@@ -17,9 +17,16 @@ import { FC, useState } from "react";
 import { CopyButton } from "../_common-button/copy-button";
 import { SearchTimeZone } from "./search-time-zone";
 import { ImCancelCircle } from "react-icons/im";
-import { ScheduleAction, TimeZoneAbb, TimeZoneKey, TimeZoneValue, TimeZones } from "../schedule/hooks/schedule-reducer";
+import {
+  ScheduleAction,
+  TimeZoneAbb,
+  TimeZoneKey,
+  TimeZoneValue,
+  TimeZones,
+} from "../schedule/hooks/schedule-reducer";
 import { toTimeZone } from "@/hooks/time-zone-reducer";
 import { toKeyArray } from "@/library/common";
+import { on } from "events";
 
 export const TimeZoneSetting: FC<{
   timeZones: TimeZones;
@@ -29,7 +36,8 @@ export const TimeZoneSetting: FC<{
    * 何番目のタイムゾーンを変更するかを特定するために、
    * クリックされたタイムゾーンの位置を保持する
    */
-  const [selectedTimeZoneKey, setSelectedTimeZoneKey] = useState<TimeZoneKey>("first");
+  const [selectedTimeZoneKey, setSelectedTimeZoneKey] =
+    useState<TimeZoneKey>("first");
 
   /**
    * タイムゾーン設定モーダルの開閉を管理
@@ -43,9 +51,8 @@ export const TimeZoneSetting: FC<{
   /**
    * タイムゾーンの変更
    */
-  const onChangeTimeZone = (
-    timeZoneAbb: string
-  ): void => {
+  const onChangeTimeZone = (timeZoneAbb: string): void => {
+    onClose();
     scheduleDispatch({
       type: "CHANGE_TIME_ZONE",
       updateTimeZoneAbb: timeZoneAbb as TimeZoneAbb,
@@ -58,9 +65,9 @@ export const TimeZoneSetting: FC<{
     if (!result) {
       throw new Error("タイムゾーンが見つかりません");
     }
-    
+
     return result;
-  }
+  };
 
   return (
     <Flex

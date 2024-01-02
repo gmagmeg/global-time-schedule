@@ -5,10 +5,15 @@ import { toDateString } from "@/library/type-date";
 import {
   ScheduleAction,
   ScheduleReducer,
+  TimeZoneValue,
+  WeekDateTime,
   WeekDateTimes,
   scheduleState,
 } from "./schedule-reducer";
-import { reMappingWeekDateTimes } from "./schedule-reducer-function";
+import {
+  convertTimeZoneTime,
+  reMappingWeekDateTimes,
+} from "./schedule-reducer-function";
 import {
   HourNumber,
   MinutesNumber,
@@ -195,4 +200,53 @@ describe("moveToNextSunday １週間の日付を日曜日始まりに補正す�
       expect(result).toEqual("2023-11-12");
     });
   });
+});
+
+describe("日本時間をベースに、他のタイムゾーン時間へ変換する", () => {
+  it.each([
+    ["UTC+1", "04:00 PM"],
+    ["UTC-5", "10:00 AM"],
+    ["UTC-8", "07:00 AM"],
+  ])(
+    "日本時間をベースに、%sのタイムゾーンの時間へ変換する",
+    (toUTC, expected) => {
+      /**
+       * Arrange
+       */
+      const baseDate: WeekDateTime["Date"] = toDateString("2023-12-17");
+
+      const weekDateTime: WeekDateTime["Time"] = {
+        hour: 12,
+        minutes: 0,
+        type: "PM",
+      };
+
+      const fromTimeZone: TimeZoneValue = {
+        abb: "JST",
+        full: "Japan Standard Time",
+        utc: "UTC+9",
+      };
+
+      const toTimeZone: TimeZoneValue = {
+        abb: toUTC,
+        full: "",
+        utc: toUTC,
+      };
+
+      /**
+       * Act
+       */
+      const dateTime = convertTimeZoneTime(
+        baseDate,
+        weekDateTime,
+        fromTimeZone,
+        toTimeZone
+      );
+
+      /**
+       * Assert
+       */
+      expect(dateTime).toBe(expected);
+    }
+  );
 });
