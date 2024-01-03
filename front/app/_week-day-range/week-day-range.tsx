@@ -11,16 +11,18 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-import { FC } from "react";
 import { DateString, toDateString } from "@/library/type-date";
 import { ScheduleAction } from "../schedule/hooks/schedule-reducer";
 import { customDayjs } from "@/library/dayjs";
 import { BiFirstPage, BiLastPage } from "react-icons/bi";
 
-export const WeekDayRange: FC<{
+export const WeekDayRange = ({
+  weekStartDate,
+  scheduleDispatch,
+}: {
   weekStartDate: DateString;
   scheduleDispatch: (action: ScheduleAction) => void;
-}> = ({ weekStartDate, scheduleDispatch }) => {
+}) => {
   /**
    * 選択日を基準とした、開始日のリストを作成する
    */

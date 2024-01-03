@@ -49,7 +49,6 @@ export default function Schedule() {
         timeZones={scheduleState.timeZones}
         scheduleDispatch={scheduleDispatch}
       />
-      {/* <TimeZoneTimes /> */}
     </Grid>
   );
 }

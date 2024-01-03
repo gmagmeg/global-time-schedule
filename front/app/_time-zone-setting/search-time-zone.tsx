@@ -18,14 +18,17 @@ import {
 } from "@lib/mapping-timezone";
 import { RiFilterLine } from "react-icons/ri";
 
-import { FC, useState } from "react";
+import { useState } from "react";
 import { TimeZone } from "@/library/type-date";
 import { TimeZoneAbb } from "../schedule/hooks/schedule-reducer";
 
-export const SearchTimeZone: FC<{
+export const SearchTimeZone = ({
+  selectedTimezone,
+  handleChangeTimeZone,
+}: {
   selectedTimezone: TimeZone;
   handleChangeTimeZone: (timeZoneAbb: string) => void;
-}> = ({ selectedTimezone, handleChangeTimeZone }) => {
+}) => {
   /**
    * タイムゾーンの絞り込みを行う処理
    */

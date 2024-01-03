@@ -1,7 +1,6 @@
 /**
  * @module time-zone-setting
  */
-import { TimeZone } from "@/library/type-date";
 import {
   Button,
   Flex,
@@ -13,7 +12,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { CiTimer } from "react-icons/ci";
-import { FC, useState } from "react";
+import { useState } from "react";
 import { CopyButton } from "../_common-button/copy-button";
 import { SearchTimeZone } from "./search-time-zone";
 import { ImCancelCircle } from "react-icons/im";
@@ -24,14 +23,15 @@ import {
   TimeZoneValue,
   TimeZones,
 } from "../schedule/hooks/schedule-reducer";
-import { toTimeZone } from "@/hooks/time-zone-reducer";
 import { toKeyArray } from "@/library/common";
-import { on } from "events";
 
-export const TimeZoneSetting: FC<{
+export const TimeZoneSetting = ({
+  timeZones,
+  scheduleDispatch,
+}: {
   timeZones: TimeZones;
   scheduleDispatch: (action: ScheduleAction) => void;
-}> = ({ timeZones, scheduleDispatch }) => {
+}) => {
   /**
    * 何番目のタイムゾーンを変更するかを特定するために、
    * クリックされたタイムゾーンの位置を保持する

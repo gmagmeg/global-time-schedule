@@ -74,7 +74,8 @@ export const WeekSchedule = ({
               updateDate={date}
               handleUpdateWeekDateTime={handleUpdateWeekDateTime}
             />
-            <CopyButton />
+            <CopyButton width="15%" />
+            <Spacer maxW={4} />
             <DaySchedule
               baseDate={date}
               baseTime={getTime(date)}

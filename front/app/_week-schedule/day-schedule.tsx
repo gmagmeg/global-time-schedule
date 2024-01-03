@@ -2,7 +2,7 @@
  * @module _day-schedule
  */
 
-import { Box } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import {
   TimeZoneKey,
   TimeZones,
@@ -33,11 +33,9 @@ export const DaySchedule = ({
 
   return (
     <Box>
-      <p>
-        {timeZoneKeys.map((timeZoneKey) => {
-          return calculateTime(timeZoneKey);
-        })}
-      </p>
+      {timeZoneKeys.map((timeZoneKey) => {
+        return <Text key={timeZoneKey}>{calculateTime(timeZoneKey)}</Text>;
+      })}
     </Box>
   );
 };
