@@ -48,7 +48,7 @@ export const toMinutesNumber = (value: number | string): MinutesNumber => {
   return Number(value) as MinutesNumber;
 };
 
-export type TimeType = "AM" | "PM" | "24h";
+export type TimeType = "AM" | "PM" | "24h" | "none";
 export const toTimeType = (value: string): TimeType => {
   return value as TimeType;
 };

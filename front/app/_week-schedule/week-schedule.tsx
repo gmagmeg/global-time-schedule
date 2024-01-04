@@ -2,29 +2,28 @@
  * @module _week-schedule
  */
 
-import { DaySchedule } from "./day-schedule";
 import { DayHourMinutes } from "./day-hour-minutes";
 import { DateString } from "@lib/type-date";
-import { Flex, Spacer } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import { DayButton } from "../_common-button/day-button";
-import { CopyButton } from "../_common-button/copy-button";
 import {
   ScheduleAction,
   ScheduleState,
+  TimeZoneTime,
   WeekDateTime,
-  WeekDateTimes,
 } from "../schedule/hooks/schedule-reducer";
 import { toKeyArray } from "@/library/common";
+import { DaySchedule } from "./day-schedule";
 
 export const WeekSchedule = ({
   weekStartDate,
   weekDateTimes,
-  timeZones,
+  timeZoneSchedule,
   scheduleDispatch,
 }: {
-  weekStartDate: DateString;
-  weekDateTimes: WeekDateTimes;
-  timeZones: ScheduleState["timeZones"];
+  weekStartDate: ScheduleState["weekStartDate"];
+  weekDateTimes: ScheduleState["weekDateTimes"];
+  timeZoneSchedule: ScheduleState["timeZoneSchedule"];
   scheduleDispatch: (action: ScheduleAction) => void;
 }) => {
   const isSelectedDate = (targetDate: DateString): boolean => {
@@ -40,6 +39,15 @@ export const WeekSchedule = ({
     return result;
   };
 
+  const getTimeZoneTime = (index: number): TimeZoneTime => {
+    const result = timeZoneSchedule[index];
+    if (!result) {
+      throw new Error("タイムゾーンが取得できませんでした");
+    }
+
+    return result;
+  }
+
   const handleUpdateWeekDateTime = (
     updateDate: WeekDateTime["Date"],
     updateTime: WeekDateTime["Time"]
@@ -53,7 +61,7 @@ export const WeekSchedule = ({
 
   return (
     <>
-      {toKeyArray(weekDateTimes).map((date: DateString) => {
+      {toKeyArray(weekDateTimes).map((date: DateString, index: number) => {
         return (
           <Flex
             key={date}
@@ -68,19 +76,12 @@ export const WeekSchedule = ({
               isSelected={isSelectedDate(weekStartDate)}
               onClick={() => {}}
             />
-            <Spacer maxW={4} />
             <DayHourMinutes
               time={getTime(date)}
               updateDate={date}
               handleUpdateWeekDateTime={handleUpdateWeekDateTime}
             />
-            <CopyButton width="15%" />
-            <Spacer maxW={4} />
-            <DaySchedule
-              baseDate={date}
-              baseTime={getTime(date)}
-              timeZones={timeZones}
-            />
+            <DaySchedule timeZoneTime={getTimeZoneTime(index)} />
           </Flex>
         );
       })}

@@ -98,9 +98,6 @@ export const DayHourMinutes = ({ updateDate, time, handleUpdateWeekDateTime }: {
 
   return (
     <>
-      <p>
-        {time.hour},{time.minutes}
-      </p>
       {
         // 時間
       }
@@ -137,7 +134,7 @@ export const DayHourMinutes = ({ updateDate, time, handleUpdateWeekDateTime }: {
         onChange={(value) => onChangeTime(value, "type")}
         defaultValue={time.type}
       >
-        <Stack spacing={4} direction="row">
+        <Stack spacing={2} direction="row">
           {["AM", "PM", "24h"].map((timeOption) => (
             <Radio key={timeOption} value={timeOption}>
               {timeOption}

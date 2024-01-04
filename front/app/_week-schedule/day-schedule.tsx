@@ -2,40 +2,32 @@
  * @module _day-schedule
  */
 
-import { Box, Text } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import {
-  TimeZoneKey,
-  TimeZones,
-  WeekDateTime,
+  TimeZoneKey
 } from "../schedule/hooks/schedule-reducer";
-import { convertTimeZoneTime } from "../schedule/hooks/schedule-reducer-function";
+import { CopyButton } from "../_common-button/copy-button";
+import { TimeZoneTime } from "../schedule/hooks/schedule-reducer";
 
 export const DaySchedule = ({
-  baseDate,
-  baseTime,
-  timeZones,
+  timeZoneTime,
 }: {
-  baseDate: WeekDateTime["Date"];
-  baseTime: WeekDateTime["Time"];
-  timeZones: TimeZones;
+  timeZoneTime: TimeZoneTime;
 }) => {
-  const calculateTime = (timeZoneKey: TimeZoneKey): string => {
-    const fromTimeZone = timeZones.get("first");
-    const toTimeZone = timeZones.get(timeZoneKey);
-    if (!fromTimeZone?.abb || !toTimeZone?.abb) {
-      return "--:--";
-    }
+  const dateFormat = (time: TimeZoneTime, key: TimeZoneKey): string => {
+    const dateTime = `${time[key].hour} : ${time[key].minutes}`;
 
-    return convertTimeZoneTime(baseDate, baseTime, fromTimeZone, toTimeZone);
-  };
-
-  const timeZoneKeys: TimeZoneKey[] = ["first", "second", "third"];
+  return (time[key].type === "none" || time[key].type === "24h")
+      ? `${dateTime}`
+      : `${dateTime} ${time[key].type}`;
+  }
 
   return (
-    <Box>
-      {timeZoneKeys.map((timeZoneKey) => {
-        return <Text key={timeZoneKey}>{calculateTime(timeZoneKey)}</Text>;
-      })}
-    </Box>
+    <Flex width={"50%"} align={"center"}>
+      <CopyButton width="20%" />
+      <Text ml={6}>{dateFormat(timeZoneTime, "first")}</Text>
+      <Text ml={6}>{dateFormat(timeZoneTime, "second")}</Text>
+      <Text ml={6}>{dateFormat(timeZoneTime, "third")}</Text>
+    </Flex>
   );
 };
