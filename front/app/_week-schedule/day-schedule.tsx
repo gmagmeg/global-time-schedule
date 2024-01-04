@@ -3,9 +3,7 @@
  */
 
 import { Flex, Text } from "@chakra-ui/react";
-import {
-  TimeZoneKey
-} from "../schedule/hooks/schedule-reducer";
+import { TimeZoneKey } from "../schedule/hooks/schedule-reducer";
 import { CopyButton } from "../_common-button/copy-button";
 import { TimeZoneTime } from "../schedule/hooks/schedule-reducer";
 
@@ -17,10 +15,16 @@ export const DaySchedule = ({
   const dateFormat = (time: TimeZoneTime, key: TimeZoneKey): string => {
     const dateTime = `${time[key].hour} : ${time[key].minutes}`;
 
-  return (time[key].type === "none" || time[key].type === "24h")
-      ? `${dateTime}`
-      : `${dateTime} ${time[key].type}`;
-  }
+    if (time[key].type === "24h") {
+      return dateTime;
+    }
+
+    if (time[key].type === "none") {
+      return '--:--'
+    }
+
+    return `${dateTime} ${time[key].type}`;
+  };
 
   return (
     <Flex width={"50%"} align={"center"}>

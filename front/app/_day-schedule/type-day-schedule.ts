@@ -16,6 +16,9 @@ export const toTimeZoneTime = (timeZone: string): TimeZoneTime => {
 export type NoneNumber = "--";
 export type NoneString = "none";
 
+/**
+ * 何もない状態は、"--"という文字列で表現している
+ */
 export type HourNumber =
   | 0
   | 1
@@ -44,6 +47,9 @@ export type HourNumber =
   | 24
   | NoneNumber;
 
+/**
+ * 何もない状態は、"--"という文字列で表現している
+ */
 export type MinutesNumber = 0 | 30 | NoneNumber;
 export const toHourNumber = (value: number | string): HourNumber => {
   return Number(value) as HourNumber;

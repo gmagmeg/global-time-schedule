@@ -58,14 +58,11 @@ export type WeekDateTimes = Map<WeekDateTime["Date"], WeekDateTime["Time"]>;
 /** ex：GMT, UTF, JST */
 export type TimeZoneAbb = string & { __brand: "dateTimeString" };
 export type TimeZoneKey = "first" | "second" | "third";
-export type TimeZoneValue =
-  | {
-      abb: string;
-      full: string;
-      utc: string;
-    }
-  | undefined;
-
+export type TimeZoneValue = {
+  abb: string;
+  full: string;
+  utc: string;
+};
 export type TimeZones = Map<TimeZoneKey, TimeZoneValue>;
 
 export type ScheduleState = {
@@ -112,11 +109,14 @@ export const toTimeZone = (timeZone: string): TimeZone => {
 };
 
 const initDate = dayjs().format("YYYY-MM-DD") as DateString;
+export const getInitTimeZone = (): TimeZoneValue => {
+  return { abb: "none", full: "none", utc: "none" };
+};
 export const scheduleState: ScheduleState = {
   timeZones: new Map<TimeZoneKey, TimeZoneValue>([
     ["first", { abb: "UTC", full: "Coordinated Universal Time", utc: "UTC+0" }],
-    ["second", { abb: "", full: "", utc: "" }],
-    ["third", { abb: "", full: "", utc: "" }],
+    ["second", getInitTimeZone()],
+    ["third", getInitTimeZone()],
   ]),
   weekDateTimes: reMappingWeekDateTimes(initDate),
   timeZoneSchedule: initTimeZoneSchedule(),
@@ -190,7 +190,7 @@ export const ScheduleReducer = (
 
         const newWeekTimeZoneTime = convertWeekTimeZoneTime(
           weekDateTime,
-          timeZones
+          newTimeZoneMap
         );
 
         return { newTimeZoneMap, newWeekTimeZoneTime };

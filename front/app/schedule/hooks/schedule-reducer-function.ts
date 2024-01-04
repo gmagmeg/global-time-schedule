@@ -1,7 +1,6 @@
 import {
   TimeFormat,
   TimeZoneSchedule,
-  TimeZoneTime,
   WeekDateTime,
   WeekDateTimes,
 } from "./schedule-reducer";
@@ -79,7 +78,7 @@ export const updateWeekDateTimes = (
 /**
  * {@link ScheduleState.timezoneSchedule}の初期値を生成します
  */
-const getInitTime = () => {
+export const getInitTime = () => {
   return {
     hour: "--" as HourNumber,
     minutes: "--" as MinutesNumber,

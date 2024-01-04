@@ -22,8 +22,10 @@ import {
   TimeZoneKey,
   TimeZoneValue,
   TimeZones,
+  getInitTimeZone,
 } from "../schedule/hooks/schedule-reducer";
 import { toKeyArray } from "@/library/common";
+import { getInitTime } from "../schedule/hooks/schedule-reducer-function";
 
 export const TimeZoneSetting = ({
   timeZones,
@@ -64,6 +66,12 @@ export const TimeZoneSetting = ({
     const result = timeZones.get(timeZoneKey);
     if (!result) {
       throw new Error("タイムゾーンが見つかりません");
+    }
+
+    if (result.abb === "none") {
+      const initTimeZone = getInitTimeZone();
+      initTimeZone.abb = "---";
+      return initTimeZone;
     }
 
     return result;
