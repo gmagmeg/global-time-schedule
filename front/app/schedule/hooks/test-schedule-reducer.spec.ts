@@ -1,17 +1,20 @@
 /**
  * schedule-reducerのテスト
  */
-import { toDateString } from "@/library/type-date";
+import { DateString, toDateString } from "@/library/type-date";
 import {
   ScheduleAction,
   ScheduleReducer,
+  TimeFormat,
+  TimeZoneKey,
   TimeZoneValue,
+  TimeZones,
   WeekDateTime,
   WeekDateTimes,
   scheduleState,
 } from "./schedule-reducer";
 import {
-  convertTimeZoneTime,
+  convertWeekTimeZoneTime,
   reMappingWeekDateTimes,
 } from "./schedule-reducer-function";
 import {
@@ -182,7 +185,7 @@ describe("moveToNextSunday １週間の日付を日曜日始まりに補正す�
       const result = moveToNextSunday(date);
 
       // Assert
-      expect(result).toEqual("2023-11-05");
+      expect(result).toBe("2023-11-05");
     });
   });
 
@@ -197,56 +200,140 @@ describe("moveToNextSunday １週間の日付を日曜日始まりに補正す�
       const result = moveToNextSunday(date);
 
       // Assert
-      expect(result).toEqual("2023-11-12");
+      expect(result).toBe("2023-11-12");
     });
+  });
+});
+
+describe("日本時間をベースに、UTC+1のタイムゾーンの時間へ変換する", () => {
+  it("タイムゾーンの指定が無い場合（初期状態）", () => {
+    /**
+     * Arrange
+     */
+    const testTimeZones: TimeZones = new Map();
+    testTimeZones.set("first", {
+      abb: "UTC",
+      full: "Coordinated Universal Time",
+      utc: "UTC+0",
+    });
+
+    const testWeekTime = new Map<DateString, TimeFormat>() as WeekDateTimes;
+    testWeekTime.set(toDateString("2023-12-17"), {
+      hour: 12,
+      minutes: 0,
+      type: "PM",
+    });
+    testTimeZones.set("second", undefined);
+    testTimeZones.set("third", undefined);
+
+    /**
+     * Act
+     */
+
+    const dateTime = convertWeekTimeZoneTime(testWeekTime, testTimeZones);
+
+    /**
+     * Assert
+     */
+    expect(dateTime).toEqual([
+      {
+        first: { hour: 12, minutes: 0, type: "PM" },
+        second: { hour: "--", minutes: "--", type: "none" },
+        third: { hour: "--", minutes: "--", type: "none" },
+      },
+    ]);
   });
 });
 
 describe("日本時間をベースに、他のタイムゾーン時間へ変換する", () => {
   it.each([
-    ["UTC+1", "04:00 PM"],
-    ["UTC-5", "10:00 AM"],
-    ["UTC-8", "07:00 AM"],
+    [
+      "UTC+1",
+      [
+        {
+          first: { hour: 12, minutes: 0, type: "PM" },
+          second: { hour: 16, minutes: 0, type: "PM" },
+          third: { hour: 16, minutes: 0, type: "PM" },
+        },
+        {
+          first: { hour: 12, minutes: 0, type: "PM" },
+          second: { hour: 16, minutes: 0, type: "PM" },
+          third: { hour: 16, minutes: 0, type: "PM" },
+        },
+      ],
+    ],
+    [
+      "UTC-5",
+      [
+        {
+          first: { hour: 12, minutes: 0, type: "PM" },
+          second: { hour: 10, minutes: 0, type: "AM" },
+          third: { hour: 10, minutes: 0, type: "AM" },
+        },
+        {
+          first: { hour: 12, minutes: 0, type: "PM" },
+          second: { hour: 10, minutes: 0, type: "AM" },
+          third: { hour: 10, minutes: 0, type: "AM" },
+        },
+      ],
+    ],
+    [
+      "UTC-8",
+      [
+        {
+          first: { hour: 12, minutes: 0, type: "PM" },
+          second: { hour: 7, minutes: 0, type: "AM" },
+          third: { hour: 7, minutes: 0, type: "AM" },
+        },
+        {
+          first: { hour: 12, minutes: 0, type: "PM" },
+          second: { hour: 7, minutes: 0, type: "AM" },
+          third: { hour: 7, minutes: 0, type: "AM" },
+        },
+      ],
+    ],
   ])(
     "日本時間をベースに、%sのタイムゾーンの時間へ変換する",
     (toUTC, expected) => {
       /**
        * Arrange
        */
-      const baseDate: WeekDateTime["Date"] = toDateString("2023-12-17");
-
       const weekDateTime: WeekDateTime["Time"] = {
         hour: 12,
         minutes: 0,
         type: "PM",
       };
 
-      const fromTimeZone: TimeZoneValue = {
+      const newTimeZoneMap = new Map<TimeZoneKey, TimeZoneValue>();
+      newTimeZoneMap.set("first", {
         abb: "JST",
         full: "Japan Standard Time",
         utc: "UTC+9",
-      };
-
-      const toTimeZone: TimeZoneValue = {
+      });
+      newTimeZoneMap.set("second", {
         abb: toUTC,
         full: "",
         utc: toUTC,
-      };
+      });
+      newTimeZoneMap.set("third", {
+        abb: "",
+        full: "",
+        utc: "",
+      });
+
+      const testWeekTime = new Map<DateString, TimeFormat>() as WeekDateTimes;
+      testWeekTime.set(toDateString("2023-12-17"), weekDateTime);
+      testWeekTime.set(toDateString("2023-12-18"), weekDateTime);
 
       /**
        * Act
        */
-      const dateTime = convertTimeZoneTime(
-        baseDate,
-        weekDateTime,
-        fromTimeZone,
-        toTimeZone
-      );
+      const dateTime = convertWeekTimeZoneTime(testWeekTime, newTimeZoneMap);
 
       /**
        * Assert
        */
-      expect(dateTime).toBe(expected);
+      expect(dateTime).toEqual(expected);
     }
   );
 });

@@ -34,7 +34,6 @@ export default function Schedule() {
       />
       {
         // タイムゾーンの設定
-        // @todo フォーマットをオブジェクト形式に変更する
       }
       <TimeZoneSetting
         timeZones={scheduleState.timeZones}
@@ -46,7 +45,7 @@ export default function Schedule() {
       <WeekSchedule
         weekStartDate={scheduleState.weekStartDate}
         weekDateTimes={scheduleState.weekDateTimes}
-        timeZones={scheduleState.timeZones}
+        timeZoneSchedule={scheduleState.timeZoneSchedule} 
         scheduleDispatch={scheduleDispatch}
       />
     </Grid>

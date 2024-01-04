@@ -13,6 +13,9 @@ export const toTimeZoneTime = (timeZone: string): TimeZoneTime => {
   return timeZone as TimeZoneTime;
 };
 
+export type NoneNumber = "--";
+export type NoneString = "none";
+
 export type HourNumber =
   | 0
   | 1
@@ -38,9 +41,10 @@ export type HourNumber =
   | 21
   | 22
   | 23
-  | 24;
+  | 24
+  | NoneNumber;
 
-export type MinutesNumber = 0 | 30;
+export type MinutesNumber = 0 | 30 | NoneNumber;
 export const toHourNumber = (value: number | string): HourNumber => {
   return Number(value) as HourNumber;
 };
@@ -48,7 +52,7 @@ export const toMinutesNumber = (value: number | string): MinutesNumber => {
   return Number(value) as MinutesNumber;
 };
 
-export type TimeType = "AM" | "PM" | "24h" | "none";
+export type TimeType = "AM" | "PM" | "24h" | NoneString;
 export const toTimeType = (value: string): TimeType => {
   return value as TimeType;
 };
