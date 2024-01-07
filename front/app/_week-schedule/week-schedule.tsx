@@ -18,21 +18,15 @@ import { TimeTypePattern } from "./time-type-pattern";
 
 export const WeekSchedule = ({
   timeTypePattern,
-  weekStartDate,
   weekDateTimes,
   timeZoneSchedule,
   scheduleDispatch,
 }: {
   timeTypePattern: ScheduleState["timeTypePattern"];
-  weekStartDate: ScheduleState["weekStartDate"];
   weekDateTimes: ScheduleState["weekDateTimes"];
   timeZoneSchedule: ScheduleState["timeZoneSchedule"];
   scheduleDispatch: (action: ScheduleAction) => void;
 }) => {
-  const isSelectedDate = (targetDate: DateString): boolean => {
-    return weekStartDate === targetDate;
-  };
-
   const getTime = (date: WeekDateTime["Date"]): WeekDateTime["Time"] => {
     const result = weekDateTimes.get(date);
     if (!result) {
@@ -63,11 +57,7 @@ export const WeekSchedule = ({
               backgroundColor: "#D7D5F0",
             }}
           >
-            <DayButton
-              date={date}
-              isSelected={isSelectedDate(weekStartDate)}
-              onClick={() => {}}
-            />
+            <DayButton date={date} onClick={() => {}} />
             <DayHourMinutes
               time={getTime(date)}
               updateDate={date}

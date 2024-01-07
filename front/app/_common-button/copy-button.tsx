@@ -10,16 +10,20 @@ import { FaCheck } from "react-icons/fa";
 export const CopyButton = ({
   copyText = "コピーする",
   width = "100%",
+  handleClickCopyButton,
 }: {
   copyText?: string;
   width?: string;
-  handleClickCopyButton?: () => void;
+  handleClickCopyButton: () => string;
 }) => {
   const [isCopied, setIsCopied] = useState(false);
 
   const copyToClipboard = async () => {
     try {
-      Promise.all([navigator.clipboard.writeText(copyText), setIsCopied(true)]);
+      Promise.all([
+        navigator.clipboard.writeText(handleClickCopyButton()),
+        setIsCopied(true),
+      ]);
     } catch (err) {
       alert("クリップボードにコピーできませんでした");
       setIsCopied(false);

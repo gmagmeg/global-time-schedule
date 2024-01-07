@@ -44,7 +44,6 @@ export default function Schedule() {
       }
       <WeekSchedule
         timeTypePattern={scheduleState.timeTypePattern}
-        weekStartDate={scheduleState.weekStartDate}
         weekDateTimes={scheduleState.weekDateTimes}
         timeZoneSchedule={scheduleState.timeZoneSchedule}
         scheduleDispatch={scheduleDispatch}

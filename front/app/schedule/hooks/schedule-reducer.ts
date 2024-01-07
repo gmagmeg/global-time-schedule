@@ -119,7 +119,7 @@ export const toTimeZone = (timeZone: string): TimeZone => {
   return timeZone as TimeZone;
 };
 
-const initDate = dayjs().format("YYYY-MM-DD") as DateString;
+const initDate = moveToNextSunday();
 export const scheduleState: ScheduleState = {
   timeTypePattern: "AM/PM",
   timeZones: new Map<TimeZoneKey, TimeZoneValue>([
@@ -129,7 +129,7 @@ export const scheduleState: ScheduleState = {
   ]),
   weekDateTimes: reMappingWeekDateTimes(initDate),
   timeZoneSchedule: initTimeZoneSchedule(),
-  weekStartDate: moveToNextSunday(),
+  weekStartDate: initDate,
 };
 
 /********************************************

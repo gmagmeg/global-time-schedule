@@ -13,22 +13,32 @@ export const DaySchedule = ({
   timeZoneTime: TimeZoneTime;
 }) => {
   const dateFormat = (time: TimeZoneTime, key: TimeZoneKey): string => {
-    const dateTime = `${time[key].hour} : ${time[key].minutes}`;
+    const dateTime = `${time[key].hour}:${time[key].minutes}`;
 
     if (time[key].type === "24h") {
       return dateTime;
     }
 
     if (time[key].type === "none") {
-      return '--:--'
+      return "--:--";
     }
 
     return `${dateTime} ${time[key].type}`;
   };
 
+  const handleClickCopyButton = (): string => {
+    return (
+      dateFormat(timeZoneTime, "first") +
+      " " +
+      dateFormat(timeZoneTime, "second") +
+      " " +
+      dateFormat(timeZoneTime, "third")
+    );
+  };
+
   return (
     <Flex width={"50%"} align={"center"}>
-      <CopyButton width="20%" />
+      <CopyButton width="20%" handleClickCopyButton={handleClickCopyButton} />
       <Text ml={6}>{dateFormat(timeZoneTime, "first")}</Text>
       <Text ml={6}>{dateFormat(timeZoneTime, "second")}</Text>
       <Text ml={6}>{dateFormat(timeZoneTime, "third")}</Text>

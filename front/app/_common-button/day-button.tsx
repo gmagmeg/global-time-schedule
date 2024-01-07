@@ -9,31 +9,19 @@ import { ClickButtonEvent } from "../event-types-alias";
 
 export const DayButton = ({
   date,
-  isSelected,
 }: {
   date: DateString;
-  isSelected: boolean;
   onClick: ClickButtonEvent;
 }) => {
-  const selectedColorScheme = {
-    bgColor: "#C794CF",
-    color: "White",
-  };
-
-  const colorScheme = {
-    bgColor: "#e2e8f0",
-    color: "White",
-  };
-
-  const buttonColorScheme = isSelected ? selectedColorScheme : colorScheme;
   const formatDate = customDayjs(date);
+  const bgColor = formatDate.day() === 0 ? "red.400" : "#C794CF";
 
   return (
     <Button
       w={"5rem"}
       h={"3rem"}
-      bg={buttonColorScheme.bgColor}
-      color={buttonColorScheme.color}
+      bg={bgColor}
+      color="White"
       _hover={{ bg: "#C794CF" }}
     >
       {formatDate.format("ddd")}

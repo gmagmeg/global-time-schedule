@@ -105,19 +105,19 @@ export const TimeZoneSetting = ({
             <Icon as={GrUpdate} mr={3} />
             変更する
           </Button>
-          { /** 最初の時間設定は設定された状態で固定したいので、削除ボタンを出さない。 */}
-          {index > 0 &&
-          <Button
-            onClick={() => onRemoveTimeZone(timeZoneKey)}
-            display={"inline-flex"}
-            alignItems={"center"}
-          >
-            <Icon as={RxCross1} mr={1} /> 削除する
-          </Button>
-          }
+          {/** 最初の時間設定は設定された状態で固定したいので、削除ボタンを出さない。 */}
+          {index > 0 && (
+            <Button
+              onClick={() => onRemoveTimeZone(timeZoneKey)}
+              display={"inline-flex"}
+              alignItems={"center"}
+            >
+              <Icon as={RxCross1} mr={1} /> 削除する
+            </Button>
+          )}
         </Flex>
       ))}
-      <CopyButton copyText="全件コピー" width="10%" />
+      {/* <CopyButton copyText="全件コピー" width="10%" /> */}
       {/*
         タイムゾーンの設定コンポーネントと
         モーダルコンポーネント
