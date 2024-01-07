@@ -43,9 +43,10 @@ export default function Schedule() {
         // １週間分のスケジュール設定
       }
       <WeekSchedule
+        timeTypePattern={scheduleState.timeTypePattern}
         weekStartDate={scheduleState.weekStartDate}
         weekDateTimes={scheduleState.weekDateTimes}
-        timeZoneSchedule={scheduleState.timeZoneSchedule} 
+        timeZoneSchedule={scheduleState.timeZoneSchedule}
         scheduleDispatch={scheduleDispatch}
       />
     </Grid>

@@ -1,31 +1,27 @@
 /**
- * @module _day-schedule
+ * @module _week-schedule
  */
 
-import {
-  Box,
-  Radio,
-  RadioGroup,
-  Select,
-  Spacer,
-  Stack,
-} from "@chakra-ui/react";
+import { Select, Spacer } from "@chakra-ui/react";
 import {
   HourNumber,
   TimeType,
   toHourNumber,
   toMinutesNumber,
-  toTimeType,
 } from "../_day-schedule/type-day-schedule";
-import { WeekDateTime } from "../schedule/hooks/schedule-reducer";
+import {
+  ScheduleAction,
+  WeekDateTime,
+} from "../schedule/hooks/schedule-reducer";
 
-export const DayHourMinutes = ({ updateDate, time, handleUpdateWeekDateTime }: {
+export const DayHourMinutes = ({
+  updateDate,
+  time,
+  scheduleDispatch,
+}: {
   time: WeekDateTime["Time"];
   updateDate: WeekDateTime["Date"];
-  handleUpdateWeekDateTime: (
-    updateDate: WeekDateTime["Date"],
-    updateTime: WeekDateTime["Time"]
-  ) => void;
+  scheduleDispatch: (action: ScheduleAction) => void;
 }) => {
   /**
    * （AM・PM）or 24hの選択に合わせて、選択できる時間の選択肢を切り替る
@@ -71,15 +67,13 @@ export const DayHourMinutes = ({ updateDate, time, handleUpdateWeekDateTime }: {
           minutes: toMinutesNumber(nextValue),
         };
         break;
-      case "type":
-        updateTime = {
-          ...updateTime,
-          type: toTimeType(nextValue),
-        };
-        break;
     }
 
-    handleUpdateWeekDateTime(updateDate, updateTime);
+    scheduleDispatch({
+      type: "UPDATE_HOUR_MINUTES",
+      updateDate: updateDate,
+      updateTime: updateTime,
+    });
   };
 
   /**
@@ -127,22 +121,6 @@ export const DayHourMinutes = ({ updateDate, time, handleUpdateWeekDateTime }: {
           </option>
         ))}
       </Select>
-      {
-        // AM・PM・24h
-      }
-      <RadioGroup
-        onChange={(value) => onChangeTime(value, "type")}
-        defaultValue={time.type}
-      >
-        <Stack spacing={2} direction="row">
-          {["AM", "PM", "24h"].map((timeOption) => (
-            <Radio key={timeOption} value={timeOption}>
-              {timeOption}
-            </Radio>
-          ))}
-        </Stack>
-      </RadioGroup>
-      <Box h={10} mx={4} borderRight={"1px"} />
     </>
   );
 };

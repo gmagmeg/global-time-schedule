@@ -2,6 +2,7 @@ import {
   TimeZoneAbb,
   TimeZoneValue,
 } from "@/app/schedule/hooks/schedule-reducer";
+import { getInitTimeZone } from "@/app/schedule/hooks/schedule-reducer-function";
 
 /**
  * 略称名で部分一致（not完全一致）したタイムゾーンの情報を返す。
@@ -26,7 +27,7 @@ export const findTimeZoneValue = (searchWord: TimeZoneAbb): TimeZoneValue => {
   const result = mappingTimezone.find((item) => item.abb === searchWord);
 
   if (result === undefined) {
-    return { abb: "", full: "", utc: "" };
+    return getInitTimeZone();
   }
 
   return result;

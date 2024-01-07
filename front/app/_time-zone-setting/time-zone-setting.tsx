@@ -12,20 +12,22 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import { CiTimer } from "react-icons/ci";
+import { GrUpdate } from "react-icons/gr";
+import { RxCross1 } from "react-icons/rx";
 import { useState } from "react";
 import { CopyButton } from "../_common-button/copy-button";
 import { SearchTimeZone } from "./search-time-zone";
 import { ImCancelCircle } from "react-icons/im";
 import {
   ScheduleAction,
+  ScheduleState,
   TimeZoneAbb,
   TimeZoneKey,
   TimeZoneValue,
   TimeZones,
-  getInitTimeZone,
 } from "../schedule/hooks/schedule-reducer";
 import { toKeyArray } from "@/library/common";
-import { getInitTime } from "../schedule/hooks/schedule-reducer-function";
+import { getTimeZoneValue } from "../schedule/hooks/schedule-reducer-function";
 
 export const TimeZoneSetting = ({
   timeZones,
@@ -51,7 +53,10 @@ export const TimeZoneSetting = ({
   };
 
   /**
-   * タイムゾーンの変更
+   * タイムゾーンへの変更処理
+   * 値の変更だけなので、同じdispatchを利用する
+   * - 登録
+   * - 解除
    */
   const onChangeTimeZone = (timeZoneAbb: string): void => {
     onClose();
@@ -62,16 +67,22 @@ export const TimeZoneSetting = ({
     });
   };
 
-  const getTimeZoneValue = (timeZoneKey: TimeZoneKey): TimeZoneValue => {
-    const result = timeZones.get(timeZoneKey);
-    if (!result) {
-      throw new Error("タイムゾーンが見つかりません");
-    }
+  const onRemoveTimeZone = (timeZoneKey: TimeZoneKey): void => {
+    scheduleDispatch({
+      type: "CHANGE_TIME_ZONE",
+      updateTimeZoneAbb: "none" as TimeZoneAbb,
+      updateTimeZoneKey: timeZoneKey,
+    });
+  };
 
+  const onGetTimeZoneValue = (
+    timeZones: ScheduleState["timeZones"],
+    timeZoneKey: TimeZoneKey
+  ): TimeZoneValue => {
+    const result = getTimeZoneValue(timeZones, timeZoneKey);
     if (result.abb === "none") {
-      const initTimeZone = getInitTimeZone();
-      initTimeZone.abb = "---";
-      return initTimeZone;
+      result.abb = "---";
+      return result;
     }
 
     return result;
@@ -84,14 +95,26 @@ export const TimeZoneSetting = ({
       roundedTopRight={12}
       alignItems={"baseline"}
     >
-      {toKeyArray(timeZones).map((timeZoneKey: TimeZoneKey) => (
+      {toKeyArray(timeZones).map((timeZoneKey: TimeZoneKey, index: number) => (
         <Flex key={timeZoneKey} w={"30%"} alignItems={"baseline"} mt={6}>
           <Text pr={2}>
-            <Icon as={CiTimer}></Icon> {getTimeZoneValue(timeZoneKey).abb}
+            <Icon as={CiTimer} />
+            {onGetTimeZoneValue(timeZones, timeZoneKey).abb}
           </Text>
-          <Button mb={4} onClick={() => onModalOpen(timeZoneKey)}>
+          <Button mr={4} onClick={() => onModalOpen(timeZoneKey)}>
+            <Icon as={GrUpdate} mr={3} />
             変更する
           </Button>
+          { /** 最初の時間設定は設定された状態で固定したいので、削除ボタンを出さない。 */}
+          {index > 0 &&
+          <Button
+            onClick={() => onRemoveTimeZone(timeZoneKey)}
+            display={"inline-flex"}
+            alignItems={"center"}
+          >
+            <Icon as={RxCross1} mr={1} /> 削除する
+          </Button>
+          }
         </Flex>
       ))}
       <CopyButton copyText="全件コピー" width="10%" />
@@ -103,7 +126,9 @@ export const TimeZoneSetting = ({
         <ModalOverlay />
         <ModalContent>
           <SearchTimeZone
-            selectedTimezone={getTimeZoneValue(selectedTimeZoneKey).abb}
+            selectedTimezone={
+              onGetTimeZoneValue(timeZones, selectedTimeZoneKey).abb
+            }
             handleChangeTimeZone={onChangeTimeZone}
           />
           <Button onClick={onClose}>

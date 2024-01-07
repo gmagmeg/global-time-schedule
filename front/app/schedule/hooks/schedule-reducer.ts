@@ -7,6 +7,7 @@ import { DateString, TimeZone } from "@/library/type-date";
 import dayjs from "dayjs";
 import {
   convertWeekTimeZoneTime,
+  getInitTimeZone,
   initTimeZoneSchedule,
   reMappingWeekDateTimes,
   updateWeekDateTimes,
@@ -65,6 +66,11 @@ export type TimeZoneValue = {
 };
 export type TimeZones = Map<TimeZoneKey, TimeZoneValue>;
 
+/**
+ * 12時間制と24時間制のどちらを使用するかを管理する
+ */
+export type TimeTypePattern = "AM/PM" | "24h";
+
 export type ScheduleState = {
   /**
    * タイムゾーン
@@ -77,11 +83,16 @@ export type ScheduleState = {
   timeZones: TimeZones;
 
   /**
+   * "AM/PM" | "24h"
+   */
+  timeTypePattern: TimeTypePattern;
+
+  /**
    * タイムゾーン毎の時間は、この値をもとに再計算する
    * タイムゾーン毎の時間は{@link ScheduleState.timeZoneSchedule}で管理している
    * ex: Map<
-   * ["2023-01-01", {hour: 12 minutes: 00, type: {"AM"}} ],
-   * ["2023-01-02", {hour: 10 minutes: 30, type: {"PM"}} ]
+   * ["2023-01-01", {hour: 12 minutes: 00, type: "AM"} ],
+   * ["2023-01-02", {hour: 10 minutes: 30, type: "PM"} ]
    * ・・・>
    */
   weekDateTimes: WeekDateTimes;
@@ -91,9 +102,9 @@ export type ScheduleState = {
    * タイムゾーンによって、値が再計算される
    * ex: [
    * {
-   *  first: {hour: 12 minutes: 00, type: {"AM"}},
-   *  second: {hour: -- minutes: --, type: {"none"}},
-   *  third: {hour: -- minutes: --, type: {"none"}}
+   *  first: {hour: 12 minutes: 00, type: "AM"},
+   *  second: {hour: -- minutes: --, type: "none"},
+   *  third: {hour: -- minutes: --, type: "none"}
    * },
    * {・・・}
    * ],
@@ -109,10 +120,8 @@ export const toTimeZone = (timeZone: string): TimeZone => {
 };
 
 const initDate = dayjs().format("YYYY-MM-DD") as DateString;
-export const getInitTimeZone = (): TimeZoneValue => {
-  return { abb: "none", full: "none", utc: "none" };
-};
 export const scheduleState: ScheduleState = {
+  timeTypePattern: "AM/PM",
   timeZones: new Map<TimeZoneKey, TimeZoneValue>([
     ["first", { abb: "UTC", full: "Coordinated Universal Time", utc: "UTC+0" }],
     ["second", getInitTimeZone()],
@@ -127,6 +136,10 @@ export const scheduleState: ScheduleState = {
  * ActionとReducer定義
  *********************************************/
 export type ScheduleAction =
+  | {
+      type: "DECIDE_TIME_TYPE_PATTERN";
+      timeTypePattern: TimeTypePattern;
+    }
   | {
       type: "DECIDE_SCHEDULE_START_DATE";
       weekStartDate: DateString;
@@ -153,6 +166,29 @@ export const ScheduleReducer = (
   action: ScheduleAction
 ): ScheduleState => {
   switch (action.type) {
+    case "DECIDE_TIME_TYPE_PATTERN":
+      const decideTimeTypePattern = () => {
+        const newWeekDateTime = new Map<WeekDateTime["Date"], TimeFormat>();
+        if (action.timeTypePattern === "24h") {
+          state.weekDateTimes.forEach((value, date) => {
+            newWeekDateTime.set(date, { ...value, type: "24h" });
+          });
+        } else {
+          state.weekDateTimes.forEach((value, date) => {
+            newWeekDateTime.set(date, { ...value, type: "AM" });
+          });
+        }
+
+        return { timeTypePattern: action.timeTypePattern, newWeekDateTime };
+      };
+
+      const resultDecideTimeTypePattern = decideTimeTypePattern();
+
+      return {
+        ...state,
+        timeTypePattern: resultDecideTimeTypePattern.timeTypePattern,
+        weekDateTimes: resultDecideTimeTypePattern.newWeekDateTime,
+      };
     /**
      * １週間の開始日を決定する。
      * サマータイムは考慮しないで進めているので、
@@ -173,16 +209,15 @@ export const ScheduleReducer = (
      */
     case "CHANGE_TIME_ZONE":
       const changeTimeZone = (
+        timeZoneKey: TimeZoneKey,
+        timeZoneAbb: TimeZoneAbb,
         timeZones: ScheduleState["timeZones"],
         weekDateTime: ScheduleState["weekDateTimes"]
       ) => {
         const newTimeZoneMap = new Map<TimeZoneKey, TimeZoneValue>([]);
         timeZones.forEach((value, key) => {
-          if (key === action.updateTimeZoneKey) {
-            newTimeZoneMap.set(
-              key,
-              findTimeZoneValue(action.updateTimeZoneAbb)
-            );
+          if (key === timeZoneKey) {
+            newTimeZoneMap.set(key, findTimeZoneValue(timeZoneAbb));
           } else {
             newTimeZoneMap.set(key, value);
           }
@@ -197,6 +232,8 @@ export const ScheduleReducer = (
       };
 
       const resultChangeTimeZone = changeTimeZone(
+        action.updateTimeZoneKey,
+        action.updateTimeZoneAbb,
         state.timeZones,
         state.weekDateTimes
       );

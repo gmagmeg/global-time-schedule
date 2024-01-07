@@ -1,7 +1,5 @@
-import { correctToSunday } from "../../library/dayjs";
-import { toTimeZoneTime } from "@app/_day-schedule/hooks/day-schedule-reducer";
 import { convertTimeZoneTime } from "../time-zone-function";
-import { toDateString, toDateTimeString } from "@/library/type-date";
+import { toDateTimeString } from "@/library/type-date";
 
 describe("日本時間をベースに、他のタイムゾーン時間へ変換する", () => {
   it.each([

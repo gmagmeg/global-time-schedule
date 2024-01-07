@@ -1,6 +1,8 @@
 import {
   TimeFormat,
+  TimeZoneKey,
   TimeZoneSchedule,
+  TimeZoneValue,
   WeekDateTime,
   WeekDateTimes,
 } from "./schedule-reducer";
@@ -98,6 +100,17 @@ export const initTimeZoneSchedule = (): TimeZoneSchedule => {
   };
 
   return Array(7).fill(defaultFormat) as TimeZoneSchedule;
+};
+
+export const getInitTimeZone = (): TimeZoneValue => {
+  return { abb: "none", full: "none", utc: "none" };
+};
+
+export const getTimeZoneValue = (
+  timeZones: ScheduleState["timeZones"],
+  timeZoneKey: TimeZoneKey
+): TimeZoneValue => {
+  return timeZones.get(timeZoneKey) ?? getInitTimeZone();
 };
 
 /**

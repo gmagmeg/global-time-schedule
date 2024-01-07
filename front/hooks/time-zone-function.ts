@@ -1,4 +1,4 @@
-import { TimeZoneInfo } from "@/app/_day-schedule/hooks/day-schedule-state";
+import { TimeZoneValue } from "@/app/schedule/hooks/schedule-reducer";
 import { customDayjs } from "@/library/dayjs";
 import {
   DateString,
@@ -13,8 +13,8 @@ import dayjs from "dayjs";
  */
 export const convertTimeZoneTime = (
   baseDateTime: DateTimeString,
-  fromTimezone: TimeZoneInfo,
-  toTimezone: TimeZoneInfo
+  fromTimezone: TimeZoneValue,
+  toTimezone: TimeZoneValue
 ): DateTimeString => {
   // UTC文字列から数値を取得する
   const convertUTCNum = (utcString: string): number => {

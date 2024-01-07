@@ -4,7 +4,7 @@
 
 import { DayHourMinutes } from "./day-hour-minutes";
 import { DateString } from "@lib/type-date";
-import { Flex } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import { DayButton } from "../_common-button/day-button";
 import {
   ScheduleAction,
@@ -14,13 +14,16 @@ import {
 } from "../schedule/hooks/schedule-reducer";
 import { toKeyArray } from "@/library/common";
 import { DaySchedule } from "./day-schedule";
+import { TimeTypePattern } from "./time-type-pattern";
 
 export const WeekSchedule = ({
+  timeTypePattern,
   weekStartDate,
   weekDateTimes,
   timeZoneSchedule,
   scheduleDispatch,
 }: {
+  timeTypePattern: ScheduleState["timeTypePattern"];
   weekStartDate: ScheduleState["weekStartDate"];
   weekDateTimes: ScheduleState["weekDateTimes"];
   timeZoneSchedule: ScheduleState["timeZoneSchedule"];
@@ -46,17 +49,6 @@ export const WeekSchedule = ({
     }
 
     return result;
-  }
-
-  const handleUpdateWeekDateTime = (
-    updateDate: WeekDateTime["Date"],
-    updateTime: WeekDateTime["Time"]
-  ): void => {
-    scheduleDispatch({
-      type: "UPDATE_HOUR_MINUTES",
-      updateDate: updateDate,
-      updateTime: updateTime,
-    });
   };
 
   return (
@@ -79,8 +71,16 @@ export const WeekSchedule = ({
             <DayHourMinutes
               time={getTime(date)}
               updateDate={date}
-              handleUpdateWeekDateTime={handleUpdateWeekDateTime}
+              scheduleDispatch={scheduleDispatch}
             />
+            <TimeTypePattern
+              time={getTime(date)}
+              updateDate={date}
+              timeTypePattern={timeTypePattern}
+              index={index}
+              scheduleDispatch={scheduleDispatch}
+            />
+            <Box h={10} mx={4} borderRight={"1px"} />
             <DaySchedule timeZoneTime={getTimeZoneTime(index)} />
           </Flex>
         );

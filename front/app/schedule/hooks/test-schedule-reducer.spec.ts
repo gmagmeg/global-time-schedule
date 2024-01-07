@@ -11,6 +11,7 @@ import {
   TimeZones,
   WeekDateTime,
   WeekDateTimes,
+  getInitTimeZone,
   scheduleState,
 } from "./schedule-reducer";
 import {
@@ -98,13 +99,41 @@ describe("UPDATE_HOUR_MINUTES", () => {
   });
 
   const dateTimes = [
-    { hour: 0, minutes: 0, type: "AM" },
-    { hour: 0, minutes: 0, type: "AM" },
-    { hour: 0, minutes: 0, type: "AM" },
-    { hour: 0, minutes: 0, type: "AM" },
-    { hour: 0, minutes: 0, type: "AM" },
-    { hour: 0, minutes: 0, type: "AM" },
-    { hour: 0, minutes: 0, type: "AM" },
+    {
+      hour: 0 as HourNumber,
+      minutes: 0 as MinutesNumber,
+      type: "AM" as TimeType,
+    },
+    {
+      hour: 0 as HourNumber,
+      minutes: 0 as MinutesNumber,
+      type: "AM" as TimeType,
+    },
+    {
+      hour: 0 as HourNumber,
+      minutes: 0 as MinutesNumber,
+      type: "AM" as TimeType,
+    },
+    {
+      hour: 0 as HourNumber,
+      minutes: 0 as MinutesNumber,
+      type: "AM" as TimeType,
+    },
+    {
+      hour: 0 as HourNumber,
+      minutes: 0 as MinutesNumber,
+      type: "AM" as TimeType,
+    },
+    {
+      hour: 0 as HourNumber,
+      minutes: 0 as MinutesNumber,
+      type: "AM" as TimeType,
+    },
+    {
+      hour: 0 as HourNumber,
+      minutes: 0 as MinutesNumber,
+      type: "AM" as TimeType,
+    },
   ];
 
   it("2024-01-01（先頭）の時間を更新する", () => {
@@ -122,19 +151,17 @@ describe("UPDATE_HOUR_MINUTES", () => {
 
     // Act
     const newState = ScheduleReducer(scheduleState, action);
+    const newWeekDateTimes: WeekDateTimes = new Map();
+    newWeekDateTimes.set(toDateString("2024-01-01"), expected);
+    newWeekDateTimes.set(toDateString("2024-01-02"), dateTimes[1]);
+    newWeekDateTimes.set(toDateString("2024-01-03"), dateTimes[2]);
+    newWeekDateTimes.set(toDateString("2024-01-04"), dateTimes[3]);
+    newWeekDateTimes.set(toDateString("2024-01-05"), dateTimes[4]);
+    newWeekDateTimes.set(toDateString("2024-01-06"), dateTimes[5]);
+    newWeekDateTimes.set(toDateString("2024-01-07"), dateTimes[6]);
 
     // Assert
-    expect(newState.weekDateTimes).toEqual(
-      new Map([
-        ["2024-01-01", expected],
-        ["2024-01-02", dateTimes[1]],
-        ["2024-01-03", dateTimes[2]],
-        ["2024-01-04", dateTimes[3]],
-        ["2024-01-05", dateTimes[4]],
-        ["2024-01-06", dateTimes[5]],
-        ["2024-01-07", dateTimes[6]],
-      ])
-    );
+    expect(newState.weekDateTimes).toEqual(newWeekDateTimes);
   });
 
   it("2024-01-07（末尾）の時間を更新する", () => {
@@ -223,8 +250,8 @@ describe("日本時間をベースに、UTC+1のタイムゾーンの時間へ�
       minutes: 0,
       type: "PM",
     });
-    testTimeZones.set("second", undefined);
-    testTimeZones.set("third", undefined);
+    testTimeZones.set("second", getInitTimeZone());
+    testTimeZones.set("third", getInitTimeZone());
 
     /**
      * Act
