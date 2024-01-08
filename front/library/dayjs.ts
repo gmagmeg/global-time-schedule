@@ -6,7 +6,7 @@ import weekday from "dayjs/plugin/weekday";
 import { DateString, toDateString } from "./type-date";
 
 dayjs.extend(utc);
-dayjs.extend(timezone);
+// dayjs.extend(timezone);
 dayjs.extend(localDate);
 dayjs.extend(weekday);
 

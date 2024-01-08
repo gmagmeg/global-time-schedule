@@ -62,7 +62,7 @@ export const mappingTimezone: TimeZoneValue[] = [
   { abb: "ART", full: "Argentina Time", utc: "UTC-3" },
   { abb: "AST_Atlantic", full: "Atlantic Standard Time", utc: "UTC-4" },
   { abb: "AST_Arabia", full: "Arabia Standard Time", utc: "UTC+3" },
-  { abb: "AT", full: "Atlantic Time", utc: "UTC-4/UTC-3" },
+  { abb: "AT", full: "Atlantic Time", utc: "UTC-4" },
   { abb: "AWST", full: "Australian Western Standard Time", utc: "UTC+8" },
   { abb: "AZOST", full: "Azores Summer Time", utc: "UTC+0" },
   { abb: "AZOT", full: "Azores Standard Time", utc: "UTC-1" },

@@ -26,22 +26,28 @@ export const DaySchedule = ({
     return `${dateTime} ${time[key].type}`;
   };
 
+  const copiedTextList = [
+    dateFormat(timeZoneTime, "first"),
+    dateFormat(timeZoneTime, "second"),
+    dateFormat(timeZoneTime, "third"),
+  ];
+
   const handleClickCopyButton = (): string => {
-    return (
-      dateFormat(timeZoneTime, "first") +
-      " " +
-      dateFormat(timeZoneTime, "second") +
-      " " +
-      dateFormat(timeZoneTime, "third")
-    );
+    return copiedTextList
+      .filter((copiedText) => copiedText !== "--:--")
+      .join(" ");
   };
 
   return (
     <Flex width={"50%"} align={"center"}>
       <CopyButton width="20%" handleClickCopyButton={handleClickCopyButton} />
-      <Text ml={6}>{dateFormat(timeZoneTime, "first")}</Text>
-      <Text ml={6}>{dateFormat(timeZoneTime, "second")}</Text>
-      <Text ml={6}>{dateFormat(timeZoneTime, "third")}</Text>
+      {copiedTextList.map((copiedText, index) => {
+        return (
+          <Text key={index} ml={6}>
+            {copiedText}
+          </Text>
+        );
+      })}
     </Flex>
   );
 };

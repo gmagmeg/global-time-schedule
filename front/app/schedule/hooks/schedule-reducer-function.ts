@@ -2,6 +2,7 @@ import {
   TimeFormat,
   TimeZoneKey,
   TimeZoneSchedule,
+  TimeZoneTime,
   TimeZoneValue,
   WeekDateTime,
   WeekDateTimes,
@@ -148,7 +149,7 @@ export const convertWeekTimeZoneTime = (
         date,
         time,
         fromUTCNum,
-        _convertUTCNum(toSecondUTC)
+        _convertUTCNum(toThirdUTC)
       );
     }
 
@@ -175,8 +176,8 @@ const _convertUTCNum = (utcString: string): number => {
 const _calculateTimeZoneTime = (
   baseDate: DateString,
   time: TimeFormat,
-  from: number,
-  to: number
+  fromUTC: number,
+  toUTC: number
 ): TimeFormat => {
   let dayjsTimeFormat = "";
   let baseDateTime = "";
@@ -188,19 +189,71 @@ const _calculateTimeZoneTime = (
   } else {
     dayjsTimeFormat = "YYYY-MM-DD HH:mm A";
     baseDateTime = `${baseDate} ${time.hour}:${time.minutes} ${time.type}`;
-    timeFormat = { h: "HH", m: "mm", t: "A" };
+    timeFormat = { h: "hh", m: "mm", t: "A" };
   }
 
-  const currentHour = customDayjs(baseDateTime, dayjsTimeFormat).hour();
-  const diffHour = currentHour + (from - to);
-  const day =
-    diffHour <= 0
-      ? customDayjs(baseDateTime).add(diffHour, "hour")
-      : customDayjs(baseDateTime).subtract(diffHour, "hour");
+  const baseDateTimeDayJs = customDayjs(baseDateTime, dayjsTimeFormat);
+
+  /**
+   * 自国の時間 + 時差(＝求めたい国のUTC) – (自分がいる国のUTC)
+   */
+  // 自国の時間
+  const currentCompanyHour = Number(baseDateTimeDayJs.format("h"));
+  // 時差(＝求めたい国のUTC) – (自分がいる国のUTC)
+  const diffHour = toUTC - fromUTC;
+
+  if (baseDate === "2024-01-14") {
+    console.log("baseDate", baseDateTimeDayJs.add(1, "h").format("hh:mm A"));
+    console.log("baseDate", baseDateTimeDayJs.add(13, "h").format("hh:mm A"));
+
+    console.table({
+      baseDate,
+      currentCompanyHour,
+      fromUTC,
+      toUTC,
+      baseDateTime,
+    });
+  }
+
+  // @todo AM/PM表記の場合、計算結果によっては＋ー12しないとダメそう?
+  const resultDay = baseDateTimeDayJs.add(diffHour, "h");
 
   return {
-    hour: toHourNumber(day.format(timeFormat.h)),
-    minutes: toMinutesNumber(day.format(timeFormat.m)),
-    type: timeFormat.t === "" ? "none" : toTimeType(day.format(timeFormat.t)),
+    hour: toHourNumber(resultDay.format("hh")),
+    minutes: toMinutesNumber(resultDay.format(timeFormat.m)),
+    type:
+      timeFormat.t === "" ? "none" : toTimeType(resultDay.format(timeFormat.t)),
   };
+};
+
+export const toCopiedTextList = (
+  timeZoneSchedule: ScheduleState["timeZoneSchedule"]
+): string => {
+  const validSchedule = timeZoneSchedule.map((time: TimeZoneTime) => {
+    const validTimeList = [
+      dateFormat(time, "first"),
+      dateFormat(time, "second"),
+      dateFormat(time, "third"),
+    ].filter((copiedText) => {
+      return copiedText !== "--:--";
+    });
+
+    return validTimeList.join(" ");
+  });
+
+  return validSchedule.join("\n");
+};
+
+export const dateFormat = (time: TimeZoneTime, key: TimeZoneKey): string => {
+  const dateTime = `${time[key].hour}:${time[key].minutes}`;
+
+  if (time[key].type === "24h") {
+    return dateTime;
+  }
+
+  if (time[key].type === "none") {
+    return "--:--";
+  }
+
+  return `${dateTime} ${time[key].type}`;
 };

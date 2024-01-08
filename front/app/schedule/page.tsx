@@ -12,6 +12,8 @@ import {
 import { timeZoneState as _timeZoneState } from "@hooks/time-zone-reducer";
 import { TimeZoneSetting } from "../_time-zone-setting/time-zone-setting";
 import { WeekDayRange } from "../_week-day-range/week-day-range";
+import { CopyButton } from "../_common-button/copy-button";
+import { toCopiedTextList } from "./hooks/schedule-reducer-function";
 
 export default function Schedule() {
   /**
@@ -21,6 +23,10 @@ export default function Schedule() {
     ScheduleReducer,
     _scheduleState
   );
+
+  const handleClickCopyButton = (): string => {
+    return toCopiedTextList(scheduleState.timeZoneSchedule);
+  };
 
   return (
     <Grid templateColumns="1fr" gap={3}>
@@ -38,6 +44,11 @@ export default function Schedule() {
       <TimeZoneSetting
         timeZones={scheduleState.timeZones}
         scheduleDispatch={scheduleDispatch}
+      />
+      <CopyButton
+        copyText="全件コピー"
+        width="10%"
+        handleClickCopyButton={handleClickCopyButton}
       />
       {
         // １週間分のスケジュール設定

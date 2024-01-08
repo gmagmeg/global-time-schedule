@@ -15,7 +15,6 @@ import { CiTimer } from "react-icons/ci";
 import { GrUpdate } from "react-icons/gr";
 import { RxCross1 } from "react-icons/rx";
 import { useState } from "react";
-import { CopyButton } from "../_common-button/copy-button";
 import { SearchTimeZone } from "./search-time-zone";
 import { ImCancelCircle } from "react-icons/im";
 import {
@@ -117,7 +116,7 @@ export const TimeZoneSetting = ({
           )}
         </Flex>
       ))}
-      {/* <CopyButton copyText="全件コピー" width="10%" /> */}
+
       {/*
         タイムゾーンの設定コンポーネントと
         モーダルコンポーネント
