@@ -2,6 +2,7 @@
  * @module time-zone-setting
  */
 import {
+  Box,
   Button,
   Flex,
   Icon,
@@ -9,6 +10,7 @@ import {
   ModalContent,
   ModalOverlay,
   Text,
+  VStack,
   useDisclosure,
 } from "@chakra-ui/react";
 import { CiTimer } from "react-icons/ci";
@@ -88,32 +90,31 @@ export const TimeZoneSetting = ({
   };
 
   return (
-    <Flex
-      px={4}
-      roundedTopLeft={12}
-      roundedTopRight={12}
-      alignItems={"baseline"}
-    >
+    <Box>
       {toKeyArray(timeZones).map((timeZoneKey: TimeZoneKey, index: number) => (
-        <Flex key={timeZoneKey} w={"30%"} alignItems={"baseline"} mt={6}>
-          <Text pr={2}>
+        <Flex key={timeZoneKey} alignItems={"baseline"} mb={8}>
+          <Text pr={2} w={100}>
             <Icon as={CiTimer} />
             {onGetTimeZoneValue(timeZones, timeZoneKey).abb}
           </Text>
-          <Button mr={4} onClick={() => onModalOpen(timeZoneKey)}>
-            <Icon as={GrUpdate} mr={3} />
-            変更する
-          </Button>
-          {/** 最初の時間設定は設定された状態で固定したいので、削除ボタンを出さない。 */}
-          {index > 0 && (
-            <Button
-              onClick={() => onRemoveTimeZone(timeZoneKey)}
-              display={"inline-flex"}
-              alignItems={"center"}
-            >
-              <Icon as={RxCross1} mr={1} /> 削除する
+          <VStack>
+            <Button w={130} onClick={() => onModalOpen(timeZoneKey)}>
+              <Icon as={GrUpdate} mr={2} />
+              変更する
             </Button>
-          )}
+
+            {/** 最初の時間設定は設定された状態で固定したいので、削除ボタンを出さない。 */}
+            {index > 0 && (
+              <Button
+                w={130}
+                onClick={() => onRemoveTimeZone(timeZoneKey)}
+                display={"inline-flex"}
+                alignItems={"center"}
+              >
+                <Icon mr={2} as={RxCross1} /> 削除する
+              </Button>
+            )}
+          </VStack>
         </Flex>
       ))}
 
@@ -136,6 +137,6 @@ export const TimeZoneSetting = ({
           </Button>
         </ModalContent>
       </Modal>
-    </Flex>
+    </Box>
   );
 };

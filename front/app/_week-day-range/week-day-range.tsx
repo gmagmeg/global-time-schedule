@@ -2,7 +2,15 @@
  * @module _week-day-range
  */
 
-import { Box, Radio, RadioGroup, Stack, Text, VStack } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Radio,
+  RadioGroup,
+  Stack,
+  Text,
+  VStack,
+} from "@chakra-ui/react";
 import { DateString, toDateString } from "@/library/type-date";
 import { ScheduleAction } from "../schedule/hooks/schedule-reducer";
 import { customDayjs } from "@/library/dayjs";
@@ -70,27 +78,26 @@ export const WeekDayRange = ({
 
   return (
     <>
-      <Box mt={1}>
-        <RadioGroup
-          value={weekStartDate}
-          onChange={onChangeWeekStartDate}
-          size={"lg"}
-        >
-          <Stack direction="row" justifyContent={"space-between"}>
-            {/** 週の開始日選択肢 */}
-            {createStartDateList().map((startDate) => (
-              <VStack key={startDate.sun.value}>
-                <Radio value={startDate.sun.value}>
-                  <Text color="red">{startDate.sun.display}（日）</Text>
-                </Radio>
-                <Radio value={startDate.mon.value}>
-                  {startDate.mon.display}（月）
-                </Radio>
-              </VStack>
-            ))}
-          </Stack>
-        </RadioGroup>
-      </Box>
+      <RadioGroup
+        value={weekStartDate}
+        onChange={onChangeWeekStartDate}
+        size={"lg"}
+      >
+        <Stack direction="column" justifyContent={"space-between"}>
+          {/** 週の開始日選択肢 */}
+          {createStartDateList().map((startDate) => (
+            <>
+              <Button>test</Button>
+              <Radio value={startDate.sun.value}>
+                <Text color="red">{startDate.sun.display}（日）</Text>
+              </Radio>
+              <Radio value={startDate.mon.value}>
+                {startDate.mon.display}（月）
+              </Radio>
+            </>
+          ))}
+        </Stack>
+      </RadioGroup>
     </>
   );
 };

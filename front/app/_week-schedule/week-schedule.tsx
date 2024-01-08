@@ -51,7 +51,7 @@ export const WeekSchedule = ({
         return (
           <Flex
             key={date}
-            p={4}
+            pb={6}
             align={"center"}
             _hover={{
               backgroundColor: "#D7D5F0",
@@ -70,7 +70,7 @@ export const WeekSchedule = ({
               index={index}
               scheduleDispatch={scheduleDispatch}
             />
-            <Box h={10} mx={4} borderRight={"1px"} />
+            <Box h={10} borderRight={"1px"} />
             <DaySchedule timeZoneTime={getTimeZoneTime(index)} />
           </Flex>
         );

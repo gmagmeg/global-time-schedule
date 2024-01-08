@@ -202,20 +202,6 @@ const _calculateTimeZoneTime = (
   // 時差(＝求めたい国のUTC) – (自分がいる国のUTC)
   const diffHour = toUTC - fromUTC;
 
-  if (baseDate === "2024-01-14") {
-    console.log("baseDate", baseDateTimeDayJs.add(1, "h").format("hh:mm A"));
-    console.log("baseDate", baseDateTimeDayJs.add(13, "h").format("hh:mm A"));
-
-    console.table({
-      baseDate,
-      currentCompanyHour,
-      fromUTC,
-      toUTC,
-      baseDateTime,
-    });
-  }
-
-  // @todo AM/PM表記の場合、計算結果によっては＋ー12しないとダメそう?
   const resultDay = baseDateTimeDayJs.add(diffHour, "h");
 
   return {
