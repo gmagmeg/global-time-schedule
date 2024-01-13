@@ -8,6 +8,7 @@ import {
   convertWeekTimeZoneTime,
   getInitTimeZone,
   initTimeZoneSchedule,
+  isInitTime,
   reMappingWeekDateTimes,
   updateWeekDateTimes,
 } from "./schedule-reducer-function";
@@ -18,6 +19,7 @@ import {
 } from "@/app/_day-schedule/type-day-schedule";
 import { moveToNextSunday } from "@/hooks/time-zone-function";
 import { findTimeZoneValue } from "@lib/mapping-timezone";
+import { init } from "next/dist/compiled/webpack/webpack";
 
 /********************************************
  * TypeとStateの定義
@@ -166,27 +168,72 @@ export const ScheduleReducer = (
 ): ScheduleState => {
   switch (action.type) {
     case "DECIDE_TIME_TYPE_PATTERN":
-      const decideTimeTypePattern = () => {
+      const decideTimeTypePattern = (
+        weekDateTimes: ScheduleState["weekDateTimes"],
+        timeZoneSchedule: ScheduleState["timeZoneSchedule"]
+      ) => {
         const newWeekDateTime = new Map<WeekDateTime["Date"], TimeFormat>();
+        const newTimeZoneSchedule: TimeZoneSchedule = initTimeZoneSchedule();
+
         if (action.timeTypePattern === "24h") {
-          state.weekDateTimes.forEach((value, date) => {
+          weekDateTimes.forEach((value, date) => {
             newWeekDateTime.set(date, { ...value, type: "24h" });
           });
+          timeZoneSchedule.forEach((value, index) => {
+            newTimeZoneSchedule[index] = {
+              first: {
+                ...value.first,
+                type: isInitTime(value.first) ? "none" : "24h",
+              },
+              second: {
+                ...value.second,
+                type: isInitTime(value.second) ? "none" : "24h",
+              },
+              third: {
+                ...value.third,
+                type: isInitTime(value.third) ? "none" : "24h",
+              },
+            };
+          });
         } else {
-          state.weekDateTimes.forEach((value, date) => {
+          weekDateTimes.forEach((value, date) => {
             newWeekDateTime.set(date, { ...value, type: "AM" });
+          });
+          timeZoneSchedule.forEach((value, index) => {
+            newTimeZoneSchedule[index] = {
+              first: {
+                ...value.first,
+                type: isInitTime(value.first) ? "none" : "AM",
+              },
+              second: {
+                ...value.second,
+                type: isInitTime(value.second) ? "none" : "AM",
+              },
+              third: {
+                ...value.third,
+                type: isInitTime(value.third) ? "none" : "AM",
+              },
+            };
           });
         }
 
-        return { timeTypePattern: action.timeTypePattern, newWeekDateTime };
+        return {
+          timeTypePattern: action.timeTypePattern,
+          newWeekDateTime,
+          newTimeZoneSchedule,
+        };
       };
 
-      const resultDecideTimeTypePattern = decideTimeTypePattern();
+      const resultDecideTimeTypePattern = decideTimeTypePattern(
+        state.weekDateTimes,
+        state.timeZoneSchedule
+      );
 
       return {
         ...state,
         timeTypePattern: resultDecideTimeTypePattern.timeTypePattern,
         weekDateTimes: resultDecideTimeTypePattern.newWeekDateTime,
+        timeZoneSchedule: resultDecideTimeTypePattern.newTimeZoneSchedule,
       };
     /**
      * １週間の開始日を決定する。

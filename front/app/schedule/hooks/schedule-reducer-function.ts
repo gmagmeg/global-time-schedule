@@ -81,12 +81,20 @@ export const updateWeekDateTimes = (
 /**
  * {@link ScheduleState.timezoneSchedule}の初期値を生成します
  */
-export const getInitTime = () => {
+export const getInitTime = (): TimeFormat => {
   return {
     hour: "--" as HourNumber,
     minutes: "--" as MinutesNumber,
     type: "none" as TimeType,
   };
+};
+
+export const isInitTime = (timeFormat: TimeFormat): boolean => {
+  return (
+    timeFormat.hour === "--" &&
+    timeFormat.minutes === "--" &&
+    timeFormat.type === "none"
+  );
 };
 
 export const initTimeZoneSchedule = (): TimeZoneSchedule => {

@@ -4,7 +4,7 @@
 
 import { DayHourMinutes } from "./day-hour-minutes";
 import { DateString } from "@lib/type-date";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Spacer } from "@chakra-ui/react";
 import { DayButton } from "../_common-button/day-button";
 import {
   ScheduleAction,
@@ -49,14 +49,7 @@ export const WeekSchedule = ({
     <>
       {toKeyArray(weekDateTimes).map((date: DateString, index: number) => {
         return (
-          <Flex
-            key={date}
-            pb={6}
-            align={"center"}
-            _hover={{
-              backgroundColor: "#D7D5F0",
-            }}
-          >
+          <Flex key={date} gap={3} align={"flex-start"} mb={4}>
             <DayButton date={date} onClick={() => {}} />
             <DayHourMinutes
               time={getTime(date)}
@@ -70,7 +63,6 @@ export const WeekSchedule = ({
               index={index}
               scheduleDispatch={scheduleDispatch}
             />
-            <Box h={10} borderRight={"1px"} />
             <DaySchedule timeZoneTime={getTimeZoneTime(index)} />
           </Flex>
         );

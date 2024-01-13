@@ -14,7 +14,7 @@ import {
 import { DateString, toDateString } from "@/library/type-date";
 import { ScheduleAction } from "../schedule/hooks/schedule-reducer";
 import { customDayjs } from "@/library/dayjs";
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { moveToNextSunday } from "@/hooks/time-zone-function";
 
 export const WeekDayRange = ({
@@ -35,6 +35,10 @@ export const WeekDayRange = ({
         value: baseDate.add(addDay + 1, "day").format("YYYY-MM-DD"),
       },
     };
+  };
+
+  const monthWeek = () => {
+    return dayjs(weekStartDate).format("MM/MMM");
   };
 
   /**
@@ -81,18 +85,27 @@ export const WeekDayRange = ({
       <RadioGroup
         value={weekStartDate}
         onChange={onChangeWeekStartDate}
-        size={"lg"}
+        size={"sm"}
       >
         <Stack direction="column" justifyContent={"space-between"}>
           {/** 週の開始日選択肢 */}
           {createStartDateList().map((startDate) => (
             <>
-              <Button>test</Button>
+              <Button
+                onClick={() => onChangeWeekStartDate(startDate.sun.value)}
+                colorScheme={"purple"}
+                size={"sm"}
+                variant={"outline"}
+              >
+                {startDate.sun.value}～
+              </Button>
               <Radio value={startDate.sun.value}>
-                <Text color="red">{startDate.sun.display}（日）</Text>
+                <Text fontSize="md" color="red">
+                  {startDate.sun.display}（日）
+                </Text>
               </Radio>
-              <Radio value={startDate.mon.value}>
-                {startDate.mon.display}（月）
+              <Radio mb={4} value={startDate.mon.value}>
+                <Text fontSize="md">{startDate.mon.display}（月）</Text>
               </Radio>
             </>
           ))}

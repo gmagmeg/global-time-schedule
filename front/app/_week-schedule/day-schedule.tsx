@@ -2,7 +2,7 @@
  * @module _day-schedule
  */
 
-import { Flex, Text } from "@chakra-ui/react";
+import { Flex, Spacer, Text } from "@chakra-ui/react";
 import { TimeZoneKey } from "../schedule/hooks/schedule-reducer";
 import { CopyButton } from "../_common-button/copy-button";
 import { TimeZoneTime } from "../schedule/hooks/schedule-reducer";
@@ -39,15 +39,13 @@ export const DaySchedule = ({
   };
 
   return (
-    <Flex width={"50%"} align={"center"}>
-      <CopyButton width="20%" handleClickCopyButton={handleClickCopyButton} />
-      {copiedTextList.map((copiedText, index) => {
-        return (
-          <Text key={index} ml={6}>
-            {copiedText}
-          </Text>
-        );
-      })}
-    </Flex>
+    <>
+      <Flex align={"center"} gap={2}>
+        {copiedTextList.map((copiedText, index) => {
+          return <Text key={index}>{copiedText}</Text>;
+        })}
+      </Flex>
+      <CopyButton width="10%" handleClickCopyButton={handleClickCopyButton} />
+    </>
   );
 };

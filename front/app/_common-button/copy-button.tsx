@@ -8,7 +8,7 @@ import { FiCopy } from "react-icons/fi";
 import { FaCheck } from "react-icons/fa";
 
 export const CopyButton = ({
-  copyText = "コピーする",
+  copyText = "",
   width = "100%",
   handleClickCopyButton,
 }: {
@@ -39,7 +39,7 @@ export const CopyButton = ({
       bg={"#4A7AF8"}
       color={"White"}
     >
-      {isCopied ? "済み" : copyText}
+      {isCopied ? "" : copyText}
     </Button>
   );
 };

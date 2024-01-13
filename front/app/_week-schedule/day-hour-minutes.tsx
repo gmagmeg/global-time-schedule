@@ -96,6 +96,7 @@ export const DayHourMinutes = ({
         // 時間
       }
       <Select
+        size={"sm"}
         onChange={(e) => onChangeTime(e.target.value, "hour")}
         value={time.hour}
         {...selectBoxStyle}
@@ -106,11 +107,11 @@ export const DayHourMinutes = ({
           </option>
         ))}
       </Select>
-      <Spacer maxW={4} />
       {
         // 分
       }
       <Select
+        size={"sm"}
         onChange={(e) => onChangeTime(e.target.value, "minutes")}
         value={time.minutes}
         {...selectBoxStyle}

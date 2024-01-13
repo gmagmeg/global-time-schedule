@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   Flex,
+  Heading,
   Icon,
   Modal,
   ModalContent,
@@ -93,12 +94,12 @@ export const TimeZoneSetting = ({
     <Box>
       {toKeyArray(timeZones).map((timeZoneKey: TimeZoneKey, index: number) => (
         <Flex key={timeZoneKey} alignItems={"baseline"} mb={8}>
-          <Text pr={2} w={100}>
-            <Icon as={CiTimer} />
+          <Text w={"5em"} onClick={() => onModalOpen(timeZoneKey)}>
+            <Icon as={CiTimer} mr={1} />
             {onGetTimeZoneValue(timeZones, timeZoneKey).abb}
           </Text>
           <VStack>
-            <Button w={130} onClick={() => onModalOpen(timeZoneKey)}>
+            <Button onClick={() => onModalOpen(timeZoneKey)} size={"sm"}>
               <Icon as={GrUpdate} mr={2} />
               変更する
             </Button>
@@ -106,7 +107,7 @@ export const TimeZoneSetting = ({
             {/** 最初の時間設定は設定された状態で固定したいので、削除ボタンを出さない。 */}
             {index > 0 && (
               <Button
-                w={130}
+                size={"sm"}
                 onClick={() => onRemoveTimeZone(timeZoneKey)}
                 display={"inline-flex"}
                 alignItems={"center"}

@@ -3,7 +3,7 @@
  */
 
 import { customDayjs } from "@/library/dayjs";
-import { Button } from "@chakra-ui/react";
+import { Button, Text } from "@chakra-ui/react";
 import { DateString } from "@lib/type-date";
 import { ClickButtonEvent } from "../event-types-alias";
 
@@ -18,8 +18,9 @@ export const DayButton = ({
 
   return (
     <Button
-      w={"5rem"}
-      h={"3rem"}
+      size={"sm"}
+      h={"50px"}
+      w={"50px"}
       bg={bgColor}
       color="White"
       _hover={{ bg: "#C794CF" }}

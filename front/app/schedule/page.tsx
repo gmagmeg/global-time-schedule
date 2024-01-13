@@ -2,7 +2,18 @@
 /**
  * @module schedule/page
  */
-import { Box, Flex, Grid, HStack, Heading, Icon, Select } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Grid,
+  HStack,
+  Heading,
+  Icon,
+  Radio,
+  RadioGroup,
+  Select,
+  Spacer,
+} from "@chakra-ui/react";
 import { useReducer } from "react";
 import { WeekSchedule } from "../_week-schedule/week-schedule";
 import {
@@ -15,7 +26,10 @@ import { TimeZoneSetting } from "../_time-zone-setting/time-zone-setting";
 import { WeekDayRange } from "../_week-day-range/week-day-range";
 import { CopyButton } from "../_common-button/copy-button";
 import { toCopiedTextList } from "./hooks/schedule-reducer-function";
-import { FaRegHandPointRight } from "react-icons/fa";
+import { VscDebugStart } from "react-icons/vsc";
+import { IoTimeOutline } from "react-icons/io5";
+import { GrSchedules } from "react-icons/gr";
+import { IconType } from "react-icons/lib";
 
 export default function Schedule() {
   /**
@@ -30,17 +44,14 @@ export default function Schedule() {
     return toCopiedTextList(scheduleState.timeZoneSchedule);
   };
 
-  const onChangeSelectTimeType = (
-    nextValue: string,
-  ): void => {
-    
+  const onChangeSelectTimeType = (nextValue: string): void => {
     scheduleDispatch({
       type: "DECIDE_TIME_TYPE_PATTERN",
       timeTypePattern: nextValue as ScheduleState["timeTypePattern"],
-    })
-  }
+    });
+  };
 
-  const stepHeading = (step: number, text: string) => {
+  const stepHeading = (icon: IconType, step: number, text: string) => {
     return (
       <Heading
         size="sm"
@@ -53,60 +64,71 @@ export default function Schedule() {
         alignItems="center"
         gap={2}
       >
-        <Icon as={FaRegHandPointRight} color="blue.500" w={6} h={6} />
-        STEP {step}
-        <br />
-        {text}
+        <Icon as={icon} color="blue.500" w={6} h={6} />
+        {step}：{text}
       </Heading>
     );
   };
 
   return (
-    <Grid templateColumns="1fr" gap={3}>
+    <Grid templateColumns="1fr" gap={3} placeItems="center">
       <Box bgColor={"#B4C6EA"}>
         <Heading as={"h1"}>ここにロゴを入れる</Heading>
         {/* <Image src="/sitelogo.png" width={500} height={100} alt={"VTubeWorld Scheduler"} /> */}
       </Box>
+      <Flex direction={"column"}>
+        <WeekDayRange
+          weekStartDate={scheduleState.weekStartDate}
+          scheduleDispatch={scheduleDispatch}
+        />
+      </Flex>
       <HStack spacing={8} align="flex-start">
         <Box>
-          {stepHeading(1, "開始日の設定")}
-          <WeekDayRange
-            weekStartDate={scheduleState.weekStartDate}
-            scheduleDispatch={scheduleDispatch}
-          />
-        </Box>
-        {
-          // タイムゾーンの設定
-        }
-        <Box>
-          {stepHeading(2, "タイムゾーンの設定")}
-          <TimeZoneSetting
-            timeZones={scheduleState.timeZones}
-            scheduleDispatch={scheduleDispatch}
-          />
-        </Box>
-        <Box>
-          {stepHeading(3, "スケジュールの設定")}
           <Flex mb={4}>
-            ここRadioボタンにする
-            <Select 
-              maxW={"110px"} onChange={(event) => onChangeSelectTimeType(event.target.value)}>
-              <option value='AM/PM'>AM/PM</option>
-              <option value='24h'>24h</option>
-            </Select>
+            <RadioGroup
+              mr={3}
+              maxW={"110px"}
+              onChange={(value) => onChangeSelectTimeType(value)}
+            >
+              <Radio value="AM/PM">AM/PM</Radio>
+              <Radio value="24h">24h</Radio>
+            </RadioGroup>
             <CopyButton
               copyText="全件コピー"
-              width="10%"
+              width="30%"
               handleClickCopyButton={handleClickCopyButton}
             />
           </Flex>
           {
             // １週間分のスケジュール設定
           }
-          <WeekSchedule
-            timeTypePattern={scheduleState.timeTypePattern}
-            weekDateTimes={scheduleState.weekDateTimes}
-            timeZoneSchedule={scheduleState.timeZoneSchedule}
+          <Box
+            maxH="80vh"
+            overflowY="auto"
+            style={{
+              direction: "rtl",
+            }}
+          >
+            <Box
+              style={{
+                direction: "ltr",
+              }}
+            >
+              <WeekSchedule
+                timeTypePattern={scheduleState.timeTypePattern}
+                weekDateTimes={scheduleState.weekDateTimes}
+                timeZoneSchedule={scheduleState.timeZoneSchedule}
+                scheduleDispatch={scheduleDispatch}
+              />
+            </Box>
+          </Box>
+        </Box>
+        {
+          // タイムゾーンの設定
+        }
+        <Box mt={16}>
+          <TimeZoneSetting
+            timeZones={scheduleState.timeZones}
             scheduleDispatch={scheduleDispatch}
           />
         </Box>
