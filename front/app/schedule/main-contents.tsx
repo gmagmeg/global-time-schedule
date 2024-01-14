@@ -65,6 +65,7 @@ export const MainContents = () => {
   useEffect(() => {
     saveTimeTypePattern(scheduleState.timeTypePattern);
   }, [scheduleState.timeTypePattern]);
+  
   const onChangeSelectTimeType = (nextValue: string): void => {
     scheduleDispatch({
       type: "DECIDE_TIME_TYPE_PATTERN",
