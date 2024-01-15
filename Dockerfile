@@ -1,13 +1,11 @@
 FROM node:20.5.1
 
 USER root
-
-RUN mkdir -p /global-time-schedule/front && chown node:node /global-time-schedule
+RUN mkdir /v-schedule && chown -R node:node /v-schedule
 
 USER node
-
-WORKDIR /global-time-schedule/front
-
-# COPY --chown=node:node ./front ./
+COPY --chown=node:node ./front ./
+WORKDIR /v-schedule/front
+RUN npm i
 
 CMD ["npm", "run", "dev"]

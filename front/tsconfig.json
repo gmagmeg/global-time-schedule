@@ -20,7 +20,7 @@
     ],
     "paths": {
       "@/*": ["./*"],
-      "@app/*": ["./app/*"],
+      "@pages/*": ["./pages/*"],
       "@lib/*": ["./library/*"],
       "@hooks/*": ["./hooks/*"]
     }
@@ -32,13 +32,13 @@
     "**/**/*.ts",
     "**/**/*.tsx",
     ".next/types/**/*.ts",
-    "app/_day-schedule/hooks/test-day-schedule-reducer.jest",
-    "app/main/page.js"
+    "src/_day-schedule/hooks/test-day-schedule-reducer.jest",
+    "pages/main/page.js"
   ],
   "exclude": ["node_modules", "node_modules/**/*"],
   "typedocOptions": {
-    "entryPoints": ["app/**/*.tsx", "app/**/*.ts", "library/*"],
-    "exclude": ["app/**/stories/*", "app/**/**/*.test.*"],
+    "entryPoints": ["pages/**/*.tsx", "pages/**/*.ts", "library/*"],
+    "exclude": ["pages/**/stories/*", "pages/**/**/*.test.*"],
     "out": "docs",
     "plugin": ["typedoc-plugin-merge-modules"],
     "mergeModulesRenameDefaults": true,

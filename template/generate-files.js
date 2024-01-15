@@ -37,12 +37,15 @@ function generateFiles(componentPath, componentName) {
     const componentContent = fs
       .readFileSync(path.join(__dirname, templateSetting.template), "utf-8")
       .replace(/__COMPONENT_NAME__/g, upperCamelComponentName)
-      .replace(/__COMPONENT_PATH__/g, `@app/${componentPath}/${componentName}`)
-      .replace(/\.\/app\//g, "");
+      .replace(
+        /__COMPONENT_PATH__/g,
+        `@pages/${componentPath}/${componentName}`
+      )
+      .replace(/\.\/pages\//g, "");
 
     // ファイルを書き込むディレクトリのパス
     const dirPath = path.join(
-      `/global-time-schedule/front/app/${componentPath}`,
+      `/v-schedule/front/pages/${componentPath}`,
       templateSetting.directory
     );
 
@@ -54,7 +57,7 @@ function generateFiles(componentPath, componentName) {
     // 置換した内容を書き込み
     fs.writeFileSync(
       path.join(
-        `/global-time-schedule/front/app/${componentPath}`,
+        `/v-schedule/front/pages/${componentPath}`,
         `${templateSetting.directory}${componentName}.${templateSetting.extension}`
       ),
       componentContent

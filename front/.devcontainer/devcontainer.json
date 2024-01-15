@@ -1,9 +1,9 @@
 {
-  "name": "global-time-schedule",
+  "name": "v-schedule",
   "dockerComposeFile": ["../../compose.yml"],
-  "service": "global-time-schedule",
-  "runServices": ["global-time-schedule"],
-  "workspaceFolder": "/global-time-schedule/front",
+  "service": "v-schedule",
+  "runServices": ["v-schedule"],
+  "workspaceFolder": "/v-schedule/front",
   "forwardPorts": [5000],
   "remoteUser": "node",
   "customizations": {

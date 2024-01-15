@@ -1,8 +1,5 @@
-import {
-  TimeZoneAbb,
-  TimeZoneValue,
-} from "@/app/schedule/hooks/schedule-reducer";
-import { getInitTimeZone } from "@/app/schedule/hooks/schedule-reducer-function";
+import { TimeZoneAbb, TimeZoneValue } from "../src/hooks/schedule-reducer";
+import { getInitTimeZone } from "../src/hooks/schedule-reducer-function";
 
 /**
  * 略称名で部分一致（not完全一致）したタイムゾーンの情報を返す。

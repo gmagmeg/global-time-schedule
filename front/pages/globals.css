@@ -1,0 +1,51 @@
+/* :root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+} */
+
+body {
+  background-color: white;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.div-border {
+  border-color: #afacac;
+}
+
+.header-title {
+  color: #5472cd;
+  border-bottom: solid 3px #cce4ff;
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.time-select-box {
+  border-bottom: 1px solid #a0add7;
+}
+
+.copy-button {
+  margin: 0.5em;
+}

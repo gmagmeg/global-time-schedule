@@ -15,7 +15,7 @@
     {
       "label": "create new component",
       "type": "shell",
-      "command": "/global-time-schedule/format-changed-files.sh",
+      "command": "/v-schedule/format-changed-files.sh",
       "args": ["${input:componentPath}", "${input:componentName}"],
       "group": {
         "kind": "build",
@@ -31,8 +31,8 @@
     {
       "type": "promptString",
       "id": "componentPath",
-      "description": "appから始まるcomponentのパスを入力してください。",
-      "default": "app/"
+      "description": "pagesから始まるcomponentのパスを入力してください。",
+      "default": "pages/"
     },
     {
       "type": "promptString",
