@@ -29,7 +29,7 @@ export const DaySchedule = ({
       <Flex alignItems={"flex-start"} gap={5} mt={1} w={"16.5em"} flexDirection={"row"}>
         {copiedTextList.map((copiedText, index) => {
           return (
-            <Text key={index} textAlign={"end"}>
+            <Text key={index} textAlign={"end"} w={"6em"}>
               {copiedText}
             </Text>
           );

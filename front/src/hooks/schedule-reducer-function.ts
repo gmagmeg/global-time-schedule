@@ -15,6 +15,7 @@ import {
   TimeType,
   toHourNumber,
   toMinutesNumber,
+  toTimeType,
 } from "@/src/_day-schedule/type-day-schedule";
 import { DateString } from "@/library/type-date";
 import { toCopyFormatText } from "../time-zone-function";
@@ -224,11 +225,18 @@ const _calculateTimeZoneTime = (
   const diffHour = toUTC - fromUTC;
 
   const resultDay = baseDateTimeDayJs.add(diffHour, "h");
+  // let timeType = resultDay.format(timeFormat.t);
+  // if (timeFormat.t === "") {
+  //   timeType = "none";
+  // }
 
   return {
     hour: toHourNumber(resultDay.format("hh")),
     minutes: toMinutesNumber(resultDay.format(timeFormat.m)),
-    type: time.type,
+    type:
+      timeFormat.t === ""
+        ? toTimeType("24h")
+        : toTimeType(resultDay.format(timeFormat.t)),
   };
 };
 

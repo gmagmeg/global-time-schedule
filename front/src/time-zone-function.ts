@@ -51,7 +51,7 @@ export const toCopyFormatText = (
 export const joinTimeZoneTime = (timeZoneStrings: string[]): string => {
   return timeZoneStrings
     .filter((copiedText) => copiedText !== "--:--")
-    .join(", ")
+    .join(" ")
     .replace("(24h)", "");
 };
 
@@ -64,11 +64,12 @@ export const dateFormat = (
     return "--:--";
   }
   const timeZone = getTimeZoneValue(timeZones, key);
-  const dateTime = `${timeZoneTime[key].hour}:${timeZoneTime[key].minutes} ${timeZone.abb}`;
+  let formatMinutes = timeZoneTime[key].minutes === 0 ? "00" : "30";
+  const dateTime = `${timeZoneTime[key].hour}:${formatMinutes}`;
 
   if (timeZoneTime[key].type === "24h") {
-    return dateTime;
+    return `${dateTime} ${timeZone.abb}`;
   }
 
-  return `${dateTime} ${timeZoneTime[key].type}`;
+  return `${dateTime} ${timeZoneTime[key].type} ${timeZone.abb}`;
 };

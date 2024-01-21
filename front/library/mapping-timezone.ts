@@ -5,17 +5,17 @@ import { getInitTimeZone } from "../src/hooks/schedule-reducer-function";
  * 略称名で部分一致（not完全一致）したタイムゾーンの情報を返す。
  */
 export const filterTimeZones = (timezoneAbb: TimeZoneAbb): TimeZoneValue[] => {
-  const result = mappingTimezone.filter((item) => {
-    return `${item.abb}${item.full}`
-      .toUpperCase()
-      .includes(timezoneAbb.toUpperCase());
+  let result = mappingTimezone.filter((item) => {
+    return `${item.abb}`.toUpperCase().includes(timezoneAbb.toUpperCase());
   });
 
   if (result.length === 0) {
-    return [{ abb: "", full: "", utc: "" }];
+    result = mappingTimezone.filter((item) => {
+      return `${item.full}`.toUpperCase().includes(timezoneAbb.toUpperCase());
+    });
   }
 
-  return result;
+  return result.length !== 0 ? result : [{ abb: "", full: "", utc: "" }];
 };
 
 /**
