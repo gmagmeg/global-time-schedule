@@ -2,7 +2,6 @@ import {
   TimeFormat,
   TimeZoneKey,
   TimeZoneSchedule,
-  TimeZoneTime,
   TimeZoneValue,
   TimeZones,
   WeekDateTime,
@@ -16,7 +15,6 @@ import {
   TimeType,
   toHourNumber,
   toMinutesNumber,
-  toTimeType,
 } from "@/src/_day-schedule/type-day-schedule";
 import { DateString } from "@/library/type-date";
 import { toCopyFormatText } from "../time-zone-function";
@@ -222,8 +220,6 @@ const _calculateTimeZoneTime = (
   /**
    * 自国の時間 + 時差(＝求めたい国のUTC) – (自分がいる国のUTC)
    */
-  // 自国の時間
-  const currentCompanyHour = Number(baseDateTimeDayJs.format("h"));
   // 時差(＝求めたい国のUTC) – (自分がいる国のUTC)
   const diffHour = toUTC - fromUTC;
 
@@ -232,8 +228,7 @@ const _calculateTimeZoneTime = (
   return {
     hour: toHourNumber(resultDay.format("hh")),
     minutes: toMinutesNumber(resultDay.format(timeFormat.m)),
-    type:
-      timeFormat.t === "" ? "none" : toTimeType(resultDay.format(timeFormat.t)),
+    type: time.type,
   };
 };
 

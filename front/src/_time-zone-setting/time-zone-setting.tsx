@@ -41,6 +41,21 @@ export const TimeZoneSetting = ({
   scheduleDispatch: (action: ScheduleAction) => void;
 }) => {
   /**
+   * 初回レンダリング時だけ、ストレージからタイムゾーンを取得することを目的としています。
+   * そのためあえて、depsには空配列を指定しています。
+   */
+  useEffect(() => {
+    const storageTimeZone = findTimeZones();
+    const keyArray: TimeZoneKey[] = ["first", "second", "third"];
+    keyArray.forEach((timezoneKey) => {
+      onChangeTimeZone(
+        storageTimeZone.get(timezoneKey)?.abb ?? "none",
+        timezoneKey
+      );
+    });
+  }, []);
+
+  /**
    * 何番目のタイムゾーンを変更するかを特定するために、
    * クリックされたタイムゾーンの位置を保持する
    */
@@ -55,18 +70,6 @@ export const TimeZoneSetting = ({
     setSelectedTimeZoneKey(timeZoneKey);
     onOpen();
   };
-
-  /**
-   * 初回レンダリング時だけ、ストレージからタイムゾーンを取得することを目的としています。
-   * そのためあえて、depsには空配列を指定しています。
-   */
-  useEffect(() => {
-    const storageTimeZone = findTimeZones();
-    const keyArray: TimeZoneKey[] = ["first", "second", "third"];
-    keyArray.forEach(( timezoneKey ) => {
-      onChangeTimeZone(storageTimeZone.get(timezoneKey)?.abb ?? "none", timezoneKey)
-    });
-  }, []);
 
   const onChangeTimeZone = (
     timeZoneAbb: string,

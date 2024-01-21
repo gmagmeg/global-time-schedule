@@ -3,10 +3,8 @@
  */
 
 import { Flex, Text } from "@chakra-ui/react";
-import { ScheduleState, TimeZoneKey, TimeZones } from "../hooks/schedule-reducer";
+import { ScheduleState } from "../hooks/schedule-reducer";
 import { CopyButton } from "../_common-button/copy-button";
-import { TimeZoneTime } from "../hooks/schedule-reducer";
-import { getTimeZoneValue } from "../hooks/schedule-reducer-function";
 import { dateFormat, joinTimeZoneTime } from "../time-zone-function";
 
 export const DaySchedule = ({

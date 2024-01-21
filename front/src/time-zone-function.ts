@@ -6,7 +6,6 @@ import {
   TimeZoneTime,
 } from "./hooks/schedule-reducer";
 import { getTimeZoneValue } from "./hooks/schedule-reducer-function";
-import { join } from "path";
 
 /**
  * タイムゾーンに関する関数を集めています
