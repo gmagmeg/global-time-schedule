@@ -2,7 +2,7 @@
  * @module _week-schedule
  */
 
-import { Box, Radio, RadioGroup, Stack } from "@chakra-ui/react";
+import { Box, HStack, Radio, RadioGroup, Stack, VStack } from "@chakra-ui/react";
 import {
   ScheduleAction,
   ScheduleState,
@@ -38,14 +38,14 @@ export const TimeTypePattern = ({
   };
 
   return (
-    <Box width={"6em"}>
+    <Box width={"4em"}>
       {timeTypePattern === "AM/PM" && (
         <RadioGroup
           mt={1}
           onChange={(value) => onChangeRadioTimeType(value)}
           defaultValue={time.type}
         >
-          <Stack spacing={2} direction="row">
+          <Stack direction="column">
             {["AM", "PM"].map((timeOption) => (
               <Radio colorScheme="purple" key={timeOption} value={timeOption}>
                 {timeOption}
@@ -61,7 +61,7 @@ export const TimeTypePattern = ({
           onChange={(value) => onChangeRadioTimeType(value)}
           defaultValue={time.type}
         >
-          <Stack spacing={2} direction="row">
+          <Stack direction="column">
             {["24h"].map((timeOption) => (
               <Radio key={timeOption} value={timeOption}>
                 {timeOption}

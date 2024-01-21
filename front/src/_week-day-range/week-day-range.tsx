@@ -4,7 +4,7 @@
 
 import { Button, Flex, Radio, RadioGroup, Stack, Text } from "@chakra-ui/react";
 import { DateString, toDateString } from "@/library/type-date";
-import { ScheduleAction, moveToNextSunday } from "../hooks/schedule-reducer";
+import { ScheduleAction, moveToNextMonday } from "../hooks/schedule-reducer";
 import { customDayjs } from "@/library/dayjs";
 import { Dayjs } from "dayjs";
 
@@ -18,12 +18,12 @@ export const WeekDayRange = ({
   const addDate = (baseDate: Dayjs, addDay: number) => {
     return {
       sun: {
-        display: baseDate.add(addDay, "day").format("MM/DD"),
-        value: baseDate.add(addDay, "day").format("YYYY-MM-DD"),
+        display: baseDate.add(addDay - 1, "day").format("MM/DD"),
+        value: baseDate.add(addDay - 1, "day").format("YYYY-MM-DD"),
       },
       mon: {
-        display: baseDate.add(addDay + 1, "day").format("MM/DD"),
-        value: baseDate.add(addDay + 1, "day").format("YYYY-MM-DD"),
+        display: baseDate.add(addDay, "day").format("MM/DD"),
+        value: baseDate.add(addDay, "day").format("YYYY-MM-DD"),
       },
     };
   };
@@ -41,17 +41,17 @@ export const WeekDayRange = ({
       value: string;
     };
   }[] => {
-    const baseDate = customDayjs(moveToNextSunday());
+    const baseDate = customDayjs(moveToNextMonday());
 
     return [
       {
         sun: {
-          display: baseDate.subtract(1, "week").format("MM/DD"),
-          value: baseDate.subtract(1, "week").format("YYYY-MM-DD"),
+          display: baseDate.subtract(8, "day").format("MM/DD"),
+          value: baseDate.subtract(8, "day").format("YYYY-MM-DD"),
         },
         mon: {
-          display: baseDate.subtract(6, "day").format("MM/DD"),
-          value: baseDate.subtract(6, "day").format("MM/DD"),
+          display: baseDate.subtract(7, "day").format("MM/DD"),
+          value: baseDate.subtract(7, "day").format("MM/DD"),
         },
       },
       addDate(baseDate, 0),

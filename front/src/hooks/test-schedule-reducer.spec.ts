@@ -12,7 +12,7 @@ import {
   WeekDateTime,
   WeekDateTimes,
   scheduleState,
-  moveToNextSunday,
+  moveToNextMonday,
 } from "./schedule-reducer";
 import {
   convertWeekTimeZoneTime,
@@ -195,8 +195,8 @@ describe("UPDATE_HOUR_MINUTES", () => {
   });
 });
 
-describe("moveToNextSunday １週間の日付を日曜日始まりに補正する", () => {
-  describe("moveToNextSunday 日曜日以外で始まったときは、翌週の日曜日始まりに補正する", () => {
+describe("moveToNextMonday １週間の日付を日曜日始まりに補正する", () => {
+  describe("moveToNextMonday 日曜日以外で始まったときは、翌週の日曜日始まりに補正する", () => {
     it.each([
       ["2023-10-30"], // 月曜日
       ["2023-10-31"], // 火曜日
@@ -209,14 +209,14 @@ describe("moveToNextSunday １週間の日付を日曜日始まりに補正す�
       const date = toDateString(baseDate);
 
       // Act
-      const result = moveToNextSunday(date);
+      const result = moveToNextMonday(date);
 
       // Assert
       expect(result).toBe("2023-11-05");
     });
   });
 
-  describe("moveToNextSunday 日曜日で始まったときは、翌週の日曜日始まりに補正する", () => {
+  describe("moveToNextMonday 日曜日で始まったときは、翌週の日曜日始まりに補正する", () => {
     it.each([
       ["2023-11-05"], // 日曜日
     ])("%sを日曜日に補正する", (baseDate) => {
@@ -224,7 +224,7 @@ describe("moveToNextSunday １週間の日付を日曜日始まりに補正す�
       const date = toDateString(baseDate);
 
       // Act
-      const result = moveToNextSunday(date);
+      const result = moveToNextMonday(date);
 
       // Assert
       expect(result).toBe("2023-11-12");

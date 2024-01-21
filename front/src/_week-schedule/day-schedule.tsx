@@ -20,7 +20,7 @@ export const DaySchedule = ({
     const dateTime = `${time[key].hour}:${time[key].minutes}`;
 
     if (time[key].type === "24h") {
-      return dateTime;
+      return `${dateTime} (24h)`;
     }
 
     return `${dateTime} ${time[key].type}`;
@@ -35,15 +35,16 @@ export const DaySchedule = ({
   const handleClickCopyButton = (): string => {
     return copiedTextList
       .filter((copiedText) => copiedText !== "--:--")
-      .join(" ");
+      .join(" ")
+      .replace("(24h)", "");
   };
 
   return (
     <>
-      <Flex alignItems={"flex-start"} gap={0} mt={1} flexDirection={"row"}>
+      <Flex alignItems={"flex-start"} gap={5} mt={1} w={"16.5em"} flexDirection={"row"}>
         {copiedTextList.map((copiedText, index) => {
           return (
-            <Text key={index} w={"4em"} textAlign={"end"}>
+            <Text key={index} textAlign={"end"}>
               {copiedText}
             </Text>
           );

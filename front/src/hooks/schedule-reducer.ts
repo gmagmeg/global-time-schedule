@@ -125,14 +125,14 @@ export const toTimeZone = (timeZone: string): TimeZone => {
   return timeZone as TimeZone;
 };
 
-export const moveToNextSunday = (date?: string): DateString => {
+export const moveToNextMonday = (date?: string): DateString => {
   const now = customDayjs(date) ?? customDayjs();
-  const nextSunday = now.day(7);
+  const nextSunday = now.day(8);
 
   return toDateString(nextSunday.format("YYYY-MM-DD"));
 };
 
-const initDate = moveToNextSunday();
+const initDate = moveToNextMonday();
 export const scheduleState: ScheduleState = {
   timeTypePattern: "AM/PM",
   timeZones: new Map<TimeZoneKey, TimeZoneValue>([

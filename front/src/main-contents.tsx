@@ -121,12 +121,12 @@ export const MainContents = () => {
       </HStack>
       <HStack alignSelf="start" mt="8" mb="4">
         <Icon as={IoCalendarOutline} boxSize={6} />{" "}
-        <Heading as="h2" size="md" mr={"50%"}>
+        <Heading as="h2" size="md" mr={"16em"}>
           WeeklySchedule
         </Heading>
         <CopyButton
           copyText="All Copy"
-          width="100px"
+          width="110px"
           handleClickCopyButton={handleClickCopyButton}
         />
       </HStack>
