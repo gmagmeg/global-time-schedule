@@ -81,7 +81,7 @@ export const MainContents = () => {
     <Grid placeContent="center" w={"100vw"} style={{ backgroundColor: 'white' }}>
       <Box>
         <Heading as="h1" size="xl" alignSelf="center">
-          VTuber&apos;s Stream Scheduler
+          VTuber&apos;s Weekly Stream Time Converter
         </Heading>
       </Box>
       {

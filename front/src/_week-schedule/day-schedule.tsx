@@ -13,14 +13,14 @@ export const DaySchedule = ({
   timeZoneTime: TimeZoneTime;
 }) => {
   const dateFormat = (time: TimeZoneTime, key: TimeZoneKey): string => {
+    if (key === "none" || time[key].type === "none") {
+      return "--:--"
+    }
+
     const dateTime = `${time[key].hour}:${time[key].minutes}`;
 
     if (time[key].type === "24h") {
       return dateTime;
-    }
-
-    if (time[key].type === "none") {
-      return "--:--";
     }
 
     return `${dateTime} ${time[key].type}`;
