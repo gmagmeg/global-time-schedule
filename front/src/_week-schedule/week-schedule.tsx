@@ -20,11 +20,13 @@ export const WeekSchedule = ({
   timeTypePattern,
   weekDateTimes,
   timeZoneSchedule,
+  timeZones,
   scheduleDispatch,
 }: {
   timeTypePattern: ScheduleState["timeTypePattern"];
   weekDateTimes: ScheduleState["weekDateTimes"];
   timeZoneSchedule: ScheduleState["timeZoneSchedule"];
+  timeZones: ScheduleState["timeZones"];
   scheduleDispatch: (action: ScheduleAction) => void;
 }) => {
   const getTime = (date: WeekDateTime["Date"]): WeekDateTime["Time"] => {
@@ -63,7 +65,10 @@ export const WeekSchedule = ({
               index={index}
               scheduleDispatch={scheduleDispatch}
             />
-            <DaySchedule timeZoneTime={getTimeZoneTime(index)} />
+            <DaySchedule
+              timeZoneTime={getTimeZoneTime(index)}
+              timeZones={timeZones}
+            />
           </HStack>
         );
       })}

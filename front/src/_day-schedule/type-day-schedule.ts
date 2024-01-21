@@ -6,13 +6,6 @@
  * 型変換の関数は型と一緒に使うことが多いので、
  * このファイルに定義する
  */
-
-// ex：11:00 AM
-export type TimeZoneTime = string;
-export const toTimeZoneTime = (timeZone: string): TimeZoneTime => {
-  return timeZone as TimeZoneTime;
-};
-
 export type NoneNumber = "--";
 export type NoneString = "none";
 

@@ -18,7 +18,7 @@ import {
   TimeType,
 } from "@/src/_day-schedule/type-day-schedule";
 import { customDayjs } from "@/library/dayjs";
-import { reMappingTimeZone } from "./time-zone-function";
+import { reMappingTimeZone } from "../time-zone-function";
 
 /********************************************
  * TypeとStateの定義

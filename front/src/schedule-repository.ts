@@ -14,7 +14,7 @@ import {
 } from "./hooks/schedule-reducer";
 import { initTimeZones } from "./hooks/schedule-reducer-function";
 import { scheduleState } from "./hooks/schedule-reducer";
-import { reMappingTimeZone } from "./hooks/time-zone-function";
+import { reMappingTimeZone } from "./time-zone-function";
 
 /**
  * {@link scheduleState.timeZones}関連の復元と保存を行います

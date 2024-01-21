@@ -195,8 +195,8 @@ describe("UPDATE_HOUR_MINUTES", () => {
   });
 });
 
-describe("moveToNextMonday １週間の日付を日曜日始まりに補正する", () => {
-  describe("moveToNextMonday 日曜日以外で始まったときは、翌週の日曜日始まりに補正する", () => {
+describe("moveToNextMonday １週間の日付を月曜日始まりに補正する", () => {
+  describe("moveToNextMonday 月曜日以外で始まったときは、翌週の月曜日始まりに補正する", () => {
     it.each([
       ["2023-10-30"], // 月曜日
       ["2023-10-31"], // 火曜日
@@ -204,7 +204,7 @@ describe("moveToNextMonday １週間の日付を日曜日始まりに補正す�
       ["2023-11-02"], // 木曜日
       ["2023-11-03"], // 金曜日
       ["2023-11-04"], // 土曜日
-    ])("%sを日曜日に補正する", (baseDate) => {
+    ])("%sを月曜日に補正する", (baseDate) => {
       // Arrange
       const date = toDateString(baseDate);
 
@@ -212,14 +212,14 @@ describe("moveToNextMonday １週間の日付を日曜日始まりに補正す�
       const result = moveToNextMonday(date);
 
       // Assert
-      expect(result).toBe("2023-11-05");
+      expect(result).toBe("2023-11-06");
     });
   });
 
-  describe("moveToNextMonday 日曜日で始まったときは、翌週の日曜日始まりに補正する", () => {
+  describe("moveToNextMonday 月曜日で始まったときは、翌週の月曜日始まりに補正する", () => {
     it.each([
-      ["2023-11-05"], // 日曜日
-    ])("%sを日曜日に補正する", (baseDate) => {
+      ["2023-11-05"], // 月曜日
+    ])("%sを月曜日に補正する", (baseDate) => {
       // Arrange
       const date = toDateString(baseDate);
 
@@ -227,7 +227,7 @@ describe("moveToNextMonday １週間の日付を日曜日始まりに補正す�
       const result = moveToNextMonday(date);
 
       // Assert
-      expect(result).toBe("2023-11-12");
+      expect(result).toBe("2023-11-13");
     });
   });
 });

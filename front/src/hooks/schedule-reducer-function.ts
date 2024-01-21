@@ -19,6 +19,7 @@ import {
   toTimeType,
 } from "@/src/_day-schedule/type-day-schedule";
 import { DateString } from "@/library/type-date";
+import { toCopyFormatText } from "../time-zone-function";
 
 /**
  * 日付と時間を紐づけ直します
@@ -140,7 +141,7 @@ export const getTimeZoneValue = (
 
 /**
  * 基準日をもとに、それぞれのタイムゾーンに応じた時間に変換する
- * 変換後のフォーマットは{@link scheduleState.timeZoneSchedule}を参照
+ * 変換後のフォーマットは{@link ScheduleState.timeZoneSchedule}を参照
  */
 export const convertWeekTimeZoneTime = (
   weekDateTime: ScheduleState["weekDateTimes"],
@@ -242,33 +243,8 @@ const _calculateTimeZoneTime = (
  * @returns
  */
 export const toCopiedTextList = (
-  timeZoneSchedule: ScheduleState["timeZoneSchedule"]
+  timeZoneSchedule: ScheduleState["timeZoneSchedule"],
+  timeZones: ScheduleState["timeZones"]
 ): string => {
-  const validSchedule = timeZoneSchedule.map((time: TimeZoneTime) => {
-    const validTimeList = [
-      dateFormat(time, "first"),
-      dateFormat(time, "second"),
-      dateFormat(time, "third"),
-    ].filter((copiedText) => {
-      return copiedText !== "--:--";
-    });
-
-    return validTimeList.join(" ");
-  });
-
-  return validSchedule.join("\n");
-};
-
-export const dateFormat = (time: TimeZoneTime, key: TimeZoneKey): string => {
-  if (key === "none" || time[key].type === "none") {
-    return "--:--";
-  }
-
-  const dateTime = `${time[key].hour}:${time[key].minutes}`;
-
-  if (time[key].type === "24h") {
-    return dateTime;
-  }
-
-  return `${dateTime} ${time[key].type}`;
+  return toCopyFormatText(timeZoneSchedule, timeZones);
 };

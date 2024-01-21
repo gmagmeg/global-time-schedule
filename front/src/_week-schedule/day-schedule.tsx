@@ -3,41 +3,28 @@
  */
 
 import { Flex, Text } from "@chakra-ui/react";
-import { TimeZoneKey } from "../hooks/schedule-reducer";
+import { ScheduleState, TimeZoneKey, TimeZones } from "../hooks/schedule-reducer";
 import { CopyButton } from "../_common-button/copy-button";
 import { TimeZoneTime } from "../hooks/schedule-reducer";
+import { getTimeZoneValue } from "../hooks/schedule-reducer-function";
+import { dateFormat, joinTimeZoneTime } from "../time-zone-function";
 
 export const DaySchedule = ({
   timeZoneTime,
+  timeZones
 }: {
-  timeZoneTime: TimeZoneTime;
+  timeZoneTime: ScheduleState["timeZoneSchedule"][number];
+  timeZones: ScheduleState["timeZones"];
 }) => {
-  const dateFormat = (time: TimeZoneTime, key: TimeZoneKey): string => {
-    if (key === "none" || time[key].type === "none") {
-      return "--:--"
-    }
-
-    const dateTime = `${time[key].hour}:${time[key].minutes}`;
-
-    if (time[key].type === "24h") {
-      return `${dateTime} (24h)`;
-    }
-
-    return `${dateTime} ${time[key].type}`;
-  };
-
   const copiedTextList = [
-    dateFormat(timeZoneTime, "first"),
-    dateFormat(timeZoneTime, "second"),
-    dateFormat(timeZoneTime, "third"),
+    dateFormat(timeZoneTime, "first", timeZones),
+    dateFormat(timeZoneTime, "second", timeZones),
+    dateFormat(timeZoneTime, "third", timeZones),
   ];
 
   const handleClickCopyButton = (): string => {
-    return copiedTextList
-      .filter((copiedText) => copiedText !== "--:--")
-      .join(" ")
-      .replace("(24h)", "");
-  };
+    return joinTimeZoneTime(copiedTextList);
+  }
 
   return (
     <>

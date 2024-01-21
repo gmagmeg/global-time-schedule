@@ -42,7 +42,7 @@ export const MainContents = () => {
   );
 
   const handleClickCopyButton = (): string => {
-    return toCopiedTextList(scheduleState.timeZoneSchedule);
+    return toCopiedTextList(scheduleState.timeZoneSchedule, scheduleState.timeZones);
   };
 
   const middleHeading = (title: string, icon: IconType, boxSize = 4) => {
@@ -135,6 +135,7 @@ export const MainContents = () => {
           timeTypePattern={scheduleState.timeTypePattern}
           weekDateTimes={scheduleState.weekDateTimes}
           timeZoneSchedule={scheduleState.timeZoneSchedule}
+          timeZones={scheduleState.timeZones}
           scheduleDispatch={scheduleDispatch}
         />
       </Box>
