@@ -2,7 +2,15 @@
  * @module _week-day-range
  */
 
-import { Button, Flex, Radio, RadioGroup, Stack, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Flex,
+  Radio,
+  RadioGroup,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
 import { DateString, toDateString } from "@/library/type-date";
 import { ScheduleAction, moveToNextMonday } from "../hooks/schedule-reducer";
 import { customDayjs } from "@/library/dayjs";
@@ -68,17 +76,22 @@ export const WeekDayRange = ({
 
   return (
     <RadioGroup
-      key={weekStartDate}
+      alignContent={"center"}
       value={weekStartDate}
       onChange={onChangeWeekStartDate}
       size={"sm"}
     >
-      <Flex>
+      <Stack direction={{ base: "column", md: "row" }}>
         {/** 週の開始日選択肢 */}
         {createStartDateList().map((startDate) => (
-          <Stack key={startDate.sun.value} w={"170px"}>
+          <Stack
+            mr={20}
+            direction={{ base: "row", md: "column" }}
+            align="start"
+            key={startDate.sun.value}
+          >
             <Button
-              w={"80%"}
+              w={"8em"}
               onClick={() => onChangeWeekStartDate(startDate.sun.value)}
               colorScheme={"purple"}
               size={"sm"}
@@ -102,7 +115,7 @@ export const WeekDayRange = ({
             </Radio>
           </Stack>
         ))}
-      </Flex>
+      </Stack>
     </RadioGroup>
   );
 };

@@ -9,7 +9,7 @@ import { dateFormat, joinTimeZoneTime } from "../time-zone-function";
 
 export const DaySchedule = ({
   timeZoneTime,
-  timeZones
+  timeZones,
 }: {
   timeZoneTime: ScheduleState["timeZoneSchedule"][number];
   timeZones: ScheduleState["timeZones"];
@@ -22,11 +22,17 @@ export const DaySchedule = ({
 
   const handleClickCopyButton = (): string => {
     return joinTimeZoneTime(copiedTextList);
-  }
+  };
 
   return (
     <>
-      <Flex alignItems={"flex-start"} gap={5} mt={1} w={"16.5em"} flexDirection={"row"}>
+      <Flex
+        alignItems={"flex-start"}
+        gap={5}
+        mt={1}
+        w={"16.5em"}
+        flexDirection={"row"}
+      >
         {copiedTextList.map((copiedText, index) => {
           return (
             <Text key={index} textAlign={"end"} w={"6em"}>
@@ -35,7 +41,7 @@ export const DaySchedule = ({
           );
         })}
       </Flex>
-      <CopyButton width="10%" handleClickCopyButton={handleClickCopyButton} />
+      <CopyButton width="5%" handleClickCopyButton={handleClickCopyButton} />
     </>
   );
 };

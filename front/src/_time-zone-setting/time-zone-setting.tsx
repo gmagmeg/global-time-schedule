@@ -126,7 +126,7 @@ export const TimeZoneSetting = ({
                   : undefined
               }
               colorScheme={"purple"}
-              width={"6em"}
+              w={"8em"}
               onClick={() => onModalOpen(timeZoneKey)}
               size={"sm"}
             >
@@ -138,7 +138,7 @@ export const TimeZoneSetting = ({
               <Button
                 colorScheme={"purple"}
                 variant={"outline"}
-                width={"6em"}
+                width={"8em"}
                 size={"sm"}
                 onClick={() => onRemoveTimeZone(timeZoneKey)}
                 display={"inline-flex"}

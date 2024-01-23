@@ -4,7 +4,7 @@
 
 import { DayHourMinutes } from "./day-hour-minutes";
 import { DateString } from "@lib/type-date";
-import { Box, HStack } from "@chakra-ui/react";
+import { Box, Stack } from "@chakra-ui/react";
 import { DayButton } from "../_common-button/day-button";
 import {
   ScheduleAction,
@@ -15,6 +15,7 @@ import {
 import { toKeyArray } from "@/library/common";
 import { DaySchedule } from "./day-schedule";
 import { TimeTypePattern } from "./time-type-pattern";
+import { CopyButton } from "../_common-button/copy-button";
 
 export const WeekSchedule = ({
   timeTypePattern,
@@ -22,12 +23,14 @@ export const WeekSchedule = ({
   timeZoneSchedule,
   timeZones,
   scheduleDispatch,
+  handleClickCopyButton,
 }: {
   timeTypePattern: ScheduleState["timeTypePattern"];
   weekDateTimes: ScheduleState["weekDateTimes"];
   timeZoneSchedule: ScheduleState["timeZoneSchedule"];
   timeZones: ScheduleState["timeZones"];
   scheduleDispatch: (action: ScheduleAction) => void;
+  handleClickCopyButton: () => string;
 }) => {
   const getTime = (date: WeekDateTime["Date"]): WeekDateTime["Time"] => {
     const result = weekDateTimes.get(date);
@@ -48,10 +51,13 @@ export const WeekSchedule = ({
   };
 
   return (
-    <Box alignItems={"flex-start"}>
+    <Box
+      w={{ md: "100%", base: "" }}
+      ml={{ md: "6", base: "" }}
+    >
       {toKeyArray(weekDateTimes).map((date: DateString, index: number) => {
         return (
-          <HStack key={date} alignItems={"flex-start"} mb={4}>
+          <Stack direction={{ base: "column", md: "row" }} key={date} mb={4}>
             <DayButton date={date} onClick={() => {}} />
             <DayHourMinutes
               time={getTime(date)}
@@ -69,7 +75,14 @@ export const WeekSchedule = ({
               timeZoneTime={getTimeZoneTime(index)}
               timeZones={timeZones}
             />
-          </HStack>
+          {(index === 0 || index === 6) && 
+            <CopyButton
+              copyText="All Copy"
+              width="10em"
+              handleClickCopyButton={handleClickCopyButton}
+            />
+          }
+          </Stack>
         );
       })}
     </Box>

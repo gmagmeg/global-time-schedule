@@ -3,16 +3,20 @@
  */
 
 import { useEffect } from "react";
-import { ScheduleAction, ScheduleState, TimeTypePattern } from "../hooks/schedule-reducer";
+import {
+  ScheduleAction,
+  ScheduleState,
+  TimeTypePattern,
+} from "../hooks/schedule-reducer";
 import { Button, Stack } from "@chakra-ui/react";
 import { findTimeTypePattern } from "../schedule-repository";
 
 export const TimeType = ({
   timeTypePattern,
   setUpdatedTimeTypePattern,
-  scheduleDispatch
+  scheduleDispatch,
 }: {
-  timeTypePattern: TimeTypePattern,
+  timeTypePattern: TimeTypePattern;
   setUpdatedTimeTypePattern: (timeTypePattern: TimeTypePattern) => void;
   scheduleDispatch: (action: ScheduleAction) => void;
 }) => {
@@ -29,27 +33,25 @@ export const TimeType = ({
   }, []);
 
   return (
-    <Stack direction="column">
-        <Button
-          size={"sm"}
-          colorScheme={"purple"}
-          variant={
-            timeTypePattern === "AM/PM" ? undefined : "outline"
-          }
-          onClick={() => onChangeSelectTimeType("AM/PM")}
-        >
-          AM/PM
-        </Button>
-        <Button
-          size={"sm"}
-          colorScheme={"purple"}
-          variant={
-            timeTypePattern === "24h" ? undefined : "outline"
-          }
-          onClick={() => onChangeSelectTimeType("24h")}
-        >
-          24h
-        </Button>
+    <Stack direction="column" align="start">
+      <Button
+        size={"sm"}
+        w={"8em"}
+        colorScheme={"purple"}
+        variant={timeTypePattern === "AM/PM" ? undefined : "outline"}
+        onClick={() => onChangeSelectTimeType("AM/PM")}
+      >
+        AM/PM
+      </Button>
+      <Button
+        w={"8em"}
+        size={"sm"}
+        colorScheme={"purple"}
+        variant={timeTypePattern === "24h" ? undefined : "outline"}
+        onClick={() => onChangeSelectTimeType("24h")}
+      >
+        24h
+      </Button>
     </Stack>
   );
 };
