@@ -86,7 +86,6 @@ export const MainContents = () => {
       placeItems="start"
       justifyContent="start"
       alignItems="center"
-      w={{ md: "80%", base: "" }}
       ml={{ md: "auto", base: "" }}
       style={{ backgroundColor: "white" }}
     >

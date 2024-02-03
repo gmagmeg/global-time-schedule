@@ -26,11 +26,6 @@ body {
   background-color: white;
 }
 
-.container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-}
-
 .div-border {
   border-color: #afacac;
 }
