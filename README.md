@@ -1,9 +1,26 @@
-# init
+概要
+日々更新されるZennとQiitaのトレンドを一箇所で簡単にチェックできるようにすることを目的としています。
+技術トレンドに素早くアクセスできることで、開発者が最新の技術情報を効率的にキャッチアップできるよう支援します。
 
-```shell
-docker build -t v-schedule ./
-```
+# 主な利用技術
+- TypeScript
+- Next.js
 
-```shell
-docker create -p 3000:3000 -v /front/node_modules v-schedule
-```
+## SSRでlocalStorageの復元
+
+[参考コード部分](https://github.com/gmagmeg/global-time-schedule/blob/main/front/src/main-contents.tsx#L58)  
+ユーザーの入力値を復元するためにlocalStorageを用いていました。  
+しかしSSR（サーバーサイドレンダリング）ではビルド時にサーバー側でコードが実行されるため、  
+ビルドタイミングでブラウザの環境が存在しておらず、  
+当初想定していたlocalStorageから値を取得しようとするとビルド時にエラーが発生しました。  
+これに対応するために、useEffectを利用して、  
+コンポーネントがブラウザ上でレンダリングされた後にのみlocalStorageへのアクセスが行われるようにしました。  
+この経験を通じて、レンダリングのタイミングやブラウザの動作についての理解を深めることができました。
+
+## タイムゾーン対応
+
+[参考コード部分](https://github.com/gmagmeg/global-time-schedule/blob/main/front/src/hooks/schedule-reducer.ts)
+組み込みのIntlライブラリでは正式名称をサポートしていますが、  ユーザーからの入力によるタイムゾーンの略称（例：JST）は、  
+サポートしておらず、また適切に処理するための目立った既存ライブラリがありませんでした。  
+この問題を解決するため、タイムゾーンの略称から時差を計算できる独自の処理を実装しました。  
+特に24h、AM・PMの変換も頻繁に発生するため、状態管理にはreducerを用いて、時間に関するロジックが１か所に集まるように工夫しました。  
